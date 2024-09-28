@@ -1,0 +1,148 @@
+{
+	"Filipino": {
+		"AlphabetGame": {
+			"Easy": [
+				{
+					"letter": "A",
+					"pronunciation": "a",
+					"exampleWords": ["Aso", "Araw"]
+				},
+				{
+					"letter": "B",
+					"pronunciation": "ba",
+					"exampleWords": ["Bahay", "Bata"]
+				},
+				{
+					"letter": "C",
+					"pronunciation": "ka",
+					"exampleWords": ["Calle", "Coche"]
+				},
+				{
+					"letter": "D",
+					"pronunciation": "da",
+					"exampleWords": ["Dagat", "Dalaga"]
+				},
+				{
+					"letter": "E",
+					"pronunciation": "e",
+					"exampleWords": ["Elepante", "Edukasyon"]
+				},
+				{
+					"letter": "F",
+					"pronunciation": "fa",
+					"exampleWords": ["Fely", "Fernando"]
+				},
+				{
+					"letter": "G",
+					"pronunciation": "ga",
+					"exampleWords": ["Ginto", "Gubat"]
+				},
+				{
+					"letter": "H",
+					"pronunciation": "ha",
+					"exampleWords": ["Hangin", "Halaman"]
+				},
+				{
+					"letter": "I",
+					"pronunciation": "i",
+					"exampleWords": ["Isda", "Ilog"]
+				},
+				{
+					"letter": "J",
+					"pronunciation": "ja",
+					"exampleWords": ["Juan", "Jakpot"]
+				},
+				{
+					"letter": "K",
+					"pronunciation": "ka",
+					"exampleWords": ["Kubo", "Kalabaw"]
+				},
+				{
+					"letter": "L",
+					"pronunciation": "la",
+					"exampleWords": ["Lupa", "Langit"]
+				},
+				{
+					"letter": "M",
+					"pronunciation": "ma",
+					"exampleWords": ["Mundo", "Mataas"]
+				},
+				{
+					"letter": "N",
+					"pronunciation": "na",
+					"exampleWords": ["Nayon", "Niyog"]
+				},
+				{
+					"letter": "Ñ",
+					"pronunciation": "enye",
+					"exampleWords": ["Niña", "Señor"]
+				},
+				{
+					"letter": "NG",
+					"pronunciation": "nga",
+					"exampleWords": ["Ngipin", "Ngayon"]
+				},
+				{
+					"letter": "O",
+					"pronunciation": "o",
+					"exampleWords": ["Oso", "Ospital"]
+				},
+				{
+					"letter": "P",
+					"pronunciation": "pa",
+					"exampleWords": ["Puno", "Palengke"]
+				},
+				{
+					"letter": "Q",
+					"pronunciation": "kwa",
+					"exampleWords": ["Quinta", "Quimiko"]
+				},
+				{
+					"letter": "R",
+					"pronunciation": "ra",
+					"exampleWords": ["Relo", "Rosas"]
+				},
+				{
+					"letter": "S",
+					"pronunciation": "sa",
+					"exampleWords": ["Saging", "Sikat"]
+				},
+				{
+					"letter": "T",
+					"pronunciation": "ta",
+					"exampleWords": ["Tao", "Tulay"]
+				},
+				{
+					"letter": "U",
+					"pronunciation": "u",
+					"exampleWords": ["Ulan", "Ubas"]
+				},
+				{
+					"letter": "V",
+					"pronunciation": "va",
+					"exampleWords": ["Violeta", "Valencia"]
+				},
+				{
+					"letter": "W",
+					"pronunciation": "wa",
+					"exampleWords": ["Walis", "Watawat"]
+				},
+				{
+					"letter": "X",
+					"pronunciation": "eks",
+					"exampleWords": ["Xylophone", "X-ray"]
+				},
+				{
+					"letter": "Y",
+					"pronunciation": "ya",
+					"exampleWords": ["Yelo", "Yaya"]
+				},
+				{
+					"letter": "Z",
+					"pronunciation": "za",
+					"exampleWords": ["Zapato", "Zebra"]
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,87 @@
+{
+	"Filipino": {
+		"StoriesGame": {
+			"Easy": [
+				{
+					"title": "Ang Tatlong Baboy",
+                    "english-title": "Three Little Pigs",
+					"pages": [
+						{
+							"pageNumber": 1,
+							"text": "May tatlong baboy. Sila ay gumawa ng mga bahay.",
+							"english-text": "There are three pigs. They made houses.",
+							"image": "page1.png"
+						},
+						{
+							"pageNumber": 2,
+							"text": "Ang unang baboy ay gumawa ng bahay ng dayami.",
+							"english-text": "The first pig made a house of straw.",
+							"image": "page2.png"
+						},
+						{
+							"pageNumber": 3,
+							"text": "Ang ikalawang baboy ay gumawa ng bahay ng kahoy.",
+							"english-text": "The second pig made a house of wood.",
+							"image": "page3.png"
+						},
+						{
+							"pageNumber": 4,
+							"text": "Ang ikatlong baboy ay gumawa ng bahay ng bato.",
+							"english-text": "The third pig made a house of bricks.",
+							"image": "page4.png"
+						},
+						{
+							"pageNumber": 5,
+							"text": "Dumating ang lobo. Sabi niya, 'Papasok ako!'",
+							"english-text": "The wolf came. He said, 'I will come in!'",
+							"image": "page5.png"
+						},
+						{
+							"pageNumber": 6,
+							"text": "Sabi ng unang baboy, 'Hindi!' Hinipan ng lobo ang bahay. Nasira ito!",
+							"english-text": "The first pig said, 'No!' The wolf blew the house. It broke!",
+							"image": "page6.png"
+						},
+						{
+							"pageNumber": 7,
+							"text": "Sabi ng ikalawang baboy, 'Hindi!' Hinipan ng lobo ang bahay. Nasira rin ito!",
+							"english-text": "The second pig said, 'No!' The wolf blew the house. It broke too!",
+							"image": "page7.png"
+						},
+						{
+							"pageNumber": 8,
+							"text": "Sabi ng ikatlong baboy, 'Hindi!' Hinipan ng lobo ang bahay, pero malakas ito.",
+							"english-text": "The third pig said, 'No!' The wolf blew the house, but it was strong.",
+							"image": "page8.png"
+						},
+						{
+							"pageNumber": 9,
+							"text": "Ang lobo ay umalis. Ang mga baboy ay ligtas.",
+							"english-text": "The wolf left. The pigs were safe.",
+							"image": "page9.png"
+						},
+                        {
+							"pageNumber": 10,
+							"text": "Masaya ang mga baboy. Sila ay nagluto ng hapunan.",
+							"english-text": "The pigs were happy. They cooked dinner.",
+							"image": "page10.png"
+						},
+						{
+							"pageNumber": 11,
+							"text": "Nag-imbita sila ng mga kaibigan. Sila ay kumain ng adobo at suman.",
+							"english-text": "They invited their friends. They ate adobo and suman.",
+							"image": "page11.png"
+						},
+						{
+							"pageNumber": 12,
+							"text": "Ang tatlong baboy ay kumanta at nagsaya buong gabi.",
+							"english-text": "The three pigs sang and celebrated all night.",
+							"image": "page12.png"
+						}
+					],
+					"author": "Ginoo Filip"
+				}
+			]
+		}
+	}
+}
