@@ -1,162 +1,184 @@
 {
-	"Filipino": {
-		"ColorsGame": {
-			"Easy": [
-				{
-					"color": "Pula",
-					"translation": "Red",
-					"exampleSentence": "Ang bola ay pula."
-				},
-				{
-					"color": "Berde",
-					"translation": "Green",
-					"exampleSentence": "Ang dahon ay berde."
-				},
-				{
-					"color": "Asul",
-					"translation": "Blue",
-					"exampleSentence": "Ang langit ay asul."
-				},
-				{
-					"color": "Dilaw",
-					"translation": "Yellow",
-					"exampleSentence": "Ang araw ay dilaw."
-				},
-				{
-					"color": "Itim",
-					"translation": "Black",
-					"exampleSentence": "Ang pusa ay itim."
-				},
-				{
-					"color": "Puti",
-					"translation": "White",
-					"exampleSentence": "Ang papel ay puti."
-				}
-			],
-			"Medium": [
-				{
-					"color": "Kahel",
-					"translation": "Orange",
-					"exampleSentence": "Ang prutas ay kahel."
-				},
-				{
-					"color": "Rosas",
-					"translation": "Pink",
-					"exampleSentence": "Ang bulaklak ay rosas."
-				},
-				{
-					"color": "Lila",
-					"translation": "Purple",
-					"exampleSentence": "Ang mga ubas ay lila."
-				},
-				{
-					"color": "Abo",
-					"translation": "Gray",
-					"exampleSentence": "Ang elepante ay abo."
-				},
-				{
-					"color": "Kayumanggi",
-					"translation": "Brown",
-					"exampleSentence": "Ang lupa ay kayumanggi."
-				}
-			],
-			"Hard": [
-				{
-					"color": "Turkesa",
-					"translation": "Turquoise",
-					"exampleSentence": "Ang dagat ay turkesa."
-				},
-				{
-					"color": "Ginto",
-					"translation": "Gold",
-					"exampleSentence": "Ang singsing ay ginto."
-				},
-				{
-					"color": "Bughaw",
-					"translation": "Deep Blue",
-					"exampleSentence": "Ang karagatan ay bughaw."
-				},
-				{
-					"color": "Kalimbahin",
-					"translation": "Light Pink",
-					"exampleSentence": "Ang bulaklak ay kalimbahin."
-				},
-				{
-					"color": "Lunti",
-					"translation": "Forest Green",
-					"exampleSentence": "Ang mga dahon ay lunti."
-				}
-			]
-		},
-        "NumbersGame": {
+    "Filipino": {
+        "ColorsGame": {
             "Easy": [
-				{
-					"word": "Isa",
-					"translation": "One",
-					"exampleSentence": "Mayroong isang bola sa mesa.",
-					"englishExample": "There is one ball on the table."
-				},
-				{
-					"word": "Dalawa",
-					"translation": "Two",
-					"exampleSentence": "May dalawang aso sa labas.",
-					"englishExample": "There are two dogs outside."
-				},
-				{
-					"word": "Tatlo",
-					"translation": "Three",
-					"exampleSentence": "Tatlong bata ang naglalaro.",
-					"englishExample": "Three children are playing."
-				},
-				{
-					"word": "Apat",
-					"translation": "Four",
-					"exampleSentence": "Apat na mangga ang nasa basket.",
-					"englishExample": "There are four mangoes in the basket."
-				},
-				{
-					"word": "Lima",
-					"translation": "Five",
-					"exampleSentence": "May limang aklat sa lamesa.",
-					"englishExample": "There are five books on the table."
-				},
-				{
-					"word": "Anim",
-					"translation": "Six",
-					"exampleSentence": "Anim na itlog ang nasa plato.",
-					"englishExample": "There are six eggs on the plate."
-				},
-				{
-					"word": "Pito",
-					"translation": "Seven",
-					"exampleSentence": "May pitong upuan sa silid.",
-					"englishExample": "There are seven chairs in the room."
-				},
-				{
-					"word": "Walo",
-					"translation": "Eight",
-					"exampleSentence": "Mayroong walong ibon sa puno.",
-					"englishExample": "There are eight birds in the tree."
-				},
-				{
-					"word": "Siyam",
-					"translation": "Nine",
-					"exampleSentence": "Siyam na halaman ang nasa hardin.",
-					"englishExample": "There are nine plants in the garden."
-				},
-				{
-					"word": "Sampu",
-					"translation": "Ten",
-					"exampleSentence": "Mayroong sampung tao sa klase.",
-					"englishExample": "There are ten people in the class."
-				}
-			],
+                {
+                    "word": "Pula",
+                    "wordTranslation": "Red",
+                    "sentence": "Ang bola ay pula.",
+                    "sentenceTranslation": "The ball is red."
+                },
+                {
+                    "word": "Berde",
+                    "wordTranslation": "Green",
+                    "sentence": "Ang dahon ay berde.",
+                    "sentenceTranslation": "The leaf is green."
+                },
+                {
+                    "word": "Asul",
+                    "wordTranslation": "Blue",
+                    "sentence": "Ang langit ay asul.",
+                    "sentenceTranslation": "The sky is blue."
+                },
+                {
+                    "word": "Dilaw",
+                    "wordTranslation": "Yellow",
+                    "sentence": "Ang araw ay dilaw.",
+                    "sentenceTranslation": "The sun is yellow."
+                },
+                {
+                    "word": "Itim",
+                    "wordTranslation": "Black",
+                    "sentence": "Ang pusa ay itim.",
+                    "sentenceTranslation": "The cat is black."
+                },
+                {
+                    "word": "Puti",
+                    "wordTranslation": "White",
+                    "sentence": "Ang papel ay puti.",
+                    "sentenceTranslation": "The paper is white."
+                }
+            ],
             "Medium": [
-
+                {
+                    "word": "Kahel",
+                    "wordTranslation": "Orange",
+                    "sentence": "Ang prutas ay kahel.",
+                    "sentenceTranslation": "The fruit is orange."
+                },
+                {
+                    "word": "Rosas",
+                    "wordTranslation": "Pink",
+                    "sentence": "Ang bulaklak ay rosas.",
+                    "sentenceTranslation": "The flower is pink."
+                },
+                {
+                    "word": "Lila",
+                    "wordTranslation": "Purple",
+                    "sentence": "Ang mga ubas ay lila.",
+                    "sentenceTranslation": "The grapes are purple."
+                },
+                {
+                    "word": "Abo",
+                    "wordTranslation": "Gray",
+                    "sentence": "Ang elepante ay abo.",
+                    "sentenceTranslation": "The elephant is gray."
+                },
+                {
+                    "word": "Kayumanggi",
+                    "wordTranslation": "Brown",
+                    "sentence": "Ang lupa ay kayumanggi.",
+                    "sentenceTranslation": "The soil is brown."
+                }
             ],
             "Hard": [
-
+                {
+                    "word": "Turkesa",
+                    "wordTranslation": "Turquoise",
+                    "sentence": "Ang dagat ay turkesa.",
+                    "sentenceTranslation": "The sea is turquoise."
+                },
+                {
+                    "word": "Ginto",
+                    "wordTranslation": "Gold",
+                    "sentence": "Ang singsing ay ginto.",
+                    "sentenceTranslation": "The ring is gold."
+                },
+                {
+                    "word": "Bughaw",
+                    "wordTranslation": "Deep Blue",
+                    "sentence": "Ang karagatan ay bughaw.",
+                    "sentenceTranslation": "The ocean is deep blue."
+                },
+                {
+                    "word": "Kalimbahin",
+                    "wordTranslation": "Light Pink",
+                    "sentence": "Ang bulaklak ay kalimbahin.",
+                    "sentenceTranslation": "The flower is light pink."
+                },
+                {
+                    "word": "Lunti",
+                    "wordTranslation": "Forest Green",
+                    "sentence": "Ang mga dahon ay lunti.",
+                    "sentenceTranslation": "The leaves are forest green."
+                }
             ]
+        },
+        "NumbersGame": {
+            "Easy": [
+                {
+                    "digit": 1,
+                    "word": "Isa",
+                    "wordTranslation": "One",
+                    "sentence": "Mayroong isang bola sa mesa.",
+                    "sentenceTranslation": "There is one ball on the table."
+                },
+                {
+                    "digit": 2,
+                    "word": "Dalawa",
+                    "wordTranslation": "Two",
+                    "sentence": "May dalawang aso sa labas.",
+                    "sentenceTranslation": "There are two dogs outside."
+                },
+                {
+                    "digit": 3,
+                    "word": "Tatlo",
+                    "wordTranslation": "Three",
+                    "sentence": "Tatlong bata ang naglalaro.",
+                    "sentenceTranslation": "Three children are playing."
+                },
+                {
+                    "digit": 4,
+                    "word": "Apat",
+                    "wordTranslation": "Four",
+                    "sentence": "Apat na mangga ang nasa basket.",
+                    "sentenceTranslation": "There are four mangoes in the basket."
+                },
+                {
+                    "digit": 5,
+                    "word": "Lima",
+                    "wordTranslation": "Five",
+                    "sentence": "May limang aklat sa lamesa.",
+                    "sentenceTranslation": "There are five books on the table."
+                },
+                {
+                    "digit": 6,
+                    "word": "Anim",
+                    "wordTranslation": "Six",
+                    "sentence": "Anim na itlog ang nasa plato.",
+                    "sentenceTranslation": "There are six eggs on the plate."
+                },
+                {
+                    "digit": 7,
+                    "word": "Pito",
+                    "wordTranslation": "Seven",
+                    "sentence": "May pitong upuan sa silid.",
+                    "sentenceTranslation": "There are seven chairs in the room."
+                },
+                {
+                    "digit": 8,
+                    "word": "Walo",
+                    "wordTranslation": "Eight",
+                    "sentence": "Mayroong walong ibon sa puno.",
+                    "sentenceTranslation": "There are eight birds in the tree."
+                },
+                {
+                    "digit": 9,
+                    "word": "Siyam",
+                    "wordTranslation": "Nine",
+                    "sentence": "Siyam na halaman ang nasa hardin.",
+                    "sentenceTranslation": "There are nine plants in the garden."
+                },
+                {
+                    "digit": 10,
+                    "word": "Sampu",
+                    "wordTranslation": "Ten",
+                    "sentence": "Mayroong sampung tao sa klase.",
+                    "sentenceTranslation": "There are ten people in the class."
+                }
+            ],
+            "Medium": [],
+            "Hard": []
         }
-	}
+    }
 }
