@@ -1,0 +1,66 @@
+{
+	"Filipino": {
+		"ColorsGame": {
+			"Easy": [
+				{
+					"id": "1",
+					"questionText": "Anong kulay ang langit?",
+					"answers": ["Asul", "Pula", "Berde", "Dilaw"],
+					"correctAnswerIndex": 0
+				},
+				{
+					"id": "2",
+					"questionText": "Anong kulay ang araw?",
+					"answers": ["Dilaw", "Itim", "Berde", "Asul"],
+					"correctAnswerIndex": 0
+				},
+				{
+					"id": "3",
+					"questionText": "Anong kulay ang dahon?",
+					"answers": ["Berde", "Pula", "Kahel", "Rosas"],
+					"correctAnswerIndex": 0
+				}
+			],
+			"Medium": [
+				{
+					"id": "4",
+					"questionText": "Anong kulay ang kahel?",
+					"answers": ["Orange", "Dilaw", "Itim", "Berde"],
+					"correctAnswerIndex": 0
+				},
+				{
+					"id": "5",
+					"questionText": "Anong kulay ang rosas?",
+					"answers": ["Pink", "Pula", "Lila", "Asul"],
+					"correctAnswerIndex": 0
+				},
+				{
+					"id": "6",
+					"questionText": "Anong kulay ang lila?",
+					"answers": ["Purple", "Berde", "Itim", "Dilaw"],
+					"correctAnswerIndex": 0
+				}
+			],
+			"Hard": [
+				{
+					"id": "7",
+					"questionText": "Anong kulay ang turkesa?",
+					"answers": ["Turquoise", "Bughaw", "Kahel", "Pula"],
+					"correctAnswerIndex": 0
+				},
+				{
+					"id": "8",
+					"questionText": "Anong kulay ang labi?",
+					"answers": ["Maroon", "Brown", "Berde", "Asul"],
+					"correctAnswerIndex": 0
+				},
+				{
+					"id": "9",
+					"questionText": "Anong kulay ang ginto?",
+					"answers": ["Gold", "Silver", "Bronze", "Itim"],
+					"correctAnswerIndex": 0
+				}
+			]
+		}
+	}
+}
