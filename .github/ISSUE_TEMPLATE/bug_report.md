@@ -2,7 +2,7 @@
 name: Bug report
 about: Describe your bug.
 title: ''
-labels: "\U0001F41Bbug, \U0001F4DDDocumentation"
+labels: "\U0001F41Bbug"
 assignees: trbraley03
 
 ---

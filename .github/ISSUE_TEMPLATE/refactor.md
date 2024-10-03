@@ -2,7 +2,7 @@
 name: Refactor
 about: What code needs refactoring?
 title: ''
-labels: ''
+labels: "♻️Refactor"
 assignees: ''
 
 ---
