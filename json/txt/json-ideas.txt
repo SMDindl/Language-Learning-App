@@ -1,0 +1,5 @@
+Reusability of Tips: 
+In the "questions" section, you’ve included a "tip". 
+If tips are commonly reused or could be shared across 
+multiple questions, you might want to store them separately 
+(e.g., as a reference or an array of tips) to avoid redundancy.

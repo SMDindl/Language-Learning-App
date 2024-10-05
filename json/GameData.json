@@ -1,6 +1,113 @@
 {
-    "Filipino": {
-        
-    }
+    "filipino": {
+        "alphabetGame": {
+            "easy": {
+                
+            },
+            "medium": {
 
+            },
+            "hard": {
+
+            }
+        },
+        "colorsGame": {
+            "easy": {
+                "words": [
+                    {
+                        "text": "Asul",
+                        "englishText": "Blue",
+                        "exampleSentence": "Asul ang langit.",
+                        "englishSentence": "The sky is blue."
+                    },
+                    {
+                        "text": "Pula",
+                        "englishText": "Red",
+                        "exampleSentence": "Ang bola ay pula.",
+                        "englishSentence": "The ball is red."
+                    },
+                    {
+                        "text": "Dilaw",
+                        "englishText": "Yellow",
+                        "exampleSentence": "Ang araw ay dilaw.",
+                        "englishSentence": "The sun is yellow."
+                    },
+                    {
+                        "text": "Berde",
+                        "englishText": "Green",
+                        "exampleSentence": "Ang dahon ay berde.",
+                        "englishSentence": "The leaf is green."
+                    }, 
+                    {
+                        "text": "Itim",
+                        "englishText": "Black",
+                        "exampleSentence": "Ang pusa ay itim.",
+                        "englishSentence": "The cat is black."
+                    },
+                    {
+                        "text": "Puti",
+                        "englishText": "White",
+                        "exampleSentence": "Ang papel ay puti.",
+                        "englishSentence": "The paper is white."
+                    }
+                ],
+                "questions": [
+                    {
+                        "text": "Anong kulay ang langit?",
+                        "englishText": "What color is the sky?",
+                        "tip": "langit = sky",
+                        "image": "picture.png",
+                        "choices": ["Asul", "Pula", "Berde", "Dilaw"],
+                        "correctChoiceIndex": 0
+                    }, 
+                    {
+                        "text": "Anong kulay ang blueberries?",
+                        "englishText": "What color are blueberries?",
+                        "tip": "kulay = color",
+                        "choices": ["Asul", "Pula"],
+                        "correctChoiceIndex": 0
+                    }
+                ]
+            },
+            "medium": {
+
+            },
+            "hard": {
+
+            }
+        },
+        "numbersGame": {
+            "easy": {
+
+            },
+            "medium": {
+
+            },
+            "hard": {
+
+            }
+        },
+        "storiesGame": {
+            "easy": {
+
+            },
+            "medium": {
+
+            },
+            "hard": {
+
+            }
+        },
+        "songsGame": {
+            "easy": {
+
+            },
+            "medium": {
+
+            },
+            "hard": {
+
+            }
+        }
+    }
 }
