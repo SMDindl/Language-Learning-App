@@ -1,0 +1,25 @@
+{
+    "users": [
+        {
+            "uuid": "",
+            "username": "sdindl",
+            "email": "sdindl@sc.email.edu",
+            "displayName": "Steven",
+            "password": "Password2024",
+            "progressTrackers": [
+                {
+                    "language": "Filipino",
+                    "completedGames": [
+                        "Easy-ColorsGame",
+                        "Medium-StoriesGame"
+                    ]
+                },
+                {
+                    "language": "",
+                    "completedGames": []
+                }
+            ]
+        }
+    ]
+}
+
