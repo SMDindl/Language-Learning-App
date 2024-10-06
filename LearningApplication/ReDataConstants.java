@@ -1,16 +1,12 @@
-
-/**
- * 
- */
-public class DataConstants {
-
+public class ReDataConstants {
+    
     // Users
     protected static final String USERS = "users";
 
     // User instance information (list contained in UserList)
     protected static final String USER_FILE_NAME = "json\\Users.json";
 	protected static final String USER_ID = "id";
-	protected static final String USER_USER_NAME = "userName";
+	protected static final String USERNAME = "userName";
 	protected static final String DISPLAY_NAME = "displayName";
 	protected static final String EMAIL = "email";
 	protected static final String PASSWORD = "password";
