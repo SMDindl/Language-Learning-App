@@ -2,6 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.nio.file.Paths;
 
 public class DataWriter {
 
@@ -12,7 +13,7 @@ public class DataWriter {
         user.put(DataConstants.DISPLAY_NAME, displayName);
         user.put(DataConstants.EMAIL, email);
         user.put(DataConstants.PASSWORD, password);
-        user.put(DataConstants.PROGRESS_TRACKERS, new JSONArray()); // Initialize with an empty array
+        user.put(DataConstants.PROGRESS_TRACKERS, new JSONArray());
 
         writeToFile(DataConstants.USER_FILE_NAME, user);
     }
@@ -20,17 +21,17 @@ public class DataWriter {
     // Method to write game data (e.g., questions)
     public void writeGameData(String gameName, String questionText, String[] answers, int correctAnswerIndex) {
         JSONObject gameData = new JSONObject();
-        gameData.put(DataConstants.QUESTIONS, new JSONArray());
+        JSONArray questionsArray = new JSONArray();
 
         JSONObject question = new JSONObject();
         question.put(DataConstants.QUESTION_TEXT, questionText);
         question.put(DataConstants.ANSWERS, new JSONArray(answers));
         question.put(DataConstants.CORRECT_ANSWER_INDEX, correctAnswerIndex);
 
-        gameData.getJSONArray(DataConstants.QUESTIONS).put(question);
+        questionsArray.put(question);
+        gameData.put(DataConstants.QUESTIONS, questionsArray);
 
-        // Writing to a specific game data file
-        String gameFileName = "json\\" + gameName + ".json";
+        String gameFileName = Paths.get("json", gameName + ".json").toString();
         writeToFile(gameFileName, gameData);
     }
 
@@ -38,9 +39,9 @@ public class DataWriter {
     private void writeToFile(String fileName, JSONObject data) {
         try (FileWriter file = new FileWriter(fileName, true)) {
             file.write(data.toString());
-            file.write(System.lineSeparator()); // New line for separation
-            file.flush();
+            file.write(System.lineSeparator());
         } catch (IOException e) {
+            System.err.println("Error writing to file: " + fileName);
             e.printStackTrace();
         }
     }
@@ -52,7 +53,7 @@ public class DataWriter {
         letter.put(DataConstants.PRONUNCATION, pronunciation);
         letter.put(DataConstants.EXAMPLE_WORDS, new JSONArray(exampleWords));
 
-        String letterFileName = "json\\letters.json"; // Assuming a single file for letters
+        String letterFileName = "json/letters.json";
         writeToFile(letterFileName, letter);
     }
 
@@ -64,8 +65,7 @@ public class DataWriter {
         story.put(DataConstants.AUTHOR, author);
         story.put(DataConstants.PAGES, new JSONArray(pages));
 
-        String storyFileName = "json\\stories.json"; // Assuming a single file for stories
+        String storyFileName = "json/stories.json";
         writeToFile(storyFileName, story);
     }
 }
-
