@@ -1,4 +1,3 @@
-
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,55 +9,93 @@ import org.json.simple.parser.JSONParser;
 
 public class DataLoader extends DataConstants {
 
+    private GameData gameData = GameData.getInstance();
+    
     public void loadGameData() {
-        HashMap<DataKey, List<Word>> wordsMap = new HashMap<>();
-        HashMap<DataKey, List<Question>> questionsMap = new HashMap<>();
-        HashMap<DataKey, List<Story>> storiesMap = new HashMap<>();
-        HashMap<DataKey, List<Letter>> lettersMap = new HashMap<>();
+        HashMap<DataKey, List<Word>> wordsMap = new HashMap<>(); // Map to store words by DataKey
 
         try {
-            FileReader reader = new FileReader(GAME_DATA_FILE); // Ensure GAME_DATA_FILE is correctly defined
+            FileReader reader = new FileReader(GAME_DATA_FILE); 
             JSONParser parser = new JSONParser();
-            JSONArray dataJSON = (JSONArray) parser.parse(reader);
-
-            // Loop through the JSON array
-            for (Object obj : dataJSON) {
-                JSONObject gameData = (JSONObject) obj;
-
-                // Example of loading words
-                JSONArray wordsArray = (JSONArray) gameData.get("words");
-                for (Object wordObj : wordsArray) {
-                    JSONObject wordJSON = (JSONObject) wordObj;
-                    String wordText = (String) wordJSON.get("text");
-                    String wordTranslation = (String) wordJSON.get("englishText");
-                    String exampleSentence = (String) wordJSON.get("exampleSentence");
-                    String sentenceTranslation = (String) wordJSON.get("englishSentence");
-
-                    Word word = new Word(wordText, wordTranslation, exampleSentence, sentenceTranslation);
-                    DataKey dataKey = DataKey.getInstance(); 
-                    wordsMap.computeIfAbsent(dataKey, k -> new ArrayList<>()).add(word);
-                }
-
-                // Add similar logic to load questions, stories, and letters...
-
-            }
-
-            // Populate the game data
-            populateData(wordsMap, questionsMap, storiesMap, lettersMap);
-
+            JSONObject jsonObject = (JSONObject) parser.parse(reader); // Parse the entire JSON object
+            
+            // Loop through each language in the JSON object
+            loadLanguages(jsonObject, wordsMap);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
+        }
+
+        // Populate the GameData instance with the loaded words
+        gameData.populateData(wordsMap, null, null, null);
+    }
+
+    // Private method to load languages
+    private void loadLanguages(JSONObject jsonObject, HashMap<DataKey, List<Word>> wordsMap) {
+        for (Object languageKey : jsonObject.keySet()) {
+            String language = (String) languageKey;
+            JSONObject games = (JSONObject) jsonObject.get(language); // Get the games for the specific language
+
+            // Loop through each game type
+            loadGameTypes(games, language, wordsMap);
         }
     }
 
-    // Method to populate data into the GameData instance
-    public void populateData(HashMap<DataKey, List<Word>> words, 
-                             HashMap<DataKey, List<Question>> questions,
-                             HashMap<DataKey, List<Story>> stories, 
-                             HashMap<DataKey, List<Letter>> letters) {
-        this.wordsMap = words;
-        this.questionsMap = questions;
-        this.storiesMap = stories;
-        this.lettersMap = letters;
+    // Private method to load game types
+    private void loadGameTypes(JSONObject games, String language, HashMap<DataKey, List<Word>> wordsMap) {
+        for (Object gameTypeKey : games.keySet()) {
+            String gameType = (String) gameTypeKey;
+            JSONObject difficulties = (JSONObject) games.get(gameType); // Get the difficulties for the game type
+
+            // Loop through each difficulty
+            loadDifficulties(difficulties, language, gameType, wordsMap);
+        }
+    }
+
+    // Private method to load difficulties
+    private void loadDifficulties(JSONObject difficulties, String language, String gameType, HashMap<DataKey, List<Word>> wordsMap) {
+        for (Object difficultyKey : difficulties.keySet()) {
+            String difficulty = (String) difficultyKey;
+            JSONObject gameData = (JSONObject) difficulties.get(difficulty); // Get the game data for the specific difficulty
+
+            // Check if gameData is a JSONObject
+            if (!(gameData instanceof JSONObject)) {
+                continue; // Skip to the next iteration if not a JSONObject
+            }
+
+            // Create DataKey for this word entry
+            DataKey dataKey = DataKey.getInstance(language, gameType, difficulty);
+            List<Word> wordsList = new ArrayList<>(); // Create a new list for this DataKey
+
+            // Process words
+            processWords(gameData, wordsList);
+
+            // Add the filled list into the wordsMap
+            wordsMap.put(dataKey, wordsList); 
+            System.out.println(dataKey); // DataKey for debugging
+        }
+    }
+
+    // Private method to process words
+    private void processWords(JSONObject gameData, List<Word> wordsList) {
+        // Check if there are words and process them
+        if (gameData.containsKey("words")) {
+            JSONArray wordsArray = (JSONArray) gameData.get("words"); // Get the words array
+            
+            // Loop through each word object in the array
+            for (int i = 0; i < wordsArray.size(); i++) {
+                JSONObject wordJSON = (JSONObject) wordsArray.get(i);
+
+                // Extract word data safely
+                String wordText = (String) wordJSON.get("text");
+                String wordTranslation = (String) wordJSON.get("englishText");
+                String exampleSentence = (String) wordJSON.get("exampleSentence");
+                String sentenceTranslation = (String) wordJSON.get("englishSentence");
+
+                // Create and add the Word object to the list
+                wordsList.add(new Word(wordText, wordTranslation, exampleSentence, sentenceTranslation));
+            }
+        } else {
+            System.out.println("No words found for the current game data.");
+        }
     }
 }

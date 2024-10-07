@@ -1,3 +1,5 @@
+
+
 public class LanguageLearningApplication {
     // Attributes
     private User user;
@@ -34,4 +36,5 @@ public class LanguageLearningApplication {
 
     public void logout() {
     }
+    
 }

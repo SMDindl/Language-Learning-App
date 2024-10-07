@@ -41,4 +41,12 @@ public class Word {
         return sentenceTranslation; 
     }
 
+    @Override
+    public String toString() {
+        return "Word: " + wordText +
+               ", Translation: " + wordTranslation +
+               ", Example: " + exampleSentence +
+               " (Translation: " + sentenceTranslation + ")";
+    }
+
 }

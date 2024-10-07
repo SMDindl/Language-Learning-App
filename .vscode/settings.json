@@ -1,5 +1,7 @@
 {
-    "java.project.sourcePaths": ["LearningApplication"],
+    "java.project.sourcePaths": [
+        "LearningApplication"
+    ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
