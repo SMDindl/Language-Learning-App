@@ -1,5 +1,4 @@
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProgressTracker {
@@ -21,11 +20,11 @@ public class ProgressTracker {
 
     }
 
-    public void addCompletedGame(GameKey key) {
+    public void addCompletedGame(DataKey key) {
         
     }
 
-    public List<GameKey> getCompletedGames() {
+    public List<DataKey> getCompletedGames() {
         return null;
     }
 }

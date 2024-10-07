@@ -18,6 +18,14 @@ public class Main extends DataConstants {
         dataKey.setGameType(gameType);
         System.out.println(dataKey.toString());
 
+        DataLoader dataLoader = new DataLoader();
+        dataLoader.loadGameData();
+
+        GameData gameData = GameData.getInstance();
+
+        System.out.println(gameData.getWords());
+
+
     }
 
 }
