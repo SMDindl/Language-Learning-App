@@ -11,6 +11,9 @@ public class DataLoader extends DataConstants {
 
     private GameData gameData = GameData.getInstance();
     
+    /**
+     * loadGame data (currently only for loading words)
+     */
     public void loadGameData() {
         HashMap<DataKey, List<Word>> wordsMap = new HashMap<>(); // Map to store words by DataKey
 
@@ -57,11 +60,6 @@ public class DataLoader extends DataConstants {
             String difficulty = (String) difficultyKey;
             JSONObject gameData = (JSONObject) difficulties.get(difficulty); // Get the game data for the specific difficulty
 
-            // Check if gameData is a JSONObject
-            if (!(gameData instanceof JSONObject)) {
-                continue; // Skip to the next iteration if not a JSONObject
-            }
-
             // Create DataKey for this word entry
             DataKey dataKey = DataKey.getInstance(language, gameType, difficulty);
             List<Word> wordsList = new ArrayList<>(); // Create a new list for this DataKey
@@ -85,7 +83,7 @@ public class DataLoader extends DataConstants {
             for (int i = 0; i < wordsArray.size(); i++) {
                 JSONObject wordJSON = (JSONObject) wordsArray.get(i);
 
-                // Extract word data safely
+                // Extract word
                 String wordText = (String) wordJSON.get("text");
                 String wordTranslation = (String) wordJSON.get("englishText");
                 String exampleSentence = (String) wordJSON.get("exampleSentence");
