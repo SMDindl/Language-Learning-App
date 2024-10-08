@@ -32,7 +32,7 @@ public class DataConstants {
     protected static final String FILIPINO = "filipino";
 
     // Difficulties
-    protected static final String EASY = "easy";
+    protected static final String EASY = "easy"; 
     protected static final String MEDIUM = "medium";
     protected static final String HARD = "hard";
 

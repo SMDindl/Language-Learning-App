@@ -6,7 +6,7 @@ public class StoriesGame {
     }
 
     public void teachWords() {
-
+        
     }
 
     public Question askQuestion() {
