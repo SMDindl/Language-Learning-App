@@ -3,6 +3,7 @@ import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class DataWriter {
 
@@ -18,25 +19,43 @@ public class DataWriter {
         writeToFile(DataConstants.USER_FILE_NAME, user);
     }
 
-    // Method to write game data (e.g., questions)
-    public void writeGameData(String gameName, String questionText, String[] answers, int correctAnswerIndex) {
+    // Method to write game data (matches the structure loaded in DataLoader)
+    public void writeGameData(String language, String gameType, String difficulty, List<Word> words) {
         JSONObject gameData = new JSONObject();
-        JSONArray questionsArray = new JSONArray();
+        JSONObject difficultiesObj = new JSONObject();
+        JSONObject gameTypeObj = new JSONObject();
 
-        JSONObject question = new JSONObject();
-        question.put(DataConstants.QUESTION_TEXT, questionText);
-        question.put(DataConstants.ANSWERS, new JSONArray(answers));
-        question.put(DataConstants.CORRECT_ANSWER_INDEX, correctAnswerIndex);
+        // Create a JSON array of words
+        JSONArray wordsArray = new JSONArray();
+        for (Word word : words) {
+            JSONObject wordObj = new JSONObject();
+            wordObj.put("text", word.getText());
+            wordObj.put("englishText", word.getTranslation());
+            wordObj.put("exampleSentence", word.getExampleSentence());
+            wordObj.put("englishSentence", word.getSentenceTranslation());
+            wordsArray.put(wordObj);
+        }
 
-        questionsArray.put(question);
-        gameData.put(DataConstants.QUESTIONS, questionsArray);
+        // Add the words array to gameData under the key "words"
+        gameData.put("words", wordsArray);
 
-        String gameFileName = Paths.get("json", gameName + ".json").toString();
-        writeToFile(gameFileName, gameData);
+        // Add game data under the difficulty
+        difficultiesObj.put(difficulty, gameData);
+
+        // Add difficulties under the game type
+        gameTypeObj.put(gameType, difficultiesObj);
+
+        // Add game type under the language
+        JSONObject languageObj = new JSONObject();
+        languageObj.put(language, gameTypeObj);
+
+        // Write to file (appending to the existing file or creating a new one)
+        String gameFileName = Paths.get("json", "gameData.json").toString();
+        writeToFile(gameFileName, languageObj);
     }
 
-    // General method for writing data to a file
-    private void writeToFile(String fileName, JSONObject data) {
+     // General method for writing data to a file
+     private void writeToFile(String fileName, JSONObject data) {
         try (FileWriter file = new FileWriter(fileName, true)) {
             file.write(data.toString());
             file.write(System.lineSeparator());
@@ -46,7 +65,7 @@ public class DataWriter {
         }
     }
 
-    // Method to write letter data
+    // Method to write letter data (similar to the structure loaded by DataLoader)
     public void writeLetterData(String letterText, String pronunciation, String[] exampleWords) {
         JSONObject letter = new JSONObject();
         letter.put(DataConstants.LETTER_TEXT, letterText);
@@ -57,7 +76,7 @@ public class DataWriter {
         writeToFile(letterFileName, letter);
     }
 
-    // Method to write story data
+    // Method to write story data (consistent with what DataLoader expects)
     public void writeStoryData(String title, String titleTranslation, String author, String[] pages) {
         JSONObject story = new JSONObject();
         story.put(DataConstants.TITLE, title);
