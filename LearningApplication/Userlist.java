@@ -46,10 +46,7 @@ public class UserList {
     }
 
     // Method to retrieve a user by username
-    public User getUser(String username) {
-     
-           
-        
-        return null; // User not found
+    public User getUser(String username) {   
+        return null; 
     }
 }

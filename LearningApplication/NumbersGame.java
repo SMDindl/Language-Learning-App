@@ -10,11 +10,12 @@ public class NumbersGame {
     }
 
     public Question askQuestion() {
-
+        return null;
     }
 
     public boolean validateAnswer(String answer) {
-        return answer == Question.getCorrectAnswer();
+        // return answer == Question.getCorrectAnswer();
+        return false;
     }
 
     public void provideFeedback(boolean isCorrect) {

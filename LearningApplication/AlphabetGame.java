@@ -10,11 +10,11 @@ public class AlphabetGame {
     }
 
     public Question askQuestion() {
-
+        return null;
     }
 
     public boolean validateAnswer(String answer) {
-        return answer == Question.getCorrectAnswer();
+        return false;
     }
 
     public void provideFeedback(boolean isCorrect) {
@@ -23,4 +23,5 @@ public class AlphabetGame {
         else
             System.out.println("Better luck next time");
     }
+
 }
