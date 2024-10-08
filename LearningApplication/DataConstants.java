@@ -44,6 +44,7 @@ public class DataConstants {
 
     // Data Lists (arrays of data elements)
     protected static final String QUESTIONS = "questions"; 
+    protected static final String STORIES = "stories"; 
     protected static final String WORDS = "words"; 
     protected static final String LETTERS = "letters"; 
     protected static final String PAGES = "pages"; 

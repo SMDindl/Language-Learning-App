@@ -1,6 +1,4 @@
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Objects;
 
 /**
@@ -20,12 +18,20 @@ public class DataKey extends DataConstants {
         setDifficulty(difficulty);
     }
 
-    // Public static method to get the instance of DataKey
+    // Public static method to get the instance of DataKey or update instance if already crated
     public static DataKey getInstance(String language, String gameType, String difficulty) {
         if (instance == null) {
-            instance = new DataKey(language, gameType, difficulty); // Create instance only if it doesn't exist
+            instance = new DataKey(language, gameType, difficulty); 
         }
-        return instance; // Return the singleton instance
+        instance.setLanguage(language);
+        instance.setGameType(gameType);
+        instance.setDifficulty(difficulty);
+        return instance; 
+    }
+
+    // Public static method to get the instance of DataKey
+    public static DataKey getInstance() {
+        return instance; 
     }
 
     // Getters
