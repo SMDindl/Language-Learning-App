@@ -32,7 +32,7 @@ public class DataLoader extends DataConstants {
         gameData.populateData(wordsMap, null, null, null);
     }
 
-    // Private method to load languages
+    // Private method to load languages (loops through each language)
     private void loadLanguages(JSONObject jsonObject, HashMap<DataKey, List<Word>> wordsMap) {
         for (Object languageKey : jsonObject.keySet()) {
             String language = (String) languageKey;
@@ -43,7 +43,7 @@ public class DataLoader extends DataConstants {
         }
     }
 
-    // Private method to load game types
+    // Private method to load game types (loops through each gameType)
     private void loadGameTypes(JSONObject games, String language, HashMap<DataKey, List<Word>> wordsMap) {
         for (Object gameTypeKey : games.keySet()) {
             String gameType = (String) gameTypeKey;
