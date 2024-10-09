@@ -20,8 +20,8 @@ import software.amazon.awssdk.services.polly.model.SynthesizeSpeechRequest;
 import software.amazon.awssdk.services.polly.model.SynthesizeSpeechResponse;
 import software.amazon.awssdk.services.polly.model.Voice;
 
-public class Narriator {
-    private Narriator(){};
+public class Narrator {
+    private Narrator(){};
 
     public static void playSound(String text){
         PollyClient polly = PollyClient.builder().region(Region.EU_WEST_3).build();
