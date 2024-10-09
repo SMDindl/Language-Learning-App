@@ -8,18 +8,18 @@ public class Question {
 
     // Methods
     public String getQuestionText() {
-        return null; // Placeholder
+        return questionText;
     }
 
     public ArrayList<String> getAnswers() {
-        return null; // Placeholder
+        return answers;
     }
 
     public int getCorrectAnswerIndex() {
-        return -1; // Placeholder
+        return correctAnswerIndex;
     }
 
     public String getCorrectAnswer() {
-        return null; // Placeholder
+        return answers.get(correctAnswerIndex);
     }
 }

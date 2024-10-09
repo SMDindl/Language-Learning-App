@@ -13,9 +13,8 @@ public class ColorsGame {
         return null;
     }
 
-    public boolean validateAnswer(String answer) {
-        // return answer == Question.getCorrectAnswer();
-        return false;
+    public boolean validateAnswer(String answer, Question question) {
+       return answer == question.getCorrectAnswer();
     }
 
     public void provideFeedback(boolean isCorrect) {

@@ -1,45 +1,40 @@
 public class Page {
     // Attributes
-    private Integer pageNumber;
+    private String pageNumber;
     private String text;
     private String englishText;
     private String image;
 
     // Constructor
-    public Page(Integer pageNumber, String text, String englishText, String image) {
-        // Stub: Initialize attributes
+    public Page(String pageNumber, String text, String englishText, String image) {
+        this.pageNumber = pageNumber;
+        this.text = text;
+        this.englishText = englishText;
+        this.image = image;
     }
 
     // Methods
     public String getText() {
-        return null; // Placeholder
+        return text;
     }
 
     public String getEnglishText() {
-        return null; // Placeholder
+        return englishText;
     }
 
     public int getPageNumber() {
-        return -1; // Placeholder
+        return this.pageNumber.charAt(0) - '0';
     }
 
     public void setPageNumber(int pageNumber) {
-        // Stub: Set page number
-    }
-
-    public String getContent() {
-        return null; // Placeholder
-    }
-
-    public void setContent(String content) {
-        // Stub: Set content
+        this.pageNumber = "" + pageNumber;
     }
 
     public String getImage() {
-        return null; // Placeholder
+        return image;
     }
 
     public void setImage(String image) {
-        // Stub: Set image
+        this.image = image;
     }
 }

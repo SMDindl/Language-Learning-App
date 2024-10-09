@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Story {
@@ -6,26 +7,35 @@ public class Story {
     private List<Page> pages;
     private String author;
     private int position;
+    private ArrayList<Word> teachWords;
 
     // Constructor
-    public Story(String title, List<Page> pages, String author) {
-        // Stub: Initialize attributes
+    public Story(String title, List<Page> pages, String author, ArrayList<Word> teachWords) {
+        this.title = title;
+        this.pages = pages;
+        this.author = author;
+        this.teachWords = teachWords;
+        this.position = 0;
     }
 
     // Methods
     public String getTitle() {
-        return null; // Placeholder
+        return title; // Placeholder
     }
 
     public List<Page> getPages() {
-        return null; // Placeholder
+        return pages; // Placeholder
     }
 
     public String getAuthor() {
-        return null; // Placeholder
+        return author; // Placeholder
     }
 
     public int getPosition() {
-        return -1; // Placeholder
+        return position; // Placeholder
+    }
+
+    public ArrayList<Word> getTeachWords() {
+        return teachWords;
     }
 }

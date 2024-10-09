@@ -8,19 +8,21 @@ public class Letter {
 
     // Constructor
     public Letter(String letter, String pronunciation, List<String> exampleWords) {
-        // Stub: Initialize attributes
+        this.letter = letter;
+        this.pronunciation = pronunciation;
+        this.exampleWords = exampleWords;
     }
 
     // Methods
     public String getLetter() {
-        return null; // Placeholder
+        return letter;
     }
 
     public String getPronunciation() {
-        return null; // Placeholder
+        return pronunciation;
     }
 
     public List<String> getExampleWords() {
-        return null; // Placeholder
+        return exampleWords;
     }
 }
