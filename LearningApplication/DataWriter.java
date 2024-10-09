@@ -1,90 +1,83 @@
-import java.io.FileWriter;
-import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 
 public class DataWriter {
 
-    // Method to write user data to the JSON file
+    // Path to the user JSON file
+    private static final String USER_FILE_PATH = "json/users.json";
+
+    /**
+     * Method to write a new user to the JSON file. 
+     * The method loads existing users, adds a new user, and writes the updated data back to the file.
+     * 
+     * @param userName The username of the user.
+     * @param displayName The display name of the user.
+     * @param email The email of the user.
+     * @param password The password of the user.
+     */
     public void writeUserData(String userName, String displayName, String email, String password) {
-        JSONObject user = new JSONObject();
-        user.put(DataConstants.USER_USER_NAME, userName);
-        user.put(DataConstants.DISPLAY_NAME, displayName);
-        user.put(DataConstants.EMAIL, email);
-        user.put(DataConstants.PASSWORD, password);
-        user.put(DataConstants.PROGRESS_TRACKERS, new JSONArray());
-
-        writeToFile(DataConstants.USER_FILE_NAME, user);
-    }
-
-    // Method to write game data (matches the structure loaded in DataLoader)
-    public void writeGameData(String language, String gameType, String difficulty, List<Word> words) {
-        JSONObject gameData = new JSONObject();
-        JSONObject difficultiesObj = new JSONObject();
-        JSONObject gameTypeObj = new JSONObject();
-
-        // Create a JSON array of words
-        JSONArray wordsArray = new JSONArray();
-        for (Word word : words) {
-            JSONObject wordObj = new JSONObject();
-            wordObj.put("text", word.getText());
-            wordObj.put("englishText", word.getTranslation());
-            wordObj.put("exampleSentence", word.getExampleSentence());
-            wordObj.put("englishSentence", word.getSentenceTranslation());
-            wordsArray.put(wordObj);
+        // Load existing users from the JSON file
+        JSONObject jsonData = loadJSONData(USER_FILE_PATH);
+        JSONArray usersArray = jsonData.optJSONArray("users");
+        if (usersArray == null) {
+            usersArray = new JSONArray();
         }
 
-        // Add the words array to gameData under the key "words"
-        gameData.put("words", wordsArray);
+        // Create a new user object
+        JSONObject newUser = new JSONObject();
+        newUser.put(DataConstants.USER_USER_NAME, userName);
+        newUser.put(DataConstants.DISPLAY_NAME, displayName);
+        newUser.put(DataConstants.EMAIL, email);
+        newUser.put(DataConstants.PASSWORD, password);
+        newUser.put(DataConstants.PROGRESS_TRACKERS, new JSONArray());
 
-        // Add game data under the difficulty
-        difficultiesObj.put(difficulty, gameData);
+        // Add the new user to the array
+        usersArray.put(newUser);
 
-        // Add difficulties under the game type
-        gameTypeObj.put(gameType, difficultiesObj);
+        // Update the JSON data with the new user
+        jsonData.put("users", usersArray);
 
-        // Add game type under the language
-        JSONObject languageObj = new JSONObject();
-        languageObj.put(language, gameTypeObj);
-
-        // Write to file (appending to the existing file or creating a new one)
-        String gameFileName = Paths.get("json", "gameData.json").toString();
-        writeToFile(gameFileName, languageObj);
+        // Write the updated data back to the file
+        writeToFile(USER_FILE_PATH, jsonData);
     }
 
-     // General method for writing data to a file
-     private void writeToFile(String fileName, JSONObject data) {
-        try (FileWriter file = new FileWriter(fileName, true)) {
-            file.write(data.toString());
-            file.write(System.lineSeparator());
+    /**
+     * Helper method to load the existing JSON data from the file.
+     * If the file does not exist or cannot be read, an empty JSON object is returned.
+     * 
+     * @param filePath The path to the JSON file.
+     * @return The JSONObject containing the data loaded from the file.
+     */
+    private JSONObject loadJSONData(String filePath) {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(filePath)));
+            return new JSONObject(content);
+        } catch (IOException e) {
+            System.err.println("Error reading JSON file: " + filePath);
+            e.printStackTrace();
+            return new JSONObject(); // Return an empty JSON object if file not found or unreadable
+        }
+    }
+
+    /**
+     * General method for writing a JSONObject to a file.
+     * This method will overwrite the contents of the file with the provided JSON data.
+     * 
+     * @param fileName The name of the file to write to.
+     * @param data The JSONObject data to write to the file.
+     */
+    private void writeToFile(String fileName, JSONObject data) {
+        try (FileWriter file = new FileWriter(fileName, false)) { // 'false' to overwrite the file
+            file.write(data.toString(4)); // Pretty print JSON with 4-space indentation
+            file.write(System.lineSeparator()); // Add a new line for readability
         } catch (IOException e) {
             System.err.println("Error writing to file: " + fileName);
             e.printStackTrace();
         }
-    }
-
-    // Method to write letter data (similar to the structure loaded by DataLoader)
-    public void writeLetterData(String letterText, String pronunciation, String[] exampleWords) {
-        JSONObject letter = new JSONObject();
-        letter.put(DataConstants.LETTER_TEXT, letterText);
-        letter.put(DataConstants.PRONUNCATION, pronunciation);
-        letter.put(DataConstants.EXAMPLE_WORDS, new JSONArray(exampleWords));
-
-        String letterFileName = "json/letters.json";
-        writeToFile(letterFileName, letter);
-    }
-
-    // Method to write story data (consistent with what DataLoader expects)
-    public void writeStoryData(String title, String titleTranslation, String author, String[] pages) {
-        JSONObject story = new JSONObject();
-        story.put(DataConstants.TITLE, title);
-        story.put(DataConstants.TITLE_TRANSLATION, titleTranslation);
-        story.put(DataConstants.AUTHOR, author);
-        story.put(DataConstants.PAGES, new JSONArray(pages));
-
-        String storyFileName = "json/stories.json";
-        writeToFile(storyFileName, story);
     }
 }
