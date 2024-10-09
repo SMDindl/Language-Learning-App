@@ -3,6 +3,6 @@ package com.narration;
 public class NarrateTester {
     public static void main(String[] args){
         
-        Narriator.playSound("Kumusta ka na?");
+        Narrator.playSound("Kumusta ka na?");
     }
 }
