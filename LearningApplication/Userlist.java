@@ -32,7 +32,7 @@ public class UserList {
 
     // Method to populate users from the JSON file
     public void populateUsers() {
-        String filePath = "json/users.json"; // Path to the JSON file
+        String filePath = "data/json/users.json"; // Path to the JSON file
         try {
             String content = new String(Files.readAllBytes(Paths.get(filePath)));
             JSONObject jsonData = new JSONObject(content);

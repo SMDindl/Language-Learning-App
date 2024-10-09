@@ -1,5 +1,3 @@
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,12 +7,11 @@ import java.nio.file.Paths;
 public class DataWriter {
 
     // Path to the user JSON file
-    private static final String USER_FILE_PATH = "json/users.json";
+    private static final String USER_FILE_PATH = "data/json/users.json";
 
     /**
      * Method to write a new user to the JSON file. 
      * The method loads existing users, adds a new user, and writes the updated data back to the file.
-     * 
      * @param userName The username of the user.
      * @param displayName The display name of the user.
      * @param email The email of the user.
@@ -30,11 +27,11 @@ public class DataWriter {
 
         // Create a new user object
         JSONObject newUser = new JSONObject();
-        newUser.put(DataConstants.USER_USER_NAME, userName);
-        newUser.put(DataConstants.DISPLAY_NAME, displayName);
-        newUser.put(DataConstants.EMAIL, email);
-        newUser.put(DataConstants.PASSWORD, password);
-        newUser.put(DataConstants.PROGRESS_TRACKERS, new JSONArray());
+        newUser.put("username", userName);
+        newUser.put("displayName", displayName);
+        newUser.put("email", email);
+        newUser.put("password", password);
+        newUser.put("progressTrackers", new JSONArray());
 
         // Add the new user to the array
         usersArray.put(newUser);
@@ -49,7 +46,6 @@ public class DataWriter {
     /**
      * Helper method to load the existing JSON data from the file.
      * If the file does not exist or cannot be read, an empty JSON object is returned.
-     * 
      * @param filePath The path to the JSON file.
      * @return The JSONObject containing the data loaded from the file.
      */
@@ -60,14 +56,13 @@ public class DataWriter {
         } catch (IOException e) {
             System.err.println("Error reading JSON file: " + filePath);
             e.printStackTrace();
-            return new JSONObject(); // Return an empty JSON object if file not found or unreadable
+            return new JSONObject(); // Return an empty JSON object if the file is not found or unreadable
         }
     }
 
     /**
      * General method for writing a JSONObject to a file.
      * This method will overwrite the contents of the file with the provided JSON data.
-     * 
      * @param fileName The name of the file to write to.
      * @param data The JSONObject data to write to the file.
      */
@@ -75,6 +70,7 @@ public class DataWriter {
         try (FileWriter file = new FileWriter(fileName, false)) { // 'false' to overwrite the file
             file.write(data.toString(4)); // Pretty print JSON with 4-space indentation
             file.write(System.lineSeparator()); // Add a new line for readability
+            System.out.println("Successfully wrote user data to: " + fileName);
         } catch (IOException e) {
             System.err.println("Error writing to file: " + fileName);
             e.printStackTrace();
