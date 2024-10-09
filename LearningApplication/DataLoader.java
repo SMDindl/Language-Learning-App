@@ -141,7 +141,7 @@ public class DataLoader extends DataConstants {
                 // Extract the correct choice index (JSON uses long for numbers, so convert to int)
                 long correctChoiceIndexLong = (long) questionJSON.get(DataConstants.CORRECT_CHOICE_INDEX);
                 int correctChoiceIndex = (int) correctChoiceIndexLong;
-
+// STUB
                 // Create and add the Question object to the list
                 // questionsList.add(new Question(questionText, choices, correctChoiceIndex));
             }
@@ -168,7 +168,7 @@ public class DataLoader extends DataConstants {
 
                 // Extract image (if available)
                 String image = letterJSON.containsKey(DataConstants.IMAGE) ? (String) letterJSON.get(DataConstants.IMAGE) : null;
-
+// STUB
                 // Create and add the Letter object to the list
                 // lettersList.add(new Letter(letterText, pronunciation, image));
             }
@@ -230,13 +230,5 @@ public class DataLoader extends DataConstants {
             System.out.println("No pages found for the current story.");
         }
     }
-
-
-
-
-
-
-
-
 
 }
