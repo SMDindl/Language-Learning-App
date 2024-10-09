@@ -37,4 +37,11 @@ public class Page {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public void getContent() {
+        System.out.println(getImage());
+        System.out.println(getEnglishText());
+        System.out.println(getText());
+        System.out.println(getPageNumber());
+    }
 }

@@ -14,15 +14,26 @@ public class StoriesGame {
             //Prints out all the stories
             System.out.println((i+1) + ". " + storyList.get(i).getTitle());
         }
-        int selection = keyboard.nextInt() - 1;
-        teachWords(storyList.get(selection));
+        Story selection = storyList.get(keyboard.nextInt() - 1);
+        teachWords(selection);
+        List<Page> storyPages = selection.getPages();
+        for(int i = 0; i < storyPages.size(); i++) {
+            storyPages.get(i).getContent();
+        }
+        askQuestion(selection);
     }
 
     public void teachWords(Story story) {
         ArrayList<Word> newWords = story.getTeachWords();
+        for(int i = 0; i < newWords.size(); i++) {
+            //Might be better to store it as a different list, one that has the word and then the information being taught
+            //For now, just storing it as a list of Word to print out the word and then the translation
+            System.out.println(newWords.get(i).getWordText());
+            System.out.println(newWords.get(i).getWordTranslation());
+        }
     }
 
-    public Question askQuestion() {
+    public Question askQuestion(Story selection) {
         return null;
     }
 
