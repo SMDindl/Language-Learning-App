@@ -1,12 +1,12 @@
 public class Page {
     // Attributes
-    private Integer pageNumber;
+    private String pageNumber;
     private String text;
     private String englishText;
     private String image;
 
     // Constructor
-    public Page(Integer pageNumber, String text, String englishText, String image) {
+    public Page(String pageNumber, String text, String englishText, String image) {
         // Stub: Initialize attributes
     }
 
