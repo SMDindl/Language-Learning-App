@@ -1,10 +1,10 @@
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class ProgressTracker {
     // Attributes
     private String language;
-    private List<String> completedGames;
+    private ArrayList<String> completedGames;
 
 /*  Constructor
     public ProgressTracker() {
@@ -24,7 +24,7 @@ public class ProgressTracker {
         
     }
 
-    public List<DataKey> getCompletedGames() {
+    public ArrayList<DataKey> getCompletedGames() {
         return null;
     }
 }

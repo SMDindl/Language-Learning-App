@@ -1,9 +1,8 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserList {
     private static UserList instance;
-    private List<User> users;
+    private ArrayList<User> users;
 
     // Private constructor to enforce singleton pattern
     private UserList() {

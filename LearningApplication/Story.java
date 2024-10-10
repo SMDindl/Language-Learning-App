@@ -1,16 +1,15 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Story {
     // Attributes
     private String title;
-    private List<Page> pages;
+    private ArrayList<Page> pages;
     private String author;
     private int position;
     private ArrayList<Word> teachWords;
 
     // Constructor
-    public Story(String title, List<Page> pages, String author, ArrayList<Word> teachWords) {
+    public Story(String title, ArrayList<Page> pages, String author, ArrayList<Word> teachWords) {
         this.title = title;
         this.pages = pages;
         this.author = author;
@@ -23,7 +22,7 @@ public class Story {
         return title; // Placeholder
     }
 
-    public List<Page> getPages() {
+    public ArrayList<Page> getPages() {
         return pages; // Placeholder
     }
 

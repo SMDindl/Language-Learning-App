@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class StoriesGame {
@@ -16,7 +15,7 @@ public class StoriesGame {
         //User picks the story to work on
         Story selection = pickStory();
         teachWords(selection);
-        List<Page> storyPages = selection.getPages();
+        ArrayList<Page> storyPages = selection.getPages();
         for(int i = 0; i < storyPages.size(); i++) {
             storyPages.get(i).getContent();
         }
@@ -35,7 +34,7 @@ public class StoriesGame {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("\nWhich story would you like to use?: \n");
         DataKey dataKey = null; //Temporary variable just to remove error in following line
-        List<Story> storyList = gameData.getStories(dataKey);
+        ArrayList<Story> storyList = gameData.getStories(dataKey);
         for(int i = 0; i < storyList.size(); i++) {
             //Prints out all the stories
             System.out.println((i+1) + ". " + storyList.get(i).getTitle());
