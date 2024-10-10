@@ -1,14 +1,14 @@
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class GameData {
     // Attributes
     private static GameData instance;
-    private HashMap<DataKey, List<Word>> wordsMap;
-    private HashMap<DataKey, List<Question>> questionsMap;
-    private HashMap<DataKey, List<Story>> storiesMap;
-    private HashMap<DataKey, List<Letter>> lettersMap;
+    private HashMap<DataKey, ArrayList<Word>> wordsMap;
+    private HashMap<DataKey, ArrayList<Question>> questionsMap;
+    private HashMap<DataKey, ArrayList<Story>> storiesMap;
+    private HashMap<DataKey, ArrayList<Letter>> lettersMap;
 
     // Instanciate hashMaps, private constructor (singleton)
     private GameData() {
@@ -27,30 +27,30 @@ public class GameData {
     }
 
     // Method to retrieve words for a specific DataKey
-    public List<Word> getWords(DataKey dataKey) {
+    public ArrayList<Word> getWords(DataKey dataKey) {
         return wordsMap.get(dataKey);
     }
 
     // Retrieve questions data for a specific DataKey
-    public List<Question> getQuestions(DataKey dataKey) {
+    public ArrayList<Question> getQuestions(DataKey dataKey) {
         return questionsMap.get(dataKey);
     }
 
     // Retrieve letters data for a specific DataKey
-    public List<Letter> getLetters(DataKey dataKey) {
+    public ArrayList<Letter> getLetters(DataKey dataKey) {
         return lettersMap.get(dataKey);
     }
 
     // Retrieve stories data for a specific DataKey
-    public List<Story> getStories(DataKey dataKey) {
+    public ArrayList<Story> getStories(DataKey dataKey) {
         return storiesMap.get(dataKey);
     }
 
     // Method to populate game data
-    public void populateData(HashMap<DataKey, List<Word>> words, 
-                             HashMap<DataKey, List<Question>> questions,
-                             HashMap<DataKey, List<Story>> stories, 
-                             HashMap<DataKey, List<Letter>> letters) {
+    public void populateData(HashMap<DataKey, ArrayList<Word>> words, 
+                             HashMap<DataKey, ArrayList<Question>> questions,
+                             HashMap<DataKey, ArrayList<Story>> stories, 
+                             HashMap<DataKey, ArrayList<Letter>> letters) {
         this.wordsMap = words;
         this.questionsMap = questions;
         this.storiesMap = stories;
