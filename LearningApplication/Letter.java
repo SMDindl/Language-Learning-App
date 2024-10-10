@@ -8,9 +8,7 @@ public class Letter {
 
     // Constructor
     public Letter(String letter, String pronunciation, List<String> exampleWords) {
-        this.letter = letter;
-        this.pronunciation = pronunciation;
-        this.exampleWords = exampleWords;
+        // Stub: Initialize attributes
     }
 
     // Methods
@@ -24,5 +22,10 @@ public class Letter {
 
     public List<String> getExampleWords() {
         return exampleWords;
+    }
+
+    // Additional method to display letter details
+    public String displayLetterDetails() {
+        return "Letter: " + letter + "\nPronunciation: " + pronunciation + "\nExample Words: " + exampleWords;
     }
 }
