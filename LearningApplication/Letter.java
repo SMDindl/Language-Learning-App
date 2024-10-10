@@ -25,4 +25,9 @@ public class Letter {
     public ArrayList<String> getExampleWords() {
         return exampleWords;
     }
+
+    // Additional method to display letter details
+    public String displayLetterDetails() {
+        return "Letter: " + letter + "\nPronunciation: " + pronunciation + "\nExample Words: " + exampleWords;
+    }
 }

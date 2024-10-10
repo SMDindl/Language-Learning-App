@@ -42,8 +42,5 @@ public class Main extends DataConstants {
 
         System.out.println(gameData.getWords(dataKey)  + "\n\n\n");
 
-
-
     }
-
 }
