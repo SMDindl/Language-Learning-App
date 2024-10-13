@@ -1,15 +1,15 @@
 package com.languageLearner.data;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Letter {
     // Attributes
     private String letter;
     private String pronunciation;
-    private List<String> exampleWords;
+    private ArrayList<String> exampleWords;
 
     // Constructor
-    public Letter(String letter, String pronunciation, List<String> exampleWords) {
+    public Letter(String letter, String pronunciation, ArrayList<Word> exampleWords) {
         // Stub: Initialize attributes
     }
 
@@ -22,7 +22,7 @@ public class Letter {
         return pronunciation;
     }
 
-    public List<String> getExampleWords() {
+    public ArrayList<String> getExampleWords() {
         return exampleWords;
     }
 

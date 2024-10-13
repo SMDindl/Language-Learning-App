@@ -11,7 +11,7 @@ public class Story {
     private ArrayList<Word> teachWords;
 
     // Constructor
-    public Story(String title, ArrayList<Word> teachWords, String author) {
+    public Story(String title, String author, ArrayList<Page> pages, ArrayList<Word> teachWords) {
         this.title = title;
         this.pages = pages;
         this.author = author;

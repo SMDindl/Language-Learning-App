@@ -7,12 +7,20 @@ public class Question {
     private String questionText;
     private int correctAnswerIndex;
     private ArrayList<String> answers;
+    private String image;
 
     // Constructor
     public Question(String questionText, int correctAnswerIndex, ArrayList<String> answers) {
         this.questionText = questionText;
         this.correctAnswerIndex = correctAnswerIndex;
         this.answers = answers;
+    }
+
+    public Question(String questionText, int correctAnswerIndex, ArrayList<String> answers, String image) {
+        this.questionText = questionText;
+        this.correctAnswerIndex = correctAnswerIndex;
+        this.answers = answers;
+        this.image = image;
     }
 
     // Methods
