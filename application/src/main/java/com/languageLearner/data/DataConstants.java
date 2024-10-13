@@ -14,10 +14,8 @@ public class DataConstants {
 
     // Users
     protected static final String USERS = "users";
-
-    // User instance information (list contained in UserList)
-    protected static final String USER_ID = "id";
-    protected static final String USERNAME = "userName";
+    protected static final String USER_ID = "uuid"; // Ensure this is set to "uuid"
+    protected static final String USERNAME = "username";
     protected static final String DISPLAY_NAME = "displayName";
     protected static final String EMAIL = "email";
     protected static final String PASSWORD = "password";

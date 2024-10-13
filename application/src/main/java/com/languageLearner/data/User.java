@@ -1,14 +1,13 @@
 package com.languageLearner.data;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
- * Stub for user
+ * User class representing a user in the language learning app.
  */
 public class User {
-   
+
     private UUID id;
     private String username;
     private String email;
@@ -28,22 +27,22 @@ public class User {
 
     // Constructor for creating user without UUID (generates one)
     public User(String email, String username, String displayName, String password) {
-        this(email, username, displayName, password, generateUUID()); 
+        this(email, username, displayName, password, generateUUID());
     }
 
-    // STUB - check if email
+    // Stub - check if email
     public boolean checkEmailAvailability(String email) {
-        return true; // Replace 
+        return true; // Replace with actual check
     }
 
-    // STUB - check username
+    // Stub - check username
     public boolean checkUsernameAvailability(String username) {
-        return true; // Replace 
+        return true; // Replace with actual check
     }
 
-    // STUB - Validate password 
+    // Stub - Validate password
     public boolean validatePassword(String password) {
-        return password.length() >= 8; // minimum length of 8 characters, could replace
+        return password.length() >= 8; // Minimum length of 8 characters, could be replaced with more rules
     }
 
     /**
@@ -54,13 +53,13 @@ public class User {
         return UUID.randomUUID();
     }
 
-    // STUB - Create user account
+    // Stub - Create user account
     // This method may not be needed
     public void createUserAccount(String email, String username, String displayName, String password, String uuid) {
-        
+        // Create a user account here, or potentially not needed
     }
 
-    // Getters 
+    // Getters
     public UUID getUuid() {
         return id;
     }
@@ -85,15 +84,40 @@ public class User {
         return progressTrackers;
     }
 
-    // STUB - add a progress tracker to list of progressTrackers
-    // will need to make sure the tracker for that language is not
-    // already in the list
-    public void addProgressTracker(ProgressTracker newTracker) { // needs added to UML
+    /**
+     * Adds a progress tracker for the user.
+     * Checks if a progress tracker for the same language already exists before adding a new one.
+     * 
+     * @param newTracker The progress tracker to add.
+     */
+    public void addProgressTracker(ProgressTracker newTracker) {
+        // Ensure there isn't already a tracker for the same language
+        for (ProgressTracker tracker : progressTrackers) {
+            if (tracker.getLanguage().equals(newTracker.getLanguage())) {
+                // If a tracker for this language exists, we do not add a new one
+                return;
+            }
+        }
         progressTrackers.add(newTracker);
     }
 
-    public void addProgressTracker(String language, List<String> gamesList) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    /**
+     * Adds a progress tracker for the given language and list of completed games (using DataKey).
+     * 
+     * @param language The language of the progress tracker.
+     * @param gamesList The list of completed games to be tracked using DataKey.
+     */
+    public void addProgressTracker(String language, ArrayList<DataKey> gamesList) {
+        // Check if a tracker for this language already exists
+        for (ProgressTracker tracker : progressTrackers) {
+            if (tracker.getLanguage().equals(language)) {
+                // Tracker for this language already exists, so we won't add another
+                return;
+            }
+        }
 
+        // Create a new progress tracker for the language and gamesList
+        ProgressTracker newTracker = new ProgressTracker(language, gamesList);
+        progressTrackers.add(newTracker);
+    }
 }
