@@ -1,1 +1,55 @@
-{"users":[{"password":"Password2024","displayName":"Steven","progressTrackers":[{"language":"filipino","completedGames":["filipino-storiesGame-medium","filipino-storiesGame-medium"]},{"language":"","completedGames":[]}],"uuid":"c9d7dff4-d613-4dad-bb41-e1fb1913ccb7","email":"sdindl@sc.email.edu","username":"sdindl"},{"password":"newPassword123","displayName":"New User","progressTrackers":[],"uuid":"dd37a658-81c0-43b9-b03b-0b4d29bee152","email":"newUser@example.com","username":"newUser"}]}
+{
+    "users": [
+        {
+            "password": "Password2024",
+            "displayName": "Steven",
+            "progressTrackers": [
+                {
+                    "language": "filipino",
+                    "completedGames": [
+                        
+                    ]
+                },
+                {
+                    "language": "",
+                    "completedGames": [
+                        
+                    ]
+                }
+            ],
+            "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
+            "email": "sdindl@sc.email.edu",
+            "username": "sdindl"
+        },
+        {
+            "password": "passworddddd",
+            "displayName": "newuser2",
+            "progressTrackers": [
+                
+            ],
+            "uuid": "ee3aa9e2-9af8-4397-b345-234e0c91df66",
+            "email": "newuser2",
+            "username": "newuser2"
+        },
+        {
+            "password": "Password30303",
+            "displayName": "Test3",
+            "progressTrackers": [
+                
+            ],
+            "uuid": "69d1cb68-4fac-4cea-a3ad-0c92ba2e020a",
+            "email": "tester@gmail.com",
+            "username": "Password3000"
+        },
+        {
+            "password": "newPassword123",
+            "displayName": "New User",
+            "progressTrackers": [
+                
+            ],
+            "uuid": "b67db7a4-26a6-40d1-85b8-d8eaff6695a9",
+            "email": "newUser@example.com",
+            "username": "newUser"
+        }
+    ]
+}

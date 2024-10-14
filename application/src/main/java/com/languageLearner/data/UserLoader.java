@@ -1,12 +1,12 @@
 package com.languageLearner.data;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class UserLoader extends DataConstants {
 
@@ -20,8 +20,8 @@ public class UserLoader extends DataConstants {
             JSONParser parser = new JSONParser();
             JSONObject jsonData = (JSONObject) parser.parse(reader);
 
-            // Step 2: Debugging - Print the entire JSON data
-            System.out.println("Entire JSON Data: " + jsonData.toJSONString());
+            // // Step 2: Debugging - Print the entire JSON data
+            // System.out.println("Entire JSON Data: " + jsonData.toJSONString());
 
             JSONArray usersArray = (JSONArray) jsonData.get(USERS); // Use constant USERS
 
@@ -34,6 +34,7 @@ public class UserLoader extends DataConstants {
 
                 // Debugging: Print the UUID field to ensure it is not null
                 System.out.println("Reading user UUID: " + userJSON.get(USER_ID));
+                System.out.println();
 
                 String uuidStr = (String) userJSON.get(USER_ID);
                 UUID uuid;
