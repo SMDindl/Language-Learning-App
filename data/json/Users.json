@@ -1,4 +1,5 @@
 {"users":[
+{"users":[
 {
     "users": [
         {
@@ -13,15 +14,15 @@
                     "completedGames": [
                         "Easy-ColorsGame",
                         "Medium-StoriesGame"
-                    ]
+                    ,
                 },
                 {
                     "language": "",
-                    "completedGames": []
+                    "completedGames": [,
                 }
-            ]
+            ,
         }
-    ]
-},
-{"uuid":"1e2ef726-31fa-42fb-885a-bf1208a6ebd0","username":"sdindl","displayName":"Steven","email":"sdindl@sc.email.edu","password":"Password2024","progressTrackers":[]}
-]}
+    ,
+},,
+{"uuid":"79080564-3d35-444f-a87b-9485d52a8c20","username":"sdindl","displayName":"Steven","email":"sdindl@sc.email.edu","password":"Password2024","progressTrackers":[,}
+,}{"uuid":"8ccc7be5-5457-4689-8741-3a48a0b7598f","username":"sdindl","displayName":"Steven","email":"sdindl@sc.email.edu","password":"Password2024","progressTrackers":[]}]}
