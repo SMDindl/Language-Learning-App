@@ -6,5 +6,6 @@
     "java.project.referencedLibraries": [
         "lib\\json-simple-1.1.1.jar"
     ],
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.debug.settings.onBuildFailureProceed": true
 }

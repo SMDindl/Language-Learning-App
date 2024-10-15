@@ -1,13 +1,21 @@
 package com.languageLearner.app;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import com.languageLearner.data.*;
+import com.languageLearner.data.DataKey;
+import com.languageLearner.data.GameData;
+import com.languageLearner.data.Page;
+import com.languageLearner.data.Question;
+import com.languageLearner.data.Story;
+import com.languageLearner.data.Word;
 
 public class StoriesGame {
     private GameData gameData;
+
+    public StoriesGame() {
+        this.gameData = GameData.getInstance();
+    }
 
     public void startGame() {
         Scanner keyboard = new Scanner(System.in);
@@ -20,7 +28,7 @@ public class StoriesGame {
         //User picks the story to work on
         Story selection = pickStory();
         teachWords(selection);
-        List<Page> storyPages = selection.getPages();
+        ArrayList<Page> storyPages = selection.getPages();
         for(int i = 0; i < storyPages.size(); i++) {
             storyPages.get(i).getContent();
         }
@@ -28,18 +36,15 @@ public class StoriesGame {
         keyboard.next();
 
         //Questions for after the user is done with the story
-        Question newQuestion = askQuestion(selection);
-        if(validateAnswer(keyboard.nextLine(), newQuestion) == true)
-            System.out.println("well done!");
-        else
-            System.out.println("Better luck next time!");
+        askQuestion();
+        
     }
 
     public Story pickStory() {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("\nWhich story would you like to use?: \n");
-        DataKey dataKey = null; //Temporary variable just to remove error in following line
-        List<Story> storyList = gameData.getStories(dataKey);
+        DataKey dataKey = DataKey.getInstance();
+        ArrayList<Story> storyList = gameData.getStories(dataKey);
         for(int i = 0; i < storyList.size(); i++) {
             //Prints out all the stories
             System.out.println((i+1) + ". " + storyList.get(i).getTitle());
@@ -58,12 +63,18 @@ public class StoriesGame {
         }
     }
 
-    public Question askQuestion(Story selection) {
-        return null;
+    public void askQuestion() {
+        Scanner keyboard = new Scanner(System.in);
+        DataKey dataKey = DataKey.getInstance();
+        ArrayList<Question> questionList = gameData.getQuestions(dataKey);
+        for(int i = 0; i < questionList.size(); i++) {
+            System.out.println(questionList.get(i).displayQuestion());
+            provideFeedback(validateAnswer(keyboard.nextLine(), questionList.get(i)));
+        }
     }
 
     public boolean validateAnswer(String answer, Question question) {
-        return answer == question.getCorrectAnswer();
+        return answer.equals(question.getCorrectAnswer());
      }
 
     public void provideFeedback(boolean isCorrect) {

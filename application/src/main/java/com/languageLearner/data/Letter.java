@@ -26,8 +26,16 @@ public class Letter {
         return exampleWords;
     }
 
+    public String displayExampleWords() {
+        String exampleWordsString = "";
+        for(int i = 0; i<exampleWords.size(); i++) {
+            exampleWordsString += ((i+1) + ". " + exampleWords.get(i) + "\n");
+        }
+        return exampleWordsString;
+    }
+
     // Additional method to display letter details
     public String displayLetterDetails() {
-        return "Letter: " + letter + "\nPronunciation: " + pronunciation + "\nExample Words: " + exampleWords;
+        return "Letter: " + letter + "\nPronunciation: " + pronunciation + "\nExample Words: \n" + displayExampleWords();
     }
 }
