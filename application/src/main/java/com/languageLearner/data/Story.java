@@ -11,11 +11,7 @@ public class Story {
     private ArrayList<Word> teachWords;
 
     // Constructor
-<<<<<<< HEAD:LearningApplication/Story.java
-    public Story(String title, ArrayList<Page> pages, String author, ArrayList<Word> teachWords) {
-=======
     public Story(String title, String author, ArrayList<Page> pages, ArrayList<Word> teachWords) {
->>>>>>> main:application/src/main/java/com/languageLearner/data/Story.java
         this.title = title;
         this.pages = pages;
         this.author = author;

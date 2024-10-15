@@ -3,7 +3,6 @@ package com.languageLearner.data;
 public class Page {
     // Attributes
     private String pageNumber;
-    private String pageNumber;
     private String text;
     private String englishText;
     private String image;
