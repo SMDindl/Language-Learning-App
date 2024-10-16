@@ -18,6 +18,7 @@ public class StoriesGame {
     }
 
     public void startGame() {
+        //test
         Scanner keyboard = new Scanner(System.in);
         System.out.println("What would you like to do?: \n1. Take a story quiz \n2. Return to game selection");
         int prompt = keyboard.nextInt();
