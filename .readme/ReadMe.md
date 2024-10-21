@@ -5,7 +5,7 @@ Our application is designed to help English speakers learn Filipino (Latin-based
 
 
 ## Features
-- **Interactive Games**: Engaging games that make learning fun.
+- **Interactive Games**: Engaging games such as Alphahabet,Colors,Numbers that make learning fun.
 - **Storybooks**: Read along with stories to enhance vocabulary.
 - **Three Difficulty Levels**: Easy, Medium, and Hard to suit different learners.
 - **Progress Tracking**: Monitor your learning journey and achievements.
