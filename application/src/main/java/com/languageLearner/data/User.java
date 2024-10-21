@@ -30,16 +30,6 @@ public class User {
         this(email, username, displayName, password, generateUUID());
     }
 
-    // Stub - check if email
-    public boolean checkEmailAvailability(String email) {
-        return true; // Replace with actual check
-    }
-
-    // Stub - check username
-    public boolean checkUsernameAvailability(String username) {
-        return true; // Replace with actual check
-    }
-
     // Stub - Validate password
     public boolean validatePassword(String password) {
         return password.length() >= 8; // Minimum length of 8 characters, could be replaced with more rules
@@ -51,12 +41,6 @@ public class User {
      */
     public static UUID generateUUID() {
         return UUID.randomUUID();
-    }
-
-    // Stub - Create user account
-    // This method may not be needed
-    public void createUserAccount(String email, String username, String displayName, String password, String uuid) {
-        // Create a user account here, or potentially not needed
     }
 
     // Getters

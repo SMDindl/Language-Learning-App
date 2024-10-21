@@ -6,11 +6,23 @@ public class Letter {
     // Attributes
     private String letter;
     private String pronunciation;
-    private ArrayList<String> exampleWords;
+    private ArrayList<Word> exampleWords;
+    private String image;
 
-    // Constructor
+    // Constructor (with image)
+    public Letter(String letter, String pronunciation, ArrayList<Word> exampleWords, String image) {
+        this.letter = letter;
+        this.pronunciation = pronunciation;
+        this.exampleWords = exampleWords;
+        this.image = image;
+    }
+
+    // Constructor without image
     public Letter(String letter, String pronunciation, ArrayList<Word> exampleWords) {
-        // Stub: Initialize attributes
+        this.letter = letter;
+        this.pronunciation = pronunciation;
+        this.exampleWords = exampleWords;
+        this.image = null; // No image provided
     }
 
     // Methods
@@ -22,7 +34,7 @@ public class Letter {
         return pronunciation;
     }
 
-    public ArrayList<String> getExampleWords() {
+    public ArrayList<Word> getExampleWords() {
         return exampleWords;
     }
 
