@@ -9,7 +9,7 @@ import java.util.HashSet;
 public class DataConstants {
 
     // JSON file names
-    protected static final String USER_FILE = "data\\json\\Users.json";
+    protected static final String USER_FILE = "data\\json\\UsersTest.json";
     protected static final String GAME_DATA_FILE = "data\\json\\GameData.json";
 
     // Users
