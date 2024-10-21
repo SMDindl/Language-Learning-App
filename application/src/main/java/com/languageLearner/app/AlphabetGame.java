@@ -10,19 +10,32 @@ import com.languageLearner.data.Question;
 
 public class AlphabetGame {
     private GameData gameData;
+    private DataKey dataKey;
 
     public AlphabetGame() {
         this.gameData = GameData.getInstance();
+        this.dataKey = DataKey.getInstance();
     }
 
     public void startGame() {
+        System.out.println("What would you like to do?: \n1. Take a letters quiz \n2. Return to game selection");
+        int prompt = 1;
+        if (prompt == 2) {
+            //Implement this to go back to the game selection
+        }
 
+        //User picks the letter to work on
+        Letter selection = pickLetter();
+        teachLetter(selection);
+        System.out.println("When you're ready for the quiz, hit the ENTER key.");
+        //keyboard.next();
+
+        askQuestion();
     }
 
     public Letter pickLetter() {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("\nWhich letter would you like to study?: \n");
-        DataKey dataKey = DataKey.getInstance();
         ArrayList<Letter> letterList = gameData.getLetters(dataKey);
         for(int i = 0; i < letterList.size(); i++) {
             //Prints out all the letters

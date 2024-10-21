@@ -10,30 +10,44 @@ import com.languageLearner.data.Word;
 
 public class NumbersGame {
     private GameData gameData;
+    private DataKey dataKey;
 
     public NumbersGame() {
         this.gameData = GameData.getInstance();
+        this.dataKey = DataKey.getInstance();
     }
 
     public void startGame() {
-        // Adding for git commit testing, remove asap - Marshall
+        System.out.println("What would you like to do?: \n1. Take a numbers quiz \n2. Return to game selection");
+        int prompt = 1;
+        if (prompt == 2) {
+            //Implement this to go back to the game selection
+        }
+
+        //User picks the number to work on
+        Word selection = pickNumber();
+        teachNumber(selection);
+        System.out.println("When you're ready for the quiz, hit the ENTER key.");
+        //keyboard.next();
+
+        askQuestion();
     }
 
-    public void teachNumbers(Numbers numbers) {
-        ArrayList<Numbers> newNumbers = numbers.getTeachWords();
-        for (int i = 0; i < newNumbers.size(); i++) {
-            // Might be better to store it as a different list, one that has the word and
-            // then the information being taught
-            // For now, just storing it as a list of Word to print out the word and then the
-            // translation
-            System.out.println(newNumbers.get(i).getWordText());
-            System.out.println(newNumbers.get(i).getWordTranslation());
-        }
+    public Word pickNumber() {
+        System.out.println("\nWhich number from 0-9 would you like to learn?: \n");
+        ArrayList<Word> numbersList = gameData.getWords(dataKey);
+        //User will be prompted to select a number
+        Word selection = numbersList.get(0);
+        return selection;
+    }
+
+    public void teachNumber(Word number) {
+        System.out.println(number.getWordText());
+        System.out.println(number.getWordTranslation());
     }
 
     public void askQuestion() {
         Scanner keyboard = new Scanner(System.in);
-        DataKey dataKey = DataKey.getInstance();
         ArrayList<Question> questionList = gameData.getQuestions(dataKey);
         for (int i = 0; i < questionList.size(); i++) {
             System.out.println(questionList.get(i).displayQuestion());

@@ -18,7 +18,31 @@ public class ColorsGame {
     }
 
     public void startGame() {
+        System.out.println("What would you like to do?: \n1. Take a letters quiz \n2. Return to game selection");
+        int prompt = 1;
+        if (prompt == 2) {
+            //Implement this to go back to the game selection
+        }
 
+        //User picks the color to work on
+        Word selection = pickColor();
+        teachColor(selection);
+        System.out.println("When you're ready for the quiz, hit the ENTER key.");
+        //keyboard.next();
+
+        askQuestion();
+    }
+
+    public Word pickColor() {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("\nWhich letter would you like to study?: \n");
+        ArrayList<Word> colorList = gameData.getWords(dataKey);
+        for(int i = 0; i < colorList.size(); i++) {
+            //Prints out all the colors
+            System.out.println((i+1) + ". " + colorList.get(i).getWordText());
+        }
+        Word selection = colorList.get(keyboard.nextInt() - 1);
+        return selection;
     }
 
     public void teachColor(Word color) {

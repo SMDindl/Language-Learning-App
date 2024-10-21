@@ -12,13 +12,14 @@ import com.languageLearner.data.Word;
 
 public class StoriesGame {
     private GameData gameData;
+    private DataKey dataKey;
 
     public StoriesGame() {
         this.gameData = GameData.getInstance();
+        this.dataKey = DataKey.getInstance();
     }
 
     public void startGame() {
-        //test
         Scanner keyboard = new Scanner(System.in);
         System.out.println("What would you like to do?: \n1. Take a story quiz \n2. Return to game selection");
         int prompt = keyboard.nextInt();
@@ -44,7 +45,6 @@ public class StoriesGame {
     public Story pickStory() {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("\nWhich story would you like to use?: \n");
-        DataKey dataKey = DataKey.getInstance();
         ArrayList<Story> storyList = gameData.getStories(dataKey);
         for(int i = 0; i < storyList.size(); i++) {
             //Prints out all the stories
@@ -66,7 +66,6 @@ public class StoriesGame {
 
     public void askQuestion() {
         Scanner keyboard = new Scanner(System.in);
-        DataKey dataKey = DataKey.getInstance();
         ArrayList<Question> questionList = gameData.getQuestions(dataKey);
         for(int i = 0; i < questionList.size(); i++) {
             System.out.println(questionList.get(i).displayQuestion());
