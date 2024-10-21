@@ -46,7 +46,7 @@ public class Question {
 
     // Additional method to display the question and its answers
     public String displayQuestion() {
-        StringBuilder questionDisplay = new StringBuilder("Question: " + questionText + "\nAnswers:\n");
+        StringBuilder questionDisplay = new StringBuilder("\nQuestion: " + questionText + "\nAnswers:\n");
         for (int i = 0; i < answers.size(); i++) {
             questionDisplay.append(i + 1).append(". ").append(answers.get(i)).append("\n");
         }
