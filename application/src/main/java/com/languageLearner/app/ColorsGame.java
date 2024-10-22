@@ -12,16 +12,18 @@ public class ColorsGame {
     private GameData gameData;
     private DataKey dataKey;
 
-    public ColorsGame() {
+    public ColorsGame(DataKey dataKey) {
         this.gameData = GameData.getInstance();
-        this.dataKey = DataKey.getInstance();
+        this.dataKey = dataKey;
     }
 
     public void startGame() {
-        System.out.println("What would you like to do?: \n1. Take a letters quiz \n2. Return to game selection");
-        int prompt = 1;
-        if (prompt == 2) {
-            //Implement this to go back to the game selection
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("What would you like to do?: \n1. Take a colors quiz \n2. Return to game selection");
+        int option = keyboard.nextInt();
+        if (option != 1) {
+            System.out.println("Returning to game selection...");
+            return;
         }
 
         //User picks the color to work on
