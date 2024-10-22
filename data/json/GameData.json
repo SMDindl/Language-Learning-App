@@ -1007,8 +1007,7 @@
                         "englishSentence": "There are five thousand pesos."
                     }
                 ]
-            }
-            },
+                },
             "storiesGame": {
                 "easy": {
                     "stories": [
@@ -1214,10 +1213,143 @@
                 },
                 "hard": {
                     "stories": [
-                        
+                        {
+                            "title": "Ang Pagong at ang Kuneho",
+                            "english-title": "The Tortoise and the Hare",
+                            "pages": [
+                                {
+                                    "pageNumber": 0,
+                                    "text": "Ang Pagong at ang Kuneho",
+                                    "english-text": "The Tortoise and the Hare",
+                                    "image": "title.png"
+                                },
+                                {
+                                    "pageNumber": 1,
+                                    "text": "Isang araw, nagyayabang ang isang kuneho tungkol sa kaniyang bilis.",
+                                    "english-text": "One day, a hare was boasting about his speed.",
+                                    "image": "page1.png"
+                                },
+                                {
+                                    "pageNumber": 2,
+                                    "text": "‘Walang makakatalo sa akin sa pagtakbo,’ sabi ng kuneho.",
+                                    "english-text": "‘No one can beat me in a race,’ said the hare.",
+                                    "image": "page2.png"
+                                },
+                                {
+                                    "pageNumber": 3,
+                                    "text": "Ang pagong ay naglakad patungo sa kuneho. ‘Gusto kong subukan,’ sabi ng pagong.",
+                                    "english-text": "The tortoise walked up to the hare. ‘I’d like to try,’ said the tortoise.",
+                                    "image": "page3.png"
+                                },
+                                {
+                                    "pageNumber": 4,
+                                    "text": "Ang kuneho ay tumawa nang malakas. ‘Ikaw? Masyado kang mabagal!’",
+                                    "english-text": "The hare laughed loudly. ‘You? You’re too slow!’",
+                                    "image": "page4.png"
+                                },
+                                {
+                                    "pageNumber": 5,
+                                    "text": "Ngunit ang pagong ay nagpumilit. ‘Subukan natin at tingnan kung sino ang mananalo.’",
+                                    "english-text": "But the tortoise insisted. ‘Let’s race and see who wins.’",
+                                    "image": "page5.png"
+                                },
+                                {
+                                    "pageNumber": 6,
+                                    "text": "Sa araw ng karera, nagsama-sama ang mga hayop upang manood.",
+                                    "english-text": "On the day of the race, the animals gathered to watch.",
+                                    "image": "page6.png"
+                                },
+                                {
+                                    "pageNumber": 7,
+                                    "text": "Sumigaw ang soro, ‘Handa na kayo? Takbo!’",
+                                    "english-text": "The fox shouted, ‘Are you ready? Go!’",
+                                    "image": "page7.png"
+                                },
+                                {
+                                    "pageNumber": 8,
+                                    "text": "Agad na umalis ang kuneho at mabilis na tumakbo.",
+                                    "english-text": "The hare took off immediately, running fast.",
+                                    "image": "page8.png"
+                                },
+                                {
+                                    "pageNumber": 9,
+                                    "text": "Habang tumatakbo, napaisip ang kuneho, ‘Masyadong mabagal ang pagong. Kaya ko pang magpahinga.’",
+                                    "english-text": "While running, the hare thought, ‘The tortoise is so slow. I can take a nap.’",
+                                    "image": "page9.png"
+                                },
+                                {
+                                    "pageNumber": 10,
+                                    "text": "Humiga ang kuneho sa ilalim ng puno at natulog.",
+                                    "english-text": "The hare lay down under a tree and fell asleep.",
+                                    "image": "page10.png"
+                                },
+                                {
+                                    "pageNumber": 11,
+                                    "text": "Samantala, patuloy na naglakad nang dahan-dahan ang pagong.",
+                                    "english-text": "Meanwhile, the tortoise kept walking slowly but steadily.",
+                                    "image": "page11.png"
+                                },
+                                {
+                                    "pageNumber": 12,
+                                    "text": "Hindi tumigil ang pagong, kahit na siya ay mabagal.",
+                                    "english-text": "The tortoise never stopped, even though he was slow.",
+                                    "image": "page12.png"
+                                },
+                                {
+                                    "pageNumber": 13,
+                                    "text": "Sa wakas, nakarating ang pagong malapit sa finish line.",
+                                    "english-text": "Finally, the tortoise reached near the finish line.",
+                                    "image": "page13.png"
+                                },
+                                {
+                                    "pageNumber": 14,
+                                    "text": "Nagising ang kuneho at nakita na ang pagong ay malapit nang manalo.",
+                                    "english-text": "The hare woke up and saw that the tortoise was about to win.",
+                                    "image": "page14.png"
+                                },
+                                {
+                                    "pageNumber": 15,
+                                    "text": "Agad tumakbo ang kuneho, ngunit huli na siya.",
+                                    "english-text": "The hare ran as fast as he could, but it was too late.",
+                                    "image": "page15.png"
+                                },
+                                {
+                                    "pageNumber": 16,
+                                    "text": "Ang pagong ay nakatawid sa finish line at nanalo.",
+                                    "english-text": "The tortoise crossed the finish line and won.",
+                                    "image": "page16.png"
+                                },
+                                {
+                                    "pageNumber": 17,
+                                    "text": "Ang lahat ng hayop ay nagdiwang para sa pagong.",
+                                    "english-text": "All the animals cheered for the tortoise.",
+                                    "image": "page17.png"
+                                },
+                                {
+                                    "pageNumber": 18,
+                                    "text": "‘Paano mo iyon nagawa?’ tanong ng kuneho.",
+                                    "english-text": "‘How did you do it?’ asked the hare.",
+                                    "image": "page18.png"
+                                },
+                                {
+                                    "pageNumber": 19,
+                                    "text": "Ngumiti ang pagong. ‘Dahan-dahan ngunit tuloy-tuloy ang panalo.’",
+                                    "english-text": "The tortoise smiled. ‘Slow and steady wins the race.’",
+                                    "image": "page19.png"
+                                },
+                                {
+                                    "pageNumber": 20,
+                                    "text": "At iyon ang aral ng alamat: ang pagtitiyaga ay nagdadala ng tagumpay.",
+                                    "english-text": "And that is the lesson of the story: perseverance brings success.",
+                                    "image": "page20.png"
+                                }
+                            ],
+                            "author": "Doktor Filip."        
+                        }
                     ]
                 }
+            
             }
         }
-}
-        
+    }
+}   
