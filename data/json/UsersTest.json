@@ -1,6 +1,16 @@
 {
     "users": [
         {
+            "password": "blahpassword",
+            "displayName": "blag",
+            "progressTrackers": [
+                
+            ],
+            "uuid": "14d5d139-a2a5-47ac-a3c3-60256af6a1f8",
+            "email": "blahbalh@gmail.com",
+            "username": "blahguyuser"
+        },
+        {
             "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
             "username": "sdindl",
             "email": "sdindl@sc.email.edu",
@@ -22,4 +32,3 @@
         }
     ]
 }
-
