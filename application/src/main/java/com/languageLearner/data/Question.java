@@ -9,18 +9,20 @@ public class Question {
     private ArrayList<String> answers;
     private String image;
 
-    // Constructor
-    public Question(String questionText, int correctAnswerIndex, ArrayList<String> answers) {
+    // Constructor (w/ image)
+    public Question(String questionText, ArrayList<String> answers, int correctAnswerIndex, String image) {
         this.questionText = questionText;
-        this.correctAnswerIndex = correctAnswerIndex;
         this.answers = answers;
+        this.correctAnswerIndex = correctAnswerIndex;
+        this.image = image;
     }
 
-    public Question(String questionText, int correctAnswerIndex, ArrayList<String> answers, String image) {
+    // Constructor without image
+    public Question(String questionText, ArrayList<String> answers, int correctAnswerIndex) {
         this.questionText = questionText;
-        this.correctAnswerIndex = correctAnswerIndex;
         this.answers = answers;
-        this.image = image;
+        this.correctAnswerIndex = correctAnswerIndex;
+        this.image = null; // No image provided
     }
 
     // Methods

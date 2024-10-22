@@ -11,7 +11,7 @@ public class GameData {
     private HashMap<DataKey, ArrayList<Story>> storiesMap;
     private HashMap<DataKey, ArrayList<Letter>> lettersMap;
 
-    // Instanciate hashMaps, private constructor (singleton)
+    // Singleton private constructor
     private GameData() {
         wordsMap = new HashMap<>();
         questionsMap = new HashMap<>();
@@ -27,7 +27,24 @@ public class GameData {
         return instance;
     }
 
-    // Method to retrieve words for a specific DataKey
+    // Methods to add data directly
+    public void addWords(DataKey dataKey, ArrayList<Word> words) {
+        wordsMap.put(dataKey, words);
+    }
+
+    public void addQuestions(DataKey dataKey, ArrayList<Question> questions) {
+        questionsMap.put(dataKey, questions);
+    }
+
+    public void addStories(DataKey dataKey, ArrayList<Story> stories) {
+        storiesMap.put(dataKey, stories);
+    }
+
+    public void addLetters(DataKey dataKey, ArrayList<Letter> letters) {
+        lettersMap.put(dataKey, letters);
+    }
+
+        // Method to retrieve words for a specific DataKey
     public ArrayList<Word> getWords(DataKey dataKey) {
         return wordsMap.get(dataKey);
     }
@@ -58,4 +75,3 @@ public class GameData {
         this.lettersMap = letters;
     }
 }
-

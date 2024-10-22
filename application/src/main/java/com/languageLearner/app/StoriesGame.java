@@ -10,77 +10,93 @@ import com.languageLearner.data.Question;
 import com.languageLearner.data.Story;
 import com.languageLearner.data.Word;
 
+
 public class StoriesGame {
+    
     private GameData gameData;
     private DataKey dataKey;
 
-    public StoriesGame() {
+    public StoriesGame(DataKey dataKey) {
         this.gameData = GameData.getInstance();
-        this.dataKey = DataKey.getInstance();
+        this.dataKey = dataKey;
     }
 
+    // Starts the story game, with the option to return to the game selection
     public void startGame() {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("What would you like to do?: \n1. Take a story quiz \n2. Return to game selection");
-        int prompt = keyboard.nextInt();
-        if (prompt == 2) {
-            //Implement this to go back to the game selection
+        System.out.println("What would you like to do?: \n1. Pick a story to read \n2. Return to game selection");
+        int option = keyboard.nextInt();
+
+        if (option == 2) {
+            System.out.println("Returning to game selection...");
+            return;
         }
 
-        //User picks the story to work on
-        Story selection = pickStory();
-        teachWords(selection);
-        ArrayList<Page> storyPages = selection.getPages();
-        for(int i = 0; i < storyPages.size(); i++) {
-            storyPages.get(i).getContent();
-        }
-        System.out.println("When you're ready for the quiz, hit the ENTER key.");
-        keyboard.next();
+        // Automatically proceed to pick the story
+        Story selectedStory = pickStory();
+        teachWords(selectedStory);
+        readStory(selectedStory);
 
-        //Questions for after the user is done with the story
+        // Automatically move to the quiz after reading the story
+        System.out.println("\nStory completed. Starting the quiz...\n");
         askQuestion();
-        
     }
 
+    // Selects a story based on the DataKey
     public Story pickStory() {
-        Scanner keyboard = new Scanner(System.in);
-        System.out.println("\nWhich story would you like to use?: \n");
         ArrayList<Story> storyList = gameData.getStories(dataKey);
-        for(int i = 0; i < storyList.size(); i++) {
-            //Prints out all the stories
-            System.out.println((i+1) + ". " + storyList.get(i).getTitle());
+        System.out.println("\nPick a story to read:");
+        for (int i = 0; i < storyList.size(); i++) {
+            System.out.println((i + 1) + ". " + storyList.get(i).getTitle());
         }
-        Story selection = storyList.get(keyboard.nextInt() - 1);
-        return selection;
+
+        Scanner keyboard = new Scanner(System.in);
+        int choice = keyboard.nextInt();
+        return storyList.get(choice - 1);  // Selecting based on user's choice
     }
 
+    // Teaches words before the story starts
     public void teachWords(Story story) {
         ArrayList<Word> newWords = story.getTeachWords();
-        for(int i = 0; i < newWords.size(); i++) {
-            //Might be better to store it as a different list, one that has the word and then the information being taught
-            //For now, just storing it as a list of Word to print out the word and then the translation
-            System.out.println(newWords.get(i).getWordText());
-            System.out.println(newWords.get(i).getWordTranslation());
+        System.out.println("\nWords to learn before reading the story:");
+        for (Word word : newWords) {
+            System.out.println(word.getWordText() + " - " + word.getWordTranslation());
         }
     }
 
+    // Reads the story, page by page
+    public void readStory(Story story) {
+        ArrayList<Page> storyPages = story.getPages();
+        for (Page page : storyPages) {
+            System.out.println("\n--- Page " + page.getPageNumber() + " ---");
+            System.out.println(page.getText());
+            System.out.println("Translation: " + page.getEnglishText());
+        }
+    }
+
+    // Automatically asks the quiz after reading the story
     public void askQuestion() {
-        Scanner keyboard = new Scanner(System.in);
         ArrayList<Question> questionList = gameData.getQuestions(dataKey);
-        for(int i = 0; i < questionList.size(); i++) {
-            System.out.println(questionList.get(i).displayQuestion());
-            provideFeedback(validateAnswer(keyboard.nextLine(), questionList.get(i)));
+        Scanner keyboard = new Scanner(System.in);
+
+        for (Question question : questionList) {
+            System.out.println(question.displayQuestion());
+            String userAnswer = keyboard.nextLine();
+            provideFeedback(validateAnswer(userAnswer, question));
         }
     }
 
+    // Validates the user's answer
     public boolean validateAnswer(String answer, Question question) {
-        return answer.equals(question.getCorrectAnswer());
-     }
+        return answer.equalsIgnoreCase(question.getCorrectAnswer());
+    }
 
+    // Provides feedback after each question
     public void provideFeedback(boolean isCorrect) {
-        if(isCorrect) 
-            System.out.println("Well done!");
-        else
-            System.out.println("Better luck next time");
+        if (isCorrect) {
+            System.out.println("Correct!");
+        } else {
+            System.out.println("Incorrect.");
+        }
     }
 }
