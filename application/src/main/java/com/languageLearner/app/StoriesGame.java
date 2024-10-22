@@ -27,7 +27,7 @@ public class StoriesGame {
         System.out.println("What would you like to do?: \n1. Pick a story to read \n2. Return to game selection");
         int option = keyboard.nextInt();
 
-        if (option == 2) {
+        if (option != 1) {
             System.out.println("Returning to game selection...");
             return;
         }
@@ -36,8 +36,10 @@ public class StoriesGame {
         Story selectedStory = pickStory();
         teachWords(selectedStory);
         readStory(selectedStory);
-
-        // Automatically move to the quiz after reading the story
+        System.out.println("When you're ready for the quiz, hit the ENTER key");
+        keyboard.nextLine(); //Clears the Scanner, otherwise it doesn't wait for the user input
+        keyboard.nextLine(); //Waits for the user to hit the ENTER key
+        //Move to the quiz after reading the story
         System.out.println("\nStory completed. Starting the quiz...\n");
         askQuestion();
     }
@@ -47,7 +49,7 @@ public class StoriesGame {
         ArrayList<Story> storyList = gameData.getStories(dataKey);
         System.out.println("\nPick a story to read:");
         for (int i = 0; i < storyList.size(); i++) {
-            System.out.println((i + 1) + ". " + storyList.get(i).getTitle());
+            System.out.println("\n" + (i + 1) + ". " + storyList.get(i).getTitle());
         }
 
         Scanner keyboard = new Scanner(System.in);
