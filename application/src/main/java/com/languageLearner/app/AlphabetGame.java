@@ -12,31 +12,35 @@ public class AlphabetGame {
     private GameData gameData;
     private DataKey dataKey;
 
-    public AlphabetGame() {
+    public AlphabetGame(DataKey dataKey) {
         this.gameData = GameData.getInstance();
-        this.dataKey = DataKey.getInstance();
+        this.dataKey = dataKey;
     }
 
     public void startGame() {
+        Scanner keyboard = new Scanner(System.in);
         System.out.println("What would you like to do?: \n1. Take a letters quiz \n2. Return to game selection");
-        int prompt = 1;
-        if (prompt == 2) {
-            //Implement this to go back to the game selection
+        int option = keyboard.nextInt();
+        if (option != 1) {
+            System.out.println("Returning to game selection...");
+            return;
         }
 
         //User picks the letter to work on
         Letter selection = pickLetter();
         teachLetter(selection);
         System.out.println("When you're ready for the quiz, hit the ENTER key.");
-        //keyboard.next();
+        keyboard.nextLine(); //Clears the Scanner, otherwise it doesn't wait for the user input
+        keyboard.nextLine(); //Waits for the user to hit the ENTER key
+        //Move to the quiz after studying the letter
 
         askQuestion();
     }
 
     public Letter pickLetter() {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("\nWhich letter would you like to study?: \n");
-        ArrayList<Letter> letterList = gameData.getLetters(dataKey);
+        System.out.println("\nType the number of the letter you would like to study?: \n");
+        ArrayList<Letter> letterList = gameData.getLetters(this.dataKey);
         for(int i = 0; i < letterList.size(); i++) {
             //Prints out all the letters
             System.out.println((i+1) + ". " + letterList.get(i).getLetter());
@@ -46,8 +50,8 @@ public class AlphabetGame {
     }
 
     public void teachLetter(Letter letter) {
-        letter.getPronunciation();
-        letter.getExampleWords();
+        System.out.println(letter.getPronunciation());
+        System.out.println(letter.getExampleWords());
     }
 
     public void askQuestion() {
