@@ -1007,7 +1007,8 @@
                         "englishSentence": "There are five thousand pesos."
                     }
                 ]
-                },
+            }
+        },
             "storiesGame": {
                 "easy": {
                     "stories": [
@@ -1351,5 +1352,4 @@
             
             }
         }
-    }
-}   
+    }  
