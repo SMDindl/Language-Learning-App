@@ -2,7 +2,13 @@ package com.languageLearner.app;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import com.languageLearner.data.*;
+
+import com.languageLearner.data.DataKey;
+import com.languageLearner.data.GameData;
+import com.languageLearner.data.Page;
+import com.languageLearner.data.Question;
+import com.languageLearner.data.Story;
+import com.languageLearner.data.Word;
 
 
 public class StoriesGame {

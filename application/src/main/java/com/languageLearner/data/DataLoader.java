@@ -13,7 +13,7 @@ public class DataLoader extends DataConstants {
     private GameData gameData = GameData.getInstance();  // Singleton instance of GameData
 
     public DataLoader() {
-        // No need for HashMaps here anymore, directly populate into GameData
+
     }
 
     /**
@@ -189,7 +189,7 @@ public class DataLoader extends DataConstants {
                 wordsList.add(new Word(wordText, wordTranslation, exampleSentence, sentenceTranslation));
             }
         } else {
-            System.out.println("No words found for the current game data.");
+            // System.out.println("No words found for the current game data.");
         }
     }
 
@@ -217,7 +217,7 @@ public class DataLoader extends DataConstants {
                 questionsList.add(new Question(questionText, choices, correctChoiceIndex));
             }
         } else {
-            System.out.println("No questions found for the current game data.");
+            // System.out.println("No questions found for the current game data.");
         }
     }
 
@@ -246,7 +246,7 @@ public class DataLoader extends DataConstants {
                 }
             }
         } else {
-            System.out.println("No letters found for the current game data.");
+            // System.out.println("No letters found for the current game data.");
         }
     }
 
@@ -272,7 +272,7 @@ public class DataLoader extends DataConstants {
                 storiesList.add(new Story(title, author, pagesList, teachWordsList));
             }
         } else {
-            System.out.println("No stories found for the current game data.");
+            // System.out.println("No stories found for the current game data.");
         }
     }
 
@@ -294,7 +294,7 @@ public class DataLoader extends DataConstants {
                 pagesList.add(new Page(pageNumber, text, englishText, image));
             }
         } else {
-            System.out.println("No pages found for the current story.");
+            // System.out.println("No pages found for the current story.");
         }
     }
 }

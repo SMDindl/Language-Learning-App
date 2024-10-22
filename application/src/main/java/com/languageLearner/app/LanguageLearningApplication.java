@@ -7,6 +7,7 @@ import com.languageLearner.data.UserList;
 public class LanguageLearningApplication {
 
     private User currentUser;
+    
     private static LanguageLearningApplication instance;
 
     // Private constructor to implement singleton pattern
@@ -23,8 +24,8 @@ public class LanguageLearningApplication {
 
     // Load users and game data when the application starts
     public void load() {
-        UserList.getInstance();  // Loading existing users
-        // Additional loading logic for game data if needed
+        loadGameData();
+        loadUsers();
     }
 
     // User signup (add a new user)
