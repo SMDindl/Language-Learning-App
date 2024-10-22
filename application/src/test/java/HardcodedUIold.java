@@ -1,22 +1,30 @@
-package com.languageLearner.test;
 
+import com.languageLearner.app.LanguageLearningApplication;
 import com.languageLearner.app.StoriesGame;
-import com.languageLearner.data.DataConstants;
 import com.languageLearner.data.DataKey;
+import com.languageLearner.data.GameData;
 import com.languageLearner.data.User;
 import com.languageLearner.data.UserList;
-import com.languageLearner.data.UserLoader;
 
 
-public class HardcodedUI {
+public class HardcodedUIold {
 
     public static void main(String[] args) {
         // Load users
-        UserLoader userLoader = new UserLoader();
-        userLoader.loadUsers();
+        
+        LanguageLearningApplication app = LanguageLearningApplication.getInstance();
+        GameData gameData = GameData.getInstance();
+        UserList userList = UserList.getInstance();
+
+        app.load();
+
+        // Step 2: Display loaded users
+        System.out.println("Loaded Users:");
+        for (User user : userList.getUsers()) {
+            System.out.println("Username: " + user.getUsername() + ", Email: " + user.getEmail());
+        }
 
         // Simulate login for the hardcoded user "sdindl@sc.email.edu"
-        UserList userList = UserList.getInstance();
         User loggedInUser = userList.login("sdindl@sc.email.edu", "Password2024");
 
         if (loggedInUser != null) {
@@ -36,5 +44,5 @@ public class HardcodedUI {
         // Simulate finishing the story and quiz
         System.out.println("Story and quiz completed!");
     }
-    
+
 }
