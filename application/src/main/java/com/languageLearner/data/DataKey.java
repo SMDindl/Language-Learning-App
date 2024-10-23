@@ -19,7 +19,7 @@ public class DataKey extends DataConstants {
         setDifficulty(difficulty);
     }
 
-    // Public static method to get the instance of DataKey or update instance if already crated
+    // Public static method to get the instance of DataKey or update instance if already created
     public static DataKey getInstance(String language, String gameType, String difficulty) {
         if (instance == null) {
             instance = new DataKey(language, gameType, difficulty); 
@@ -48,23 +48,23 @@ public class DataKey extends DataConstants {
         return gameType;
     }
 
-    // Setters with validation
+    // Setters with validation, but allow null values
     public void setLanguage(String language) {
-        if (!VALID_LANGUAGES.contains(language)) {
+        if (language != null && !VALID_LANGUAGES.contains(language)) {
             throw new IllegalArgumentException("Invalid language: " + language);
         }
         this.language = language;
     }
 
     public void setDifficulty(String difficulty) {
-        if (!VALID_DIFFICULTIES.contains(difficulty)) {
+        if (difficulty != null && !VALID_DIFFICULTIES.contains(difficulty)) {
             throw new IllegalArgumentException("Invalid difficulty: " + difficulty);
         }
         this.difficulty = difficulty;
     }
 
     public void setGameType(String gameType) {
-        if (!VALID_GAME_TYPES.contains(gameType)) {
+        if (gameType != null && !VALID_GAME_TYPES.contains(gameType)) {
             throw new IllegalArgumentException("Invalid game type: " + gameType);
         }
         this.gameType = gameType;
@@ -77,9 +77,9 @@ public class DataKey extends DataConstants {
         if (obj == null || getClass() != obj.getClass()) return false;
         
         DataKey dataKey = (DataKey) obj;
-        return language.equals(dataKey.language) && 
-               gameType.equals(dataKey.gameType) && 
-               difficulty.equals(dataKey.difficulty);
+        return Objects.equals(language, dataKey.language) && 
+               Objects.equals(gameType, dataKey.gameType) && 
+               Objects.equals(difficulty, dataKey.difficulty);
     }
 
     @Override
@@ -89,6 +89,8 @@ public class DataKey extends DataConstants {
 
     @Override
     public String toString() {
-        return language + "-" + gameType + "-" + difficulty;
+        return (language != null ? language : "null") + "-" + 
+               (gameType != null ? gameType : "null") + "-" + 
+               (difficulty != null ? difficulty : "null");
     }
 }

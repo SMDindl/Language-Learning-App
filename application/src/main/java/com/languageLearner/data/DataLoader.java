@@ -19,7 +19,7 @@ public class DataLoader extends DataConstants {
     /**
      * Process #1: Load all game data from the JSON file into the GameData class.
      */
-    public void loadGameData() {
+    public  void loadGameData() {
         try {
             // Process #1.1: Read the file and parse the JSON data
             FileReader reader = new FileReader(GAME_DATA_FILE);
@@ -36,7 +36,7 @@ public class DataLoader extends DataConstants {
     /**
      * Process #2: Load all users from the JSON file into the UserList.
      */
-    public void loadUsers() {
+    public  void loadUsers() {
         UserList userList = UserList.getInstance();  // Get singleton UserList instance
         userList.clearUsers(); // Clear current user list before loading new users
 
@@ -120,7 +120,7 @@ public class DataLoader extends DataConstants {
     /**
      * Process #1.2: Loop through each language in the JSON object and load its data.
      */
-    private void loadLanguages(JSONObject jsonObject) {
+    private  void loadLanguages(JSONObject jsonObject) {
         for (Object languageKey : jsonObject.keySet()) {
             String language = (String) languageKey;
             JSONObject games = (JSONObject) jsonObject.get(language); // Get games for the specific language
@@ -133,7 +133,7 @@ public class DataLoader extends DataConstants {
     /**
      * Process #1.3: Loop through each game type (e.g., alphabetGame, colorsGame) and load its data.
      */
-    private void loadGameTypes(JSONObject games, String language) {
+    private  void loadGameTypes(JSONObject games, String language) {
         for (Object gameTypeKey : games.keySet()) {
             String gameType = (String) gameTypeKey;
             JSONObject difficulties = (JSONObject) games.get(gameType); // Get the difficulties for the game type
@@ -146,7 +146,7 @@ public class DataLoader extends DataConstants {
     /**
      * Process #1.4: Load each difficulty's game data (e.g., easy, medium, hard).
      */
-    private void loadDifficulties(JSONObject difficulties, String language, String gameType) {
+    private  void loadDifficulties(JSONObject difficulties, String language, String gameType) {
         for (Object difficultyKey : difficulties.keySet()) {
             String difficulty = (String) difficultyKey;
             JSONObject gameDataJSON = (JSONObject) difficulties.get(difficulty); // Get game data for this difficulty
@@ -174,7 +174,7 @@ public class DataLoader extends DataConstants {
     /**
      * Process #1.5: Process the word entries within the game data.
      */
-    private void processWords(JSONObject gameDataJSON, ArrayList<Word> wordsList) {
+    private  void processWords(JSONObject gameDataJSON, ArrayList<Word> wordsList) {
         if (gameDataJSON.containsKey(WORDS)) {
             JSONArray wordsArray = (JSONArray) gameDataJSON.get(WORDS);
 
@@ -196,7 +196,7 @@ public class DataLoader extends DataConstants {
     /**
      * Process #1.6: Process the question entries within the game data.
      */
-    private void processQuestions(JSONObject gameDataJSON, ArrayList<Question> questionsList) {
+    private  void processQuestions(JSONObject gameDataJSON, ArrayList<Question> questionsList) {
         if (gameDataJSON.containsKey(QUESTIONS)) {
             JSONArray questionsArray = (JSONArray) gameDataJSON.get(QUESTIONS);
 
@@ -224,7 +224,7 @@ public class DataLoader extends DataConstants {
     /**
      * Process #1.7: Process the letter entries within the game data.
      */
-    private void processLetters(JSONObject gameDataJSON, ArrayList<Letter> lettersList) {
+    private  void processLetters(JSONObject gameDataJSON, ArrayList<Letter> lettersList) {
         if (gameDataJSON.containsKey(LETTERS)) {
             JSONArray lettersArray = (JSONArray) gameDataJSON.get(LETTERS);
 
@@ -253,7 +253,7 @@ public class DataLoader extends DataConstants {
     /**
      * Process #1.8: Process the story entries within the game data.
      */
-    private void processStories(JSONObject gameDataJSON, ArrayList<Story> storiesList) {
+    private  void processStories(JSONObject gameDataJSON, ArrayList<Story> storiesList) {
         if (gameDataJSON.containsKey(STORIES)) {
             JSONArray storiesArray = (JSONArray) gameDataJSON.get(STORIES);
 
@@ -279,7 +279,7 @@ public class DataLoader extends DataConstants {
     /**
      * Process #1.9: Process the page entries within a story.
      */
-    private void processPages(JSONObject storyJSON, ArrayList<Page> pagesList) {
+    private  void processPages(JSONObject storyJSON, ArrayList<Page> pagesList) {
         if (storyJSON.containsKey(PAGES)) {
             JSONArray pagesArray = (JSONArray) storyJSON.get(PAGES);
 

@@ -16,9 +16,9 @@ public class StoriesGame {
     private GameData gameData;
     private DataKey dataKey;
 
-    public StoriesGame(DataKey dataKey) {
+    public StoriesGame() {
         this.gameData = GameData.getInstance();
-        this.dataKey = dataKey;
+        this.dataKey = DataKey.getInstance();
     }
 
     // Starts the story game, with the option to return to the game selection
