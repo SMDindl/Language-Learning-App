@@ -1093,6 +1093,43 @@
                                     "english-text": "The three pigs sang and celebrated all night.",
                                     "image": "page12.png"
                                 }
+                              ],
+                            "questions": [
+                                {
+                                    "questionType": "multipleChoice",
+                                    "pageNumber": 1,
+                                    "text": "What were the 3 little pigs' houses made of?",
+                                    "choices": ["Straw, Sticks, Bricks", "Wood, Stone, Metal", "Leaves, Bamboo, Steel"],
+                                    "correctChoiceIndex": 0
+                                },
+                                {
+                                    "questionType": "fillInBlank",
+                                    "pageNumber": 2,
+                                    "text": "The first pig made his house out of ___.",
+                                    "correctAnswer": "straw"
+                                },
+                                {
+                                    "questionType": "trueFalse",
+                                    "pageNumber": 3,
+                                    "text": "Did the wolf knock on the door?",
+                                    "answer": true
+                                },
+                                {
+                                    "questionType": "multipleChoice",
+                                    "pageNumber": 4,
+                                    "text": "Which pig had the strongest house?",
+                                    "choices": ["First pig", "Second pig", "Third pig"],
+                                    "correctChoiceIndex": 2
+                                },
+                                {
+                                    "questionType": "matching",
+                                    "pageNumber": 4,
+                                    "pairs": [
+                                        { "text1": "Straw", "text2": "First pig" },
+                                        { "text1": "Sticks", "text2": "Second pig" },
+                                        { "text1": "Bricks", "text2": "Third pig" }
+                                  ]
+                                }
                             ],
                             "author": "Ginoo Filip"
                         }
