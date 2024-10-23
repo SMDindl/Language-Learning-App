@@ -1007,7 +1007,8 @@
                         "englishSentence": "There are five thousand pesos."
                     }
                 ]
-                },
+            }
+        },
             "storiesGame": {
                 "easy": {
                     "stories": [
@@ -1093,43 +1094,72 @@
                                     "english-text": "The three pigs sang and celebrated all night.",
                                     "image": "page12.png"
                                 }
-                              ],
+                            ],
                             "questions": [
-                                {
-                                    "questionType": "multipleChoice",
-                                    "pageNumber": 1,
-                                    "text": "What were the 3 little pigs' houses made of?",
-                                    "choices": ["Straw, Sticks, Bricks", "Wood, Stone, Metal", "Leaves, Bamboo, Steel"],
-                                    "correctChoiceIndex": 0
-                                },
-                                {
-                                    "questionType": "fillInBlank",
-                                    "pageNumber": 2,
-                                    "text": "The first pig made his house out of ___.",
-                                    "correctAnswer": "straw"
-                                },
-                                {
-                                    "questionType": "trueFalse",
-                                    "pageNumber": 3,
-                                    "text": "Did the wolf knock on the door?",
-                                    "answer": true
-                                },
-                                {
-                                    "questionType": "multipleChoice",
-                                    "pageNumber": 4,
-                                    "text": "Which pig had the strongest house?",
-                                    "choices": ["First pig", "Second pig", "Third pig"],
-                                    "correctChoiceIndex": 2
-                                },
-                                {
-                                    "questionType": "matching",
-                                    "pageNumber": 4,
-                                    "pairs": [
-                                        { "text1": "Straw", "text2": "First pig" },
-                                        { "text1": "Sticks", "text2": "Second pig" },
-                                        { "text1": "Bricks", "text2": "Third pig" }
-                                  ]
-                                }
+                              {
+                                "questionType": "multipleChoice",
+                                "pageNumber": 3,
+                                "text": "What were the 3 little pigs' houses made of?",
+                                "choices": ["Straw, Sticks, Bricks", "Wood, Stone, Metal", "Leaves, Bamboo, Steel"],
+                                "correctChoiceIndex": 0
+                              },
+                              {
+                                "questionType": "multipleChoice",
+                                "pageNumber": 4,
+                                "text": "What did the first pig build his house out of?",
+                                "choices": ["Straw", "Wood", "Bricks"],
+                                "correctChoiceIndex": 0
+                              },
+                              {
+                                "questionType": "trueFalse",
+                                "pageNumber": 5,
+                                "text": "Did the wolf blow down the first pig's house?",
+                                "answer": true
+                              },
+                              {
+                                "questionType": "trueFalse",
+                                "pageNumber": 6,
+                                "text": "The second pig made his house out of bricks.",
+                                "answer": false
+                              },
+                              {
+                                "questionType": "fillInBlank",
+                                "pageNumber": 7,
+                                "text": "The third pig made his house out of ___.",
+                                "correctAnswer": "bricks"
+                              },
+                              {
+                                "questionType": "multipleChoice",
+                                "pageNumber": 8,
+                                "text": "Which pig had the strongest house?",
+                                "choices": ["First pig", "Second pig", "Third pig"],
+                                "correctChoiceIndex": 2
+                              },
+                              {
+                                "questionType": "fillInBlank",
+                                "pageNumber": 9,
+                                "text": "The wolf said 'I will ___ and blow your house down.'",
+                                "correctAnswer": "huff"
+                              },
+                              {
+                                "questionType": "trueFalse",
+                                "pageNumber": 10,
+                                "text": "The wolf was able to blow down all three houses.",
+                                "answer": false
+                              },
+                              {
+                                "questionType": "multipleChoice",
+                                "pageNumber": 11,
+                                "text": "What did the pigs eat for dinner?",
+                                "choices": ["Adobo and Suman", "Pizza", "Burgers"],
+                                "correctChoiceIndex": 0
+                              },
+                              {
+                                "questionType": "fillInBlank",
+                                "pageNumber": 12,
+                                "text": "There were ___ little pigs in the story.",
+                                "correctAnswer": "three"
+                              }
                             ],
                             "author": "Ginoo Filip"
                         }
@@ -1242,6 +1272,74 @@
                                     "text": "At ako! Lahat tayo ay magkaibigan! Lahat tayo ay masaya!",
                                     "english-text": "And me! We are all friends! We are happy!",
                                     "image": "page16.png"
+                                }
+                            ],
+                            "questions": [
+                                {
+                                  "questionType": "multipleChoice",
+                                  "pageNumber": 3,
+                                  "text": "What animal was red?",
+                                  "choices": ["Bird", "Frog", "Cat", "Fish"],
+                                  "correctChoiceIndex": 0
+                                },
+                                {
+                                  "questionType": "multipleChoice",
+                                  "pageNumber": 4,
+                                  "text": "What animal was green?",
+                                  "choices": ["Frog", "Bird", "Cat", "Fish"],
+                                  "correctChoiceIndex": 0
+                                },
+                                {
+                                  "questionType": "multipleChoice",
+                                  "pageNumber": 6,
+                                  "text": "What animal was yellow?",
+                                  "choices": ["Cat", "Rabbit", "Bird", "Frog"],
+                                  "correctChoiceIndex": 0
+                                },
+                                {
+                                  "questionType": "multipleChoice",
+                                  "pageNumber": 8,
+                                  "text": "What animal was blue?",
+                                  "choices": ["Fish", "Frog", "Rabbit", "Cat"],
+                                  "correctChoiceIndex": 0
+                                },
+                                {
+                                  "questionType": "fillInBlank",
+                                  "pageNumber": 10,
+                                  "text": "The animal that was white was a ___.",
+                                  "correctAnswer": "rabbit"
+                                },
+                                {
+                                  "questionType": "trueFalse",
+                                  "pageNumber": 14,
+                                  "text": "Did the animals see their friends?",
+                                  "answer": true
+                                },
+                                {
+                                  "questionType": "multipleChoice",
+                                  "pageNumber": 15,
+                                  "text": "What animal was brown?",
+                                  "choices": ["Caribou", "Bird", "Cat", "Frog"],
+                                  "correctChoiceIndex": 0
+                                },
+                                {
+                                  "questionType": "fillInBlank",
+                                  "pageNumber": 16,
+                                  "text": "The caribou saw a group of ___.",
+                                  "correctAnswer": "animals"
+                                },
+                                {
+                                  "questionType": "trueFalse",
+                                  "pageNumber": 9,
+                                  "text": "The caribou and his friends were happy.",
+                                  "answer": true
+                                },
+                                {
+                                  "questionType": "multipleChoice",
+                                  "pageNumber": 12,
+                                  "text": "What did the animals do at the end of the story?",
+                                  "choices": ["Had fun", "Cried", "Slept", "Ate"],
+                                  "correctChoiceIndex": 0
                                 }
                             ],
                             "author": "Doktor Filip"
@@ -1388,5 +1486,4 @@
             
             }
         }
-    }
-}   
+    }  
