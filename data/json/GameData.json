@@ -9,22 +9,37 @@
                         "exampleWords": ["Aso", "Araw"],
                         "questions": [
                             {
+                                "type": "multipleChoice", 
                                 "text": "Anong hayop ang nagsisimula sa A?",
                                 "englishText": "What animal starts with A?",
                                 "choices": ["Aso", "Pusa", "Ibon", "Baka"],
                                 "correctChoiceIndex": 0
                             },
                             {
+                                "type": "multipleChoice", 
                                 "text": "Anong bagay ang may A at kulay puti?",
                                 "englishText": "What item has A and is white?",
                                 "choices": ["Asukal", "Kape", "Tasa", "Lapis"],
                                 "correctChoiceIndex": 0
                             },
                             {
+                                "type": "multipleChoice", 
                                 "text": "Anong prutas ang may A?",
                                 "englishText": "What fruit has A?",
                                 "choices": ["Mangga", "Saging", "Apple", "Pakwan"],
                                 "correctChoiceIndex": 2
+                            },
+                            {
+                                "type": "trueFalse",
+                                "text": "Ang Aso ay hayop?",
+                                "englishText": "Is a dog an animal?",
+                                "correctAnswer": true
+                            },
+                            {
+                                "type": "fillInTheBlank",
+                                "text": "Ang ____ ay isang bagay na nagsisimula sa A.",
+                                "englishText": "____ is an item that starts with A.",
+                                "correctAnswer": "Aso"
                             }
                         ]
                     },
@@ -52,7 +67,7 @@
                                 "correctChoiceIndex": 1
                             }
                         ]
-                    },
+                    },  
                     {
                         "text": "C",
                         "pronunciation": "ka",
@@ -62,19 +77,22 @@
                                 "text": "Anong bagay ang nagsisimula sa C?",
                                 "englishText": "What item starts with C?",
                                 "choices": ["Coche", "Sasakyan", "Bahay", "Ibon"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong hayop ang may C?",
                                 "englishText": "What animal has C?",
                                 "choices": ["Cat", "Aso", "Ibon", "Baka"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong pagkain ang may C?",
                                 "englishText": "What food has C?",
                                 "choices": ["Carrot", "Mango", "Saging", "Ubas"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             }
                         ]
                     },
@@ -87,19 +105,22 @@
                                 "text": "Anong bagay ang nagsisimula sa D?",
                                 "englishText": "What item starts with D?",
                                 "choices": ["Dagat", "Lawa", "Ibon", "Buhay"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong hayop ang may D?",
                                 "englishText": "What animal has D?",
                                 "choices": ["Daga", "Aso", "Pusa", "Baka"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong pagkain ang may D?",
                                 "englishText": "What food has D?",
                                 "choices": ["Dahon", "Saging", "Mangga", "Ubas"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             }
                         ]
                     },
@@ -112,19 +133,22 @@
                                 "text": "Anong hayop ang nagsisimula sa E?",
                                 "englishText": "What animal starts with E?",
                                 "choices": ["Elepante", "Aso", "Pusa", "Ibon"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong bagay ang may E?",
                                 "englishText": "What item has E?",
                                 "choices": ["Edukasyon", "Tulong", "Ibon", "Buhay"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong prutas ang may E?",
                                 "englishText": "What fruit has E?",
                                 "choices": ["Mangga", "Saging", "Elderberry", "Pakwan"],
-                                "correctChoiceIndex": 2
+                                "correctChoiceIndex": 2,
+                                "type": "multipleChoice"
                             }
                         ]
                     },
@@ -137,19 +161,22 @@
                                 "text": "Anong hayop ang nagsisimula sa F?",
                                 "englishText": "What animal starts with F?",
                                 "choices": ["Fish", "Aso", "Pusa", "Ibon"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong bagay ang may F?",
                                 "englishText": "What item has F?",
                                 "choices": ["Fork", "Spoon", "Kutsara", "Baso"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong prutas ang may F?",
                                 "englishText": "What fruit has F?",
                                 "choices": ["Fig", "Saging", "Mangga", "Ubas"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             }
                         ]
                     },
@@ -162,19 +189,22 @@
                                 "text": "Anong hayop ang nagsisimula sa G?",
                                 "englishText": "What animal starts with G?",
                                 "choices": ["Goat", "Aso", "Pusa", "Ibon"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong bagay ang may G?",
                                 "englishText": "What item has G?",
                                 "choices": ["Gadget", "Kutsara", "Baso", "Silya"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong pagkain ang may G?",
                                 "englishText": "What food has G?",
                                 "choices": ["Gulay", "Saging", "Mangga", "Ubas"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             }
                         ]
                     },
@@ -187,19 +217,22 @@
                                 "text": "Anong bagay ang nagsisimula sa H?",
                                 "englishText": "What item starts with H?",
                                 "choices": ["Hangin", "Sinigang", "Timpla", "Kutsara"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong hayop ang may H?",
                                 "englishText": "What animal has H?",
                                 "choices": ["Horse", "Aso", "Pusa", "Ibon"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong pagkain ang may H?",
                                 "englishText": "What food has H?",
                                 "choices": ["Hamburger", "Saging", "Mangga", "Ubas"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             }
                         ]
                     },
@@ -212,19 +245,22 @@
                                 "text": "Anong hayop ang nagsisimula sa I?",
                                 "englishText": "What animal starts with I?",
                                 "choices": ["Isda", "Aso", "Pusa", "Ibon"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong bagay ang may I?",
                                 "englishText": "What item has I?",
                                 "choices": ["Ipad", "Kutsara", "Baso", "Silya"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong pagkain ang may I?",
                                 "englishText": "What food has I?",
                                 "choices": ["Ice cream", "Saging", "Mangga", "Ubas"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             }
                         ]
                     },
@@ -237,19 +273,22 @@
                                 "text": "Anong hayop ang nagsisimula sa J?",
                                 "englishText": "What animal starts with J?",
                                 "choices": ["Jaguar", "Aso", "Pusa", "Ibon"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong bagay ang may J?",
                                 "englishText": "What item has J?",
                                 "choices": ["Jacket", "Kutsara", "Baso", "Silya"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong pagkain ang may J?",
                                 "englishText": "What food has J?",
                                 "choices": ["Jam", "Saging", "Mangga", "Ubas"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             }
                         ]
                     },
@@ -262,19 +301,22 @@
                                 "text": "Anong hayop ang nagsisimula sa K?",
                                 "englishText": "What animal starts with K?",
                                 "choices": ["Kalabaw", "Aso", "Pusa", "Ibon"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong bagay ang may K?",
                                 "englishText": "What item has K?",
                                 "choices": ["Kutsara", "Kubo", "Baso", "Silya"],
-                                "correctChoiceIndex": 1
+                                "correctChoiceIndex": 1,
+                                "type": "multipleChoice"
                             },
                             {
                                 "text": "Anong pagkain ang may K?",
                                 "englishText": "What food has K?",
                                 "choices": ["Kalamansi", "Saging", "Mangga", "Ubas"],
-                                "correctChoiceIndex": 0
+                                "correctChoiceIndex": 0,
+                                "type": "multipleChoice"
                             }
                         ]
                     },
