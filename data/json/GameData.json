@@ -1506,7 +1506,77 @@
                                     "image": "page20.png"
                                 }
                             ],
-                            "author": "Doktor Filip."        
+                            "questions": [
+                                {
+                                    "questionType": "multipleChoice",
+                                    "pageNumber": 2,
+                                    "text": "Who was faster in the story?",
+                                    "choices": ["The tortoise", "The hare", "Both were equal"],
+                                    "correctChoiceIndex": 1
+                                },
+                                {
+                                    "questionType": "trueFalse",
+                                    "pageNumber": 4,
+                                    "text": "The hare laughed when the tortoise wanted to race.",
+                                    "answer": true
+                                },
+                                {
+                                    "questionType": "fillInBlank",
+                                    "pageNumber": 9,
+                                    "text": "The hare took a nap under a ___.",
+                                    "correctAnswer": "tree"
+                                },
+                                {
+                                    "questionType": "multipleChoice",
+                                    "pageNumber": 13,
+                                    "text": "What was the tortoise's strategy to win the race?",
+                                    "choices": ["Ran fast at the end", "Never stopped walking", "Asked the hare to take a break"],
+                                    "correctChoiceIndex": 1
+                                },
+                                {
+                                    "questionType": "matching",
+                                    "pageNumber": 14,
+                                    "pairs": [
+                                    { "text1": "Tortoise", "text2": "Steady but slow" },
+                                    { "text1": "Hare", "text2": "Fast but overconfident" }
+                                    ]
+                                },
+                                {
+                                    "questionType": "trueFalse",
+                                    "pageNumber": 10,
+                                    "text": "The tortoise stopped during the race.",
+                                    "answer": false
+                                },
+                                {
+                                    "questionType": "fillInBlank",
+                                    "pageNumber": 16,
+                                    "text": "The tortoise crossed the ___ line.",
+                                    "correctAnswer": "finish"
+                                },
+                                {
+                                    "questionType": "multipleChoice",
+                                    "pageNumber": 7,
+                                    "text": "Who announced the start of the race?",
+                                    "choices": ["The fox", "The lion", "The wolf"],
+                                    "correctChoiceIndex": 0
+                                },
+                                {
+                                    "questionType": "multipleChoice",
+                                    "pageNumber": 19,
+                                    "text": "What lesson did the tortoise teach?",
+                                    "choices": ["Fast and steady wins", "Slow and steady wins", "Quick thinking wins"],
+                                    "correctChoiceIndex": 1
+                                },
+                                {
+                                    "questionType": "matching",
+                                    "pageNumber": 15,
+                                    "pairs": [
+                                    { "text1": "Hare", "text2": "Lost" },
+                                    { "text1": "Tortoise", "text2": "Won" }
+                                    ]
+                                }
+                            ],
+                            "author": "Doktor Filip"    
                         }
                     ]
                 }
