@@ -1,5 +1,6 @@
 package com.languageLearner.app;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 import com.languageLearner.data.DataConstants;
@@ -50,23 +51,27 @@ public class UI extends DataConstants {
         }
     }
 
-    // Method to handle game selection
+    // Method to handle game selection and ensure flow stays within games
     private static void gamesLoop(String difficulty) {
-        Scanner scanner = new Scanner(System.in);
-        GameData gameData = GameData.getInstance();
-        String[] gameTypes = {DataConstants.ALPHABET_GAME, DataConstants.COLORS_GAME, DataConstants.NUMBERS_GAME, DataConstants.STORIES_GAME};
-        boolean gamesAvailable = false;
-        int gameIndex = 1;  // Start game index at 1
+        while (true) {  // Keep looping within the game selection process
+            Scanner scanner = new Scanner(System.in);
+            GameData gameData = GameData.getInstance();
+            String[] gameTypes = {DataConstants.ALPHABET_GAME, DataConstants.COLORS_GAME, DataConstants.NUMBERS_GAME, DataConstants.STORIES_GAME};
+            boolean gamesAvailable = false;
+            int gameIndex = 1;  // Start game index at 1
 
-        while (true) {  // Stay in the game loop until user chooses to switch difficulty or exit
             System.out.println("\nSelect a game:");
-            gameIndex = 1;  // Reset index for fresh display
+            
+            // Clear mapping for each game loop
+            HashMap<Integer, String> gameMapping = new HashMap<>();
 
             for (String gameType : gameTypes) {
                 DataKey dataKey = DataKey.getInstance(LANGUAGE_FILIPINO, gameType, difficulty);
                 if (gameData.getWords(dataKey) != null || gameData.getQuestions(dataKey) != null ||
                     gameData.getStories(dataKey) != null || gameData.getLetters(dataKey) != null) {
+                    // Map the index with the actual game type
                     System.out.println(gameIndex + ". " + gameType);
+                    gameMapping.put(gameIndex, gameType);
                     gameIndex++;
                     gamesAvailable = true;
                 }
@@ -81,7 +86,7 @@ public class UI extends DataConstants {
             int selection = scanner.nextInt();
 
             if (selection >= 1 && selection < gameIndex) {
-                String selectedGameType = gameTypes[selection - 1];
+                String selectedGameType = gameMapping.get(selection); // Fetch the correct game based on user input
                 System.out.println("\nPlaying " + selectedGameType + " in " + difficulty + " mode");
                 app.startGame(DataKey.getInstance(LANGUAGE_FILIPINO, selectedGameType, difficulty));
                 postGameOptions(selectedGameType, difficulty);  // After game options
