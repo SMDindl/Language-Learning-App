@@ -12,9 +12,9 @@ public class ColorsGame {
     private GameData gameData;
     private DataKey dataKey;
 
-    public ColorsGame(DataKey dataKey) {
+    public ColorsGame() {
         this.gameData = GameData.getInstance();
-        this.dataKey = dataKey;
+        this.dataKey = DataKey.getInstance();;
     }
 
     public void startGame() {

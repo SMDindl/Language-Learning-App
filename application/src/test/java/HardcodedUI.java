@@ -17,7 +17,7 @@ import com.languageLearner.data.Word;
 /**
  * Tester class for loading and printing game data and user list.
  */
-public class HardCodedUI extends DataConstants {
+public class HardcodedUI extends DataConstants {
 
     public static void main(String[] args) {
 
@@ -51,7 +51,7 @@ public class HardCodedUI extends DataConstants {
         DataKey dataKey = DataKey.getInstance("filipino", "storiesGame", "medium");
 
         // Start the StoriesGame (automatically goes through the story and then a quiz)
-        StoriesGame storiesGame = new StoriesGame(dataKey);
+        StoriesGame storiesGame = new StoriesGame();
         storiesGame.startGame(); // Story will be read, then quiz will follow
 
         // Simulate finishing the story and quiz

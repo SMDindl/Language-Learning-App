@@ -1007,8 +1007,35 @@
                         "englishSentence": "There are five thousand pesos."
                     }
                 ]
-            }
-        },
+            },
+            "matching": {
+              "easy": {
+                "pairs": [
+                    { "filipino": "isa", "english": "one" },
+                    { "filipino": "dalawa", "english": "two" },
+                    { "filipino": "tatlo", "english": "three" }
+                ]
+             },
+            "medium": {
+                "pairs": [
+                    { "filipino": "apat", "english": "four" },
+                    { "filipino": "lima", "english": "five" },
+                    { "filipino": "anim", "english": "six" },
+                    { "filipino": "pito", "english": "seven" },
+                    { "filipino": "walo", "english": "eight" }
+                ]
+             },
+            "hard":   {
+                "pairs": [
+                    { "filipino": "siyam", "english": "nine" },
+                    { "filipino": "sampu", "english": "ten" },
+                    { "filipino": "labing-isa", "english": "eleven" },
+                    { "filipino": "labindalawa", "english": "twelve" },
+                    { "filipino": "labing-tatlo", "english": "thirteen" }
+                  ]
+                }
+              }
+            },
             "storiesGame": {
                 "easy": {
                     "stories": [

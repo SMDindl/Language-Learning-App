@@ -1,13 +1,15 @@
 package com.languageLearner.app;
 
+import com.languageLearner.data.DataConstants;
+import com.languageLearner.data.DataKey;
+import com.languageLearner.data.DataLoader;
 import com.languageLearner.data.User;
 import com.languageLearner.data.UserList;
 
 // Implemented facade for login/signup/logout + stubs
-public class LanguageLearningApplication {
+public class LanguageLearningApplication extends DataConstants {
 
     private User currentUser;
-    
     private static LanguageLearningApplication instance;
 
     // Private constructor to implement singleton pattern
@@ -24,8 +26,8 @@ public class LanguageLearningApplication {
 
     // Load users and game data when the application starts
     public void load() {
-        loadGameData();
-        loadUsers();
+        new DataLoader().loadGameData();  
+        new DataLoader().loadUsers();   
     }
 
     // User signup (add a new user)
@@ -49,6 +51,32 @@ public class LanguageLearningApplication {
         this.currentUser = null;
     }
 
+    // Logic to start a game based on datakey, can be extended when new games are added
+    public void startGame(DataKey dataKey) {
+        String gameType = dataKey.getGameType();
+
+        switch (gameType) {
+            case DataConstants.COLORS_GAME:
+                ColorsGame colorsGame = new ColorsGame();
+                colorsGame.startGame();
+                break;
+            case DataConstants.ALPHABET_GAME:
+                AlphabetGame alphabetGame = new AlphabetGame();
+                alphabetGame.startGame();
+                break;
+            case DataConstants.NUMBERS_GAME:
+                NumbersGame numbersGame = new NumbersGame();
+                numbersGame.startGame();
+                break;
+            case DataConstants.STORIES_GAME:
+                StoriesGame storiesGame = new StoriesGame();
+                storiesGame.startGame();
+                break;
+            default:
+                // Invalid Game Type or null
+        }
+    }
+
     // STUB: Update the user's preferred language
     public void updateLanguage(String language) {
         // STUB: Implement logic to update the user's preferred language
@@ -64,13 +92,4 @@ public class LanguageLearningApplication {
         // STUB: Implement logic to update the game type
     }
 
-    // STUB: Load game data (if needed)
-    private void loadGameData() {
-        // STUB: Implement logic to load game data
-    }
-
-    // STUB: Load user data (if needed)
-    private void loadUsers() {
-        // STUB: Implement logic to load users
-    }
 }

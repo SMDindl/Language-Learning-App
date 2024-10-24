@@ -2,6 +2,8 @@ package com.languageLearner.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GameData {
     
@@ -62,6 +64,18 @@ public class GameData {
     // Retrieve stories data for a specific DataKey
     public ArrayList<Story> getStories(DataKey dataKey) {
         return storiesMap.get(dataKey);
+    }
+
+    // Method to retrieve available games for a specific language and difficulty
+    public Set<String> getAvailableGamesForDifficulty(DataKey dataKey) {
+        Set<String> availableGames = new HashSet<>();
+
+        if (wordsMap.containsKey(dataKey)) availableGames.add(DataConstants.COLORS_GAME);
+        if (questionsMap.containsKey(dataKey)) availableGames.add(DataConstants.ALPHABET_GAME);
+        if (storiesMap.containsKey(dataKey)) availableGames.add(DataConstants.STORIES_GAME);
+        if (lettersMap.containsKey(dataKey)) availableGames.add(DataConstants.NUMBERS_GAME);
+
+        return availableGames;
     }
 
     // Method to populate game data
