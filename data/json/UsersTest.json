@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 {
     "users": [
         {
@@ -21,8 +20,8 @@
                 {
                     "language": "filipino",
                     "completedGames": [
-                        "easy-colorsGame",
-                        "medium-storiesGame"
+                        "filipino-easy-colorsGame",
+                        "filipino-medium-storiesGame"
                     ]
                 },
                 {
@@ -32,10 +31,4 @@
             ]
         }
     ]
-=======
-{
-    "users": [
-        
-    ]
->>>>>>> Stashed changes
 }
