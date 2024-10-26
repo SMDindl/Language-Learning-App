@@ -3,29 +3,43 @@
         {
             "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
             "username": "sdindl",
-            "email": "sdindl@sc.email.edu",
-            "displayName": "Steven",
-            "password": "Password2024",
             "progressTrackers": [
                 {
                     "language": "filipino",
                     "completedGames": [
-                        "easy-colorsGame",
-                        "medium-storiesGame"
+                        "filipino-easy-colorsGame"
                     ],
                     "missedQuestions": [
-
+                        {
+                            "dataKey": "filipino-easy-colorsGame",
+                            "questionUUID": "some-uuid-1"
+                        },
+                        {
+                            "dataKey": "filipino-easy-numbersGame",
+                            "questionUUID": "some-uuid-1-1"
+                        }
                     ],
                     "missedMatching": [
-
+                        {
+                            "dataKey": "filipino-medium-numbersGame",
+                            "questionUUID": "some-uuid-2"
+                        }
+                    ],
+                    "missedFITB": [
+                        {
+                            "dataKey": "filipino-hard-storiesGame",
+                            "questionUUID": "some-uuid-3"
+                        }
                     ]
                 },
                 {
                     "language": "",
-                    "completedGames": []
+                    "completedGames": [],
+                    "missedQuestions": [],
+                    "missedMatching": [],
+                    "missedFITB": []
                 }
             ]
         }
     ]
 }
-

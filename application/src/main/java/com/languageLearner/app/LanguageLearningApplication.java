@@ -13,8 +13,7 @@ public class LanguageLearningApplication extends DataConstants {
     private static LanguageLearningApplication instance;
 
     // Private constructor to implement singleton pattern
-    private LanguageLearningApplication() {
-    }
+    private LanguageLearningApplication() {}
 
     // Get the instance of the facade
     public static LanguageLearningApplication getInstance() {
@@ -46,6 +45,11 @@ public class LanguageLearningApplication extends DataConstants {
         return false; // Login failed
     }
 
+    // Check if a user is currently logged in
+    public boolean isLoggedIn() {
+        return currentUser != null;
+    }
+
     // Logout current user
     public void logout() {
         this.currentUser = null;
@@ -75,6 +79,14 @@ public class LanguageLearningApplication extends DataConstants {
             default:
                 // Invalid Game Type or null
         }
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
     // STUB: Update the user's preferred language

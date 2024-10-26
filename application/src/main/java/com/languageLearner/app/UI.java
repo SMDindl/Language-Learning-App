@@ -15,25 +15,84 @@ public class UI extends DataConstants {
     private static final LanguageLearningApplication app = LanguageLearningApplication.getInstance();
 
     public static void main(String[] args) {
+
+        // Hardcoded login
         app.load();
         hardcodedLogin();
         playLoop();
+
+        // // Standard flow
+        // app.load();
+        // loginFlow();
     }
 
+    // Login flow
+    private static void loginFlow() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Welcome to the Hello Worlders' Filipino learning app!");
+            System.out.println("1. Login\n2. Sign up\n3. Exit");
+            System.out.print("Select an option: ");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    System.out.print("Enter email: ");
+                    String email = scanner.nextLine();
+                    System.out.print("Enter password: ");
+                    String password = scanner.nextLine();
+                    if (app.signin(email, password)) {
+                        System.out.println("Login successful! Welcome, " + app.getCurrentUser().getDisplayName());
+                        playLoop();
+                    } else {
+                        System.out.println("Login failed. Please try again.");
+                    }
+                    break;
+                case "2":
+                    // Signup flow if needed
+                    break;
+                case "3":
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid selection. Please try again.");
+            }
+        }
+    }
+
+    // Hard coded login
     private static void hardcodedLogin() { 
         User current = UserList.getInstance().login("sdindl@sc.email.edu", "Password2024");
-
         if (current != null) {
+            app.setCurrentUser(current); // Set the current user in the app facade
             System.out.println("\nLogin successful! Welcome, " + current.getDisplayName());
+            playLoop();
         } else {
-            System.out.println("\nLogin failed.");
+            System.out.println("\nHardcoded login failed.");
         }
     }
 
     private static void playLoop() {
-        System.out.println("\nWelcome to the Hello Worlders' " + LANGUAGE_FILIPINO + " learning app.");
-        while (true) {
-            selectDifficulty();  // Loop through difficulty selection
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nWelcome to the Hello Worlders' Filipino learning app.");
+        while (app.isLoggedIn()) {
+            System.out.println("\n1. Select Difficulty\n2. Logout\n3. Exit");
+            System.out.print("Choose an option: ");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    selectDifficulty();  // Loop through difficulty selection
+                    break;
+                case "2":
+                    app.logout();
+                    System.out.println("You have been logged out.\n");
+                    loginFlow();
+                    return;
+                case "3":
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid selection. Please try again.");
+            }
         }
     }
 
@@ -43,11 +102,21 @@ public class UI extends DataConstants {
         System.out.println("\nSelect a difficulty:\n1. Easy\n2. Medium\n3. Hard\n4. Exit");
 
         switch (scanner.nextLine()) {
-            case "1": gamesLoop(DataConstants.EASY); break;
-            case "2": gamesLoop(DataConstants.MEDIUM); break;
-            case "3": gamesLoop(DataConstants.HARD); break;
-            case "4": System.exit(0);
-            default: System.out.println("\nInvalid selection.");
+            case "1":
+                gamesLoop(DataConstants.EASY);
+                break;
+            case "2":
+                gamesLoop(DataConstants.MEDIUM);
+                break;
+            case "3":
+                gamesLoop(DataConstants.HARD);
+                break;
+            case "4":
+                app.logout();
+                loginFlow(); // Go back to login if exiting from difficulty selection
+                break;
+            default:
+                System.out.println("\nInvalid selection.");
         }
     }
 

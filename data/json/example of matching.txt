@@ -1,0 +1,48 @@
+public void giveMatchingQuestion(String difficulty) {
+    ArrayList<Word> wordsList = gameData.getWords(dataKey);
+    ArrayList<Word> shuffledWords = shuffleList(wordsList);  // Shuffle for random order
+
+    if (wordsList.size() < 2) {
+        System.out.println("Not enough words for matching questions.");
+        return;
+    }
+
+    System.out.println("Match the following words to their translations:");
+
+    // Display the shuffled words for matching
+    for (int i = 0; i < shuffledWords.size(); i++) {
+        System.out.println((i + 1) + ". " + shuffledWords.get(i).getWordText());
+    }
+
+    // Display the correct translations
+    System.out.println("\nTranslations:");
+    for (int i = 0; i < wordsList.size(); i++) {
+        System.out.println((i + 1) + ". " + wordsList.get(i).getEnglishText());
+    }
+
+    // Collect the user's answers
+    Scanner scanner = new Scanner(System.in);
+    int[] userMatches = new int[wordsList.size()];
+    for (int i = 0; i < wordsList.size(); i++) {
+        System.out.print("Match word " + (i + 1) + " with translation: ");
+        userMatches[i] = scanner.nextInt();
+    }
+
+    // Validate the user's matches
+    checkMatchingAnswers(shuffledWords, wordsList, userMatches);
+}
+
+public void checkMatchingAnswers(ArrayList<Word> shuffledWords, ArrayList<Word> correctWords, int[] userMatches) {
+    for (int i = 0; i < userMatches.length; i++) {
+        // The correct answer is the index of the word in the correct list
+        Word correctWord = correctWords.get(userMatches[i] - 1);
+
+        if (!shuffledWords.get(i).getWordTranslation().equals(correctWord.getWordTranslation())) {
+            // User got this match wrong, store the missed match
+            System.out.println("Incorrect match: " + shuffledWords.get(i).getWordText() + " should match with " + correctWord.getWordTranslation());
+            storeMissedMatch(shuffledWords.get(i).getUuid());
+        } else {
+            System.out.println("Correct match: " + shuffledWords.get(i).getWordText());
+        }
+    }
+}
