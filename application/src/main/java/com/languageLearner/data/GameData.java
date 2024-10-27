@@ -78,6 +78,16 @@ public class GameData {
         return availableGames;
     }
 
+    // Implementation to handle a list of words as a matching question
+    public void doMatching(ArrayList<Word> words) { // Need to consider DataKey being used as well as it the list is nested within an object
+
+    }
+    
+    // Implementation to handle a list of words as a fill in the blank question
+    public void doFITB(ArrayList<Word> words) { // Need to consider DataKey being used as well as it the list is nested within an object
+    
+    } 
+
     // Method to populate game data
     public void populateData(HashMap<DataKey, ArrayList<Word>> words, 
                              HashMap<DataKey, ArrayList<Question>> questions,
