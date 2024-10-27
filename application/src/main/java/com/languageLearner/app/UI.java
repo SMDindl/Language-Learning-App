@@ -8,6 +8,7 @@ import com.languageLearner.data.DataKey;
 import com.languageLearner.data.GameData;
 import com.languageLearner.data.User;
 import com.languageLearner.data.UserList;
+import com.languageLearner.narration.Narrator;
 
 public class UI extends DataConstants {
 
@@ -15,6 +16,7 @@ public class UI extends DataConstants {
     private static final LanguageLearningApplication app = LanguageLearningApplication.getInstance();
 
     public static void main(String[] args) {
+        Narrator.playSoundRussell("");
 
         // Hardcoded login
         app.load();
@@ -31,6 +33,7 @@ public class UI extends DataConstants {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Welcome to the Hello Worlders' Filipino learning app!");
+
             System.out.println("1. Login\n2. Sign up\n3. Exit");
             System.out.print("Select an option: ");
             String choice = scanner.nextLine();
@@ -50,6 +53,28 @@ public class UI extends DataConstants {
                     break;
                 case "2":
                     // Signup flow if needed
+                    System.out.println("Signup: ");
+
+                    System.out.print("Enter your Email: ");
+                    String email2 = scanner.nextLine();
+
+                    System.out.print("Enter your Username: ");
+                    String username = scanner.nextLine();
+
+                    System.out.print("Enter your Display Name: ");
+                    String displayName = scanner.nextLine();
+
+                    System.out.print("Enter your Password: ");
+                    String password2 = scanner.nextLine();
+
+                    boolean signupSuccess = app.signup(email2, username, displayName, password2);
+
+                    if (signupSuccess) {
+                        System.out.println("Signup successful! Welcome, " + displayName + "!");
+                    } else {
+                        System.out.println("Signup failed. Please try again.");
+                    }
+
                     break;
                 case "3":
                     System.exit(0);
@@ -65,6 +90,8 @@ public class UI extends DataConstants {
         if (current != null) {
             app.setCurrentUser(current); // Set the current user in the app facade
             System.out.println("\nLogin successful! Welcome, " + current.getDisplayName());
+            // Narrator.playSoundRussell("Login successful! Welcome, " + current.getDisplayName());
+
             playLoop();
         } else {
             System.out.println("\nHardcoded login failed.");
@@ -73,7 +100,10 @@ public class UI extends DataConstants {
 
     private static void playLoop() {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("\nWelcome to the Hello Worlders' Filipino learning app.");
+        // Narrator.playSoundRussell("Welcome to the Hello Worlders' Filipino learning app.");
+        
         while (app.isLoggedIn()) {
             System.out.println("\n1. Select Difficulty\n2. Logout\n3. Exit");
             System.out.print("Choose an option: ");

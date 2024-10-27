@@ -6,8 +6,8 @@ public class ProgressTracker {
 
     private String language;
     private ArrayList<DataKey> completedGames;
-    private ArrayList<MissedQuestion> missedQuestions;
-    private ArrayList<MissedQuestion> missedMatching;
+    private ArrayList<MissedQuestion> missedQuestions; // Multiple choice or t/f
+    private ArrayList<MissedQuestion> missedMatching; 
     private ArrayList<MissedQuestion> missedFITB;
 
     // Constructor

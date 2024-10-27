@@ -1,8 +1,5 @@
 package com.languageLearner.narration;
 
-// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: Apache-2.0
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -21,16 +18,34 @@ import software.amazon.awssdk.services.polly.model.SynthesizeSpeechResponse;
 import software.amazon.awssdk.services.polly.model.Voice;
 
 public class Narrator {
-    private Narrator(){};
+    private Narrator() {};
 
-    public static void playSound(String text){
+    // Play sound using Miguel's voice
+    public static void playSoundMiguel(String text) {
+        playSound(text, "Miguel");
+    }
+
+    // Play sound using Russell's voice
+    public static void playSoundRussell(String text) {
+        playSound(text, "Russell");
+    }
+
+    public static void playSoundZayd(String text) {
+        playSound(text, "Zayd");
+    }
+
+
+
+
+    // Main playSound method that takes text and voice name as parameters
+    private static void playSound(String text, String voiceName) {
         PollyClient polly = PollyClient.builder().region(Region.EU_WEST_3).build();
 
-        talkPolly(polly, text);
+        talkPolly(polly, text, voiceName);
         polly.close();
     }
 
-    private static void talkPolly(PollyClient polly, String text) {
+    private static void talkPolly(PollyClient polly, String text, String voiceName) {
         try {
             DescribeVoicesRequest describeVoiceRequest = DescribeVoicesRequest.builder()
                     .engine("standard")
@@ -38,10 +53,9 @@ public class Narrator {
 
             DescribeVoicesResponse describeVoicesResult = polly.describeVoices(describeVoiceRequest);
             Voice voice = describeVoicesResult.voices().stream()
-                    .filter(v -> v.name().equals("Miguel"))
+                    .filter(v -> v.name().equals(voiceName))
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException("Voice not found"));
-
 
             InputStream stream = synthesize(polly, text, voice, OutputFormat.MP3);
             AdvancedPlayer player = new AdvancedPlayer(stream,
@@ -69,4 +83,3 @@ public class Narrator {
         return synthRes;
     }
 }
-

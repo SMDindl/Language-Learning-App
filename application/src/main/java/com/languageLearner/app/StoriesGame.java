@@ -9,6 +9,7 @@ import com.languageLearner.data.Page;
 import com.languageLearner.data.Question;
 import com.languageLearner.data.Story;
 import com.languageLearner.data.Word;
+import com.languageLearner.narration.Narrator;
 
 
 public class StoriesGame {
@@ -83,6 +84,7 @@ public class StoriesGame {
 
         for (Question question : questionList) {
             System.out.println(question.displayQuestion());
+            Narrator.playSoundMiguel(question.getQuestionText());
             String userAnswer = keyboard.nextLine();
             provideFeedback(validateAnswer(userAnswer, question));
         }

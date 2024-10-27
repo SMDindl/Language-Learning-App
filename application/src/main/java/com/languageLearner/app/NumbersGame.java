@@ -36,6 +36,10 @@ public class NumbersGame {
     public Word pickNumber() {
         System.out.println("\nWhich number from 0-9 would you like to learn?: \n");
         ArrayList<Word> numbersList = gameData.getWords(dataKey);
+        for(int i = 0; i < numbersList.size(); i++) {
+            //Prints out all the colors
+            System.out.println((i+1) + ". " + numbersList.get(i).getWordText());
+        }
         //User will be prompted to select a number
         Word selection = numbersList.get(0);
         return selection;

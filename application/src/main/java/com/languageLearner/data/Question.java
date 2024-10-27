@@ -1,6 +1,7 @@
 package com.languageLearner.data;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Question {
     // Attributes
@@ -8,6 +9,7 @@ public class Question {
     private int correctAnswerIndex;
     private ArrayList<String> answers;
     private String image;
+    private UUID id;
 
     // Constructor (w/ image)
     public Question(String questionText, ArrayList<String> answers, int correctAnswerIndex, String image) {
@@ -54,4 +56,27 @@ public class Question {
         }
         return questionDisplay.toString();
     }
+
+    // public void askQuestion() {
+    //     Scanner keyboard = new Scanner(System.in);
+    //     ArrayList<Question> questionList = gameData.getQuestions(dataKey);
+    //     for(int i = 0; i < questionList.size(); i++) {
+    //         System.out.println(questionList.get(i).displayQuestion());
+    //         Narrator.playSoundMiguel(questionList.get(i).getQuestionText());
+    //         int num = keyboard.nextInt() - 1;
+    //         provideFeedback(validateAnswer(num, questionList.get(i)));
+    //     }
+    // }
+
+    // public boolean validateAnswer(int answer, Question question) {
+    //     System.out.println("anw" + answer + "       " + question.getCorrectAnswerIndex());
+    //     return answer == (question.getCorrectAnswerIndex());
+    //  }
+
+    // public void provideFeedback(boolean isCorrect) {
+    //     if(isCorrect) 
+    //         System.out.println("Well done!");
+    //     else
+    //         System.out.println("Better luck next time");
+    // }
 }
