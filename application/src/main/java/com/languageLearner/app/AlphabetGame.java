@@ -6,7 +6,6 @@ import java.util.Scanner;
 import com.languageLearner.data.DataKey;
 import com.languageLearner.data.GameData;
 import com.languageLearner.data.Letter;
-import com.languageLearner.data.Question;
 
 public class AlphabetGame {
     private GameData gameData;
@@ -14,9 +13,12 @@ public class AlphabetGame {
 
     public AlphabetGame() {
         this.gameData = GameData.getInstance();
-        this.dataKey = DataKey.getInstance();
+        this.dataKey = DataKey.getInstance(); // Example DataKey for Alphabet Game
     }
 
+    /**
+     * Starts the Alphabet Game where the user can select a letter to study and then take a quiz.
+     */
     public void startGame() {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("What would you like to do?: \n1. Take a letters quiz \n2. Return to game selection");
@@ -26,52 +28,54 @@ public class AlphabetGame {
             return;
         }
 
-        //User picks the letter to work on
+        // User picks the letter to work on
         Letter selection = pickLetter();
         teachLetter(selection);
         System.out.println("When you're ready for the quiz, hit the ENTER key.");
-        keyboard.nextLine(); //Clears the Scanner, otherwise it doesn't wait for the user input
-        keyboard.nextLine(); //Waits for the user to hit the ENTER key
-        //Move to the quiz after studying the letter
+        keyboard.nextLine(); // Clears the Scanner buffer
+        keyboard.nextLine(); // Waits for the user to hit the ENTER key
 
-        askQuestion();
+        // Move to the quiz after studying the letter
+        askQuestions(selection.getText()); // Pass the letter as context for questions
     }
 
+    /**
+     * Prompts the user to pick a letter to study.
+     *
+     * @return the selected Letter object
+     */
     public Letter pickLetter() {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("\nType the number of the letter you would like to study?: \n");
+        System.out.println("\nType the number of the letter you would like to study: \n");
         ArrayList<Letter> letterList = gameData.getLetters(this.dataKey);
-        for(int i = 0; i < letterList.size(); i++) {
-            //Prints out all the letters
-            System.out.println((i+1) + ". " + letterList.get(i).getLetter());
+        for (int i = 0; i < letterList.size(); i++) {
+            System.out.println((i + 1) + ". " + letterList.get(i).getText());
         }
-        Letter selection = letterList.get(keyboard.nextInt() - 1);
-        return selection;
+        return letterList.get(keyboard.nextInt() - 1);
     }
 
+    /**
+     * Displays pronunciation and example words for the selected letter.
+     *
+     * @param letter the selected Letter object
+     */
     public void teachLetter(Letter letter) {
-        System.out.println(letter.getPronunciation());
-        System.out.println(letter.getExampleWords());
+        System.out.println("Pronunciation: " + letter.getPronunciation());
+        System.out.println("Example words: " + letter.getExampleWords());
     }
 
-    public void askQuestion() {
-        Scanner keyboard = new Scanner(System.in);
-        DataKey dataKey = DataKey.getInstance();
-        ArrayList<Question> questionList = gameData.getQuestions(dataKey);
-        for(int i = 0; i < questionList.size(); i++) {
-            System.out.println(questionList.get(i).displayQuestion());
-            provideFeedback(validateAnswer(keyboard.nextLine(), questionList.get(i)));
-        }
-    }
+    /**
+     * Asks a series of multiple-choice and true/false questions specific to the selected letter.
+     *
+     * @param letterContext the letter being quizzed on, used as context
+     */
+    public void askQuestions(String letterContext) {
+        // Ask multiple-choice questions related to the selected letter
+        System.out.println("\n--- Multiple Choice Quiz ---");
+        gameData.askQuestions(this.dataKey, 2, GameData.TYPE_MULTIPLE_CHOICE, letterContext);
 
-    public boolean validateAnswer(String answer, Question question) {
-        return answer.equals(question.getCorrectAnswer());
-     }
-
-    public void provideFeedback(boolean isCorrect) {
-        if(isCorrect) 
-            System.out.println("Well done!");
-        else
-            System.out.println("Better luck next time");
+        // Ask true/false questions related to the selected letter
+        System.out.println("\n--- True/False Quiz ---");
+        gameData.askQuestions(this.dataKey, 2, GameData.TYPE_TRUE_FALSE, letterContext);
     }
 }

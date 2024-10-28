@@ -8,7 +8,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-
 /**
  * Loads user and game data from JSON files into the application's data structure.
  * Handles parsing and populating relevant game data and user progress tracking.
@@ -16,6 +15,7 @@ import org.json.simple.parser.JSONParser;
 public class DataLoader extends DataConstants {
 
     private GameData gameData = GameData.getInstance();
+    private DataKey dataKey = DataKey.getInstance();
 
     /** Constructor for DataLoader. */
     public DataLoader() {}
@@ -66,7 +66,6 @@ public class DataLoader extends DataConstants {
                         JSONObject trackerJSON = (JSONObject) trackerObj;
                         ProgressTracker tracker = new ProgressTracker((String) trackerJSON.get(LANGUAGE));
 
-                        // Load completed games
                         JSONArray completedGamesArray = (JSONArray) trackerJSON.get(COMPLETED_GAMES);
                         if (completedGamesArray != null) {
                             for (Object gameObj : completedGamesArray) {
@@ -83,10 +82,7 @@ public class DataLoader extends DataConstants {
                                 }
                             }
                         }
-
-                        // Load missed questions
                         loadMissedQuestions(tracker, trackerJSON);
-
                         user.addProgressTracker(tracker);
                     }
                 }
@@ -97,12 +93,6 @@ public class DataLoader extends DataConstants {
         }
     }
 
-    /**
-     * Helper method to parse and add missed questions to the given tracker.
-     *
-     * @param tracker ProgressTracker instance where missed items are added.
-     * @param trackerJSON JSON object containing tracker details.
-     */
     private void loadMissedQuestions(ProgressTracker tracker, JSONObject trackerJSON) {
         JSONArray missedQuestionsArray = (JSONArray) trackerJSON.get("missedQuestions");
         if (missedQuestionsArray != null) {
@@ -110,18 +100,12 @@ public class DataLoader extends DataConstants {
                 JSONObject missedJSON = (JSONObject) missedObj;
                 String questionUUID = (String) missedJSON.get(USER_ID);
                 if (questionUUID != null) {
-                    tracker.addMissedQuestion(questionUUID);
+                    tracker.addMissedQuestion(UUID.fromString(questionUUID));
                 }
             }
         }
     }
 
-    /**
-     * Parses a UUID from a string.
-     *
-     * @param uuidStr String representation of a UUID.
-     * @return UUID if parsed successfully, or null if invalid.
-     */
     private UUID parseUUID(String uuidStr) {
         try {
             return UUID.fromString(uuidStr);
@@ -131,45 +115,28 @@ public class DataLoader extends DataConstants {
         }
     }
 
-    /**
-     * Loads languages and their associated data from the JSON object.
-     *
-     * @param jsonObject JSON object containing game data by language.
-     */
     private void loadLanguages(JSONObject jsonObject) {
         for (Object languageKey : jsonObject.keySet()) {
             String language = (String) languageKey;
+            // dataKey.setLanguage(language);
             JSONObject games = (JSONObject) jsonObject.get(language);
-
             loadGameTypes(games, language);
         }
     }
 
-    /**
-     * Loads game types within a specific language from the JSON object.
-     *
-     * @param games JSON object containing game types.
-     * @param language Language for which game types are being loaded.
-     */
     private void loadGameTypes(JSONObject games, String language) {
         for (Object gameTypeKey : games.keySet()) {
             String gameType = (String) gameTypeKey;
+            // dataKey.setGameType(gameType);
             JSONObject difficulties = (JSONObject) games.get(gameType);
-
             loadDifficulties(difficulties, language, gameType);
         }
     }
 
-    /**
-     * Loads difficulty levels within a game type from the JSON object.
-     *
-     * @param difficulties JSON object containing difficulties.
-     * @param language Language for which difficulties are being loaded.
-     * @param gameType Game type for which difficulties are being loaded.
-     */
     private void loadDifficulties(JSONObject difficulties, String language, String gameType) {
         for (Object difficultyKey : difficulties.keySet()) {
             String difficulty = (String) difficultyKey;
+            // dataKey.setDifficulty(difficulty);
             JSONObject gameDataJSON = (JSONObject) difficulties.get(difficulty);
 
             DataKey dataKey = DataKey.getInstance(language, gameType, difficulty);
@@ -193,10 +160,10 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Loads words
-     * 
-     * @param gameDataJSON
-     * @param wordsList
+     * Processes word entries within the game data JSON object.
+     *
+     * @param gameDataJSON JSON object containing game data.
+     * @param wordsList List to store processed Word objects.
      */
     private void processWords(JSONObject gameDataJSON, ArrayList<Word> wordsList) {
         if (gameDataJSON.containsKey(WORDS)) {
@@ -204,45 +171,42 @@ public class DataLoader extends DataConstants {
     
             for (Object wordObj : wordsArray) {
                 JSONObject wordJSON = (JSONObject) wordObj;
+                UUID id = wordJSON.containsKey(USER_ID) ? UUID.fromString((String) wordJSON.get(USER_ID)) : UUID.randomUUID();
     
-                // Extract common fields
                 String wordText = (String) wordJSON.get(TEXT);
                 String wordTranslation = (String) wordJSON.get(ENGLISH_TEXT);
-                String exampleSentence = wordJSON.containsKey(EXAMPLE_SENTENCE) ? (String) wordJSON.get(EXAMPLE_SENTENCE) : null;
-                String sentenceTranslation = wordJSON.containsKey(ENGLISH_SENTENCE) ? (String) wordJSON.get(ENGLISH_SENTENCE) : null;
+                String exampleSentence = (String) wordJSON.get(EXAMPLE_SENTENCE);
+                String sentenceTranslation = (String) wordJSON.get(ENGLISH_SENTENCE);
+                String digit = (String) wordJSON.get(NUMBER);  // Retrieve digit if available
     
-                // Check for optional "number" field
-                if (wordJSON.containsKey(DIGIT)) {
-                    String number = (String) wordJSON.get(DIGIT);
-                    // Use constructor with "number" field
-                    wordsList.add(new Word(number, wordText, wordTranslation, exampleSentence, sentenceTranslation));
+                // Select appropriate Word constructor based on available fields
+                Word word;
+                if (digit != null && exampleSentence != null && sentenceTranslation != null) {
+                    word = new Word(digit, wordText, wordTranslation, exampleSentence, sentenceTranslation, id);
+                } else if (digit != null) {
+                    word = new Word(digit, wordText, wordTranslation, id);
+                } else if (exampleSentence != null && sentenceTranslation != null) {
+                    word = new Word(wordText, wordTranslation, exampleSentence, sentenceTranslation, id);
                 } else {
-                    // Use constructor without "number" field
-                    wordsList.add(new Word(wordText, wordTranslation, exampleSentence, sentenceTranslation));
+                    word = new Word(wordText, wordTranslation, id);
                 }
+    
+                // Add constructed word to the words list
+                wordsList.add(word);
             }
         }
     }
     
-
-    /**
-     * Processes question entries within the game data JSON object.
-     *
-     * @param gameDataJSON JSON object containing game data.
-     * @param questionsList List to store processed Question objects.
-     */
     private void processQuestions(JSONObject gameDataJSON, ArrayList<Question> questionsList) {
         if (gameDataJSON.containsKey(QUESTIONS)) {
             JSONArray questionsArray = (JSONArray) gameDataJSON.get(QUESTIONS);
 
             for (Object questionObj : questionsArray) {
                 JSONObject questionJSON = (JSONObject) questionObj;
-
+                UUID uuid = questionJSON.containsKey(USER_ID) ? UUID.fromString((String) questionJSON.get(USER_ID)) : UUID.randomUUID();
                 String questionText = (String) questionJSON.get(TEXT);
                 String context = questionJSON.containsKey(CONTEXT) ? (String) questionJSON.get(CONTEXT) : null;
-                UUID uuid = questionJSON.containsKey(USER_ID) ? UUID.fromString((String) questionJSON.get(USER_ID)) : UUID.randomUUID();
 
-                // Determine if the question is multiple-choice or true/false
                 if (questionJSON.containsKey(CHOICES)) {
                     int correctAnswerIndex = Math.toIntExact((long) questionJSON.get(CORRECT_CHOICE_INDEX));
                     ArrayList<String> choices = new ArrayList<>();
@@ -250,74 +214,49 @@ public class DataLoader extends DataConstants {
                     for (Object choice : choicesArray) {
                         choices.add((String) choice);
                     }
-
                     questionsList.add(new Question(
-                        uuid.toString(),
+                        uuid,
                         "multiple_choice",
                         questionText,
                         choices,
                         correctAnswerIndex,
                         context
                     ));
-                } else if (questionJSON.containsKey("correctAnswer")) {
-                    boolean correctAnswer = (boolean) questionJSON.get("correctAnswer");
-
+                } else if (questionJSON.containsKey(CORRECT_ANSWER)) {
+                    boolean correctAnswer = (boolean) questionJSON.get(CORRECT_ANSWER);
                     questionsList.add(new Question(
-                        uuid.toString(),
+                        uuid,
                         "true_false",
                         questionText,
                         correctAnswer,
                         context
                     ));
-                } else {
-                    System.err.println("Unrecognized question format: " + questionJSON);
                 }
             }
         }
     }
 
-    /**
-     * Processes letter entries within the game data JSON object.
-     *
-     * @param gameDataJSON JSON object containing game data.
-     * @param lettersList List to store processed Letter objects.
-     */
     private void processLetters(JSONObject gameDataJSON, ArrayList<Letter> lettersList) {
         if (gameDataJSON.containsKey(LETTERS)) {
             JSONArray lettersArray = (JSONArray) gameDataJSON.get(LETTERS);
 
             for (Object letterObj : lettersArray) {
                 JSONObject letterJSON = (JSONObject) letterObj;
+                UUID uuid = letterJSON.containsKey(USER_ID) ? UUID.fromString((String) letterJSON.get(USER_ID)) : UUID.randomUUID();
 
-                // Process example words for each letter
                 ArrayList<Word> exampleWordsList = new ArrayList<>();
                 processWords(letterJSON, exampleWordsList);
 
-                // Generate UUID for each letter
-                UUID uuid = UUID.randomUUID();
-
-                // Create a new Letter object with UUID and add it to lettersList
-                String text = (String) letterJSON.get(TEXT);
-                String pronunciation = (String) letterJSON.get(PRONUNCIATION);
-                String image = (String) letterJSON.get(IMAGE);
-                
                 lettersList.add(new Letter(
-                    text,
-                    pronunciation,
+                    (String) letterJSON.get(TEXT),
+                    (String) letterJSON.get(PRONUNCIATION),
                     exampleWordsList,
-                    uuid  // Pass the generated UUID
+                    uuid
                 ));
             }
         }
     }
 
-
-    /**
-     * Processes story entries within the game data JSON object.
-     *
-     * @param gameDataJSON JSON object containing game data.
-     * @param storiesList List to store processed Story objects.
-     */
     private void processStories(JSONObject gameDataJSON, ArrayList<Story> storiesList) {
         if (gameDataJSON.containsKey(STORIES)) {
             JSONArray storiesArray = (JSONArray) gameDataJSON.get(STORIES);
@@ -341,12 +280,6 @@ public class DataLoader extends DataConstants {
         }
     }
 
-    /**
-     * Processes page entries within a story JSON object.
-     *
-     * @param storyJSON JSON object containing story data.
-     * @param pagesList List to store processed Page objects.
-     */
     private void processPages(JSONObject storyJSON, ArrayList<Page> pagesList) {
         if (storyJSON.containsKey(PAGES)) {
             JSONArray pagesArray = (JSONArray) storyJSON.get(PAGES);
@@ -355,7 +288,7 @@ public class DataLoader extends DataConstants {
                 JSONObject pageJSON = (JSONObject) pageObj;
 
                 pagesList.add(new Page(
-                    String.valueOf(pageJSON.get(PAGE_NUMBER)),
+                    (String) pageJSON.get(PAGE_NUMBER),
                     (String) pageJSON.get(TEXT),
                     (String) pageJSON.get(ENGLISH_TEXT),
                     (String) pageJSON.get(IMAGE)

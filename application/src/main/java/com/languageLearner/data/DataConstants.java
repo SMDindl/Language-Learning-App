@@ -51,13 +51,14 @@ public class DataConstants {
     protected static final String ENGLISH_TEXT = "englishText";
     protected static final String EXAMPLE_SENTENCE = "exampleSentence";
     protected static final String ENGLISH_SENTENCE = "englishSentence";
-    protected static final String DIGIT = "digit";
+    protected static final String NUMBER = "number";
     protected static final String PRONUNCIATION = "pronunciation";
     protected static final String IMAGE = "image";
     protected static final String TITLE = "title";
     protected static final String AUTHOR = "author";
     protected static final String PAGE_NUMBER = "pageNumber";
     protected static final String CORRECT_CHOICE_INDEX = "correctChoiceIndex";
+    protected static final String CORRECT_ANSWER = "correctAnswer";
     protected static final String CHOICES = "choices";
     protected static final String CONTEXT = "context"; // New constant for question context
 

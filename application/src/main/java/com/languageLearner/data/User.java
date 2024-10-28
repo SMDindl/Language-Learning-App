@@ -108,6 +108,16 @@ public class User {
         progressTrackers.add(newTracker);
     }
 
+    public void trackMissedQuestion(UUID questionId) {
+        ProgressTracker tracker = getOrCreateProgressTracker(DataKey.getInstance().getLanguage());
+        tracker.addMissedQuestion(questionId);
+    }
+
+    public void untrackMissedQuestion(UUID questionId) {
+        ProgressTracker tracker = getOrCreateProgressTracker(DataKey.getInstance().getLanguage());
+        tracker.removeMissedQuestion(questionId);
+    }
+
     /**
      * Adds or updates a progress tracker for the given language and a single completed game (using DataKey).
      * If a tracker for the language exists, it updates it, otherwise, it creates a new one.
@@ -126,9 +136,21 @@ public class User {
         progressTrackers.add(newTracker); // Add new tracker if it doesn't exist
     }
 
-    public void trackMissedQuestion(String questionId) {
-        ProgressTracker tracker = getOrCreateProgressTracker(DataKey.getInstance().getLanguage());
-        tracker.addMissedQuestion(questionId);
+    /**
+     * 
+     * @param language
+     * @return
+     */
+    private ProgressTracker getOrCreateProgressTracker(String language) {
+        // Find or create a tracker for the specified language
+        for (ProgressTracker tracker : progressTrackers) {
+            if (tracker.getLanguage().equals(language)) {
+                return tracker;
+            }
+        }
+        ProgressTracker newTracker = new ProgressTracker(language);
+        progressTrackers.add(newTracker);
+        return newTracker;
     }
 
     public void displayProgress(DataKey dataKey) {
@@ -141,17 +163,69 @@ public class User {
         // Further options to view missed questions, completed games, etc.
         // Implement additional logic based on user input
     }
-
-    private ProgressTracker getOrCreateProgressTracker(String language) {
-        // Find or create a tracker for the specified language
-        for (ProgressTracker tracker : progressTrackers) {
-            if (tracker.getLanguage().equals(language)) {
-                return tracker;
-            }
-        }
-        ProgressTracker newTracker = new ProgressTracker(language);
-        progressTrackers.add(newTracker);
-        return newTracker;
-    }
     
 }
+
+// package com.languageLearner.data;
+
+// import java.util.ArrayList;
+// import java.util.UUID;
+
+// public class User {
+
+//     private UUID id;
+//     private String username;
+//     private String email;
+//     private String displayName;
+//     private String password;
+//     private ArrayList<ProgressTracker> progressTrackers;
+
+//     public User(String email, String username, String displayName, String password, UUID id) {
+//         this.email = email;
+//         this.username = username;
+//         this.displayName = displayName;
+//         this.password = password;
+//         this.id = id;
+//         this.progressTrackers = new ArrayList<>();
+//     }
+
+//     public UUID getUuid() {
+//         return id;
+//     }
+
+//     public String getUsername() {
+//         return username;
+//     }
+
+//     public ArrayList<ProgressTracker> getProgressTrackers() {
+//         return progressTrackers;
+//     }
+
+//     public ProgressTracker getProgressTrackerByDataKey(DataKey dataKey) {
+//         for (ProgressTracker tracker : progressTrackers) {
+//             if (tracker.getLanguage().equals(dataKey.getLanguage())) {
+//                 return tracker;
+//             }
+//         }
+//         ProgressTracker newTracker = new ProgressTracker(dataKey.getLanguage());
+//         progressTrackers.add(newTracker);
+//         return newTracker;
+//     }
+
+//     public void displayProgress() {
+//         System.out.println("Completed games: " + progressTrackers.size());
+//         for (ProgressTracker tracker : progressTrackers) {
+//             System.out.println("Missed questions: " + tracker.getMissedQuestions().size());
+//         }
+//     }
+
+//     public void trackMissedQuestion(UUID questionId) {
+//         ProgressTracker tracker = getProgressTrackerByDataKey(DataKey.getInstance());
+//         tracker.addMissedQuestion(questionId);
+//     }
+
+//     public void untrackMissedQuestion(UUID questionId) {
+//         ProgressTracker tracker = getProgressTrackerByDataKey(DataKey.getInstance());
+//         tracker.removeMissedQuestion(questionId);
+//     }
+// }

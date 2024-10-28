@@ -11,7 +11,6 @@ import com.languageLearner.data.Story;
 import com.languageLearner.data.Word;
 import com.languageLearner.narration.Narrator;
 
-
 public class StoriesGame {
     
     private GameData gameData;
@@ -19,10 +18,10 @@ public class StoriesGame {
 
     public StoriesGame() {
         this.gameData = GameData.getInstance();
-        this.dataKey = DataKey.getInstance();
+        this.dataKey = DataKey.getInstance();  // Singleton instance of DataKey for StoriesGame
     }
 
-    // Starts the story game, with the option to return to the game selection
+    // Starts the story game with an option to return to the game selection
     public void startGame() {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("What would you like to do?: \n1. Pick a story to read \n2. Return to game selection");
@@ -33,29 +32,30 @@ public class StoriesGame {
             return;
         }
 
-        // Automatically proceed to pick the story
+        // User selects the story to read
         Story selectedStory = pickStory();
         teachWords(selectedStory);
         readStory(selectedStory);
+
         System.out.println("When you're ready for the quiz, hit the ENTER key");
-        keyboard.nextLine(); //Clears the Scanner, otherwise it doesn't wait for the user input
-        keyboard.nextLine(); //Waits for the user to hit the ENTER key
-        //Move to the quiz after reading the story
+        keyboard.nextLine();  // Clears the Scanner
+        keyboard.nextLine();  // Waits for ENTER key
+
         System.out.println("\nStory completed. Starting the quiz...\n");
-        askQuestion();
+        askQuestions(selectedStory.getTitle());  // Pass the story title as context
     }
 
-    // Selects a story based on the DataKey
+    // Allows user to select a story
     public Story pickStory() {
         ArrayList<Story> storyList = gameData.getStories(dataKey);
         System.out.println("\nPick a story to read:");
         for (int i = 0; i < storyList.size(); i++) {
-            System.out.println("\n" + (i + 1) + ". " + storyList.get(i).getTitle());
+            System.out.println((i + 1) + ". " + storyList.get(i).getTitle());
         }
 
         Scanner keyboard = new Scanner(System.in);
         int choice = keyboard.nextInt();
-        return storyList.get(choice - 1);  // Selecting based on user's choice
+        return storyList.get(choice - 1);  // Select story based on user's choice
     }
 
     // Teaches words before the story starts
@@ -77,30 +77,39 @@ public class StoriesGame {
         }
     }
 
-    // Automatically asks the quiz after reading the story
-    public void askQuestion() {
-        ArrayList<Question> questionList = gameData.getQuestions(dataKey);
+    // Asks questions based on the chosen story
+    public void askQuestions(String storyTitle) {
         Scanner keyboard = new Scanner(System.in);
 
+        // Retrieve questions specifically for this story's context
+        ArrayList<Question> questionList = gameData.getQuestions(dataKey, storyTitle);
+
         for (Question question : questionList) {
-            System.out.println(question.displayQuestion());
-            Narrator.playSoundMiguel(question.getQuestionText());
-            String userAnswer = keyboard.nextLine();
-            provideFeedback(validateAnswer(userAnswer, question));
+            question.askQuestion();  // Display question text and options if applicable
+            Narrator.playSoundMiguel(question.getText());
+
+            // Handle different question types
+            switch (question.getType()) {
+                case GameData.TYPE_MULTIPLE_CHOICE:
+                    System.out.println("Enter the number of your answer:");
+                    int userChoice = keyboard.nextInt() - 1;
+                    question.provideFeedback(question.validateAnswer(userChoice));
+                    break;
+
+                case GameData.TYPE_TRUE_FALSE:
+                    System.out.println("Enter true or false:");
+                    boolean userAnswer = keyboard.nextBoolean();
+                    question.provideFeedback(question.validateAnswer(userAnswer));
+                    break;
+
+                default:
+                    System.out.println("Unsupported question type.");
+                    break;
+            }
         }
-    }
 
-    // Validates the user's answer
-    public boolean validateAnswer(String answer, Question question) {
-        return answer.equalsIgnoreCase(question.getCorrectAnswer());
-    }
-
-    // Provides feedback after each question
-    public void provideFeedback(boolean isCorrect) {
-        if (isCorrect) {
-            System.out.println("Correct!");
-        } else {
-            System.out.println("Incorrect.");
+        if (questionList.isEmpty()) {
+            System.out.println("No questions available for this story.");
         }
     }
 }

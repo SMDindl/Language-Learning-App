@@ -21,15 +21,10 @@ public class DataKey extends DataConstants {
 
     // Public static method to get the instance of DataKey or update instance if already created
     public static DataKey getInstance(String language, String gameType, String difficulty) {
-        if (instance == null) {
-            instance = new DataKey(language, gameType, difficulty); 
-        }
-        instance.setLanguage(language);
-        instance.setGameType(gameType);
-        instance.setDifficulty(difficulty);
-        return instance; 
+        instance = new DataKey(language, gameType, difficulty);
+        return instance;
     }
-
+    
     // Public static method to get the instance of DataKey
     public static DataKey getInstance() {
         return instance; 

@@ -10,6 +10,13 @@ public class Letter {
     private ArrayList<Word> exampleWords;
     private UUID uuid;
 
+    /**
+     * public Letter(String text, String pronunciation, ArrayList<Word> exampleWords, UUID uuid) {
+     * @param text
+     * @param pronunciation
+     * @param exampleWords
+     * @param uuid
+     */
     public Letter(String text, String pronunciation, ArrayList<Word> exampleWords, UUID uuid) {
         this.text = text;
         this.pronunciation = pronunciation;

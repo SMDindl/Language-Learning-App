@@ -14,59 +14,82 @@ public class NumbersGame {
 
     public NumbersGame() {
         this.gameData = GameData.getInstance();
-        this.dataKey = DataKey.getInstance();
+        this.dataKey = DataKey.getInstance();  // Configurable DataKey for NumbersGame
     }
 
+    /**
+     * Starts the Numbers Game, allowing the user to choose between taking a quiz or returning to the menu.
+     */
     public void startGame() {
-        System.out.println("What would you like to do?: \n1. Take a numbers quiz \n2. Return to game selection");
-        int prompt = 1;
-        if (prompt == 2) {
-            //Implement this to go back to the game selection
-        }
-
-        //User picks the number to work on
-        Word selection = pickNumber();
-        teachNumber(selection);
-        System.out.println("When you're ready for the quiz, hit the ENTER key.");
-        //keyboard.next();
-
-        askQuestion();
-    }
-
-    public Word pickNumber() {
-        System.out.println("\nWhich number from 0-9 would you like to learn?: \n");
-        ArrayList<Word> numbersList = gameData.getWords(dataKey);
-        for(int i = 0; i < numbersList.size(); i++) {
-            //Prints out all the colors
-            System.out.println((i+1) + ". " + numbersList.get(i).getWordText());
-        }
-        //User will be prompted to select a number
-        Word selection = numbersList.get(0);
-        return selection;
-    }
-
-    public void teachNumber(Word number) {
-        System.out.println(number.getWordText());
-        System.out.println(number.getWordTranslation());
-    }
-
-    public void askQuestion() {
         Scanner keyboard = new Scanner(System.in);
-        ArrayList<Question> questionList = gameData.getQuestions(dataKey);
-        for (int i = 0; i < questionList.size(); i++) {
-            System.out.println(questionList.get(i).displayQuestion());
-            provideFeedback(validateAnswer(keyboard.nextLine(), questionList.get(i)));
+        System.out.println("What would you like to do?: \n1. Take a numbers quiz \n2. Return to game selection");
+        int option = keyboard.nextInt();
+        if (option != 1) {
+            System.out.println("Returning to game selection...");
+            return;
         }
+
+        teachNumbers();
+        System.out.println("When you're ready for the quiz, hit the ENTER key.");
+        keyboard.nextLine();  // Clear newline buffer
+        keyboard.nextLine();  // Wait for ENTER key to proceed to the quiz
+
+        askQuestions();
     }
 
-    public boolean validateAnswer(String answer, Question question) {
-        return answer.equals(question.getCorrectAnswer());
+    /**
+     * Displays numbers and their translations, including digits if available in the `Word` data.
+     */
+    public void teachNumbers() {
+        ArrayList<Word> numbersList = gameData.getWords(dataKey);
+        System.out.println("\n--- Learning Numbers ---");
+
+        for (Word number : numbersList) {
+            String digitInfo = number.getDigit() != null ? " (" + number.getDigit() + ")" : "";
+            System.out.println(number.getWordText() + " = " + number.getWordTranslation() + digitInfo);
+        }
+        System.out.println("\n--- End of Number List ---\n");
     }
 
-    public void provideFeedback(boolean isCorrect) {
-        if (isCorrect)
-            System.out.println("Well done!");
-        else
-            System.out.println("Better luck next time");
+    /**
+     * Iterates through questions for NumbersGame and handles multiple question types.
+     */
+    public void askQuestions() {
+        ArrayList<Question> questionList = gameData.getQuestions(dataKey);
+        Scanner keyboard = new Scanner(System.in);
+
+        for (Question question : questionList) {
+            question.askQuestion();  // Display question text and options if applicable
+
+            switch (question.getType()) {
+                case GameData.TYPE_MULTIPLE_CHOICE:
+                    System.out.println("Select the correct option (e.g., 1, 2):");
+                    int userChoice = keyboard.nextInt() - 1;
+                    question.provideFeedback(question.validateAnswer(userChoice));
+                    break;
+
+                case GameData.TYPE_TRUE_FALSE:
+                    System.out.println("Enter true or false:");
+                    boolean userAnswer = keyboard.nextBoolean();
+                    question.provideFeedback(question.validateAnswer(userAnswer));
+                    break;
+
+                case GameData.TYPE_FILL_IN_THE_BLANK:
+                    System.out.println("Fill in the blank:");
+                    String userText = keyboard.next();
+                    question.provideFeedback(question.validateAnswer(userText));
+                    break;
+
+                case GameData.TYPE_MATCHING:
+                    System.out.println("Match the number with its translation (e.g., '1-uno, 2-dos'):");
+                    String userMatchAnswer = keyboard.next();
+                    question.provideFeedback(question.validateAnswer(userMatchAnswer));
+                    break;
+
+                default:
+                    System.out.println("Unknown question type.");
+                    break;
+            }
+        }
     }
 }
