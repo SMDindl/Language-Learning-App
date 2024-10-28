@@ -1,109 +1,80 @@
 package com.languageLearner.data;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
+/**
+ * Represents a multiple-choice question in the language learning application.
+ */
 public class Question {
+    private String questionText;
+    private ArrayList<String> answers;
+    private int correctAnswerIndex;
+    private String image;
+    private DataKey dataKey;
+    private String categoryId;
+    private UUID uuid;
 
-    private String id;
-    private String type;
-    private String text;
-    private List<String> options;           // For multiple-choice and matching questions
-    private Integer correctAnswerIndex;     // Index for multiple-choice questions
-    private String correctAnswer;           // For true/false, FITB, and matching answers
-    private String context;                 // Optional context (e.g., story title or letter name)
-    private Word wordData;                  // For FITB questions involving word data
-
-    // Constructor for multiple-choice questions
-    public Question(String id, String type, String text, List<String> options, int correctAnswerIndex, String context) {
-        this.id = id != null ? id : UUID.randomUUID().toString();
-        this.type = type;
-        this.text = text;
-        this.options = options;
+    /**
+     * Constructs a Question with all fields, including optional image and categoryId.
+     *
+     * @param questionText       The text of the question.
+     * @param answers            The list of possible answers.
+     * @param correctAnswerIndex The index of the correct answer in the answers list.
+     * @param dataKey            The DataKey for the question's game type, language, and difficulty.
+     * @param categoryId         The specific category identifier (e.g., a letter or story).
+     * @param image              The image associated with the question, if any.
+     * @param uuid               The unique identifier for the question.
+     */
+    public Question(String questionText, ArrayList<String> answers, int correctAnswerIndex,
+                    DataKey dataKey, String categoryId, String image, UUID uuid) {
+        this.questionText = questionText;
+        this.answers = answers;
         this.correctAnswerIndex = correctAnswerIndex;
-        this.context = context;
-    }
-
-    // Constructor for true/false questions
-    public Question(String id, String type, String text, boolean correctAnswer, String context) {
-        this.id = id != null ? id : UUID.randomUUID().toString();
-        this.type = type;
-        this.text = text;
-        this.correctAnswer = Boolean.toString(correctAnswer);
-        this.context = context;
-    }
-
-    // Constructor for fill-in-the-blank (FITB) questions using `Word` data
-    public Question(String type, Word wordData, String context) {
-        this.id = wordData.getId().toString(); // Use UUID from Word
-        this.type = type;
-        this.wordData = wordData;
-        this.context = context;
-        generateFITBQuestion(); // Generate the FITB question dynamically
-    }
-
-    // Constructor for matching questions generated from multiple `Word` entries
-    public Question(String type, List<Word> wordsList, String context) {
-        this.id = UUID.randomUUID().toString(); // Generate unique UUID for matching
-        this.type = type;
-        this.context = context;
-        generateMatchingQuestion(wordsList); // Generate the matching question dynamically
-    }
-
-    // Generates a FITB question by removing the word from the example sentence
-    private void generateFITBQuestion() {
-        this.text = wordData.getExampleSentence().replace(wordData.getWordText(), "_____");
-        this.correctAnswer = wordData.getWordText();
-    }
-
-    // Generates a matching question by pairing text and translations from a list of `Word`
-    private void generateMatchingQuestion(List<Word> wordsList) {
-        StringBuilder questionText = new StringBuilder("Match the words with their translations:\n");
-        this.options = new ArrayList<>();
-        for (Word word : wordsList) {
-            this.options.add(word.getWordText() + " - " + word.getWordTranslation());
-            questionText.append(word.getWordText()).append(" : ").append(word.getWordTranslation()).append("\n");
-        }
-        this.text = questionText.toString();
+        this.dataKey = dataKey;
+        this.categoryId = categoryId;
+        this.image = image;
+        this.uuid = uuid;
     }
 
     /**
-     * Validates the user's answer.
+     * Constructs a Question without an image.
      *
-     * @param userAnswer the user's answer to the question
-     * @return true if the answer is correct, false otherwise
+     * @param questionText       The text of the question.
+     * @param answers            The list of possible answers.
+     * @param correctAnswerIndex The index of the correct answer in the answers list.
+     * @param dataKey            The DataKey for the question's game type, language, and difficulty.
+     * @param categoryId         The specific category identifier.
+     * @param uuid               The unique identifier for the question.
      */
-    public boolean validateAnswer(Object userAnswer) {
-        switch (type) {
-            case "multiple_choice":
-                return userAnswer instanceof Integer && correctAnswerIndex == (Integer) userAnswer;
-            case "true_false":
-            case "FITB":
-                return correctAnswer.equalsIgnoreCase(userAnswer.toString());
-            case "matching":
-                return options.contains(userAnswer);
-            default:
-                return false;
-        }
+    public Question(String questionText, ArrayList<String> answers, int correctAnswerIndex,
+                    DataKey dataKey, String categoryId, UUID uuid) {
+        this(questionText, answers, correctAnswerIndex, dataKey, categoryId, null, uuid);
     }
 
     /**
-     * Provides feedback to the user based on the correctness of their answer.
+     * Constructs a Question without a categoryId or image.
      *
-     * @param isCorrect whether the user's answer was correct
+     * @param questionText       The text of the question.
+     * @param answers            The list of possible answers.
+     * @param correctAnswerIndex The index of the correct answer in the answers list.
+     * @param dataKey            The DataKey for the question's game type, language, and difficulty.
+     * @param uuid               The unique identifier for the question.
      */
-    public void provideFeedback(boolean isCorrect) {
-        if (isCorrect) {
-            System.out.println("Correct!");
-        } else {
-            System.out.println("Incorrect. Try again.");
-        }
+    public Question(String questionText, ArrayList<String> answers, int correctAnswerIndex,
+                    DataKey dataKey, UUID uuid) {
+        this(questionText, answers, correctAnswerIndex, dataKey, null, null, uuid);
     }
 
     /**
-     * Displays the question text and options (if applicable) to the user.
+     * Constructs a Question without a dataKey, categoryId, or image.
+     *
+     * @param questionText       The text of the question.
+     * @param answers            The list of possible answers.
+     * @param correctAnswerIndex The index of the correct answer in the answers list.
+     * @param uuid               The unique identifier for the question.
      */
+<<<<<<< HEAD
     public UUID getUuid() {
         return uuid;
     }
@@ -143,14 +114,104 @@ public class Question {
                 System.out.println((i + 1) + ": " + options.get(i));
             }
         }
+=======
+    public Question(String questionText, ArrayList<String> answers, int correctAnswerIndex, UUID uuid) {
+        this(questionText, answers, correctAnswerIndex, null, null, null, uuid);
+>>>>>>> parent of cd55c2b (Merge branch 'branch-steven')
     }
 
-    // Getters for relevant attributes
-    public String getId() { return id; }
-    public String getType() { return type; }
-    public String getText() { return text; }
-    public List<String> getOptions() { return options; }
-    public Integer getCorrectAnswerIndex() { return correctAnswerIndex; }
-    public String getCorrectAnswer() { return correctAnswer; }
-    public String getContext() { return context; }
+    /**
+     * Gets the question text.
+     *
+     * @return The text of the question.
+     */
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    /**
+     * Gets the list of possible answers.
+     *
+     * @return The list of answers.
+     */
+    public ArrayList<String> getAnswers() {
+        return answers;
+    }
+
+    /**
+     * Gets the index of the correct answer in the answers list.
+     *
+     * @return The index of the correct answer.
+     */
+    public int getCorrectAnswerIndex() {
+        return correctAnswerIndex;
+    }
+
+    /**
+     * Gets the correct answer text.
+     *
+     * @return The correct answer.
+     */
+    public String getCorrectAnswer() {
+        return answers.get(correctAnswerIndex);
+    }
+
+    /**
+     * Gets the image associated with the question, if any.
+     *
+     * @return The image URL or path, or null if not available.
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * Gets the DataKey for the question, indicating language, game type, and difficulty.
+     *
+     * @return The DataKey.
+     */
+    public DataKey getDataKey() {
+        return dataKey;
+    }
+
+    /**
+     * Gets the category identifier for the question.
+     *
+     * @return The categoryId, or null if not available.
+     */
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    /**
+     * Gets the unique identifier (UUID) for the question.
+     *
+     * @return The UUID.
+     */
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    /**
+     * Validates if the provided answer index matches the correct answer.
+     *
+     * @param answerIndex The index of the user's selected answer.
+     * @return True if the answer is correct, false otherwise.
+     */
+    public boolean validateAnswer(int answerIndex) {
+        return answerIndex == correctAnswerIndex;
+    }
+
+    /**
+     * Formats and displays the question and its answers.
+     *
+     * @return The formatted question with possible answers.
+     */
+    public String displayQuestion() {
+        StringBuilder questionDisplay = new StringBuilder("\nQuestion: " + questionText + "\nAnswers:\n");
+        for (int i = 0; i < answers.size(); i++) {
+            questionDisplay.append(i + 1).append(". ").append(answers.get(i)).append("\n");
+        }
+        return questionDisplay.toString();
+    }
 }

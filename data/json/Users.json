@@ -10,10 +10,34 @@
                         "filipino-easy-colorsGame"
                     ],
                     "missedQuestions": [
-                        "uuid-1",
-                        "uuid-2",
-                        "uuid-3"
+                        {
+                            "dataKey": "filipino-easy-colorsGame",
+                            "questionUUID": "some-uuid-1"
+                        },
+                        {
+                            "dataKey": "filipino-easy-numbersGame",
+                            "questionUUID": "some-uuid-1-1"
+                        }
+                    ],
+                    "missedMatching": [
+                        {
+                            "dataKey": "filipino-medium-numbersGame",
+                            "questionUUID": "some-uuid-2"
+                        }
+                    ],
+                    "missedFITB": [
+                        {
+                            "dataKey": "filipino-hard-storiesGame",
+                            "questionUUID": "some-uuid-3"
+                        }
                     ]
+                },
+                {
+                    "language": "",
+                    "completedGames": [],
+                    "missedQuestions": [],
+                    "missedMatching": [],
+                    "missedFITB": []
                 }
             ]
         }

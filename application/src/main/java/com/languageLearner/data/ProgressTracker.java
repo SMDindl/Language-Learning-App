@@ -3,7 +3,7 @@ package com.languageLearner.data;
 import java.util.ArrayList;
 
 public class ProgressTracker {
-    
+
     private String language;
     private ArrayList<DataKey> completedGames;
     private ArrayList<MissedQuestion> missedQuestions; // Multiple choice or t/f
@@ -26,38 +26,55 @@ public class ProgressTracker {
 
     public void addMissedMatching(MissedQuestion question) {
         missedMatching.add(question);
+<<<<<<< HEAD
+=======
     }
 
-    public ArrayList<DataKey> getCompletedGames() {
-        return completedGames;
+    public void addMissedFITB(MissedQuestion question) {
+        missedFITB.add(question);
     }
 
-    public ArrayList<String> getMissedQuestions() {
+    // Methods to remove missed questions
+    public void removeMissedQuestion(MissedQuestion question) {
+        missedQuestions.remove(question);
+    }
+
+    public void removeMissedMatching(MissedQuestion question) {
+        missedMatching.remove(question);
+    }
+
+    public void removeMissedFITB(MissedQuestion question) {
+        missedFITB.remove(question);
+    }
+
+    // Retrieve all missed questions of each type
+    public ArrayList<MissedQuestion> getMissedQuestions() {
         return missedQuestions;
     }
 
-    /**
-     * Adds a game to the list of completed games if it's not already there.
-     */
-    public void addCompletedGame(DataKey game) {
-        if (!completedGames.contains(game)) {
-            completedGames.add(game);
+    public ArrayList<MissedQuestion> getMissedMatching() {
+        return missedMatching;
+    }
+
+    public ArrayList<MissedQuestion> getMissedFITB() {
+        return missedFITB;
+    }
+
+    // Getter for language
+    public String getLanguage() {
+        return language;
+>>>>>>> parent of cd55c2b (Merge branch 'branch-steven')
+    }
+
+    // Method to add a completed game
+    public void addCompletedGame(DataKey key) {
+        if (!completedGames.contains(key)) {
+            completedGames.add(key);
         }
     }
 
-    /**
-     * Adds a question to the list of missed questions if it's not already there.
-     */
-    public void addMissedQuestion(String questionUUID) {
-        if (!missedQuestions.contains(questionUUID)) {
-            missedQuestions.add(questionUUID);
-        }
-    }
-
-    /**
-     * Removes a question from the list of missed questions if it exists.
-     */
-    public void removeMissedQuestion(String questionUUID) {
-        missedQuestions.remove(questionUUID);
+    // Method to retrieve all completed games
+    public ArrayList<DataKey> getCompletedGames() {
+        return completedGames;
     }
 }

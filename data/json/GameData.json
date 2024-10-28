@@ -187,8 +187,7 @@
                                 "text": "Anong bagay ang nagsisimula sa H?",
                                 "englishText": "What item starts with H?",
                                 "choices": ["Hangin", "Sinigang", "Timpla", "Kutsara"],
-                                "correctChoiceIndex": 0,
-                                "context": "H"
+                                "correctChoiceIndex": 0
                             },
                             {
                                 "text": "Anong hayop ang may H?",
@@ -765,18 +764,6 @@
                         "englishText": "What color is the leaf?",
                         "choices": ["Berde", "Pula", "Dilaw", "Itim"],
                         "correctChoiceIndex": 0
-                    },
-                    {
-                        "text": "Asul ang langit.",
-                        "englishText": "The sky is blue.",
-                        "isTrueFalse": true,
-                        "answer": true
-                    },
-                    {
-                        "text": "Pula ang pusa.",
-                        "englishText": "The cat is red.",
-                        "isTrueFalse": true,
-                        "answer": false
                     }
                 ]
             },
@@ -831,18 +818,6 @@
                         "englishText": "What color are the grapes?",
                         "choices": ["Lila", "Asul", "Dilaw", "Puting"],
                         "correctChoiceIndex": 0
-                    },
-                    {
-                        "text": "Kahel ang prutas.",
-                        "englishText": "The fruit is orange.",
-                        "isTrueFalse": true,
-                        "answer": true
-                    },
-                    {
-                        "text": "Abo ang bulaklak.",
-                        "englishText": "The flower is gray.",
-                        "isTrueFalse": true,
-                        "answer": false
                     }
                 ]
             },
@@ -897,152 +872,159 @@
                         "englishText": "What color is the ocean?",
                         "choices": ["Bughaw", "Asul", "Dilaw", "Puting"],
                         "correctChoiceIndex": 0
-                    },
-                    {
-                        "text": "Bughaw ang karagatan.",
-                        "englishText": "The ocean is deep blue.",
-                        "isTrueFalse": true,
-                        "answer": true
-                    },
-                    {
-                        "text": "Ginto ang mga dahon.",
-                        "englishText": "The leaves are gold.",
-                        "isTrueFalse": true,
-                        "answer": false
                     }
                 ]
             }
         },
         "numbersGame": {
             "easy": {
-                "words": [
+                "numbers": [
                     {
-                        "number": "1",
+                        "digit": "1",
                         "text": "Isa",
                         "englishText": "One",
                         "sentence": "Mayroong isang bola sa mesa.",
                         "englishSentence": "There is one ball on the table."
                     },
                     {
-                        "number": "2",
+                        "digit": "2",
                         "text": "Dalawa",
                         "englishText": "Two",
                         "sentence": "May dalawang aso sa labas.",
                         "englishSentence": "There are two dogs outside."
                     },
                     {
-                        "number": "3",
+                        "digit": "3",
                         "text": "Tatlo",
                         "englishText": "Three",
                         "sentence": "Tatlong bata ang naglalaro.",
                         "englishSentence": "Three children are playing."
                     },
                     {
-                        "number": "4",
+                        "digit": "4",
                         "text": "Apat",
                         "englishText": "Four",
                         "sentence": "Apat na mangga ang nasa basket.",
                         "englishSentence": "There are four mangoes in the basket."
                     },
                     {
-                        "number": "5",
+                        "digit": "5",
                         "text": "Lima",
                         "englishText": "Five",
                         "sentence": "May limang aklat sa lamesa.",
                         "englishSentence": "There are five books on the table."
                     },
                     {
-                        "number": "6",
+                        "digit": "6",
                         "text": "Anim",
                         "englishText": "Six",
                         "sentence": "Anim na itlog ang nasa plato.",
                         "englishSentence": "There are six eggs on the plate."
                     },
                     {
-                        "number": "7",
+                        "digit": "7",
                         "text": "Pito",
                         "englishText": "Seven",
                         "sentence": "May pitong upuan sa silid.",
                         "englishSentence": "There are seven chairs in the room."
                     },
                     {
-                        "number": "8",
+                        "digit": "8",
                         "text": "Walo",
                         "englishText": "Eight",
                         "sentence": "Mayroong walong ibon sa puno.",
                         "englishSentence": "There are eight birds in the tree."
                     },
                     {
-                        "number": "9",
+                        "digit": "9",
                         "text": "Siyam",
                         "englishText": "Nine",
                         "sentence": "Siyam na halaman ang nasa hardin.",
                         "englishSentence": "There are nine plants in the garden."
                     },
                     {
-                        "number": "10",
+                        "digit": "10",
                         "text": "Sampu",
                         "englishText": "Ten",
                         "sentence": "Mayroong sampung tao sa klase.",
                         "englishSentence": "There are ten people in the class."
                     }
+                ],
+                "matching": [
+                    { "filipino": "isa", "english": "one", "uuid": "f41bcc57-5f89-4d5d-a1a3-3029f1a60185"},
+                    { "filipino": "dalawa", "english": "two", "uuid": "2a3dca32-3bad-48fb-9f8f-fc491237e1df"},
+                    { "filipino": "tatlo", "english": "three", "uuid": "b84e4194-543b-40b1-9dc1-b956b140a75a"}
                 ]
             },
             "medium": {
-                "words": [
+                "numbers": [
                     {
-                        "number": "11",
+                        "digit": "11",
                         "text": "Labing-isa",
                         "englishText": "Eleven",
                         "sentence": "May labing-isang bulaklak sa vase.",
                         "englishSentence": "There are eleven flowers in the vase."
                     },
                     {
-                        "number": "12",
+                        "digit": "12",
                         "text": "Labindalawa",
                         "englishText": "Twelve",
                         "sentence": "May labing-dalawang prutas sa basket.",
                         "englishSentence": "There are twelve fruits in the basket."
                     },
                     {
-                        "number": "20",
+                        "digit": "20",
                         "text": "Bente",
                         "englishText": "Twenty",
                         "sentence": "May bente na tao sa parke.",
                         "englishSentence": "There are twenty people in the park."
                     },
                     {
-                        "number": "100",
+                        "digit": "100",
                         "text": "Isang daan",
                         "englishText": "One Hundred",
                         "sentence": "May isang daan na mga libro.",
                         "englishSentence": "There are one hundred books."
                     }
+                ],
+                "matching": [
+                    { "filipino": "apat", "english": "four", "uuid": "e3fc6d91-ff8e-4a73-b13e-5f450c115e42"},
+                    { "filipino": "lima", "english": "five",  "uuid": "f43a939d-bdf5-4a10-aae8-84de692190bd"},
+                    { "filipino": "anim", "english": "six", "uuid": "8871e9b9-6015-4f99-b090-83f8fb54be4a"},
+                    { "filipino": "pito", "english": "seven", "uuid": "c8f4d1fe-edef-44c7-adf6-e9653dfeba24"},
+                    { "filipino": "walo", "english": "eight", "uuid": "49cc1058-2918-4f0e-992c-84bcfc7de207" }
                 ]
             },
             "hard": {
-                "words": [
+                "numbers": [
                     {
-                        "number": "500",
+                        "digit": "500",
                         "text": "Limang daan",
                         "englishText": "Five Hundred",
                         "sentence": "May limang daan na piso.",
                         "englishSentence": "There are five hundred pesos."
                     },
                     {
-                        "number": "1000",
+                        "digit": "1000",
                         "text": "Isang libo",
                         "englishText": "One Thousand",
                         "sentence": "May isang libo na mga piso.",
                         "englishSentence": "There are one thousand pesos."
                     },
                     {
-                        "number": "5000",
+                        "digit": "5000",
                         "text": "Limang libo",
                         "englishText": "Five Thousand",
                         "sentence": "May limang libo na mga piso.",
                         "englishSentence": "There are five thousand pesos."
                     }
+                ],
+                "matching": [
+                    { "filipino": "siyam", "english": "nine", "uuid": "519afb47-7a48-4f94-b001-692644f7b2c8" },
+                    { "filipino": "sampu", "english": "ten", "uuid": "c8f4d1fe-edef-44c7-adf6-e9653dfeba24" },
+                    { "filipino": "labing-isa", "english": "eleven", "uuid": "4253d313-d1c0-40f3-b1c3-8b91c42f4ea2" },
+                    { "filipino": "labindalawa", "english": "twelve", "uuid": "4903fd7d-eb0d-4a66-9eff-6d0c5c6ffb4d" },
+                    { "filipino": "labing-tatlo", "english": "thirteen", "uuid": "793a6b80-a66f-4199-8592-c5762f50a811"}
                 ]
             }
         },
@@ -1390,13 +1372,13 @@
                             "english-title": "The Tortoise and the Hare",
                             "pages": [
                                 {
-                                    "pageNumber": "0",
+                                    "pageNumber": 0,
                                     "text": "Ang Pagong at ang Kuneho",
                                     "english-text": "The Tortoise and the Hare",
                                     "image": "title.png"
                                 },
                                 {
-                                    "pageNumber": "1",
+                                    "pageNumber": 1,
                                     "text": "Isang araw, nagyayabang ang isang kuneho tungkol sa kaniyang bilis.",
                                     "english-text": "One day, a hare was boasting about his speed.",
                                     "image": "page1.png"
