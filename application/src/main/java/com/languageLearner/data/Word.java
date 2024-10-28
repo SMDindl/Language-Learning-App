@@ -45,6 +45,10 @@ public class Word {
         return sentenceTranslation; 
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Word: " + wordText +

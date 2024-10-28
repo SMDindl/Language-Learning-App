@@ -68,6 +68,19 @@ public class User {
         return progressTrackers;
     }
 
+    // Method to retrieve or create a ProgressTracker for a given DataKey's language
+    public ProgressTracker getProgressTrackerByDataKey(DataKey dataKey) {
+        for (ProgressTracker tracker : progressTrackers) {
+            if (tracker.getLanguage().equals(dataKey.getLanguage())) {
+                return tracker;
+            }
+        }
+        // If no tracker exists for the language, create a new one
+        ProgressTracker newTracker = new ProgressTracker(dataKey.getLanguage());
+        progressTrackers.add(newTracker);
+        return newTracker;
+    }
+
     /**
      * Adds or updates a progress tracker for the given language and list of completed games (using DataKey).
      * If a tracker for the language exists, it updates it, otherwise, it creates a new one.

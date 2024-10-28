@@ -89,19 +89,19 @@ public class LanguageLearningApplication extends DataConstants {
         this.currentUser = currentUser;
     }
 
-    // STUB: Update the user's preferred language
-    public void updateLanguage(String language) {
-        // STUB: Implement logic to update the user's preferred language
-    }
+    // // STUB: Update the user's preferred language
+    // public void updateLanguage(String language) {
+    //     // STUB: Implement logic to update the user's preferred language
+    // }
 
-    // STUB: Update the user's selected difficulty
-    public void updateDifficulty(String difficulty) {
-        // STUB: Implement logic to update the user's selected difficulty
-    }
+    // // STUB: Update the user's selected difficulty
+    // public void updateDifficulty(String difficulty) {
+    //     // STUB: Implement logic to update the user's selected difficulty
+    // }
 
-    // STUB: Update the game type the user is playing
-    public void updateGameType(String gameType) {
-        // STUB: Implement logic to update the game type
-    }
+    // // STUB: Update the game type the user is playing
+    // public void updateGameType(String gameType) {
+    //     // STUB: Implement logic to update the game type
+    // }
 
 }
