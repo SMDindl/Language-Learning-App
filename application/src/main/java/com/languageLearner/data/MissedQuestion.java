@@ -1,19 +1,17 @@
 package com.languageLearner.data;
 
-import java.util.UUID;
-
 public class MissedQuestion {
     
     private DataKey dataKey;  
-    private UUID uuid;      
+    private String uuid;      
 
     // Constructor
-    public MissedQuestion(DataKey dataKey, UUID uuid) {
+    public MissedQuestion(DataKey dataKey, String uuid) {
         this.dataKey = dataKey;
         this.uuid = uuid;
     }
 
-    public UUID getQuestionUUID() {
+    public String getQuestionUUID() {
         return uuid;
     }
 
