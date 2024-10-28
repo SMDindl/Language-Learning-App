@@ -1,16 +1,16 @@
 package com.languageLearner.data;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Letter {
     
     private String text;
     private String pronunciation;
-    private List<String> exampleWords;
+    private ArrayList<Word> exampleWords;
     private UUID uuid;
 
-    public Letter(String text, String pronunciation, List<String> exampleWords, UUID uuid) {
+    public Letter(String text, String pronunciation, ArrayList<Word> exampleWords, UUID uuid) {
         this.text = text;
         this.pronunciation = pronunciation;
         this.exampleWords = exampleWords;
@@ -26,7 +26,7 @@ public class Letter {
         return pronunciation;
     }
 
-    public List<String> getExampleWords() {
+    public ArrayList<Word> getExampleWords() {
         return exampleWords;
     }
 

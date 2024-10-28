@@ -305,7 +305,6 @@ public class DataLoader extends DataConstants {
                     text,
                     pronunciation,
                     exampleWordsList,
-                    image,
                     uuid  // Pass the generated UUID
                 ));
             }
