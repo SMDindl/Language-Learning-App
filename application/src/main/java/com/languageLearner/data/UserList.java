@@ -67,10 +67,13 @@ public class UserList {
     // User login
     public User login(String email, String password) {
         for (User user : users) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+            System.out.println("Checking user: " + user.getEmail());
+            if (user.getEmail().equalsIgnoreCase(email) && user.getPassword().equals(password)) {
+                System.out.println("Login successful for user: " + user.getUsername());
                 return user; // Successful login
             }
         }
+        System.out.println("Login failed: No matching user found for email " + email);
         return null; // Login failed
     }
 

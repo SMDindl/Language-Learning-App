@@ -2,6 +2,7 @@ package com.languageLearner.data;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.json.simple.JSONArray;
@@ -15,10 +16,8 @@ import org.json.simple.parser.JSONParser;
 public class DataLoader extends DataConstants {
 
     private GameData gameData = GameData.getInstance();
-    private DataKey dataKey = DataKey.getInstance();
-
-    /** Constructor for DataLoader. */
-    public DataLoader() {}
+    private HashMap<UUID, Question> questionsUUIDMap = new HashMap<>(); // To store questions by UUID
+    private HashMap<UUID, Word> wordsUUIDMap = new HashMap<>(); // To store words by UUID
 
     /**
      * Loads game data from the JSON file specified by GAME_DATA_FILE.
@@ -40,85 +39,101 @@ public class DataLoader extends DataConstants {
     public void loadUsers() {
         UserList userList = UserList.getInstance();
         userList.clearUsers();
-
+    
         try (FileReader reader = new FileReader(USER_FILE)) {
             JSONParser parser = new JSONParser();
             JSONObject jsonData = (JSONObject) parser.parse(reader);
-
             JSONArray usersArray = (JSONArray) jsonData.get(USERS);
+            
             for (Object userObj : usersArray) {
                 JSONObject userJSON = (JSONObject) userObj;
-
-                UUID uuid = parseUUID((String) userJSON.get(USER_ID));
-                if (uuid == null) continue;
-
-                User user = new User(
-                    (String) userJSON.get(EMAIL),
-                    (String) userJSON.get(USERNAME),
-                    (String) userJSON.get(DISPLAY_NAME),
-                    (String) userJSON.get(PASSWORD),
-                    uuid
-                );
-
+                String email = (String) userJSON.get(EMAIL);
+                String username = (String) userJSON.get(USERNAME);
+                String displayName = (String) userJSON.get(DISPLAY_NAME);
+                String password = (String) userJSON.get(PASSWORD);
+                String uuidStr = (String) userJSON.get(USER_ID);
+                
+                // Validation
+                if (email == null || username == null || displayName == null || password == null || uuidStr == null) {
+                    System.err.println("Skipping user with missing fields: " + userJSON);
+                    continue; 
+                }
+                
+                UUID uuid = UUID.fromString(uuidStr);
+                User user = new User(email, username, displayName, password, uuid);
                 JSONArray trackersArray = (JSONArray) userJSON.get(PROGRESS_TRACKERS);
-                if (trackersArray != null) {
-                    for (Object trackerObj : trackersArray) {
-                        JSONObject trackerJSON = (JSONObject) trackerObj;
-                        ProgressTracker tracker = new ProgressTracker((String) trackerJSON.get(LANGUAGE));
-
-                        JSONArray completedGamesArray = (JSONArray) trackerJSON.get(COMPLETED_GAMES);
-                        if (completedGamesArray != null) {
-                            for (Object gameObj : completedGamesArray) {
-                                String[] gameKeyParts = gameObj.toString().split("-");
-                                if (gameKeyParts.length == 3) {
-                                    String lang = gameKeyParts[0];
-                                    String difficulty = gameKeyParts[1];
-                                    String gameType = gameKeyParts[2];
-
-                                    DataKey gameKey = DataKey.getInstance(lang, gameType, difficulty);
-                                    tracker.addCompletedGame(gameKey);
-                                } else {
-                                    System.err.println("Invalid game key format: " + gameObj.toString());
+                
+                for (Object trackerObj : trackersArray) {
+                    JSONObject trackerJSON = (JSONObject) trackerObj;
+                    String language = (String) trackerJSON.get(LANGUAGE);
+                    ProgressTracker tracker = new ProgressTracker(language);
+                    
+                    // Load completed games
+                    JSONArray completedGamesArray = (JSONArray) trackerJSON.get(COMPLETED_GAMES);
+                    for (Object game : completedGamesArray) {
+                        tracker.addCompletedGame(DataKey.fromString((String) game));
+                    }
+    
+                    // Load missed questions
+                    JSONArray missedQuestionsArray = (JSONArray) trackerJSON.get("missedQuestions");
+                    for (Object missedObj : missedQuestionsArray) {
+                        JSONObject missedJSON = (JSONObject) missedObj;
+                        String questionUUID = (String) missedJSON.get("questionUUID");
+    
+                        // Check if it's a matching question
+                        if (missedJSON.containsKey("wordUUIDs")) {
+                            ArrayList<UUID> wordUUIDs = new ArrayList<>();
+                            JSONArray wordUUIDsArray = (JSONArray) missedJSON.get("wordUUIDs");
+                            for (Object wordUUIDObj : wordUUIDsArray) {
+                                UUID wordUUID = UUID.fromString((String) wordUUIDObj);
+                                // Retrieve the corresponding word from the map
+                                Word word = wordsUUIDMap.get(wordUUID);
+                                if (word != null) {
+                                    wordUUIDs.add(wordUUID); // Store the UUIDs
+                                }
+                            }
+                            // Create a new question for matching using the retrieved words
+                            ArrayList<Word> words = new ArrayList<>();
+                            for (UUID wordUUID : wordUUIDs) {
+                               words.add(wordsUUIDMap.get(wordUUID));
+                            }
+                            Question matchingQuestion = new Question("matching_question", words);
+                            tracker.addMissedQuestion(matchingQuestion);
+                        } else {
+                            // For other question types, check UUID maps
+                            UUID qUUID = UUID.fromString(questionUUID);
+                            
+                            // Check in questionsUUIDMap first
+                            Question question = questionsUUIDMap.get(qUUID);
+                            if (question != null) {
+                                tracker.addMissedQuestion(question);
+                            } else {
+                                // If not found, check in wordsUUIDMap for FITB
+                                Word word = wordsUUIDMap.get(qUUID);
+                                if (word != null) {
+                                    // Create a new FITB question using the word UUID
+                                    word.getWordText();
+                                    Question fitbQuestion = new Question("FITB", word, null);
+                                    tracker.addMissedQuestion(fitbQuestion);
                                 }
                             }
                         }
-                        loadMissedQuestions(tracker, trackerJSON);
-                        user.addProgressTracker(tracker);
                     }
+    
+                    user.addProgressTracker(tracker);
                 }
+    
                 userList.addUser(user);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    private void loadMissedQuestions(ProgressTracker tracker, JSONObject trackerJSON) {
-        JSONArray missedQuestionsArray = (JSONArray) trackerJSON.get("missedQuestions");
-        if (missedQuestionsArray != null) {
-            for (Object missedObj : missedQuestionsArray) {
-                JSONObject missedJSON = (JSONObject) missedObj;
-                String questionUUID = (String) missedJSON.get(USER_ID);
-                if (questionUUID != null) {
-                    tracker.addMissedQuestion(UUID.fromString(questionUUID));
-                }
-            }
-        }
-    }
-
-    private UUID parseUUID(String uuidStr) {
-        try {
-            return UUID.fromString(uuidStr);
-        } catch (IllegalArgumentException | NullPointerException e) {
-            System.err.println("Invalid or null UUID: " + uuidStr);
-            return null;
-        }
-    }
+    
 
     private void loadLanguages(JSONObject jsonObject) {
         for (Object languageKey : jsonObject.keySet()) {
             String language = (String) languageKey;
-            // dataKey.setLanguage(language);
             JSONObject games = (JSONObject) jsonObject.get(language);
             loadGameTypes(games, language);
         }
@@ -127,7 +142,6 @@ public class DataLoader extends DataConstants {
     private void loadGameTypes(JSONObject games, String language) {
         for (Object gameTypeKey : games.keySet()) {
             String gameType = (String) gameTypeKey;
-            // dataKey.setGameType(gameType);
             JSONObject difficulties = (JSONObject) games.get(gameType);
             loadDifficulties(difficulties, language, gameType);
         }
@@ -136,7 +150,6 @@ public class DataLoader extends DataConstants {
     private void loadDifficulties(JSONObject difficulties, String language, String gameType) {
         for (Object difficultyKey : difficulties.keySet()) {
             String difficulty = (String) difficultyKey;
-            // dataKey.setDifficulty(difficulty);
             JSONObject gameDataJSON = (JSONObject) difficulties.get(difficulty);
 
             DataKey dataKey = DataKey.getInstance(language, gameType, difficulty);
@@ -159,7 +172,7 @@ public class DataLoader extends DataConstants {
         }
     }
 
-    /**
+     /**
      * Processes word entries within the game data JSON object.
      *
      * @param gameDataJSON JSON object containing game data.
@@ -193,6 +206,7 @@ public class DataLoader extends DataConstants {
     
                 // Add constructed word to the words list
                 wordsList.add(word);
+                wordsUUIDMap.put(word.getId(), word); // Used for dataLoading missed questions
             }
         }
     }
@@ -207,30 +221,43 @@ public class DataLoader extends DataConstants {
                 String questionText = (String) questionJSON.get(TEXT);
                 String context = questionJSON.containsKey(CONTEXT) ? (String) questionJSON.get(CONTEXT) : null;
 
-                if (questionJSON.containsKey(CHOICES)) {
+                if (questionJSON.containsKey(CHOICES)) { // Create mutiple choice question
+
                     int correctAnswerIndex = Math.toIntExact((long) questionJSON.get(CORRECT_CHOICE_INDEX));
                     ArrayList<String> choices = new ArrayList<>();
                     JSONArray choicesArray = (JSONArray) questionJSON.get(CHOICES);
                     for (Object choice : choicesArray) {
                         choices.add((String) choice);
                     }
-                    questionsList.add(new Question(
+                    Question question = new Question(
                         uuid,
                         "multiple_choice",
                         questionText,
                         choices,
                         correctAnswerIndex,
                         context
-                    ));
-                } else if (questionJSON.containsKey(CORRECT_ANSWER)) {
+                    );
+                    // Add to the list (which will create the GameData hashmap)
+                    questionsList.add(question);
+
+                    // Add to the mash (which is used to manage missed questions)
+                    questionsUUIDMap.put(question.getId(), question); 
+            
+                } else if (questionJSON.containsKey(CORRECT_ANSWER)) {  // Create true/false question
+
                     boolean correctAnswer = (boolean) questionJSON.get(CORRECT_ANSWER);
-                    questionsList.add(new Question(
+                    Question question = new Question(
                         uuid,
                         "true_false",
                         questionText,
                         correctAnswer,
                         context
-                    ));
+                    );
+                    // Add to the list (which will create the GameData hashmap)
+                    questionsList.add(question);
+
+                    // Add to the mash (which is used to manage missed questions)
+                    questionsUUIDMap.put(question.getId(), question); 
                 }
             }
         }

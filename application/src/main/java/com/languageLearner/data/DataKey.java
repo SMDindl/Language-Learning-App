@@ -65,6 +65,17 @@ public class DataKey extends DataConstants {
         this.gameType = gameType;
     }
 
+    public static DataKey fromString(String dataKeyString) {
+        String[] parts = dataKeyString.split("-");
+        if (parts.length == 3) {
+            String language = parts[0];
+            String gameType = parts[1];
+            String difficulty = parts[2];
+            return new DataKey(language, gameType, difficulty);
+        }
+        return null; // Or throw an exception
+    }
+
     // Override equals and hashCode for proper functionality in collections
     @Override
     public boolean equals(Object obj) {
@@ -75,7 +86,7 @@ public class DataKey extends DataConstants {
         return Objects.equals(language, dataKey.language) && 
                Objects.equals(gameType, dataKey.gameType) && 
                Objects.equals(difficulty, dataKey.difficulty);
-    }
+    }   
 
     @Override
     public int hashCode() {

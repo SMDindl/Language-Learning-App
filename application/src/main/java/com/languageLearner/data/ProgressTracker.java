@@ -1,13 +1,19 @@
 package com.languageLearner.data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
+/**
+ * Tracks a user's progress in a specific language, including completed games and missed questions.
+ */
 public class ProgressTracker {
 
     private String language;
-    private ArrayList<DataKey> completedGames;
-    private ArrayList<UUID> missedQuestions;
+    private List<DataKey> completedGames;
+    private ArrayList<Question> missedQuestions;
+    private HashMap<UUID, ArrayList<UUID>> matchingWords = new HashMap<>(); // Populated from user list of missed questions
 
     public ProgressTracker(String language) {
         this.language = language;
@@ -15,41 +21,31 @@ public class ProgressTracker {
         this.missedQuestions = new ArrayList<>();
     }
 
-    public ProgressTracker(String language, ArrayList<DataKey> completedGames) {
-        this.language = language;
-        this.completedGames = completedGames;
-        this.missedQuestions = new ArrayList<>();
+    public String getLanguage() {
+        return language;
     }
 
-    public void addCompletedGame(DataKey game) { 
+    public List<DataKey> getCompletedGames() {
+        return completedGames;
+    }
+
+    public List<Question> getMissedQuestions() {
+        return missedQuestions;
+    }
+
+    public void addCompletedGame(DataKey game) {
         if (!completedGames.contains(game)) {
             completedGames.add(game);
         }
     }
 
-    public void addMissedQuestion(UUID questionId) {
-        if (!missedQuestions.contains(questionId)) {
-            missedQuestions.add(questionId);
+    public void addMissedQuestion(Question question) {
+        if (!missedQuestions.contains(question)) {
+            missedQuestions.add(question);
         }
     }
 
-    public void removeMissedQuestion(UUID questionId) {
-        if (missedQuestions.contains(questionId)) {
-            missedQuestions.remove(questionId);
-        }
+    public void removeMissedQuestion(Question question) {
+        missedQuestions.remove(question);
     }
-
-    // Getters
-    public ArrayList<DataKey> getCompletedGames() {
-        return completedGames;
-    }
-
-    public ArrayList<UUID> getMissedQuestions() {
-        return missedQuestions;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
 }

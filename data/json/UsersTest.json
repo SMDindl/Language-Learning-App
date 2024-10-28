@@ -1,34 +1,58 @@
 {
     "users": [
         {
-            "password": "blahpassword",
-            "displayName": "blag",
-            "progressTrackers": [
-                
-            ],
-            "uuid": "14d5d139-a2a5-47ac-a3c3-60256af6a1f8",
-            "email": "blahbalh@gmail.com",
-            "username": "blahguyuser"
-        },
-        {
-            "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
-            "username": "sdindl",
-            "email": "sdindl@sc.email.edu",
-            "displayName": "Steven",
             "password": "Password2024",
+            "displayName": "Steven",
             "progressTrackers": [
                 {
                     "language": "filipino",
                     "completedGames": [
-                        "filipino-easy-colorsGame",
-                        "filipino-medium-storiesGame"
+                        "filipino-alphabetGame-easy"
+                    ],
+                    "missedQuestions": [
+                        
                     ]
-                },
-                {
-                    "language": "",
-                    "completedGames": []
                 }
-            ]
+            ],
+            "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
+            "email": "sdindl@email.sc.edu",
+            "username": "sdindl"
+        },
+        {
+            "password": "Password123",
+            "displayName": "Tim",
+            "progressTrackers": [
+                {
+                    "language": "filipino",
+                    "completedGames": [
+                        
+                    ],
+                    "missedQuestions": [
+                        
+                    ]
+                }
+            ],
+            "uuid": "b5e4f8a2-88bb-4723-93e4-78456f3c54a9",
+            "email": "ttomacka@email.com",
+            "username": "ttomacka"
+        },
+        {
+            "password": "TammyPassword1",
+            "displayName": "Tammy",
+            "progressTrackers": [
+                {
+                    "language": "filipino",
+                    "completedGames": [
+                        
+                    ],
+                    "missedQuestions": [
+                        
+                    ]
+                }
+            ],
+            "uuid": "d1a4f9b1-bc7d-48f8-a90b-28edbf90d5b5",
+            "email": "tammy@email.com",
+            "username": "ttammy"
         }
     ]
 }

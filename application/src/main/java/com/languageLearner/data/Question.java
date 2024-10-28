@@ -15,6 +15,7 @@ public class Question {
     private String correctAnswer;           // For true/false and FITB answers
     private String context;                 // Optional context (e.g., story title or letter name)
     private Word wordData;                  // For FITB questions involving word data
+    private List<UUID> wordUUIDs;           // UUIDs of words for matching questions
 
     // Constructor for multiple-choice questions
     public Question(UUID id, String type, String text, List<String> options, int correctAnswerIndex, String context) {
@@ -44,12 +45,51 @@ public class Question {
         generateFITBQuestion(); // Generate the FITB question dynamically
     }
 
-    // Constructor for matching questions generated from multiple `Word` entries
+    /**
+     * Constructor for matching questions generating matching question
+     * @param type
+     * @param wordsList
+     * @param context
+     */
     public Question(String type, List<Word> wordsList, String context) {
         this.id = UUID.randomUUID(); // Generate unique UUID for matching
         this.type = type;
         this.context = context;
+        // this.wordUUIDs = new ArrayList<>(); // Initialize the list of word UUIDs for tracking
         generateMatchingQuestion(wordsList); // Generate the matching question dynamically
+    }
+
+    /**
+     *  Constructor for loading matching questions from stored UUIDs
+     * 
+     * @param type
+     * @param wordUUIDs
+     */
+    public Question(String type, ArrayList<Word> words) {
+        this.id = UUID.randomUUID(); // Generate unique UUID for the matching question
+        this.type = type;
+        generateMatchingQuestion(words); // Generate the matching question dynamically
+    }
+
+    /**
+     * Constructor for a matching question (DataWriting)
+     * @param type
+     * @param id
+     */
+    public Question(String type, UUID id) {
+        this.type = type;
+        this.id = id != null ? id : UUID.randomUUID();
+        this.wordUUIDs = new ArrayList<>();
+        // Set up other properties as needed
+    }
+
+    // Method to add a word UUID
+    public void addWordUUID(UUID wordUUID) {
+        this.wordUUIDs.add(wordUUID);
+    }
+
+    public void setWordUUIDs(UUID wordUUID) {
+        
     }
 
     // Generates a FITB question by removing the word from the example sentence
@@ -78,7 +118,7 @@ public class Question {
     public void setOptions(List<String> wordTexts, List<String> translations) {
         this.options = new ArrayList<>();
         StringBuilder questionText = new StringBuilder("Match the words with their translations:\n");
-        for (int i = 0; i < wordTexts.size(); i++) {
+        for (int i = 0; i < wordTexts.size()+1; i++) {
             this.options.add(wordTexts.get(i) + " - " + translations.get(i));
             questionText.append(wordTexts.get(i)).append(" : ").append(translations.get(i)).append("\n");
         }
@@ -150,5 +190,5 @@ public class Question {
     public Integer getCorrectAnswerIndex() { return correctAnswerIndex; }
     public String getCorrectAnswer() { return correctAnswer; }
     public String getContext() { return context; }
-
+    public List<UUID> getWordUUIDs() { return wordUUIDs; } 
 }

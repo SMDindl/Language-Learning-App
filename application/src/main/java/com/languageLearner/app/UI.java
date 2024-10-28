@@ -18,14 +18,10 @@ public class UI extends DataConstants {
     public static void main(String[] args) {
         Narrator.playSoundRussell("");
 
-        // Hardcoded login
+        // Load users and data, and attempt hardcoded login for testing
         app.load();
         hardcodedLogin();
         playLoop();
-
-        // // Standard flow
-        // app.load();
-        // loginFlow();
     }
 
     // Login flow
@@ -52,84 +48,82 @@ public class UI extends DataConstants {
                     }
                     break;
                 case "2":
-                    // Signup flow if needed
                     System.out.println("Signup: ");
-
                     System.out.print("Enter your Email: ");
                     String email2 = scanner.nextLine();
-
                     System.out.print("Enter your Username: ");
                     String username = scanner.nextLine();
-
                     System.out.print("Enter your Display Name: ");
                     String displayName = scanner.nextLine();
-
                     System.out.print("Enter your Password: ");
                     String password2 = scanner.nextLine();
-
+                    
                     boolean signupSuccess = app.signup(email2, username, displayName, password2);
-
                     if (signupSuccess) {
                         System.out.println("Signup successful! Welcome, " + displayName + "!");
                     } else {
                         System.out.println("Signup failed. Please try again.");
                     }
-
                     break;
                 case "3":
-                    System.exit(0);
+                    app.exit();
                 default:
                     System.out.println("Invalid selection. Please try again.");
             }
         }
     }
 
-    // Hard coded login
+    // Hardcoded login for testing
     private static void hardcodedLogin() { 
-        User current = UserList.getInstance().login("sdindl@sc.email.edu", "Password2024");
+        User current = UserList.getInstance().login("sdindl@email.sc.edu", "Password2024");
         if (current != null) {
-            app.setCurrentUser(current); // Set the current user in the app facade
+            app.setCurrentUser(current); 
             System.out.println("\nLogin successful! Welcome, " + current.getDisplayName());
-            // Narrator.playSoundRussell("Login successful! Welcome, " + current.getDisplayName());
-
             playLoop();
         } else {
             System.out.println("\nHardcoded login failed.");
         }
     }
 
+    // Main application loop after login
     private static void playLoop() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\nWelcome to the Hello Worlders' Filipino learning app.");
-        // Narrator.playSoundRussell("Welcome to the Hello Worlders' Filipino learning app.");
         
         while (app.isLoggedIn()) {
-            System.out.println("\n1. Select Difficulty\n2. Logout\n3. Exit");
+            System.out.println("\n1. Play Games\n2. View Progress\n3. Review Missed Questions\n4. Logout\n5. Exit");
             System.out.print("Choose an option: ");
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
-                    selectDifficulty();  // Loop through difficulty selection
+                    app.setCurrentLanguage("filipino");
+                    selectDifficulty();
                     break;
                 case "2":
+                    app.viewProgress();
+                    break;
+                case "3":
+                    app.reviewMissedQuestions();
+                    break;
+                case "4":
                     app.logout();
                     System.out.println("You have been logged out.\n");
                     loginFlow();
                     return;
-                case "3":
-                    System.exit(0);
+                case "5":
+                    app.exit();
                 default:
                     System.out.println("Invalid selection. Please try again.");
             }
         }
     }
 
-    // Method to handle difficulty selection
+    // Method to handle difficulty selection with a back option
     private static void selectDifficulty() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\nSelect a difficulty:\n1. Easy\n2. Medium\n3. Hard\n4. Exit");
+        System.out.println("\nSelect a difficulty:\n1. Easy\n2. Medium\n3. Hard\n4. Back to Main Menu");
 
         switch (scanner.nextLine()) {
             case "1":
@@ -142,33 +136,29 @@ public class UI extends DataConstants {
                 gamesLoop(DataConstants.HARD);
                 break;
             case "4":
-                app.logout();
-                loginFlow(); // Go back to login if exiting from difficulty selection
-                break;
+                return; // Go back to main menu without logging out
             default:
                 System.out.println("\nInvalid selection.");
+                selectDifficulty(); // Retry difficulty selection if invalid input
         }
     }
 
-    // Method to handle game selection and ensure flow stays within games
+    // Game selection loop with a back option
     private static void gamesLoop(String difficulty) {
-        while (true) {  // Keep looping within the game selection process
+        while (true) {
             Scanner scanner = new Scanner(System.in);
             GameData gameData = GameData.getInstance();
             String[] gameTypes = {DataConstants.ALPHABET_GAME, DataConstants.COLORS_GAME, DataConstants.NUMBERS_GAME, DataConstants.STORIES_GAME};
             boolean gamesAvailable = false;
-            int gameIndex = 1;  // Start game index at 1
+            int gameIndex = 1;
 
             System.out.println("\nSelect a game:");
-            
-            // Clear mapping for each game loop
             HashMap<Integer, String> gameMapping = new HashMap<>();
 
             for (String gameType : gameTypes) {
                 DataKey dataKey = DataKey.getInstance(LANGUAGE_FILIPINO, gameType, difficulty);
                 if (gameData.getWords(dataKey) != null || gameData.getQuestions(dataKey) != null ||
                     gameData.getStories(dataKey) != null || gameData.getLetters(dataKey) != null) {
-                    // Map the index with the actual game type
                     System.out.println(gameIndex + ". " + gameType);
                     gameMapping.put(gameIndex, gameType);
                     gameIndex++;
@@ -178,28 +168,28 @@ public class UI extends DataConstants {
 
             if (!gamesAvailable) {
                 System.out.println("\nNo games available for this difficulty.");
-                return;  // Go back to difficulty selection
+                return; // Go back to difficulty selection
             }
 
-            System.out.print("\nEnter game number, 5 to switch difficulty, or 6 to exit: ");
+            System.out.print("\nEnter game number, " + gameIndex + " to go back, or " + (gameIndex + 1) + " to exit: ");
             int selection = scanner.nextInt();
 
             if (selection >= 1 && selection < gameIndex) {
-                String selectedGameType = gameMapping.get(selection); // Fetch the correct game based on user input
+                String selectedGameType = gameMapping.get(selection);
                 System.out.println("\nPlaying " + selectedGameType + " in " + difficulty + " mode");
                 app.startGame(DataKey.getInstance(LANGUAGE_FILIPINO, selectedGameType, difficulty));
-                postGameOptions(selectedGameType, difficulty);  // After game options
-            } else if (selection == 5) {
-                return;  // Go back to difficulty selection
-            } else if (selection == 6) {
-                System.exit(0);  // Exit the program
+                postGameOptions(selectedGameType, difficulty);
+            } else if (selection == gameIndex) {
+                return; // Go back to selectDifficulty
+            } else if (selection == gameIndex + 1) {
+                app.exit();
             } else {
                 System.out.println("\nInvalid selection. Please choose a valid option.");
             }
         }
     }
 
-    // Post-game options: Play Again, Choose Another Game (stay in game selection), or Exit
+    // Post-game options: Play Again, Choose Another Game, or Exit
     private static void postGameOptions(String gameType, String difficulty) {
         Scanner scanner = new Scanner(System.in);
         boolean continueGame = true;
@@ -212,14 +202,12 @@ public class UI extends DataConstants {
             switch (input) {
                 case "1":
                     System.out.println("\nPlaying " + gameType + " again on " + difficulty + " difficulty.");
-                    app.startGame(DataKey.getInstance(LANGUAGE_FILIPINO, gameType, difficulty));  // Restart the same game
+                    app.startGame(DataKey.getInstance(LANGUAGE_FILIPINO, gameType, difficulty));
                     break;
                 case "2":
-                    System.out.println("\nChoosing another game...");
-                    return;  // Return to the gamesLoop for game selection (same difficulty)
+                    return; // Go back to gamesLoop to select another game
                 case "3":
-                    System.out.println("\nExiting...\n");
-                    System.exit(0);  // Exit the program
+                    app.exit();
                 default:
                     System.out.println("\nInvalid selection. Please choose a valid option.");
             }

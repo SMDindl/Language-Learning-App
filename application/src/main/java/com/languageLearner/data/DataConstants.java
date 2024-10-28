@@ -9,12 +9,12 @@ import java.util.HashSet;
 public class DataConstants {
 
     // JSON file names
-    protected static final String USER_FILE = "data\\json\\UsersTest.json";
-    protected static final String GAME_DATA_FILE = "data\\json\\GameData.json";
+    protected static final String USER_FILE = "data/json/UsersTest.json";
+    protected static final String GAME_DATA_FILE = "data/json/GameData.json";
 
     // Users
     protected static final String USERS = "users";
-    protected static final String USER_ID = "uuid";
+    protected static final String USER_ID = "uuid"; // Using USER_ID for user UUIDs
     protected static final String USERNAME = "username";
     protected static final String DISPLAY_NAME = "displayName";
     protected static final String EMAIL = "email";
@@ -24,6 +24,10 @@ public class DataConstants {
     // Progress Trackers information 
     protected static final String LANGUAGE = "language"; 
     protected static final String COMPLETED_GAMES = "completedGames";
+    protected static final String MISSED_QUESTIONS = "missedQuestions"; // Add constant for missed questions
+    protected static final String QUESTION_UUID = "questionUUID"; // Add constant for question UUID
+    protected static final String TYPE = "type"; // Add constant for question type
+    protected static final String WORD_UUIDS = "wordUUIDs"; // Add constant for word UUIDs in matching questions
 
     // GameData class information
     protected static final String FILIPINO = "filipino";

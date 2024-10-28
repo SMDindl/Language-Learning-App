@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.languageLearner.data.DataKey;
 import com.languageLearner.data.GameData;
 import com.languageLearner.data.Letter;
+import com.languageLearner.data.User;
 
 public class AlphabetGame {
     private GameData gameData;

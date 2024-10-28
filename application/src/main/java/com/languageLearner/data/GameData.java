@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Singleton class responsible for managing game data, including words, questions,
@@ -18,6 +19,10 @@ public class GameData {
     private HashMap<DataKey, ArrayList<Question>> questionsMap;
     private HashMap<DataKey, ArrayList<Story>> storiesMap;
     private HashMap<DataKey, ArrayList<Letter>> lettersMap;
+
+    // UUID Maps (easy link to find question based on just their id)
+    private HashMap<UUID, Question> questionsIDMap = new HashMap<>();       // 
+    private HashMap<UUID, Word> wordsIDMap = new HashMap<>();               // 
 
     // Question type constants
     public static final String TYPE_MULTIPLE_CHOICE = "multiple_choice";
@@ -153,6 +158,19 @@ public class GameData {
         this.questionsMap = questions;
         this.storiesMap = stories;
         this.lettersMap = letters;
+
+        // Populate the questionsIDMap
+        for (ArrayList<Question> questionList : questions.values()) {
+            for (Question question : questionList) {
+                questionsIDMap.put(question.getId(), question); 
+            }
+        }
+        // Populate the wordsIDMap with UUIDs and Words
+        for (ArrayList<Word> wordList : words.values()) {
+            for (Word word : wordList) {
+                wordsIDMap.put(word.getId(), word); // Map UUID to Word
+            }
+        }
     }
 
     // QUESTION HANDLING
@@ -198,6 +216,7 @@ public class GameData {
         // Create a matching question with shuffled translations
         Question matchingQuestion = new Question(TYPE_MATCHING, words, null);
         matchingQuestion.setOptions(wordTexts, translations); // Assuming this method to set shuffled options
+        
         questions.add(matchingQuestion);
     }
 
