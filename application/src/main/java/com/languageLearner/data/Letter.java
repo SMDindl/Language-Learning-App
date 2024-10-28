@@ -1,53 +1,46 @@
 package com.languageLearner.data;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class Letter {
-    // Attributes
-    private String letter;
+    
+    private String text;
     private String pronunciation;
-    private ArrayList<Word> exampleWords;
-    private String image;
+    private List<String> exampleWords;
+    private UUID uuid;
 
-    // Constructor (with image)
-    public Letter(String letter, String pronunciation, ArrayList<Word> exampleWords, String image) {
-        this.letter = letter;
+    public Letter(String text, String pronunciation, List<String> exampleWords, UUID uuid) {
+        this.text = text;
         this.pronunciation = pronunciation;
         this.exampleWords = exampleWords;
-        this.image = image;
+        this.uuid = uuid;
     }
 
-    // Constructor without image
-    public Letter(String letter, String pronunciation, ArrayList<Word> exampleWords) {
-        this.letter = letter;
-        this.pronunciation = pronunciation;
-        this.exampleWords = exampleWords;
-        this.image = null; // No image provided
-    }
-
-    // Methods
-    public String getLetter() {
-        return letter;
+    // Getters and setters
+    public String getText() {
+        return text;
     }
 
     public String getPronunciation() {
         return pronunciation;
     }
 
-    public ArrayList<Word> getExampleWords() {
+    public List<String> getExampleWords() {
         return exampleWords;
     }
 
-    public String displayExampleWords() {
-        String exampleWordsString = "";
-        for(int i = 0; i<exampleWords.size(); i++) {
-            exampleWordsString += ((i+1) + ". " + exampleWords.get(i) + "\n");
-        }
-        return exampleWordsString;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    // Additional method to display letter details
-    public String displayLetterDetails() {
-        return "Letter: " + letter + "\nPronunciation: " + pronunciation + "\nExample Words: \n" + displayExampleWords();
+    @Override
+    public String toString() {
+        return "Letter{" +
+                "text='" + text + '\'' +
+                ", pronunciation='" + pronunciation + '\'' +
+                ", exampleWords=" + exampleWords +
+                ", uuid=" + uuid +
+                '}';
     }
 }
