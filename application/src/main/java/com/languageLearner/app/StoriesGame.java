@@ -1,3 +1,9 @@
+/**
+ * The StoriesGame class represents a game where users can read stories in a
+ * specific language, learn vocabulary words, and take quizzes related to the stories.
+ * This class offers methods for selecting a story, teaching key vocbulary, reading
+ * pages of the story, and administering quizzes.
+ */
 package com.languageLearner.app;
 
 import java.util.ArrayList;
@@ -13,9 +19,17 @@ import com.languageLearner.data.Word;
 
 public class StoriesGame {
     
+    /** The game data instance used to retrieve stories, words, ans questions. */
     private GameData gameData;
+
+    /** The data key used to specify language or context for retrieving data. */
     private DataKey dataKey;
 
+    /**
+     * Constructs a StoriesGame instance with the specified data key to retrieve
+     * 
+     * @param dataKey the data key associated with the desired language data
+     */
     public StoriesGame(DataKey dataKey) {
         this.gameData = GameData.getInstance();
         this.dataKey = dataKey;
@@ -44,7 +58,11 @@ public class StoriesGame {
         askQuestion();
     }
 
-    // Selects a story based on the DataKey
+    /**
+     * Prompts the user to select a story to read and returns the selected story.
+     * 
+     * @return the selected Story object
+     */
     public Story pickStory() {
         ArrayList<Story> storyList = gameData.getStories(dataKey);
         System.out.println("\nPick a story to read:");
@@ -57,7 +75,11 @@ public class StoriesGame {
         return storyList.get(choice - 1);  // Selecting based on user's choice
     }
 
-    // Teaches words before the story starts
+    /**
+     * Displays the vocabulary words to learn before reading the story.
+     * 
+     * @param story the selected story containing words to teach
+     */
     public void teachWords(Story story) {
         ArrayList<Word> newWords = story.getTeachWords();
         System.out.println("\nWords to learn before reading the story:");
@@ -66,7 +88,11 @@ public class StoriesGame {
         }
     }
 
-    // Reads the story, page by page
+    /**
+     * Reads the pages of the selected story and displays the text and its translation.
+     * 
+     * @param story the selected story to read
+     */
     public void readStory(Story story) {
         ArrayList<Page> storyPages = story.getPages();
         for (Page page : storyPages) {
@@ -88,12 +114,22 @@ public class StoriesGame {
         }
     }
 
-    // Validates the user's answer
+    /**
+     * Validates the user's answer against the correct answer for the question.
+     * 
+     * @param answer the user's answer
+     * @param question the question to validate against
+     * @return true if the answer is correct, false otherwise
+     */
     public boolean validateAnswer(String answer, Question question) {
         return answer.equalsIgnoreCase(question.getCorrectAnswer());
     }
 
-    // Provides feedback after each question
+    /**
+     * Provides feedback to the user based on whether their answer was correct or not.
+     * 
+     * @param isCorrect true if the user's answer is correct, false otherwise
+     */
     public void provideFeedback(boolean isCorrect) {
         if (isCorrect) {
             System.out.println("Correct!");

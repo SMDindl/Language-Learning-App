@@ -3,23 +3,45 @@ package com.languageLearner.data;
 import java.util.Objects;
 
 /**
- * Singleton class for DataKey
+ * The DataKey class is a Singleton that represents a key for indentifying 
+ * language data settings, such as language, game type, and difficulty level.
+ * This class provides validation for these properties and ensures that only one
+ * instance exists, following the Singleton pattern.
  */
 public class DataKey extends DataConstants {
 
     private static DataKey instance; // Static instance variable
+
+    /** Language setting for the data key */
     private String language;
+
+    /** Game type setting for the data key */
     private String gameType;
+
+    /** Difficulty setting for the data key */
     private String difficulty;
 
-    // Private constructor to prevent instantiation
+    /**
+     * Pivate constructor to prevent instantiation from outside the class.
+     * 
+     * @param language the language setting
+     * @param gameType the game type setting
+     * @param difficulty the difficulty setting
+     */
     private DataKey(String language, String gameType, String difficulty) {
         setLanguage(language);
         setGameType(gameType);
         setDifficulty(difficulty);
     }
 
-    // Public static method to get the instance of DataKey or update instance if already crated
+    /**
+     * Return the instance of DataKey, creating it if it doesn't exist.
+     * 
+     * @param language the language setting
+     * @param gameType the game type setting
+     * @param difficulty the difficulty setting
+     * @return the instance of DataKey
+     */
     public static DataKey getInstance(String language, String gameType, String difficulty) {
         if (instance == null) {
             instance = new DataKey(language, gameType, difficulty); 
@@ -30,25 +52,48 @@ public class DataKey extends DataConstants {
         return instance; 
     }
 
-    // Public static method to get the instance of DataKey
+    /**
+     * Return the instance of DataKey without parameters.
+     * 
+     * @return the instance of DataKey
+     */
     public static DataKey getInstance() {
         return instance; 
     }
 
-    // Getters
+    /**
+     * Getters for the properties
+     * 
+     * @return the language setting
+     */
     public String getLanguage() {
         return language;
     }
 
+    /**
+     * Getters for the properties
+     * 
+     * @return the difficulty setting
+     */
     public String getDifficulty() {
         return difficulty;
     }
 
+    /**
+     * Getters for the properties
+     * 
+     * @return the game type setting
+     */
     public String getGameType() {
         return gameType;
     }
 
-    // Setters with validation
+    /**
+     * Set the language setting, validating against allowed values.
+     * 
+     * @param language the language setting
+     * @throws IllegalArgumentException if the language is invalid
+     */
     public void setLanguage(String language) {
         if (!VALID_LANGUAGES.contains(language)) {
             throw new IllegalArgumentException("Invalid language: " + language);
@@ -56,6 +101,12 @@ public class DataKey extends DataConstants {
         this.language = language;
     }
 
+    /**
+     * Set the difficulty setting, validating against allowed values.
+     * 
+     * @param difficulty the difficulty setting
+     * @throws IllegalArgumentException if the difficulty is invalid
+     */
     public void setDifficulty(String difficulty) {
         if (!VALID_DIFFICULTIES.contains(difficulty)) {
             throw new IllegalArgumentException("Invalid difficulty: " + difficulty);
@@ -63,6 +114,12 @@ public class DataKey extends DataConstants {
         this.difficulty = difficulty;
     }
 
+    /**
+     * Sets the game type setting, validating against allowed values.
+     * 
+     * @param gameType the game type setting
+     * @throws IllegalArgumentException if the game type is invalid
+     */
     public void setGameType(String gameType) {
         if (!VALID_GAME_TYPES.contains(gameType)) {
             throw new IllegalArgumentException("Invalid game type: " + gameType);
@@ -70,7 +127,12 @@ public class DataKey extends DataConstants {
         this.gameType = gameType;
     }
 
-    // Override equals and hashCode for proper functionality in collections
+    /**
+     * Compares this DataKey to another object for equality.
+     * 
+     * @param obj the object to compare
+     * @return true if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -82,11 +144,21 @@ public class DataKey extends DataConstants {
                difficulty.equals(dataKey.difficulty);
     }
 
+    /**
+     * Returns a hash code value for the object.
+     * 
+     * @return a hash code value for this object
+     */
     @Override
     public int hashCode() {
         return Objects.hash(language, gameType, difficulty);
     }
-
+    
+    /**
+     * Returns a string representation of the DataKey.
+     * 
+     * @return a string representation of the DataKey
+     */
     @Override
     public String toString() {
         return language + "-" + gameType + "-" + difficulty;

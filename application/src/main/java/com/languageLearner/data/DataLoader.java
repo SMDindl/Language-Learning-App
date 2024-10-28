@@ -8,10 +8,16 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * The DataLoader class is responsible for loading game data and user data from JSON files.
+ * It processes the data and populates the GameData and UserList classes with the loaded information.
+ */
 public class DataLoader extends DataConstants {
+    
+    /** Singleton instance of GameData to store game-related data */
+    private GameData gameData = GameData.getInstance(); 
 
-    private GameData gameData = GameData.getInstance();  // Singleton instance of GameData
-
+    /** Constructs a DataLoader instance */
     public DataLoader() {
 
     }
