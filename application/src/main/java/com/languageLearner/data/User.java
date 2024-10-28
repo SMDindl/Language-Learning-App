@@ -125,5 +125,33 @@ public class User {
         }
         progressTrackers.add(newTracker); // Add new tracker if it doesn't exist
     }
+
+    public void trackMissedQuestion(String questionId) {
+        ProgressTracker tracker = getOrCreateProgressTracker(DataKey.getInstance().getLanguage());
+        tracker.addMissedQuestion(questionId);
+    }
+
+    public void displayProgress(DataKey dataKey) {
+        ProgressTracker tracker = getOrCreateProgressTracker(dataKey.getLanguage());
+        System.out.println("Progress Tracking:");
+        System.out.println("Completed games: " + tracker.getCompletedGames().size());
+        System.out.println("Missed questions: " + tracker.getMissedQuestions().size());
+        System.out.println("\n1. View missed questions\n2. Review completed games\n3. Back to difficulty selection");
+
+        // Further options to view missed questions, completed games, etc.
+        // Implement additional logic based on user input
+    }
+
+    private ProgressTracker getOrCreateProgressTracker(String language) {
+        // Find or create a tracker for the specified language
+        for (ProgressTracker tracker : progressTrackers) {
+            if (tracker.getLanguage().equals(language)) {
+                return tracker;
+            }
+        }
+        ProgressTracker newTracker = new ProgressTracker(language);
+        progressTrackers.add(newTracker);
+        return newTracker;
+    }
     
 }

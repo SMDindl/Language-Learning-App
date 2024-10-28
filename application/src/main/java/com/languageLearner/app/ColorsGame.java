@@ -78,6 +78,13 @@ public class ColorsGame {
 
         // Hardcoded matching question to appear last
         askHardcodedMatchingQuestion(keyboard);
+
+        //Matching Question
+        System.out.println("Match the color in English with the color in Fillipino");
+        System.out.println("Red : Berde");
+        System.out.println("Blue : Dilaw");
+        System.out.println("Green : Asul");
+        System.out.println("Yellow: Pula");
     }
 
     private void askHardcodedMatchingQuestion(Scanner keyboard) {
