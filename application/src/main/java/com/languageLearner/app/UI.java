@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.languageLearner.data.DataConstants;
 import com.languageLearner.data.DataKey;
+import com.languageLearner.data.DataWriter;
 import com.languageLearner.data.GameData;
 import com.languageLearner.data.User;
 import com.languageLearner.data.UserList;
@@ -33,7 +34,7 @@ public class UI extends DataConstants {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Welcome to the Hello Worlders' Filipino learning app!");
-
+            
             System.out.println("1. Login\n2. Sign up\n3. Exit");
             System.out.print("Select an option: ");
             String choice = scanner.nextLine();
@@ -77,7 +78,7 @@ public class UI extends DataConstants {
 
                     break;
                 case "3":
-                    System.exit(0);
+                    appExit();
                 default:
                     System.out.println("Invalid selection. Please try again.");
             }
@@ -102,6 +103,7 @@ public class UI extends DataConstants {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\nWelcome to the Hello Worlders' Filipino learning app.");
+        Narrator.playSoundRussell("Welcome to the Hello Worlders' Filipino learning app!");
         // Narrator.playSoundRussell("Welcome to the Hello Worlders' Filipino learning app.");
         
         while (app.isLoggedIn()) {
@@ -119,7 +121,7 @@ public class UI extends DataConstants {
                     loginFlow();
                     return;
                 case "3":
-                    System.exit(0);
+                    appExit();
                 default:
                     System.out.println("Invalid selection. Please try again.");
             }
@@ -192,7 +194,7 @@ public class UI extends DataConstants {
             } else if (selection == 5) {
                 return;  // Go back to difficulty selection
             } else if (selection == 6) {
-                System.exit(0);  // Exit the program
+                appExit();  // Exit the program
             } else {
                 System.out.println("\nInvalid selection. Please choose a valid option.");
             }
@@ -219,10 +221,16 @@ public class UI extends DataConstants {
                     return;  // Return to the gamesLoop for game selection (same difficulty)
                 case "3":
                     System.out.println("\nExiting...\n");
-                    System.exit(0);  // Exit the program
+                    appExit();  // Exit the program
                 default:
                     System.out.println("\nInvalid selection. Please choose a valid option.");
             }
         }
+    }
+
+    private static void appExit() {
+        DataWriter dataWriter = new DataWriter();
+        dataWriter.writeAllUsers();
+        System.exit(0);
     }
 }

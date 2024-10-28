@@ -104,6 +104,38 @@ public class Question {
     /**
      * Displays the question text and options (if applicable) to the user.
      */
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    /**
+     * Validates if the provided answer index matches the correct answer.
+     *
+     * @param answerIndex The index of the user's selected answer.
+     * @return True if the answer is correct, false otherwise.
+     */
+    public boolean validateAnswer(int answerIndex) {
+        if(answerIndex != correctAnswerIndex)
+        {
+            MissedQuestion newMiss = new MissedQuestion(this.dataKey, this.uuid);
+            ProgressTracker.addMissedQuestion(newMiss);
+        }
+            
+        return answerIndex == correctAnswerIndex;
+    }
+
+    /**
+     * Formats and displays the question and its answers.
+     *
+     * @return The formatted question with possible answers.
+     */
+    public String displayQuestion() {
+        StringBuilder questionDisplay = new StringBuilder("\nQuestion: " + questionText + "\nAnswers:\n");
+        for (int i = 0; i < answers.size(); i++) {
+            questionDisplay.append(i + 1).append(". ").append(answers.get(i)).append("\n");
+        }
+        return questionDisplay.toString();
+    }
     public void askQuestion() {
         System.out.println(text);
         if ("multiple_choice".equals(type) && options != null) {

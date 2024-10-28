@@ -6,17 +6,26 @@ public class ProgressTracker {
     
     private String language;
     private ArrayList<DataKey> completedGames;
-    private ArrayList<String> missedQuestions; // Store question UUIDs directly
+    private static ArrayList<MissedQuestion> missedQuestions; // Multiple choice or t/f
+    private ArrayList<MissedQuestion> missedMatching; 
+    private ArrayList<MissedQuestion> missedFITB;
 
     // Constructor
     public ProgressTracker(String language) {
         this.language = language;
         this.completedGames = new ArrayList<>();
         this.missedQuestions = new ArrayList<>();
+        this.missedMatching = new ArrayList<>();
+        this.missedFITB = new ArrayList<>();
     }
 
-    public String getLanguage() {
-        return language;
+    // Methods to add missed questions
+    public static void addMissedQuestion(MissedQuestion question) {
+        missedQuestions.add(question);
+    }
+
+    public void addMissedMatching(MissedQuestion question) {
+        missedMatching.add(question);
     }
 
     public ArrayList<DataKey> getCompletedGames() {

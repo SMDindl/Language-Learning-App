@@ -108,9 +108,29 @@ public class DataLoader extends DataConstants {
         if (missedQuestionsArray != null) {
             for (Object missedObj : missedQuestionsArray) {
                 JSONObject missedJSON = (JSONObject) missedObj;
-                String questionUUID = (String) missedJSON.get(USER_ID);
-                if (questionUUID != null) {
-                    tracker.addMissedQuestion(questionUUID);
+                String dataKeyStr = (String) missedJSON.get("dataKey");
+                UUID questionUUID = (UUID) missedJSON.get("questionUUID");
+
+                if (dataKeyStr != null && questionUUID != null) {
+                    String[] keyParts = dataKeyStr.split("-");
+                    if (keyParts.length == 3) {
+                        DataKey dataKey = DataKey.getInstance(keyParts[0], keyParts[1], keyParts[2]);
+                        MissedQuestion missedQuestion = new MissedQuestion(dataKey, questionUUID);
+
+                        switch (key) {
+                            case "missedQuestions":
+                                tracker.addMissedQuestion(missedQuestion);
+                                break;
+                            case "missedMatching":
+                                tracker.addMissedMatching(missedQuestion);
+                                break;
+                            case "missedFITB":
+                                tracker.addMissedFITB(missedQuestion);
+                                break;
+                        }
+                    } else {
+                        System.err.println("Invalid dataKey format in missed entries: " + dataKeyStr);
+                    }
                 }
             }
         }
