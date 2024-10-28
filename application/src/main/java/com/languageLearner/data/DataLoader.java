@@ -112,7 +112,7 @@ public class DataLoader extends DataConstants {
             for (Object missedObj : missedArray) {
                 JSONObject missedJSON = (JSONObject) missedObj;
                 String dataKeyStr = (String) missedJSON.get("dataKey");
-                String questionUUID = (String) missedJSON.get("questionUUID");
+                UUID questionUUID = (UUID) missedJSON.get("questionUUID");
 
                 if (dataKeyStr != null && questionUUID != null) {
                     String[] keyParts = dataKeyStr.split("-");

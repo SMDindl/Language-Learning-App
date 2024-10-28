@@ -157,6 +157,12 @@ public class Question {
      * @return True if the answer is correct, false otherwise.
      */
     public boolean validateAnswer(int answerIndex) {
+        if(answerIndex != correctAnswerIndex)
+        {
+            MissedQuestion newMiss = new MissedQuestion(this.dataKey, this.uuid);
+            ProgressTracker.addMissedQuestion(newMiss);
+        }
+            
         return answerIndex == correctAnswerIndex;
     }
 

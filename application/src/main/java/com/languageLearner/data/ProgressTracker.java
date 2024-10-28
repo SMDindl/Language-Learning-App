@@ -6,7 +6,7 @@ public class ProgressTracker {
 
     private String language;
     private ArrayList<DataKey> completedGames;
-    private ArrayList<MissedQuestion> missedQuestions; // Multiple choice or t/f
+    private static ArrayList<MissedQuestion> missedQuestions; // Multiple choice or t/f
     private ArrayList<MissedQuestion> missedMatching; 
     private ArrayList<MissedQuestion> missedFITB;
 
@@ -20,7 +20,7 @@ public class ProgressTracker {
     }
 
     // Methods to add missed questions
-    public void addMissedQuestion(MissedQuestion question) {
+    public static void addMissedQuestion(MissedQuestion question) {
         missedQuestions.add(question);
     }
 
