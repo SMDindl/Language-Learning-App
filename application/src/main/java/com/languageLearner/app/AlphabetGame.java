@@ -12,9 +12,9 @@ public class AlphabetGame {
     private GameData gameData;
     private DataKey dataKey;
 
-    public AlphabetGame(DataKey dataKey) {
+    public AlphabetGame() {
         this.gameData = GameData.getInstance();
-        this.dataKey = dataKey;
+        this.dataKey = DataKey.getInstance();
     }
 
     public void startGame() {

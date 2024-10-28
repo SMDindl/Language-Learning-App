@@ -1,5 +1,7 @@
 package com.languageLearner.data;
 
+import java.util.UUID;
+
 /**
  * 
  */
@@ -9,6 +11,7 @@ public class Word {
     private String wordTranslation;
     private String exampleSentence;
     private String sentenceTranslation;
+    private UUID id;
 
     // Constructor
     public Word(String wordText, String wordTranslation, String exampleSentence, String sentenceTranslation) {

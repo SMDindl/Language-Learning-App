@@ -69,10 +69,38 @@ public class User {
     }
 
     /**
-     * Adds a progress tracker for the user.
-     * Checks if a progress tracker for the same language already exists before adding a new one.
+     * Adds or updates a progress tracker for the given language and list of completed games (using DataKey).
+     * If a tracker for the language exists, it updates it, otherwise, it creates a new one.
      * 
-     * @param newTracker The progress tracker to add.
+     * @param language The language of the progress tracker.
+     * @param gamesList The list of completed games to be tracked using DataKey.
+     */
+    public void addOrUpdateProgressTracker(String language, ArrayList<DataKey> gamesList) {
+        // Check if a tracker for this language already exists
+        for (ProgressTracker tracker : progressTrackers) {
+            if (tracker.getLanguage().equals(language)) {
+                // Tracker for this language exists, update the list of completed games
+                for (DataKey game : gamesList) {
+                    tracker.addCompletedGame(game);
+                }
+                return;
+            }
+        }
+
+        // If no tracker exists for the language, create a new one
+        ProgressTracker newTracker = new ProgressTracker(language);
+        for (DataKey game : gamesList) {
+            newTracker.addCompletedGame(game);
+        }
+        progressTrackers.add(newTracker);
+    }
+
+    /**
+     * Adds or updates a progress tracker for the given language and a single completed game (using DataKey).
+     * If a tracker for the language exists, it updates it, otherwise, it creates a new one.
+     * 
+     * @param language The language of the progress tracker.
+     * @param game The completed game to add using DataKey.
      */
     public void addProgressTracker(ProgressTracker newTracker) {
         // Ensure there isn't already a tracker for the same language
@@ -82,26 +110,7 @@ public class User {
                 return;
             }
         }
-        progressTrackers.add(newTracker);
+        progressTrackers.add(newTracker); // Add new tracker if it doesn't exist
     }
-
-    /**
-     * Adds a progress tracker for the given language and list of completed games (using DataKey).
-     * 
-     * @param language The language of the progress tracker.
-     * @param gamesList The list of completed games to be tracked using DataKey.
-     */
-    public void addProgressTracker(String language, ArrayList<DataKey> gamesList) {
-        // Check if a tracker for this language already exists
-        for (ProgressTracker tracker : progressTrackers) {
-            if (tracker.getLanguage().equals(language)) {
-                // Tracker for this language already exists, so we won't add another
-                return;
-            }
-        }
-
-        // Create a new progress tracker for the language and gamesList
-        ProgressTracker newTracker = new ProgressTracker(language, gamesList);
-        progressTrackers.add(newTracker);
-    }
+    
 }

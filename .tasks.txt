@@ -1,0 +1,31 @@
+Project Implementation DUE SUNDAY: 
+
+Need to implement "MissedQuestions" array within the progress tracker. 
+
+Need to give each Question a unquie UUID so that we can just store these UUID's in the MissedQuestions array.
+
+Need to create a method "public void storeMissedQuestion(String uuid)" in the ProgessTracker class.
+
+Need to create a method "public void removeMissedQuestion(String uuid)" in the ProgessTracker class.
+
+Need to create a method "public void storeMissedMatching(String uuid)" in the ProgessTracker class.
+
+Need to create a method "public void removeMissedMatching(String uuid)" in the ProgessTracker class.
+
+These methods will obvsly be used in game classes when user anwsers question.
+
+Will need to create addional methods that act the same if we end up creating quesitons out of just words, such as matching questions.
+
+Need to make sure the signup / login is properly ensuring that usernames arent taken and other validation nesseities are being met.
+
+Steven needs github pro account before sunday.
+
+Need to implement / use narrator somewhere
+
+Hardcode UI to directly follow the Excellent Version of the scenario (obvs accounting for games vs lessons etc, but should follow the same flow.)
+
+Implement logout in UI flow
+
+Switch page numbers of book to String and make sure other cases of page numbers in the code match
+
+This stuff should be added to scrum and there may be more.

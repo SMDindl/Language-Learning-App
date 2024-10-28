@@ -2,6 +2,8 @@ package com.languageLearner.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GameData {
     
@@ -63,6 +65,28 @@ public class GameData {
     public ArrayList<Story> getStories(DataKey dataKey) {
         return storiesMap.get(dataKey);
     }
+
+    // Method to retrieve available games for a specific language and difficulty
+    public Set<String> getAvailableGamesForDifficulty(DataKey dataKey) {
+        Set<String> availableGames = new HashSet<>();
+
+        if (wordsMap.containsKey(dataKey)) availableGames.add(DataConstants.COLORS_GAME);
+        if (questionsMap.containsKey(dataKey)) availableGames.add(DataConstants.ALPHABET_GAME);
+        if (storiesMap.containsKey(dataKey)) availableGames.add(DataConstants.STORIES_GAME);
+        if (lettersMap.containsKey(dataKey)) availableGames.add(DataConstants.NUMBERS_GAME);
+
+        return availableGames;
+    }
+
+    // Implementation to handle a list of words as a matching question
+    public void doMatching(ArrayList<Word> words) { // Need to consider DataKey being used as well as it the list is nested within an object
+
+    }
+    
+    // Implementation to handle a list of words as a fill in the blank question
+    public void doFITB(ArrayList<Word> words) { // Need to consider DataKey being used as well as it the list is nested within an object
+    
+    } 
 
     // Method to populate game data
     public void populateData(HashMap<DataKey, ArrayList<Word>> words, 
