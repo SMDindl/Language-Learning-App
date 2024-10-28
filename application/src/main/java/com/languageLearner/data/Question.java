@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class Question {
+
     private String id;
     private String type;
     private String text;
-    private List<String> options;          // For multiple-choice and matching questions
+    private List<String> options;           // For multiple-choice and matching questions
     private Integer correctAnswerIndex;     // Index for multiple-choice questions
     private String correctAnswer;           // For true/false, FITB, and matching answers
     private String context;                 // Optional context (e.g., story title or letter name)

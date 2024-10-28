@@ -45,7 +45,6 @@ public class DataConstants {
     protected static final String WORDS = "words"; 
     protected static final String LETTERS = "letters"; 
     protected static final String PAGES = "pages"; 
-    protected static final String NUMBERS = "numbers"; 
 
     // Data elements
     protected static final String TEXT = "text";

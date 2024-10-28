@@ -193,27 +193,37 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Processes word entries within the game data JSON object.
-     *
-     * @param gameDataJSON JSON object containing game data.
-     * @param wordsList List to store processed Word objects.
+     * Loads words
+     * 
+     * @param gameDataJSON
+     * @param wordsList
      */
     private void processWords(JSONObject gameDataJSON, ArrayList<Word> wordsList) {
         if (gameDataJSON.containsKey(WORDS)) {
             JSONArray wordsArray = (JSONArray) gameDataJSON.get(WORDS);
-
+    
             for (Object wordObj : wordsArray) {
                 JSONObject wordJSON = (JSONObject) wordObj;
-
-                wordsList.add(new Word(
-                    (String) wordJSON.get(TEXT),
-                    (String) wordJSON.get(ENGLISH_TEXT),
-                    (String) wordJSON.get(EXAMPLE_SENTENCE),
-                    (String) wordJSON.get(ENGLISH_SENTENCE)
-                ));
+    
+                // Extract common fields
+                String wordText = (String) wordJSON.get(TEXT);
+                String wordTranslation = (String) wordJSON.get(ENGLISH_TEXT);
+                String exampleSentence = wordJSON.containsKey(EXAMPLE_SENTENCE) ? (String) wordJSON.get(EXAMPLE_SENTENCE) : null;
+                String sentenceTranslation = wordJSON.containsKey(ENGLISH_SENTENCE) ? (String) wordJSON.get(ENGLISH_SENTENCE) : null;
+    
+                // Check for optional "number" field
+                if (wordJSON.containsKey(DIGIT)) {
+                    String number = (String) wordJSON.get(DIGIT);
+                    // Use constructor with "number" field
+                    wordsList.add(new Word(number, wordText, wordTranslation, exampleSentence, sentenceTranslation));
+                } else {
+                    // Use constructor without "number" field
+                    wordsList.add(new Word(wordText, wordTranslation, exampleSentence, sentenceTranslation));
+                }
             }
         }
     }
+    
 
     /**
      * Processes question entries within the game data JSON object.
@@ -279,19 +289,29 @@ public class DataLoader extends DataConstants {
             for (Object letterObj : lettersArray) {
                 JSONObject letterJSON = (JSONObject) letterObj;
 
+                // Process example words for each letter
                 ArrayList<Word> exampleWordsList = new ArrayList<>();
                 processWords(letterJSON, exampleWordsList);
 
+                // Generate UUID for each letter
+                UUID uuid = UUID.randomUUID();
+
+                // Create a new Letter object with UUID and add it to lettersList
+                String text = (String) letterJSON.get(TEXT);
+                String pronunciation = (String) letterJSON.get(PRONUNCIATION);
                 String image = (String) letterJSON.get(IMAGE);
+                
                 lettersList.add(new Letter(
-                    (String) letterJSON.get(TEXT),
-                    (String) letterJSON.get(PRONUNCIATION),
+                    text,
+                    pronunciation,
                     exampleWordsList,
-                    image
+                    image,
+                    uuid  // Pass the generated UUID
                 ));
             }
         }
     }
+
 
     /**
      * Processes story entries within the game data JSON object.
