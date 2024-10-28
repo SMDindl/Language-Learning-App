@@ -887,6 +887,21 @@
                         "exampleSentence": "Ang papel ay puti.",
                         "englishSentence": "The paper is white."
                     }
+                ],
+                "questions": [
+                    {
+                        "uuid": "8a2b6c3d-1234-45ab-cdef-6789012345a1",
+                        "text": "Anong kulay ang langit?",
+                        "englishText": "What color is the sky?",
+                        "choices": ["Asul", "Puting", "Itim", "Berde"],
+                        "correctChoiceIndex": 0
+                    },
+                    {
+                        "uuid": "9b3c4d5e-2345-67ab-cdef-7890123456b2",
+                        "text": "Ang saging ay dilaw.",
+                        "englishText": "The banana is yellow.",
+                        "correctAnswer": true
+                    }                    
                 ]
             },
             "medium": {
