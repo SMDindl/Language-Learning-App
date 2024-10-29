@@ -17,6 +17,7 @@ public class Question {
     private String context;                 // Optional context (e.g., story title or letter name)
     private Word wordData;                  // For FITB questions involving word data
     private List<UUID> wordUUIDs;           // UUIDs of words for matching questions
+    private User currentUser;
 
     // Constructor for multiple-choice questions
     public Question(UUID id, String type, String text, List<String> options, int correctAnswerIndex, String context) {
@@ -216,7 +217,8 @@ public class Question {
 
     public boolean askMissedQuestion() {
         System.out.println(text);
-        ProgressTracker tracker = ProgressTracker.getInstance();
+        currentUser.getProgressTracker(DataKey.getInstance().getLanguage());
+
         Scanner keyboard = new Scanner(System.in);
         if ("multiple_choice".equals(type) && options != null) {
             for (int i = 0; i < options.size(); i++) {

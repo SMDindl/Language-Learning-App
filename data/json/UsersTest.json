@@ -1,36 +1,9 @@
 {
     "users": [
         {
-            "password": "Password2024",
+            "password": "Password",
             "displayName": "Tammy",
             "progressTrackers": [
-                {
-                    "language": "filipino",
-                    "completedGames": [
-                        
-                    ],
-                    "missedQuestions": [
-                        
-                    ]
-                },
-                {
-                    "language": "filipino",
-                    "completedGames": [
-                        
-                    ],
-                    "missedQuestions": [
-                        
-                    ]
-                },
-                {
-                    "language": "filipino",
-                    "completedGames": [
-                        
-                    ],
-                    "missedQuestions": [
-                        
-                    ]
-                },
                 {
                     "language": "filipino",
                     "completedGames": [
@@ -46,11 +19,20 @@
             "username": "ttomacka"
         },
         {
-            "password": "1234",
+            "password": "Password",
             "displayName": "ttom",
             "progressTrackers": [
                 {
                     "language": "filipino",
+                    "completedGames": [
+                        "filipino-alphabetGame-easy"
+                    ],
+                    "missedQuestions": [
+                        
+                    ]
+                },
+                {
+                    "language": "language",
                     "completedGames": [
                         
                     ],

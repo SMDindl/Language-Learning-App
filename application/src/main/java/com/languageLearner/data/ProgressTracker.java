@@ -1,31 +1,25 @@
 package com.languageLearner.data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
 
 /**
  * Tracks a user's progress in a specific language, including completed games and missed questions.
  */
 public class ProgressTracker {
 
-    private static ProgressTracker instance;
     private String language;
     private ArrayList<DataKey> completedGames;
     private ArrayList<Question> missedQuestions;
-    private HashMap<UUID, ArrayList<UUID>> matchingWords = new HashMap<>(); // Populated from user list of missed questions
+    // private HashMap<UUID, ArrayList<UUID>> matchingWords = new HashMap<>(); // Populated from user list of missed questions
 
-    public ProgressTracker() {
-        this.language = "";
+    public ProgressTracker(String language) {
+        this.language = language;
         this.completedGames = new ArrayList<>();
         this.missedQuestions = new ArrayList<>();
     }
 
-    public static ProgressTracker getInstance() {
-        if (instance == null) {
-            instance = new ProgressTracker();
-        }
-        return instance;
+    public ProgressTracker getTracker() {
+        return this;
     }
 
     public String getLanguage() {

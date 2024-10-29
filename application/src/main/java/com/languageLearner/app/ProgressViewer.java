@@ -10,7 +10,7 @@ public class ProgressViewer {
 
     // Displays the user's progress for the specified language
     public static void displayProgress(User user, String language) {
-        ProgressTracker tracker = user.getProgressTrackerByLanguage(language);
+        ProgressTracker tracker = user.getProgressTracker(language);
         System.out.println("\n=== Progress Overview for " + user.getDisplayName() + " ===");
         System.out.println("Language: " + language);
         System.out.println("Completed games: " + tracker.getCompletedGames().size());
@@ -20,7 +20,7 @@ public class ProgressViewer {
 
     // Reviews the user's missed questions for the specified language
     public static void reviewMissedQuestions(User user, String language) {
-        ProgressTracker tracker = user.getProgressTrackerByLanguage(language);
+        ProgressTracker tracker = user.getProgressTracker(language);
         if (tracker.getMissedQuestions().isEmpty()) {
             System.out.println("No missed questions to review for language: " + language);
         } else {

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import com.languageLearner.narration.Narrator;
+
 /**
  * Singleton class responsible for managing game data, including words, questions,
  * stories, and letters, for different games based on language, difficulty, and context.
@@ -236,12 +238,13 @@ public class GameData {
         }
 
         int count = 0;
-        ProgressTracker tracker = ProgressTracker.getInstance();
+        ProgressTracker tracker = new ProgressTracker(dataKey.getInstance().getLanguage());
 
         for (Question question : questions) {
             if (question.getType().equalsIgnoreCase(questionType)) {
                 System.out.println("Question ID: " + question.getId());
                 question.askQuestion();
+                Narrator.playSoundMiguel(question.getText());
 
                 // Show simulated answer for testing
                 Object simulatedAnswer = getUserAnswer(questionType);
@@ -277,7 +280,7 @@ public class GameData {
         }
 
         int count = 0;
-        ProgressTracker tracker = ProgressTracker.getInstance();
+        ProgressTracker tracker = new ProgressTracker(dataKey.getInstance().getLanguage());
 
         for (Question question : questions) {
             // Filter by question type and context

@@ -10,6 +10,9 @@ import com.languageLearner.data.User;
 import com.languageLearner.data.UserList;
 import com.languageLearner.narration.Narrator;
 
+/**
+ * Current UI for Hello Worlder's Language App
+ */
 public class UI extends DataConstants {
 
     private static final String LANGUAGE_FILIPINO = "filipino";

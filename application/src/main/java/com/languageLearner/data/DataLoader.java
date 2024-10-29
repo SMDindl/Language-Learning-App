@@ -66,8 +66,7 @@ public class DataLoader extends DataConstants {
                 for (Object trackerObj : trackersArray) {
                     JSONObject trackerJSON = (JSONObject) trackerObj;
                     String language = (String) trackerJSON.get(LANGUAGE);
-                    ProgressTracker tracker = ProgressTracker.getInstance();
-                    tracker.setLanguage(language);
+                    ProgressTracker tracker = new ProgressTracker(language);
                     
                     // Load completed games
                     JSONArray completedGamesArray = (JSONArray) trackerJSON.get(COMPLETED_GAMES);

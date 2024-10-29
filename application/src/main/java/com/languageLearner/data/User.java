@@ -77,16 +77,16 @@ public class User {
      * @param language The language for which to retrieve the ProgressTracker.
      * @return The ProgressTracker for the specified language.
      */
-    public ProgressTracker getProgressTrackerByLanguage(String language) {
+    public ProgressTracker getProgressTracker(String language) {
         for (ProgressTracker tracker : progressTrackers) {
             if (tracker.getLanguage().equals(language)) {
                 return tracker;
             }
         }
         // Create and add a new tracker if it doesn't exist
-        ProgressTracker newTracker = ProgressTracker.getInstance();
-        progressTrackers.add(newTracker);
-        return newTracker;
+        ProgressTracker progressTracker = new ProgressTracker(language);
+        progressTrackers.add(progressTracker);
+        return progressTracker;
     }
 
     /**
@@ -96,7 +96,7 @@ public class User {
      * @param question The missed question.
      */
     public void trackMissedQuestion(String language, Question question) {
-        ProgressTracker tracker = getProgressTrackerByLanguage(language);
+        ProgressTracker tracker = getProgressTracker(language);
         tracker.addMissedQuestion(question);
     }
 
@@ -107,7 +107,7 @@ public class User {
      * @param question The question to untrack.
      */
     public void untrackMissedQuestion(DataKey key, Question question) {
-        ProgressTracker tracker = getProgressTrackerByLanguage(key.getLanguage());
+        ProgressTracker tracker = getProgressTracker(key.getLanguage());
         tracker.removeMissedQuestion(question);
     }
 
@@ -118,7 +118,7 @@ public class User {
      * @param game The DataKey representing the completed game.
      */
     public void addCompletedGame(DataKey game) {
-        ProgressTracker tracker = getProgressTrackerByLanguage(game.getLanguage());
+        ProgressTracker tracker = getProgressTracker(game.getLanguage());
         tracker.addCompletedGame(game);
     }
 
@@ -128,7 +128,7 @@ public class User {
      * @param language The language for which to display progress.
      */
     public void displayProgress(String language) {
-        ProgressTracker tracker = getProgressTrackerByLanguage(language);
+        ProgressTracker tracker = getProgressTracker(language);
         System.out.println("\n=== Progress Overview for " + displayName + " ===");
         System.out.println("Language: " + language);
         System.out.println("Completed games: " + tracker.getCompletedGames().size());
