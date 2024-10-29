@@ -1,0 +1,76 @@
+{
+    "LANGUAGES": [
+        {
+            "LANG": "filipino",
+            "UUID": "1bafb0ae-3462-4ec3-9cc2-a98ff2898e72",
+            "GAMES": [
+                {
+                    "GAME": "colorsGame",
+                    "DIFF": "easy",
+                    "UUID": "8ce4fefc-a539-4546-9d7e-0ac8778f8de5",
+                    "INFO": {
+
+                        "description": "Welcome to the easy colors game. First, you will learn each color (red, green, and blue), then complete a quiz!",
+                        "objective": "Be able to identify the Filipino words for each color taught and know the Filipino words for common objected of those colors.",
+                        "instructions": [
+                            "Nagivate through each of the given colors and review the examples given.",
+                            "When you feel up for the task, do the brain blaster"
+                        ],
+                        "prep": {
+                            "introConcept": "In Filipino, the word for 'color' is 'kulay.'",
+                            "exampleUsage": "To say that something is a color, use 'ay kulay' followed by the color. For example, 'Ang mansanas ay kulay pula.' (The apple is red.)",
+                            "gameTip": "Remember, colors often appear in everyday objects! Think of common items like fruits (mga prutas) or plants (mga halaman) to help remember."
+                        }
+
+                    },
+                    "TEXT": [
+                        {
+                            "text": "pula",
+                            "englishText": "red",
+                            "linkedText": "Ang mansanas ay kulay pula.",
+                            "englishLinkedText": "The apple is red.",
+                            "helperText": "Pula means 'red' in Filipino. It’s used the same way as 'red' in English, like describing a red apple (mansanas na pula) or a red car (kotse na pula).",
+                            "UUID": "285bad41-5c1c-45b4-bc51-59f480bb1895"
+                        },
+                        {
+                            "text": "berde",
+                            "englishText": "green",
+                            "linkedText": "Ang damo ay kulay berde.",
+                            "englishLinkedText": "The grass is green.",
+                            "helperText": "Berde sounds a bit like 'verdant,' which means green and lush in English. Think of green grass (damo) or trees (mga puno).",
+                            "UUID": "a4c6be84-4a97-4c9d-9b28-69c6e72fd6b4"
+                        },
+                        {
+                            "text": "asul",
+                            "englishText": "blue",
+                            "linkedText": "Ang langit ay kulay asul.",
+                            "englishLinkedText": "The sky is blue.",
+                            "helperText": "Asul means 'blue' in Filipino, similar to the color of the sky (langit) or the ocean (karagatan).",
+                            "UUID": "52105f37-5798-4814-a066-d44fb5f7a4a6"
+                        }
+                    ]
+                },
+                {
+                    "GAME": "numbersGame",
+                    "DIFF": "medium",
+                    "UUID": "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
+                    "TEXT": [
+                        
+                    ]
+                }
+                
+            ]
+        },
+        {
+            "COMMENT": "spanish",
+            "COMMENT1": "2cdef789-abcd-ef12-3456-7890ghijklm",
+            "COMMENT2": [
+                {
+                    "GAME": "colorsGame",
+                    "DIFF": "easy",
+                    "UUID": "1234abcd-5678-efgh-ijkl-91011mnopqr",
+                }
+            ]
+        }
+    ]
+}
