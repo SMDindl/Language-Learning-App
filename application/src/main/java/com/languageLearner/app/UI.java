@@ -20,7 +20,7 @@ public class UI extends DataConstants {
 
         // Load users and data, and attempt hardcoded login for testing
         app.load();
-        hardcodedLogin();
+        loginFlow();
         playLoop();
     }
 
@@ -75,7 +75,7 @@ public class UI extends DataConstants {
 
     // Hardcoded login for testing
     private static void hardcodedLogin() { 
-        User current = UserList.getInstance().login("sdindl@email.sc.edu", "Password2024");
+        User current = UserList.getInstance().login("ttomacka@email.sc.edu", "Password2024");
         if (current != null) {
             app.setCurrentUser(current); 
             System.out.println("\nLogin successful! Welcome, " + current.getDisplayName());

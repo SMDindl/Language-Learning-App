@@ -2,7 +2,7 @@
     "users": [
         {
             "password": "Password2024",
-            "displayName": "Steven",
+            "displayName": "Tammy",
             "progressTrackers": [
                 {
                     "language": "filipino",
@@ -10,23 +10,58 @@
                         
                     ],
                     "missedQuestions": [
-                        {
-                            "questionUUID": "8f493190-ba09-42ce-905c-e2d5d37d87dc",
-                            "wordUUIDs": [
-                                "123e4567-e89b-12d3-a456-426614174000",
-                                "223e4567-e89b-12d3-a456-426614174001",
-                                "323e4567-e89b-12d3-a456-426614174002",
-                                "423e4567-e89b-12d3-a456-426614174003",
-                                "523e4567-e89b-12d3-a456-426614174004",
-                                "623e4567-e89b-12d3-a456-426614174005"
-                            ]
-                        }
+                        
+                    ]
+                },
+                {
+                    "language": "filipino",
+                    "completedGames": [
+                        
+                    ],
+                    "missedQuestions": [
+                        
+                    ]
+                },
+                {
+                    "language": "filipino",
+                    "completedGames": [
+                        
+                    ],
+                    "missedQuestions": [
+                        
+                    ]
+                },
+                {
+                    "language": "filipino",
+                    "completedGames": [
+                        
+                    ],
+                    "missedQuestions": [
+                        
                     ]
                 }
             ],
             "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
-            "email": "sdindl@email.sc.edu",
-            "username": "sdindl"
+            "email": "ttomacka@email.sc.edu",
+            "username": "ttomacka"
+        },
+        {
+            "password": "1234",
+            "displayName": "ttom",
+            "progressTrackers": [
+                {
+                    "language": "filipino",
+                    "completedGames": [
+                        
+                    ],
+                    "missedQuestions": [
+                        
+                    ]
+                }
+            ],
+            "uuid": "e0dc4f8b-2844-4251-8a61-f4a654a352a6",
+            "email": "tim@email.sc.edu",
+            "username": "ttom"
         }
     ]
 }
