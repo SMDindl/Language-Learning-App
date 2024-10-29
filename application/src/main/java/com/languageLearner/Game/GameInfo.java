@@ -1,15 +1,21 @@
-package com.languageLearner.Game;
+package com.languageLearner.game;
+
+import java.util.ArrayList;
+
+import org.json.simple.JSONObject;
 
 public class GameInfo {
+    
     private String description;
     private String objective;
-    private List<String> instructions;
+    private ArrayList<String> instructions;
     private String introConcept;
     private String exampleUsage;
     private String gameTip;
 
-    public GameInfo(String description, String objective, List<String> instructions, 
+    public GameInfo(String description, String objective, ArrayList<String> instructions, 
                     String introConcept, String exampleUsage, String gameTip) {
+
         this.description = description;
         this.objective = objective;
         this.instructions = instructions;
@@ -18,10 +24,13 @@ public class GameInfo {
         this.gameTip = gameTip;
     }
 
+    // Methods to interact with game info...
+
+    // Used to load from json, will be accessed in dataloader
     public static GameInfo fromJson(JSONObject infoJson) {
         String description = (String) infoJson.get("description");
         String objective = (String) infoJson.get("objective");
-        List<String> instructions = (List<String>) infoJson.get("instructions");
+        ArrayList<String> instructions = (ArrayList<String>) infoJson.get("instructions");
 
         JSONObject prepJson = (JSONObject) infoJson.get("prep");
         String introConcept = (String) prepJson.get("introConcept");
