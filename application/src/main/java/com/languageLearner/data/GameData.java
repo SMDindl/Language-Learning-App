@@ -236,6 +236,7 @@ public class GameData {
         }
 
         int count = 0;
+        ProgressTracker tracker = ProgressTracker.getInstance();
 
         for (Question question : questions) {
             if (question.getType().equalsIgnoreCase(questionType)) {
@@ -247,7 +248,7 @@ public class GameData {
                 System.out.println("Simulated Answer: " + simulatedAnswer);
 
                 // Validate answer based on the type
-                boolean isCorrect = question.validateAnswer(simulatedAnswer);
+                boolean isCorrect = question.validateAnswer(simulatedAnswer, tracker);
                 question.provideFeedback(isCorrect);
 
                 count++;
@@ -276,6 +277,7 @@ public class GameData {
         }
 
         int count = 0;
+        ProgressTracker tracker = ProgressTracker.getInstance();
 
         for (Question question : questions) {
             // Filter by question type and context
@@ -287,7 +289,7 @@ public class GameData {
 
                 // Simulate getting a user answer
                 Object userAnswer = getUserAnswer(questionType);
-                boolean isCorrect = question.validateAnswer(userAnswer);
+                boolean isCorrect = question.validateAnswer(userAnswer, tracker);
 
                 // Provide feedback
                 question.provideFeedback(isCorrect);
@@ -311,7 +313,7 @@ public class GameData {
     private Object getUserAnswer(String questionType) {
         switch (questionType) {
             case TYPE_MULTIPLE_CHOICE:
-                return 0; // Simulate selecting the first choice
+                return 1; // Simulate selecting the first choice
             case TYPE_TRUE_FALSE:
                 return true; // Simulate answering "true"
             case TYPE_FILL_IN_THE_BLANK:

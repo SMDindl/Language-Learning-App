@@ -2,7 +2,6 @@ package com.languageLearner.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -10,26 +9,38 @@ import java.util.UUID;
  */
 public class ProgressTracker {
 
+    private static ProgressTracker instance;
     private String language;
-    private List<DataKey> completedGames;
+    private ArrayList<DataKey> completedGames;
     private ArrayList<Question> missedQuestions;
     private HashMap<UUID, ArrayList<UUID>> matchingWords = new HashMap<>(); // Populated from user list of missed questions
 
-    public ProgressTracker(String language) {
-        this.language = language;
+    public ProgressTracker() {
+        this.language = "";
         this.completedGames = new ArrayList<>();
         this.missedQuestions = new ArrayList<>();
+    }
+
+    public static ProgressTracker getInstance() {
+        if (instance == null) {
+            instance = new ProgressTracker();
+        }
+        return instance;
     }
 
     public String getLanguage() {
         return language;
     }
 
-    public List<DataKey> getCompletedGames() {
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public ArrayList<DataKey> getCompletedGames() {
         return completedGames;
     }
 
-    public List<Question> getMissedQuestions() {
+    public ArrayList<Question> getMissedQuestions() {
         return missedQuestions;
     }
 

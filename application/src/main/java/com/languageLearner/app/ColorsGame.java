@@ -51,7 +51,7 @@ public class ColorsGame {
         for (Word color : colorList) {
             System.out.println(color.getWordText() + " = " + color.getWordTranslation());
         }
-        System.out.println("\n--- End of Color List ---\n");
+        System.out.println("--- End of Color List ---\n");
     }
 
     /**

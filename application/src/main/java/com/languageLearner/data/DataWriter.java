@@ -43,6 +43,7 @@ public class DataWriter {
                     missedQuestion.put("questionUUID", question.getId().toString());
 
                     // Only include wordUUIDs for matching questions
+                    
                     if (question.getType().equals("matching")) {
                         JSONArray wordUUIDs = new JSONArray();
                         for (UUID wordId : question.getWordUUIDs()) {
@@ -50,6 +51,7 @@ public class DataWriter {
                         }
                         missedQuestion.put("wordUUIDs", wordUUIDs);
                     }
+                        
 
                     missedQuestionsArray.add(missedQuestion);
                 }

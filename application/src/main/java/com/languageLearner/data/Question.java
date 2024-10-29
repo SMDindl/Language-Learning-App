@@ -3,6 +3,7 @@ package com.languageLearner.data;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class Question {
@@ -51,11 +52,14 @@ public class Question {
      * @param wordsList
      * @param context
      */
-    public Question(String type, List<Word> wordsList, String context) {
+    public Question(String type, ArrayList<Word> wordsList, String context) {
         this.id = UUID.randomUUID(); // Generate unique UUID for matching
         this.type = type;
         this.context = context;
-        // this.wordUUIDs = new ArrayList<>(); // Initialize the list of word UUIDs for tracking
+        this.wordUUIDs = new ArrayList<>();
+        for (Word word : wordsList) {
+            this.wordUUIDs.add(word.getId()); 
+        }
         generateMatchingQuestion(wordsList); // Generate the matching question dynamically
     }
 
@@ -118,7 +122,7 @@ public class Question {
     public void setOptions(List<String> wordTexts, List<String> translations) {
         this.options = new ArrayList<>();
         StringBuilder questionText = new StringBuilder("Match the words with their translations:\n");
-        for (int i = 0; i < wordTexts.size()+1; i++) {
+        for (int i = 0; i < wordTexts.size(); i++) {
             this.options.add(wordTexts.get(i) + " - " + translations.get(i));
             questionText.append(wordTexts.get(i)).append(" : ").append(translations.get(i)).append("\n");
         }
@@ -209,6 +213,52 @@ public class Question {
             }
         }
     }
+
+    public boolean askMissedQuestion() {
+        System.out.println(text);
+        ProgressTracker tracker = ProgressTracker.getInstance();
+        Scanner keyboard = new Scanner(System.in);
+        if ("multiple_choice".equals(type) && options != null) {
+            for (int i = 0; i < options.size(); i++) {
+                System.out.println((i + 1) + ": " + options.get(i));
+            }
+            int answer = 0;
+            answer = keyboard.nextInt()-1;
+            provideFeedback(validateMissedQuestionAnswer(answer));
+            return validateMissedQuestionAnswer(answer);
+        }
+        if ("true_false".equalsIgnoreCase(type)) {
+            String answer = keyboard.nextLine();
+            provideFeedback(validateMissedQuestionAnswer(answer));
+            return validateMissedQuestionAnswer(answer);
+            }
+        if ("FITB".equalsIgnoreCase(type)) {
+            String answer = keyboard.nextLine();
+            provideFeedback(validateMissedQuestionAnswer(answer));
+            return validateMissedQuestionAnswer(answer);
+        }
+        else {
+            String answer = keyboard.nextLine();
+            provideFeedback(validateMissedQuestionAnswer(answer, 0));
+            return validateMissedQuestionAnswer(answer);
+        }
+            
+    }
+
+    public boolean validateMissedQuestionAnswer(int answer) {
+        return answer == getCorrectAnswerIndex();
+    }
+
+    public boolean validateMissedQuestionAnswer(String TRUEORFALSE) {
+        return TRUEORFALSE.equals(correctAnswer);
+    }
+
+    private boolean validateMissedQuestionAnswer(String userAnswer, int fakeInt) {
+        HashSet<String> correctPairSet = new HashSet<>(options);
+        HashSet<String> userPairSet = new HashSet<>(List.of(userAnswer.split(",")));
+        return userPairSet.equals(correctPairSet);
+    }
+
 
     // Getters for relevant attributes
     public UUID getId() { return id; }

@@ -1,5 +1,7 @@
 package com.languageLearner.app;
 
+import java.util.ArrayList;
+
 import com.languageLearner.data.ProgressTracker;
 import com.languageLearner.data.Question;
 import com.languageLearner.data.User;
@@ -23,9 +25,16 @@ public class ProgressViewer {
             System.out.println("No missed questions to review for language: " + language);
         } else {
             System.out.println("=== Reviewing Missed Questions for Language: " + language + " ===");
-            for (Question question : tracker.getMissedQuestions()) {
-                question.askQuestion();
+            ArrayList<Question> missedAnswerList = new ArrayList<>();
+            for (int i = 0; i < tracker.getMissedQuestions().size(); i++) {
+                Question question = tracker.getMissedQuestions().get(i);
+                if(question.askMissedQuestion()) {
+                    missedAnswerList.add(question);
+                }
                 // Additional logic for validating and providing feedback could go here
+            }
+            for(int i = 0; i < missedAnswerList.size(); i++) {
+                tracker.removeMissedQuestion(missedAnswerList.get(i));
             }
         }
     }

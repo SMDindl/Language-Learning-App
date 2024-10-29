@@ -84,7 +84,7 @@ public class User {
             }
         }
         // Create and add a new tracker if it doesn't exist
-        ProgressTracker newTracker = new ProgressTracker(language);
+        ProgressTracker newTracker = ProgressTracker.getInstance();
         progressTrackers.add(newTracker);
         return newTracker;
     }
