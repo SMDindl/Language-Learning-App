@@ -1,25 +1,17 @@
 package com.languageLearner.data;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Letter {
     // Attributes
     private String letter;
     private String pronunciation;
     private ArrayList<Word> exampleWords;
-    private String image;
+    private UUID uuid;
 
-    // Constructor (with image)
-    public Letter(String letter, String pronunciation, ArrayList<Word> exampleWords, String image) {
-        this.letter = letter;
-        this.pronunciation = pronunciation;
-        this.exampleWords = exampleWords;
-        this.image = image;
-    }
-
-    // Constructor without image
-    public Letter(String letter, String pronunciation, ArrayList<Word> exampleWords) {
-        this.letter = letter;
+    public Letter(String text, String pronunciation, ArrayList<Word> exampleWords, UUID uuid) {
+        this.text = text;
         this.pronunciation = pronunciation;
         this.exampleWords = exampleWords;
         this.image = null; // No image provided
@@ -34,6 +26,7 @@ public class Letter {
         return pronunciation;
     }
 
+    public ArrayList<Word> getExampleWords() {
     public ArrayList<Word> getExampleWords() {
         return exampleWords;
     }

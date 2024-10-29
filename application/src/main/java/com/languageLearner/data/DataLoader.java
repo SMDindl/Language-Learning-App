@@ -301,7 +301,7 @@ public class DataLoader extends DataConstants {
                     (String) letterJSON.get(TEXT),
                     (String) letterJSON.get(PRONUNCIATION),
                     exampleWordsList,
-                    image
+                    uuid  // Pass the generated UUID
                 ));
             }
         }
