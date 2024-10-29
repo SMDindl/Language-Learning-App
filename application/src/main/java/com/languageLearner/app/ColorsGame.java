@@ -1,7 +1,6 @@
 package com.languageLearner.app;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import com.languageLearner.data.DataKey;
@@ -16,7 +15,7 @@ public class ColorsGame {
 
     public ColorsGame() {
         this.gameData = GameData.getInstance();
-        this.dataKey = DataKey.getInstance();  // Singleton instance of DataKey for ColorsGame
+        this.dataKey = DataKey.getInstance();;
     }
 
     public void startGame() {
@@ -28,82 +27,98 @@ public class ColorsGame {
             return;
         }
 
-        teachColors();
+        //User picks the color to work on
+        // Word selection = pickColor();
+        teachColor();
         System.out.println("When you're ready for the quiz, hit the ENTER key.");
-        keyboard.nextLine();  // Consume the newline
-        keyboard.nextLine();  // Wait for Enter key
+        //keyboard.next();
 
-        askQuestions();
+        askQuestion();
     }
 
-    public void teachColors() {
-        ArrayList<Word> colorList = gameData.getWords(dataKey);
-        for (Word color : colorList) {
+    // public Word pickColor() {
+    //     Scanner keyboard = new Scanner(System.in);
+    //     System.out.println("\nWhich letter would you like to study?: \n");
+    //     ArrayList<Word> colorList = gameData.getWords(dataKey);
+    //     for(int i = 0; i < colorList.size(); i++) {
+    //         //Prints out all the colors
+    //         System.out.println((i+1) + ". " + colorList.get(i).getWordText());
+    //     }
+    //     Word selection = colorList.get(keyboard.nextInt() - 1);
+    //     return selection;
+    // }
+
+    public void teachColor() {
+        ArrayList<Word> newColors = gameData.getWords(dataKey);
+        for(int i = 0; i < newColors.size(); i++) {
+            //Might be better to store it as a different list, one that has the word and then the information being taught
+            //For now, just storing it as a list of Word to print out the word and then the translation
+
+            // System.out.println(newColors.get(i).getWordText());
+            // System.out.println(newColors.get(i).getWordTranslation());
+            Word color = newColors.get(i);
             System.out.println(color.getWordText() + " = " + color.getWordTranslation());
+            // Narrator.playSoundMiguel(color.getWordText());
+            // Narrator.playSoundRussell("equals " + color.getWordTranslation());
         }
+
+        
     }
 
-    public void askQuestions() {
+    public void askQuestion() {
         Scanner keyboard = new Scanner(System.in);
         ArrayList<Question> questionList = gameData.getQuestions(dataKey);
-
-        // Iterate through the question list
-        for (Question question : questionList) {
-            question.askQuestion(); // Display the question text and options if applicable
-            Narrator.playSoundMiguel(question.getText());
-
-            switch (question.getType()) {
-                case "multiple_choice":
-                    int userChoice = keyboard.nextInt() - 1;
-                    question.provideFeedback(question.validateAnswer(userChoice));
-                    break;
-
-                case "true_false":
-                    System.out.println("Enter true or false:");
-                    boolean userAnswer = keyboard.nextBoolean();
-                    question.provideFeedback(question.validateAnswer(userAnswer));
-                    break;
-
-                case "FITB":
-                    System.out.println("Fill in the blank:");
-                    String userText = keyboard.next();
-                    question.provideFeedback(question.validateAnswer(userText));
-                    break;
-
-                default:
-                    System.out.println("Unknown question type.");
-                    break;
-            }
+        for(int i = 0; i < questionList.size(); i++) {
+            System.out.println(questionList.get(i).displayQuestion());
+            Narrator.playSoundMiguel(questionList.get(i).getQuestionText());
+            int num = keyboard.nextInt() - 1;
+            provideFeedback(validateAnswer(num, questionList.get(i)));
         }
 
-        // Hardcoded matching question to appear last
-        askHardcodedMatchingQuestion(keyboard);
+        //Matching Question
+        System.out.println("Match the color in English with the color in Fillipino");
+        System.out.println("Red : Berde");
+        System.out.println("Blue : Dilaw");
+        System.out.println("Green : Asul");
+        System.out.println("Yellow: Pula");
+
+        System.out.println("Red : ");
+        String input = keyboard.nextLine();
+        provideFeedback(input.equalsIgnoreCase("pula"));
+
+        System.out.println("Blue : ");
+        input = keyboard.nextLine();
+        provideFeedback(input.equalsIgnoreCase("asul"));
+
+        System.out.println("Green : ");
+        input = keyboard.nextLine();
+        provideFeedback(input.equalsIgnoreCase("berde"));
+
+        System.out.println("Yellow : ");
+        input = keyboard.nextLine();
+        provideFeedback(input.equalsIgnoreCase("dilaw"));
+
+        //FITB Question
+        System.out.println("Fill in the blank with the correct color");
+        System.out.println("____ ang langit.");
+        input = keyboard.nextLine();
+        provideFeedback(input.equalsIgnoreCase("azul"));
+
+        //True or False
+        System.out.println("True or False: Pula ang pusa.");
+        input = keyboard.nextLine();
+        provideFeedback(input.equalsIgnoreCase("false"));
     }
 
-    private void askHardcodedMatchingQuestion(Scanner keyboard) {
-        // Example word list for matching question
-        List<Word> matchingWords = List.of(
-            new Word("Red", "Vermelho"),
-            new Word("Blue", "Azul"),
-            new Word("Green", "Verde"),
-            new Word("Yellow", "Amarelo")
-        );
+    public boolean validateAnswer(int answer, Question question) {
+        System.out.println("anw" + answer + "       " + question.getCorrectAnswerIndex());
+        return answer == (question.getCorrectAnswerIndex());
+     }
 
-        // Create the hardcoded matching question
-        Question matchingQuestion = new Question("matching", matchingWords, "Colors");
-
-        // Display the matching question
-        System.out.println("\nLast Question: Match the colors with their translations.");
-        matchingQuestion.askQuestion(); // Display matching question text
-
-        // Collect user answers for matching
-        List<String> userMatches = new ArrayList<>();
-        for (int i = 0; i < matchingQuestion.getOptions().size(); i++) {
-            System.out.println((i + 1) + ": " + matchingQuestion.getOptions().get(i));
-            userMatches.add(keyboard.next()); // Collect user's matching choices
-        }
-
-        // Provide feedback based on the matching question
-        matchingQuestion.provideFeedback(matchingQuestion.validateAnswer(userMatches));
+    public void provideFeedback(boolean isCorrect) {
+        if(isCorrect) 
+            System.out.println("Well done!");
+        else
+            System.out.println("Better luck next time");
     }
 }
