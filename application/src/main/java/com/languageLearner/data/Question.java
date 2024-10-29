@@ -131,19 +131,46 @@ public class Question {
      * @param userAnswer the user's answer to the question
      * @return true if the answer is correct, false otherwise
      */
-    public boolean validateAnswer(Object userAnswer) {
+    public boolean validateAnswer(Object userAnswer, ProgressTracker tracker) {
         switch (type) {
             case "multiple_choice":
-                return userAnswer instanceof Integer && correctAnswerIndex.equals(userAnswer);
+                if (userAnswer instanceof Integer && correctAnswerIndex.equals(userAnswer)) {
+                    if (tracker != null) {
+                        tracker.removeMissedQuestion(this); // Remove this question from missed questions
+                    }
+                    return true; // Answer is correct
+                }
+                break; // Don't forget to break to avoid falling through
+    
             case "true_false":
             case "FITB":
-                return correctAnswer.equalsIgnoreCase(userAnswer.toString());
+                boolean isCorrect = correctAnswer.equalsIgnoreCase(userAnswer.toString());
+                if (isCorrect && tracker != null) {
+                    tracker.removeMissedQuestion(this);
+                } else if (!isCorrect && tracker != null) {
+                    tracker.addMissedQuestion(this);
+                }
+                return isCorrect;
+    
             case "matching":
-                return validateMatchingAnswer(userAnswer.toString());
+                boolean isMatchingCorrect = validateMatchingAnswer(userAnswer.toString());
+                if (isMatchingCorrect && tracker != null) {
+                    tracker.removeMissedQuestion(this);
+                } else if (!isMatchingCorrect && tracker != null) {
+                    tracker.addMissedQuestion(this);
+                }
+                return isMatchingCorrect;
+    
             default:
                 return false;
         }
+        // If the answer was incorrect, add it to missed questions
+        if (tracker != null) {
+            tracker.addMissedQuestion(this);
+        }
+        return false; // Incorrect answer by default
     }
+    
 
     /**
      * Validates a matching answer by comparing user input to correct pairs.
