@@ -2,7 +2,6 @@ package com.languageLearner.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.UUID;
 
 import com.languageLearner.app.Question;
@@ -16,7 +15,7 @@ public class GameData {
     private static GameData instance; // Singleton instance
 
     // ArrayLists for managing different types of game data
-    private final HashMap<UUID, String> languages;      // Language management
+    private final ArrayList<Language> languages;      // Language management
     private final ArrayList<String> DIFFICULTIES = new ArrayList<>(Arrays.asList("EASY", "MEDIUM", "HARD")); // Difficulty levels
     private final ArrayList<Game> games;                // Game data management
     private final ArrayList<Question> questions;        // Question data management
@@ -25,7 +24,7 @@ public class GameData {
 
     // Private constructor initializing ArrayLists
     private GameData() {
-        languages = new HashMap<>();      // Initialize languages list
+        languages = new ArrayList<>();      // Initialize languages list
         games = new ArrayList<>();          // Initialize games list
         questions = new ArrayList<>();      // Initialize questions list
         textObjects = new ArrayList<>();    // Initialize textObjects list
@@ -42,15 +41,23 @@ public class GameData {
 
     // Getters
     public ArrayList<String> getLanguageStrings() {
-        return new ArrayList<>(languages.values()); // List of language names
+        ArrayList<String> languageStrings = new ArrayList<>();
+        for (Language lang : languages) {
+            languageStrings.add(lang.getLanguageName());
+        }
+        return languageStrings;
     }
 
     public ArrayList<UUID> getLanguageUUIDs() {
-        return new ArrayList<>(languages.keySet()); // List of language UUIDs
+        ArrayList<UUID> languageStrings = new ArrayList<>();
+        for (Language lang : languages) {
+            languageStrings.add(lang.getUUID());
+        }
+        return languageStrings;
     }
 
-    public HashMap<UUID, String> getLanguages() {
-        return new HashMap<>(languages); // Map of UUID to language name
+    public ArrayList<Language> getLanguages() {
+        return languages; // Map of UUID to language name
     }
 
     public ArrayList<String> getDifficulties() {
@@ -80,10 +87,22 @@ public class GameData {
      * @param languageName the name of the language to add
      */
     public void addLanguage(UUID languageUUID, String languageName) {
-        if (!languages.containsKey(languageUUID)) {
-            languages.put(languageUUID, languageName);
+        if(getUUIDs(languages).contains(languageUUID)) {
+
         }
     }
+
+    private ArrayList<UUID> getUUIDs(ArrayList<?> list) {
+        ArrayList<UUID> uuids = new ArrayList<>();
+        for (Object obj : list) {
+            if (obj instanceof HasUUID) {  // Ensure obj has a UUID method
+                HasUUID item = (HasUUID) obj;  // Cast to the type that has getUUID()
+                uuids.add(item.getUUID());
+            }
+        }
+        return uuids;
+    }
+    
 
     /**
      * Adds a game to the games list.
@@ -133,5 +152,5 @@ public class GameData {
         return uuid;
     }
 
-    
+
 }

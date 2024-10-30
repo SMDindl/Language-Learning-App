@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 /**
  * TextObject <-- Game <--- Difficulty & Language
  */
-public class TextObject {
+public class TextObject implements HasUUID, HasGameUUID {
     
     private String text;
     private String englishText;

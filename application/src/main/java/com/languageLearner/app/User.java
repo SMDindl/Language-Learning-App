@@ -5,32 +5,37 @@ import java.util.HashSet;
 import java.util.UUID;
 
 import com.languageLearner.game.Game;
+import com.languageLearner.game.HasUUID;
 
-public class User {
+public class User implements HasUUID {
 
     private String username;
     private String email;
     private String displayName;
     private String password;
     private UUID uuid;
-    private HashSet<ProgressTracker> progressTrackers; // LanguageUUID, Progress(tracker) mapped to one another 
+    private HashSet<ProgressTracker> progressTrackers; // HashSet ensures no dupulicates
 
     public void addProgressTracker(UUID languageUUID, String language) {
+        progressTrackers.add(new ProgressTracker(languageUUID, language));
+    }
 
+    public UUID getUUID() {
+        return uuid;
     }
 
     /**
      * Inner nestest class used for traking user progress
      */
-    public class ProgressTracker {
+    public class ProgressTracker implements HasUUID {
 
         private static ArrayList<Question> missedQuestions;  // UUID of the game (that the question is apart of), the question itself (loaded by uuid)
         private static ArrayList<Game> completedGames;     // UUID of the game, the Game
-        private final UUID languageUUID;
+        private final UUID uuid;
         private final String language;
 
         public ProgressTracker(UUID languageUUID, String language) {
-            this.languageUUID = languageUUID;
+            this.uuid = languageUUID;
             this.language = language;
         }
 
@@ -43,8 +48,8 @@ public class User {
             return language;
         }
 
-        public UUID getLanguageUUID() {
-            return languageUUID;
+        public UUID getUUID() {
+            return uuid;
         }
     
         public ArrayList<Game> getCompletedGames() {

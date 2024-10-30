@@ -7,19 +7,17 @@ import java.util.stream.Collectors;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class Game {
+public class Game implements HasUUID {
 
-    private String language;
-    private UUID languageUUID;  // UUID of the actual language (e.g., Filipino)
-    private String gameTitle;
-    private String difficulty;
-    private UUID uuid;          // UUID of the actual game
-    private ArrayList<TextObject> textObjects;
-    private GameInfo info;
+    private final Language language;
+    private final String gameTitle;
+    private final String difficulty;
+    private final UUID uuid;          // UUID of the actual game
+    private final ArrayList<TextObject> textObjects;
+    private final GameInfo info;
 
-    public Game(String language, UUID languageUUID, String gameTitle, String difficulty, UUID uuid, GameInfo info, ArrayList<TextObject> textObjects) {
+    public Game(Language language, String gameTitle, String difficulty, UUID uuid, GameInfo info, ArrayList<TextObject> textObjects) {
         this.language = language;
-        this.languageUUID = languageUUID;
         this.gameTitle = gameTitle;
         this.difficulty = difficulty;
         this.uuid = uuid;
@@ -28,12 +26,8 @@ public class Game {
     }
 
     // Getters
-    public String getLanguage() {
+    public Language getLanguage() {
         return language;
-    }
-
-    public UUID getLanguageUUID() {
-        return languageUUID;
     }
 
     public String getGameTitle() {
@@ -44,6 +38,7 @@ public class Game {
         return difficulty;
     }
 
+    @Override
     public UUID getUUID() {
         return uuid;
     }
@@ -70,8 +65,8 @@ public class Game {
         ArrayList<TextObject> textObjects = (ArrayList<TextObject>) textJsonArray.stream()
                                             .map(obj -> TextObject.fromJson((JSONObject) obj, uuid))  // Cast each element to JSONObject, also UUID passed
                                             .collect(Collectors.toCollection(ArrayList::new));
-
-        return new Game(language, languageUUID, gameTitle, difficulty, uuid, info, textObjects);
+        
+        return new Game(new Language(language, uuid), gameTitle, difficulty, uuid, info, textObjects);
     }
 
     // toString method for debugging
@@ -81,7 +76,7 @@ public class Game {
             + "Language:\n" 
             + language + "\n\n"
             + "Language UUID:\n" 
-            + languageUUID + "\n\n"
+            + language.getUUID() + "\n\n"
             + "Game UUID:\n" 
             + uuid + "\n\n"
             + "Info:\n" 

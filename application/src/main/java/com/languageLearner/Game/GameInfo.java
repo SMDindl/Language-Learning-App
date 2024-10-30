@@ -6,17 +6,17 @@ import java.util.UUID;
 import org.json.simple.JSONObject;
 
 /**
- * GameInfo <-- Game <--- Difficulty & Language
+ * GameInfo <-- Game (has difficulty) <--- Language
  */
-public class GameInfo {
+public class GameInfo implements HasGameUUID {
     
-    private String description;
-    private String objective;
-    private ArrayList<String> instructions;
-    private String introConcept;
-    private String exampleUsage;
-    private String gameTip;
-    private UUID gameUUID;
+    private final String description;
+    private final String objective;
+    private final ArrayList<String> instructions;
+    private final String introConcept;
+    private final String exampleUsage;
+    private final String gameTip;
+    private final UUID gameUUID;
 
     /**
      * 
@@ -41,11 +41,9 @@ public class GameInfo {
     }
 
     // UUID getters
-    /**
-     * 
-     * @return UUID
-     */
-    public UUID getUUID() {
+    
+    @Override
+    public UUID getGameUUID() {
         return gameUUID;
     }
 
