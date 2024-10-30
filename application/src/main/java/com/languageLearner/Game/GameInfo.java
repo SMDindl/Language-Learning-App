@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.json.simple.JSONObject;
 
 /**
- * 
+ * GameInfo <-- Game <--- Difficulty & Language
  */
 public class GameInfo {
     
@@ -30,7 +30,7 @@ public class GameInfo {
      */
     public GameInfo(String description, String objective, ArrayList<String> instructions, 
                     String introConcept, String exampleUsage, String gameTip, UUID gameUUID) {
-                        
+
         this.description = description;
         this.objective = objective;
         this.instructions = instructions;
@@ -66,7 +66,7 @@ public class GameInfo {
         String gameTip = (String) prepJson.get("gameTip");
 
         GameInfo gameInfo = new GameInfo(description, objective, instructions, introConcept, exampleUsage, gameTip, gameUUID);
-        GameData.getInstance().addGameInfo(gameUUID, gameInfo);
+        GameData.getInstance().addGameInfo(gameInfo);
         return gameInfo;
     }
 }

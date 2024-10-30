@@ -44,7 +44,7 @@ public class DataLoader {
             for (Object gameObj : gamesArray) {
                 JSONObject gameJson = (JSONObject) gameObj;
                 Game game = Game.fromJson(gameJson, language, languageUUID);
-                GameData.getInstance().addGame(languageUUID, game); // add to GameData language
+                GameData.getInstance().addGame(game); // add to GameData language
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -54,7 +54,7 @@ public class Game {
                                             .collect(Collectors.toCollection(ArrayList::new));
 
         Game game = new Game(language, languageUUID, gameTitle, difficulty, uuid, info, textObjects);
-        GameData.getInstance().addGame(languageUUID, game);
+        GameData.getInstance().addGame(game);
         return game;
     }
     

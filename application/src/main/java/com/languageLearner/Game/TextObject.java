@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.json.simple.JSONObject;
 
 /**
- * 
+ * TextObject <-- Game <--- Difficulty & Language
  */
 public class TextObject {
     
@@ -76,7 +76,7 @@ public class TextObject {
         UUID uuid = UUID.fromString((String) textJson.get("UUID"));
 
         TextObject textObject = new TextObject(text, englishText, linkedText, englishLinkedText, helperText, uuid, gameUUID);
-        GameData.getInstance().addTextObject(gameUUID, textObject);
+        GameData.getInstance().addTextObject(textObject);
         return textObject;
     }
     
