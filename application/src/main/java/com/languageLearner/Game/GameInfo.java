@@ -50,7 +50,14 @@ public class GameInfo {
     }
 
     // Methods to interact with game info...
-
+    public String instructionsToString() {
+        String s = "";
+        int i = 1;
+        for(String intruc : instructions) {
+            s += i++ + ") " + intruc + " \n";
+        }
+        return s;
+    }
 
 
     // Used to load from json, will be accessed in dataloader
@@ -69,4 +76,25 @@ public class GameInfo {
         GameData.getInstance().addGameInfo(gameInfo);
         return gameInfo;
     }
+
+    @Override
+    public String toString() {
+        return "\n---- ALL GAME INFO ----\n\n" 
+            + "Description:\n"
+            + description + "\n\n"
+            + "Objective:\n" 
+            +  objective + "\n\n"
+            + "Intructions List:\n" 
+            + instructionsToString() + "\n"  
+            + "Intro Concept:\n" 
+            + introConcept + "\n\n" 
+            + "Example:\n" 
+            + exampleUsage + "\n\n" 
+            + "Tip:\n" 
+            + gameTip + "\n\n"
+            + "GameUUID:\n" 
+            + gameUUID + "\n\n"
+            + "--- END OF ALL GAME INFO --- \n";
+    }
+    
 }

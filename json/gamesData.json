@@ -10,11 +10,11 @@
                     "UUID": "8ce4fefc-a539-4546-9d7e-0ac8778f8de5",
                     "INFO": {
 
-                        "description": "Welcome to the easy colors game. First, you will learn each color (red, green, and blue), then complete a quiz!",
+                        "description": "Welcome to the easy colors game. First, you will learn each color (red, green, and blue), then you will concure the brain blaster!",
                         "objective": "Be able to identify the Filipino words for each color taught and know the Filipino words for common objected of those colors.",
                         "instructions": [
                             "Nagivate through each of the given colors and review the examples given.",
-                            "When you feel up for the task, do the brain blaster"
+                            "When up for the task, you will face the brain blaster."
                         ],
                         "prep": {
                             "introConcept": "In Filipino, the word for 'color' is 'kulay.'",
@@ -29,7 +29,7 @@
                             "englishText": "red",
                             "linkedText": "Ang mansanas ay kulay pula.",
                             "englishLinkedText": "The apple is red.",
-                            "helperText": "Pula means 'red' in Filipino. It’s used the same way as 'red' in English, like describing a red apple (mansanas na pula) or a red car (kotse na pula).",
+                            "helperText": "Pula means 'red' in Filipino. It's used the same way as 'red' in English, like describing a red apple (mansanas na pula) or a red car (kotse na pula).",
                             "UUID": "285bad41-5c1c-45b4-bc51-59f480bb1895"
                         },
                         {
@@ -49,26 +49,56 @@
                             "UUID": "52105f37-5798-4814-a066-d44fb5f7a4a6"
                         }
                     ]
-                },
-                {
-                    "GAME": "numbersGame",
-                    "DIFF": "medium",
-                    "UUID": "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
-                    "TEXT": [
-                        
-                    ]
                 }
-                
             ]
         },
         {
-            "COMMENT": "spanish",
-            "COMMENT1": "2cdef789-abcd-ef12-3456-7890ghijklm",
-            "COMMENT2": [
+            "LANG": "spanish",
+            "UUID": "d9d2caae-e27d-4de7-9b2a-8a784f5fbb12",
+            "GAMES": [
                 {
                     "GAME": "colorsGame",
                     "DIFF": "easy",
-                    "UUID": "1234abcd-5678-efgh-ijkl-91011mnopqr"
+                    "UUID": "b8d6fae7-2ecb-4427-bc9a-31e8fa5bc2e3",
+                    "INFO": {
+                        "description": "Welcome to the easy colors game! First, you will learn each color (red, green, and blue), then complete a quiz!",
+                        "objective": "Be able to identify the Spanish words for each color taught and know the Spanish words for common objects of those colors.",
+                        "instructions": [
+                            "Nagivate through each of the given colors and review the examples given.",
+                            "When up for the task, you will face the brain blaster."
+                        ],
+                        "prep": {
+                            "introConcept": "In Spanish, the word for 'color' is 'color.'",
+                            "exampleUsage": "To say that something is a color, use 'es color' followed by the color. For example, 'La manzana es color roja.' (The apple is red.)",
+                            "gameTip": "Remember, colors often appear in everyday objects! Think of common items like fruits or plants to help you remember."
+                        }
+                    },
+                    "TEXT": [
+                        {
+                            "text": "rojo",
+                            "englishText": "red",
+                            "linkedText": "La manzana es color roja.",
+                            "englishLinkedText": "The apple is red.",
+                            "helperText": "Rojo means 'red' in Spanish. It's used the same way as 'red' in English, like describing a red apple (manzana roja) or a red car (coche rojo).",
+                            "UUID": "b35ef1a4-2a3f-47c3-8412-8c4c5e6c6a31"
+                        },
+                        {
+                            "text": "verde",
+                            "englishText": "green",
+                            "linkedText": "La hierba es color verde.",
+                            "englishLinkedText": "The grass is green.",
+                            "helperText": "Verde is similar to 'verdant,' which means green and lush in English. Think of green grass or trees.",
+                            "UUID": "0c5a90ef-42c7-45e8-9bb2-43d2edaf6a53"
+                        },
+                        {
+                            "text": "azul",
+                            "englishText": "blue",
+                            "linkedText": "El cielo es color azul.",
+                            "englishLinkedText": "The sky is blue.",
+                            "helperText": "Azul means 'blue' in Spanish, similar to the color of the sky or the ocean.",
+                            "UUID": "ba4f07d2-0e35-4bfa-a9ff-f0b6d60e3a1a"
+                        }
+                    ]
                 }
             ]
         }

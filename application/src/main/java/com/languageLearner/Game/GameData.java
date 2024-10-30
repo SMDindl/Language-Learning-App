@@ -16,7 +16,7 @@ public class GameData {
     private static GameData instance; // Singleton instance
 
     // ArrayLists for managing different types of game data
-    private final HashMap<UUID, String> languages;           // Language management
+    private final HashMap<UUID, String> languages;      // Language management
     private final ArrayList<String> DIFFICULTIES = new ArrayList<>(Arrays.asList("EASY", "MEDIUM", "HARD")); // Difficulty levels
     private final ArrayList<Game> games;                // Game data management
     private final ArrayList<Question> questions;        // Question data management
@@ -132,4 +132,6 @@ public class GameData {
     public Object search(UUID uuid) {
         return uuid;
     }
+
+    
 }

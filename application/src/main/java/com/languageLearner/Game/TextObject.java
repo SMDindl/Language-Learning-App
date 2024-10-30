@@ -79,5 +79,19 @@ public class TextObject {
         GameData.getInstance().addTextObject(textObject);
         return textObject;
     }
+
+    @Override
+    public String toString() {
+        return "TEXT OBJ:\n" 
+            + "Text: " + text + "\n"
+            + "English Text: " + englishText + "\n"
+            + "Linked Text: " + linkedText + "\n"
+            + "English Linked Text: " + englishLinkedText + "\n"
+            + "Helper Text: " + helperText + "\n"
+            + "UUID: " + uuid + "\n"
+            + "Game UUID: " + gameUUID + "\n"
+            + "-End of text obj-\n";
+    }
+
     
 }
