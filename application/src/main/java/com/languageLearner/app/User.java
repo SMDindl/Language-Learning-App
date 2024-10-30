@@ -17,7 +17,7 @@ public class User {
      */
     public class Progress {
 
-        private static HashMap<UUID, Question> missedQuestions; // UUID of question, the question itself
+        private static HashMap<UUID, Question> missedQuestions; // UUID of the game (that the question is apart of), the question itself (loaded by uuid)
         private static HashMap<UUID, String> completedGames; // UUID of the game, the title of the game
 
         public Progress(String langauge) {

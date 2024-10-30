@@ -16,6 +16,10 @@ public class DataConstants {
         LANGUAGE_UUIDS.put(FILIPINO, FILIPINO_UUID);
     }
 
+    public UUID getFilipinoLanguageUUID() {
+        return FILIPINO_UUID;
+    }
+
     // Idenifiers
     // public static final String LANG = "LANG";
     // public static final String GAME = "game";       // game is searched for by DataLoader to know when 
