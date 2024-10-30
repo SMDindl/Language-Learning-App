@@ -2,130 +2,71 @@ package com.languageLearner.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import com.languageLearner.app.Question;
 
 /**
- * Singleton
+ * Singleton class to manage game data
  */
+@SuppressWarnings("FieldMayBeFinal")
 public class GameData {
 
     // Singleton instance
     private static GameData instance;
 
     // Language management
-    private HashMap<UUID, String> languages;      // list of all language UUIDS, alongside name of the language
+    private UUIDMap<String> languages;
 
     // Difficulties management
     private final ArrayList<String> DIFFICULTIES = new ArrayList<>(Arrays.asList("EASY", "MEDIUM", "HARD"));
 
+    // All of these different data types store the game thing, but paired with different uuids to help handle different scenarios
     // Game data management
-    private ArrayList<Game> games;                          // list of all games per language, each instance of game has their language uuid stored w/ it
-    private HashMap<Game, UUID> gamesWithUUIDs;             // games alongside with their own uuid, Game.getUUID(), for easy management
+    private UUIDMap<Game> games;                    // list of all games per language, each instance of game has their language uuid stored w/ it
+    private UUIDMap<Game> gamesWithGameIDs;         // games alongside with their own uuid, Game.getUUID(), for easy management
 
-    // Question data mangement
-    private HashMap<UUID, ArrayList<Question>> questions;   // questions alongside to their game's respective uuid
-    private HashMap<Question, UUID> questionsWithUUIDs;     // questions linked with their own uuid, question.getUUID(), for easy searching
+    // Question data management
+    private UUIDMap<Question> questionsWithGameIDs;     // questions linked to their game's UUID
+    private UUIDMap<Question> questionsWithQuestionIDs; // questions linked with their own UUID
 
-    // TextObject data mangement
-    private HashMap<UUID, ArrayList<TextObject>> textObject;    // questions linked to their game's respective uuid
-    private HashMap<TextObject, UUID> textObjectWithUUIDs;       // questions linked with their own uuid, question.getUUID(), for easy searching
+    // TextObject data management
+    private UUIDMap<TextObject> textObjectsWithGameIDs; // TextObjects linked to their game's UUID
+    private UUIDMap<TextObject> textObjectsWithTextObjectIDs; // TextObjects linked with their own UUID
 
-    // GameInfo mangement
-    private HashMap<UUID, ArrayList<GameInfo>> gameInfo;    // questions linked to their game's respective uuid
-    private HashMap<GameInfo, UUID> gameInfoWithUUIDs;       // questions linked with their own uuid, question.getUUID(), for easy searching
-
-    // generatedQuestions
+    // GameInfo management
+    private UUIDMap<GameInfo> gameInfoWithGameIDs;      // GameInfo linked to their game's UUID
+    private UUIDMap<GameInfo> gameInfoWithGameInfoIDs;  // GameInfo linked with their own UUID
 
     private GameData() {
-        // Language mangement
-        languages = new HashMap<>();
+        // Initialize language management
+        languages = new UUIDMap<>();
 
-        // Game mangement
-        games = new ArrayList<>();
-        gamesWithUUIDs = new HashMap<>();
+        // Initialize game management
+        games = new UUIDMap<>();
+        gamesWithGameIDs = new UUIDMap<>();
 
-        // Questions management
-        questions = new HashMap<>();
-        questionsWithUUIDs = new HashMap<>();
+        // Initialize question management
+        questionsWithGameIDs = new UUIDMap<>();
+        questionsWithQuestionIDs = new UUIDMap<>();
 
-        // TextObject management
-        textObject = new HashMap<>();
-        textObjectWithUUIDs = new HashMap<>();
+        // Initialize TextObject management
+        textObjectsWithGameIDs = new UUIDMap<>();
+        textObjectsWithTextObjectIDs = new UUIDMap<>();
 
-        gameInfo = new HashMap<>();
-        gameInfoWithUUIDs = new  HashMap<>();
+        // Initialize GameInfo management
+        gameInfoWithGameIDs = new UUIDMap<>();
+        gameInfoWithGameInfoIDs = new UUIDMap<>();
     }
 
     public static GameData getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new GameData();
         }
         return instance;
     }
 
-    /**
-     * Adds a language if it doesn't already exist.
-     *
-     * @param uuid      the UUID of the language
-     * @param language  the name of the language
-     * @return true if the language was added, false if it was a duplicate
-     */
-    public boolean addLanguage(UUID languageUUID, String languageName) {
-        if (!languages.containsKey(languageUUID)) {
-            languages.put(languageUUID, languageName);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Adds a game to:
-     * - ArrayList<Game> games
-     * Adds a game and game.UUID to:
-     * - HashMap<Game, UUID> gamesWithUUIDs
-     *
-     * @param game the Game object to add
-     * @return true if the game was added, false if it was a duplicate
-     */
-    public boolean addGame(Game game) {
-        UUID uuid = game.getUUID();
-        if (!gamesWithUUIDs.containsValue(uuid)) {
-            games.add(game);                        // Add to list of games
-            gamesWithUUIDs.put(game, uuid);         // Add to list of game+uuid 
-            return true;
-        }
-        return false;
-    }
-
-    // private HashMap<UUID, ArrayList<Question>> questions;   // questions alongside to their game's respective uuid
-    // private HashMap<Question, UUID> questionsWithUUIDs;     // questions linked with their own uuid, question.getUUID(), for easy searching
-
-    /**
-     * Adds a question to:
-     * - HashMap<UUID, ArrayList<Question>> questions
-     * Adds a question and question.getUUID to;
-     * - HashMap<Question, UUID> questionsWithUUIDs
-     * 
-     * @param question
-     * @return
-     */
-    public boolean addQuestion(Question question) {
-        UUID uuid = question.getUUID();
-        ArrayList<Question> questionList = questions.get(question.getGameUUID());
-        if (!gamesWithUUIDs.containsValue(uuid)) {
-            
-            questionsWithUUIDs.put(question, uuid);                 // Add to list of question+uuid 
-            return true;
-        }
-        return false;
-    }
-
-    // Getters 
-    public HashMap<UUID, String> getLanguages() {
+    public UUIDMap<String> getLanguages() {
         return languages;
     }
 
@@ -133,64 +74,64 @@ public class GameData {
         return DIFFICULTIES;
     }
 
-    public HashMap<Game, UUID> getGamesWithUUIDs() {
-        return gamesWithUUIDs;
+    public ArrayList<Game> getGames() {
+        return games.get(UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72"));
+    }
+
+    // Adder methods
+    // Includes ablities for adding:
+    // languages, games, questions, textObjects, gameInfo
+    /**
+     * Adds a language if it doesn't already exist.
+     *
+     * @param languageUUID the UUID of the language
+     * @param languageName the name of the language
+     */
+    public void addLanguage(UUID languageUUID, String languageName) {
+        languages.add(languageUUID, languageName);
     }
 
     /**
-     * Returns List of gameTitles based upon the uuid of the language
+     * Adds a game if it doesn't already exist.
+     *
+     * @param game         the Game to add
+     * @param languageUUID the UUID of the language the game belongs to
      */
-    public ArrayList<String> getGameTitlesByUUID(UUID targetUUID) {
-        ArrayList<String> gameNames = new ArrayList<>();
-    
-        // Iterate through each entry in the gamesWithUUIDs map
-        for (HashMap.Entry<Game, UUID> entry : gamesWithUUIDs.entrySet()) {
-            
-            if (entry.getValue().equals(targetUUID)) { // Check if the UUID matches the target UUID
-                gameNames.add(entry.getKey().getGameTitle());
-            }
-        }
-    
-        return gameNames;
+    public void addGame(UUID languageUUID, Game game) {
+        games.add(languageUUID, game);
+        gamesWithGameIDs.add(game.getUUID(), game);
     }
 
     /**
-     * Returns List of gamesByUUID
-     * 
+     * Adds a question associated with a specific game UUID.
+     *
+     * @param gameUUID the UUID of the game
+     * @param question the Question to add
      */
-    public ArrayList<Game> getGameByUUID(UUID targetUUID) {
-        ArrayList<Game> gamesList = new ArrayList<>();
-    
-        // Iterate through each entry in the gamesWithUUIDs map
-        for (HashMap.Entry<Game, UUID> entry : gamesWithUUIDs.entrySet()) {
-            
-            if (entry.getValue().equals(targetUUID)) { // Check if the UUID matches the target UUID
-                gamesList.add(entry.getKey());
-            }
-        }
-    
-        return gamesList;
+    public void addQuestion(UUID gameUUID, Question question) {
+        questionsWithGameIDs.add(gameUUID, question);             // Adds question to the list of questions by game UUID
+        questionsWithQuestionIDs.add(question.getUUID(), question); // Adds question by its specific UUID
     }
 
     /**
-     * Return questions for specific uuid 
-     * 
-     * @param targetUUID
-     * @return
+     * Adds a TextObject associated with a specific game UUID.
+     *
+     * @param gameUUID  the UUID of the game
+     * @param textObject the TextObject to add
      */
-    public ArrayList<Question> questionsForGame(UUID targetUUID) {
-        ArrayList<Question> questions = new ArrayList<>();
-    
-        // Iterate through each entry in the gamesWithUUIDs map
-        for (HashMap.Entry<Question, UUID> entry : questionsWithUUIDs.entrySet()) {
-            
-            if (entry.getValue().equals(targetUUID)) { // Check if the UUID matches the target UUID
-                questions.add(entry.getKey());
-            }
-        }
-    
-        return questions;
+    public void addTextObject(UUID gameUUID, TextObject textObject) {
+        textObjectsWithGameIDs.add(gameUUID, textObject);               // Adds TextObject by game UUID
+        textObjectsWithTextObjectIDs.add(textObject.getUUID(), textObject); // Adds TextObject by its specific UUID
     }
 
-
+    /**
+     * Adds GameInfo associated with a specific game UUID.
+     *
+     * @param gameUUID the UUID of the game
+     * @param gameInfo the GameInfo to add
+     */
+    public void addGameInfo(UUID gameUUID, GameInfo gameInfo) {
+        gameInfoWithGameIDs.add(gameUUID, gameInfo);                   // Adds GameInfo by game UUID
+        gameInfoWithGameInfoIDs.add(gameInfo.getUUID(), gameInfo);     // Adds GameInfo by its specific UUID
+    }
 }

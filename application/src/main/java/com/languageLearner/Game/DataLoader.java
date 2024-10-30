@@ -10,10 +10,20 @@ import org.json.simple.parser.JSONParser;
 
 public class DataLoader {
 
+    private static DataLoader instance;
+
     // Singleton
     // Clear all ArrayLists/HashMaps before loading
     private DataLoader() {
 
+    }
+
+    public DataLoader getInstance() {
+        if (instance == null) {
+            instance = new DataLoader();
+        }
+        
+        return instance;
     }
 
     // Method to load all games from a JSON file
@@ -25,14 +35,16 @@ public class DataLoader {
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
             String language = (String) jsonObject.get("LANG");  // Retrieves the language as a String
-            UUID langUUID = UUID.fromString((String) jsonObject.get("UUID"));  // Retrieves UUID as a String and converts to UUID
+            UUID languageUUID = UUID.fromString((String) jsonObject.get("UUID"));  // Retrieves UUID as a String and converts to UUID
+
+            GameData.getInstance().addLanguage(languageUUID, language); // add to GameData language
 
             JSONArray gamesArray = (JSONArray) jsonObject.get("GAMES");
 
             for (Object gameObj : gamesArray) {
                 JSONObject gameJson = (JSONObject) gameObj;
-                Game game = Game.fromJson(gameJson, language, langUUID);
-                games.add(game);
+                Game game = Game.fromJson(gameJson, language, languageUUID);
+                GameData.getInstance().addGame(languageUUID, game); // add to GameData language
             }
         } catch (Exception e) {
             e.printStackTrace();

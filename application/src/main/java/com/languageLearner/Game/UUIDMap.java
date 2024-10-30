@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- * A generic map that associates a UUID with an object of a specified type.
- * Object can be anysort of data type.
+ * A generic map that associates a UUID with a list of objects of a specified type.
+ * Each UUID key is mapped to an ArrayList containing elements of type T.
  *
  * @param <T> the type of object to be stored in the map
  */
 public class UUIDMap<T> {
 
-    private final HashMap<UUID, T> uuidMap;
+    private final HashMap<UUID, ArrayList<T>> uuidMap;
 
     /**
      * Constructs a new, empty UUIDMap.
@@ -22,86 +22,68 @@ public class UUIDMap<T> {
     }
 
     /**
-     * Adds an object to the map with a specified UUID as the key,
-     * only if the UUID already exists in the map.
+     * Adds an object to the list associated with a specified UUID.
+     * If no list exists for the UUID, a new list is created and the object is added to it.
      *
      * @param uuid the UUID to associate with the object
      * @param object the object to add
      */
-    @SuppressWarnings("unchecked")
     public void add(UUID uuid, T object) {
-        if (!(object instanceof ArrayList) && uuidMap.get(uuid) instanceof ArrayList) { // for handing the need to place obj into array
-            ((ArrayList<T>) uuidMap.get(uuid)).add((T) object);
-        } else if (uuidMap.containsKey(uuid)) {
-            uuidMap.put(uuid, object);
-        }
+        uuidMap.computeIfAbsent(uuid, k -> new ArrayList<>()).add(object);
     }
 
     /**
-     * Retrieves the object associated with a specific UUID.
+     * Retrieves the list of objects associated with a specific UUID.
      *
-     * @param uuid the UUID of the object to retrieve
-     * @return the object associated with the given UUID, or null if no such object exists
+     * @param uuid the UUID of the list to retrieve
+     * @return the list of objects associated with the given UUID, or null if no such list exists
      */
-    public T get(UUID uuid) {
-        return uuidMap.get(uuid);
+    public ArrayList<T> getList(UUID uuid) {
+        return uuidMap.getOrDefault(uuid, new ArrayList<>());
     }
 
     /**
-     * Removes the object associated with a specific UUID from the map.
+     * Removes the list of objects associated with a specific UUID from the map.
      *
-     * @param uuid the UUID of the object to remove
-     * @return the removed object, or null if no object was associated with the given UUID
+     * @param uuid the UUID of the list to remove
+     * @return the removed list, or null if no list was associated with the given UUID
      */
-    public T remove(UUID uuid) {
+    public ArrayList<T> remove(UUID uuid) {
         return uuidMap.remove(uuid);
     }
 
     /**
-     * Checks if the map contains an object associated with the specified UUID.
+     * Checks if the map contains a list associated with the specified UUID.
      *
      * @param uuid the UUID to check for in the map
-     * @return true if an object is associated with the given UUID, false otherwise
+     * @return true if a list is associated with the given UUID, false otherwise
      */
     public boolean containsUUID(UUID uuid) {
         return uuidMap.containsKey(uuid);
     }
 
     /**
-     * Returns an ArrayList associated with the specified UUID,
-     * if it exists and is an ArrayList. Otherwise, returns null.
+     * Checks if any list in the map contains the specified object.
      *
-     * @param uuid the UUID to look up
-     * @return the ArrayList associated with the UUID, or null if not found or not an ArrayList
+     * @param object the object to check for in the map's lists
+     * @return true if any list contains the specified object, false otherwise
      */
-    public ArrayList<?> getAllPerUUID(UUID uuid) {
-        T object = uuidMap.get(uuid);
-        if (object instanceof ArrayList) {
-            return (ArrayList<?>) object;
+    public boolean contains(T object) {
+        // Iterate over each ArrayList<T> in the map and check if it contains the object
+        for (ArrayList<T> list : uuidMap.values()) {
+            if (list.contains(object)) {
+                return true;
+            }
         }
-        System.out.println("Returned null"); // debug statement
-        return null; // or could return new ArrayList<>() if we want an empty list
+        return false;
     }
 
     /**
-     * Returns a copy of the internal map, containing all UUID-object associations.
+     * Returns a copy of the internal map, containing all UUID-ArrayList associations.
      *
      * @return a new HashMap containing all entries in this UUIDMap
      */
-    public HashMap<UUID, T> getAll() {
+    public HashMap<UUID, ArrayList<T>> getAll() {
         return new HashMap<>(uuidMap);
     }
-
-    // /**
-    //  * Adds an object to the map with a randomly generated UUID as the key.
-    //  *
-    //  * @param object the object to add
-    //  * @return the UUID generated and associated with the added object
-    //  */
-    // public UUID add(T object) {
-    //     UUID uuid = UUID.randomUUID();
-    //     uuidMap.put(uuid, object);
-    //     return uuid;
-    // }
-
 }

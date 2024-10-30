@@ -12,10 +12,10 @@ import org.json.simple.JSONObject;
  */
 public class Question {
 
+    // uuids
     private UUID uuid;      // All questions will have their own respective uuid
     private UUID gameUUID;      // All questions will have a game UUID that they are attached to
 
-    
     // Multiple choice / true-false values
     private String question;
     private ArrayList<String> Choices;
@@ -67,6 +67,5 @@ public class Question {
     public static void fromJson(JSONObject gameJson) {
 
     }
-
 
 }

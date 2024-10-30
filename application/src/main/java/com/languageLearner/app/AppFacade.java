@@ -1,8 +1,6 @@
 package com.languageLearner.app;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.UUID;
 
 import com.languageLearner.game.Game;
@@ -20,7 +18,7 @@ public class AppFacade {
     // All of these crossover with Game (To keep track and manage current game)
     private String currentLanguage;
     private String currentGameDifficulty;
-    private String currentGameTitle;
+    private Game currentGame;
     private UUID currentGameUUID; 
 
     private User currentUser;
@@ -40,14 +38,9 @@ public class AppFacade {
      * Pick language by String
      * @param lang
      */
-    public void pickLanguage(String lang) {
-        HashMap<UUID, String> languages = gameData.getLanguages();
-        Collection<String> languageNames = languages.values();
-
-        for(String l : languageNames) {
-            if(l.equalsIgnoreCase(lang)) {
-                setCurrentLanguage(lang);
-            }
+    public void pickLanguage(String language) {
+        if(gameData.getLanguages().contains(language)) {
+            setCurrentLanguage(language);
         }
     }
 
@@ -56,11 +49,11 @@ public class AppFacade {
      * @param uuid
      */
     public void pickLanguage(UUID uuid) {
-        HashMap<UUID, String> languages = gameData.getLanguages();
-        
-        if(languages.containsKey(uuid)) {
-            String language = languages.get(uuid);
-            setCurrentLanguage(language);
+        Object language = gameData.getLanguages().get(uuid);
+        if (language instanceof String string) {
+            setCurrentLanguage(string);
+        } else if (language instanceof ArrayList) {
+            System.out.println("Not set - multiple languages found: " + language);
         }
     }
 
@@ -82,22 +75,7 @@ public class AppFacade {
     }
 
     public void pickGame(String gameName) {
-        HashMap<Game, UUID> games = gameData.getGamesWithUUIDs();
-        Collection<String> gameNames = games.;
-
-        if(currentGameDifficulty != currentGameDifficulty.get) {
-            for(String d : game) {
-                if(d.equalsIgnoreCase(difficulty)) {
-
-                    setCurrentDifficulty(difficulty);
-
-                } else {
-                    System.out.println("Difficulty fail / not set"); // DEBUG STATEMENT
-                }
-            }
-        } else {
-            System.out.println("Diff not set"); // DEBUG STATEMENT
-        }
+        
     }
 
     // Setters
@@ -109,12 +87,6 @@ public class AppFacade {
         this.currentGameDifficulty = difficulty;
     }
 
-    // public void setCurrentGame(String title, String difficulty, UUID uuid) {
-    //     this.currentGameTitle = title;
-    //     this.currentGameDifficulty = difficulty;
-    //     this.currentGameUUID = uuid;
-    // }
-
     public void setCurrentUser(User user) {
         this.currentUser = user;
     }
@@ -124,8 +96,8 @@ public class AppFacade {
         return currentLanguage;
     }
 
-    public String getCurrentGameTitle() {
-        return currentGameTitle;
+    public Game getCurrentGame() {
+        return currentGame;
     }
 
     public String getCurrentGameDifficulty() {
@@ -142,7 +114,7 @@ public class AppFacade {
 
     // Clear methods
     public void clearCurrentGame() {
-        this.currentGameTitle = null;
+        this.currentGame = null;
         this.currentGameDifficulty = null;
         this.currentGameUUID = null;
     }

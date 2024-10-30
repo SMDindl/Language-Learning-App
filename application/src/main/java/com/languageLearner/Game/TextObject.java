@@ -4,6 +4,9 @@ import java.util.UUID;
 
 import org.json.simple.JSONObject;
 
+/**
+ * 
+ */
 public class TextObject {
     
     private String text;
@@ -14,6 +17,16 @@ public class TextObject {
     private UUID uuid;
     private UUID gameUUID;
 
+    /**
+     * 
+     * @param text
+     * @param englishText
+     * @param linkedText
+     * @param englishLinkedText
+     * @param helperText
+     * @param uuid
+     * @param gameUUID
+     */
     public TextObject(String text, String englishText, String linkedText, String englishLinkedText, String helperText, UUID uuid, UUID gameUUID) {
         this.text = text;
         this.englishText = englishText;
@@ -24,7 +37,7 @@ public class TextObject {
         this.gameUUID = gameUUID;
     }
 
-    // Data Getters
+    // UUID and GameUUID getters
     public UUID getUUID() {
         return uuid;
     }
@@ -34,6 +47,25 @@ public class TextObject {
     }
 
     // Standard getters
+    public String getText() {
+        return text;
+    }
+
+    public String getEnglishText() {
+        return englishText;
+    }
+
+    public String getLinkedText() {
+        return linkedText;
+    }
+
+    public String getEnglishLinkedText() {
+        return englishLinkedText;
+    }
+
+    public String getHelperText() {
+        return helperText;
+    }
 
     public static TextObject fromJson(JSONObject textJson, UUID gameUUID) {
         String text = (String) textJson.get("text");
@@ -43,10 +75,9 @@ public class TextObject {
         String helperText = (String) textJson.get("helperText");
         UUID uuid = UUID.fromString((String) textJson.get("UUID"));
 
-        // Make sure the data is being loaded in correct places
-
-    
-        return new TextObject(text, englishText, linkedText, englishLinkedText, helperText, uuid, gameUUID);
+        TextObject textObject = new TextObject(text, englishText, linkedText, englishLinkedText, helperText, uuid, gameUUID);
+        GameData.getInstance().addTextObject(gameUUID, textObject);
+        return textObject;
     }
     
 }

@@ -53,12 +53,9 @@ public class Game {
                                             .map(obj -> TextObject.fromJson((JSONObject) obj, uuid))  // Cast each element to JSONObject also uuid passed
                                             .collect(Collectors.toCollection(ArrayList::new));
 
-        // Make sure the data is being loaded in correct places
-        // This is where all ArrayLists and HashMaps are populated
-
-                
-        // Return instance of game
-        return new Game(language, languageUUID, gameTitle, difficulty, uuid, info, textObjects);
+        Game game = new Game(language, languageUUID, gameTitle, difficulty, uuid, info, textObjects);
+        GameData.getInstance().addGame(languageUUID, game);
+        return game;
     }
     
 }
