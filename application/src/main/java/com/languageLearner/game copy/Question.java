@@ -35,7 +35,7 @@ public class Question {
     // Multiple Choice(includes true/false so this is two question types)
     // this is loaded from the gamesQuestions json
     public Question(String question, ArrayList<String> Choices, UUID uuid) {
-        
+        languageUUID = LanguageManager.getInstance().getAllLanguage()getGame(gameUUID).getLanguageUUID();
     }
 
     // Fill in the blank - this is created from a single textObject
