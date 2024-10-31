@@ -8,7 +8,7 @@ import org.json.simple.JSONObject;
 /**
  * GameInfo <-- Game (has difficulty) <--- Language
  */
-public class GameInfo implements HasGameUUID {
+public class GameInfo {
     
     private final String description;
     private final String objective;
@@ -41,8 +41,6 @@ public class GameInfo implements HasGameUUID {
     }
 
     // UUID getters
-    
-    @Override
     public UUID getGameUUID() {
         return gameUUID;
     }
@@ -71,7 +69,6 @@ public class GameInfo implements HasGameUUID {
         String gameTip = (String) prepJson.get("gameTip");
 
         GameInfo gameInfo = new GameInfo(description, objective, instructions, introConcept, exampleUsage, gameTip, gameUUID);
-        GameData.getInstance().addGameInfo(gameInfo);
         return gameInfo;
     }
 

@@ -7,17 +7,17 @@ import java.util.stream.Collectors;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class Game implements HasUUID {
+public class Game {
 
-    private final Language language;
+    private final UUID languageUUID;
     private final String gameTitle;
-    private final String difficulty;
-    private final UUID uuid;          // UUID of the actual game
+    private final Difficulty difficulty;
+    private final UUID uuid;            // UUID of the actual game
     private final ArrayList<TextObject> textObjects;
     private final GameInfo info;
 
-    public Game(Language language, String gameTitle, String difficulty, UUID uuid, GameInfo info, ArrayList<TextObject> textObjects) {
-        this.language = language;
+    public Game(UUID languageUUID, String gameTitle, Difficulty difficulty, UUID uuid, GameInfo info, ArrayList<TextObject> textObjects) {
+        this.languageUUID = languageUUID;
         this.gameTitle = gameTitle;
         this.difficulty = difficulty;
         this.uuid = uuid;
@@ -26,19 +26,18 @@ public class Game implements HasUUID {
     }
 
     // Getters
-    public Language getLanguage() {
-        return language;
+    public UUID getLanguageUUID() {
+        return languageUUID;
     }
 
     public String getGameTitle() {
         return gameTitle;
     }
 
-    public String getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
 
-    @Override
     public UUID getUUID() {
         return uuid;
     }
@@ -55,7 +54,7 @@ public class Game implements HasUUID {
     @SuppressWarnings("unchecked")
     public static Game fromJson(JSONObject gameJson, String language, UUID languageUUID) {
         String gameTitle = (String) gameJson.get("GAME");
-        String difficulty = (String) gameJson.get("DIFF");
+        Difficulty difficulty = (Difficulty) gameJson.get("DIFF");
         UUID uuid = UUID.fromString((String) gameJson.get("UUID"));
 
         JSONObject infoJson = (JSONObject) gameJson.get("INFO");
@@ -66,17 +65,15 @@ public class Game implements HasUUID {
                                             .map(obj -> TextObject.fromJson((JSONObject) obj, uuid))  // Cast each element to JSONObject, also UUID passed
                                             .collect(Collectors.toCollection(ArrayList::new));
         
-        return new Game(new Language(language, uuid), gameTitle, difficulty, uuid, info, textObjects);
+        return new Game(languageUUID, gameTitle, difficulty, uuid, info, textObjects);
     }
 
     // toString method for debugging
     @Override
     public String toString() {
         return "\n\n=== Game class data for " + difficulty + " " + gameTitle + " ===\n\n" 
-            + "Language:\n" 
-            + language + "\n\n"
             + "Language UUID:\n" 
-            + language.getUUID() + "\n\n"
+            + languageUUID + "\n\n"
             + "Game UUID:\n" 
             + uuid + "\n\n"
             + "Info:\n" 

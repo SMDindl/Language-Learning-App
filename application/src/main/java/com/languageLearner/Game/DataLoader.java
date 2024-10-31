@@ -9,8 +9,8 @@ import org.json.simple.parser.JSONParser;
 
 public class DataLoader {
 
-    private final GameData gameData = GameData.getInstance();
-    private String GAME_DATA_FILE = "json\\gamesData.json";
+    // private final LanguageManager languageManager = LanguageManager.getInstance();
+    private final String GAME_DATA_FILE = "json\\gamesData.json";
 
     public void loadGameData() {
         try (FileReader reader = new FileReader(GAME_DATA_FILE)) {
@@ -35,8 +35,8 @@ public class DataLoader {
             String language = (String) languageData.get("LANG");
             UUID languageUUID = UUID.fromString((String) languageData.get("UUID"));
     
-            // Add the language to GameData
-            GameData.getInstance().addLanguage(languageUUID, language);
+            // Add the language to LanguageManager
+            LanguageManager.getInstance().addLanguage(new Language(languageUUID, language));
     
             // Get the games array for this language
             JSONArray gamesArray = (JSONArray) languageData.get("GAMES");
@@ -53,19 +53,16 @@ public class DataLoader {
             // Create a Game instance from JSON, including language and languageUUID
             Game game = Game.fromJson(gameJson, language, languageUUID);
     
-            // Add each game to GameData
-            GameData.getInstance().addGame(game);
+            // Add each game to LanguageManager
+            LanguageManager.getInstance().getLanguage(languageUUID).addGame(game.getDifficulty(), game);
         }
     }
 
     @Override
     public String toString() { 
         String s = "\u001B[33m" + "DATA LOADER TO STRING:\n\n" + "\u001B[0m";
-        s += "Languages:\n "
-        + GameData.getInstance().getLanguages();
-        for(Game game : gameData.getGames()) {
-            s += game;
-        }
+        s += "Languages:\n ";
+        LanguageManager.getInstance().getAllLanguages();
         s += "\u001B[33m" + "END OF DATA LOADER TO STRING\n\n" + "\u001B[0m";
         return s;
     }
@@ -76,7 +73,7 @@ public class DataLoader {
      */
     public static void main(String[] args) {
         DataLoader loader = new DataLoader();
-        // GameData gameData = GameData.getInstance();
+        // LanguageManager gameData = LanguageManager.getInstance();
         loader.loadGameData(); 
 
        System.out.println(loader.toString());

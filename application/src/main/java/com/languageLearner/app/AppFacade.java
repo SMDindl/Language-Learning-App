@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.languageLearner.game.Game;
 import com.languageLearner.game.GameData;
+import com.languageLearner.game.User;
 
 /**
  * Singleton class to manage the application's current game and user state.

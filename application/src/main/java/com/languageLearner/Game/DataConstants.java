@@ -1,37 +1,43 @@
 package com.languageLearner.game;
 
-import java.util.HashMap;
-import java.util.UUID;
-
+/**
+ * 
+ */
 public class DataConstants {
 
-    private static final HashMap<String, UUID> LANGUAGE_UUIDS = new HashMap<>();
+    // MAIN JSON ARRAY HOLDING EVERYTHING
+    public static final String LANGUAGES = "LANGUAGES";
 
-    public static final String FILIPINO = "filipino";
-    public static final String FILIPINO_UUID_STRING = "1bafb0ae-3462-4ec3-9cc2-a98ff2898e72";
-    public static final UUID FILIPINO_UUID = UUID.fromString(FILIPINO_UUID_STRING);
+    // MAIN JSON OBJS
+    public static final String LANG = "LANG";
+    public static final String UUID = "UUID";
 
-    // Link Language LANG/UUID with HashMap
-    static {
-        LANGUAGE_UUIDS.put(FILIPINO, FILIPINO_UUID);
-    }
+    // INFO OBJ + ITS OBJS/ARRAYS
+    public static final String INFO = "INFO";
+    public static final String DESCRIPTION = "description";
+    public static final String OBJECTIVE = "objective";
+    public static final String INSTRUCTIONS = "instructions"; // JSON ARRAY (holds strings split by commas)
+    public static final String PREP = "prep";                 // JSON ARRAY (holds 3 json objects)
 
-    public UUID getFilipinoLanguageUUID() {
-        return FILIPINO_UUID;
-    }
+    // JSON OBJS WITHIN PREP OBJECT
+    public static final String INTRO_CONCEPT = "introConcept"; 
+    public static final String EXAMPLE_USAGE = "exampleUsage";
+    public static final String GAME_TIP = "gameTip";
 
-    // Idenifiers
-    // public static final String LANG = "LANG";
-    // public static final String GAME = "game";       // game is searched for by DataLoader to know when 
-    // public static final String COMMENT = "comment"; // comments are ignored by dataLoader, comments can specifiy the name of the game for each searching
+    // JSON ARRAYS 
+    public static final String GAMES = "GAMES";
+    public static final String QUESTIONS = "QUESTIONS";
+    public static final String TEXT = "TEXT";
 
-    // Games for filipino
-    // public static final String FILIPINO_COLORS_GAME_EASY = "filipino_colors_game_easy";
-    // public static final String FILIPINO_COLORS_GAME_MEDIUM = "filipino_colors_game_medium";
-    // public static final String FILIPINO_COLORS_GAME_HARD = "filipino_colors_game_hard";
+    // JSON OBJS WITHIN TEXT ARRAY (additonally a uuid is held within
+    public static final String TEXT_OBJ = "text";
+    public static final String ENGLISH_TEXT = "englishText";
+    public static final String LINKED_TEXT = "linkedText";
+    public static final String ENGLISH_LINKED_TEXT = "englishLinkedText";
+    public static final String HELPER_TEXT = "helperText";
 
-    // public static final String NUMBERS_GAME = "numbers_game";
-
-
+    // JSON OBJS WITHIN QUESTION
+    public static final String QUESTION_TEXT = "questionText"; // JSON OBJ
+    public static final String CHOICES = "choices";            // JSON ARRAY (postion 0 should always be the correct answer)
     
 }
