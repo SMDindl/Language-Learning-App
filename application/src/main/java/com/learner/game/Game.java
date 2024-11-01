@@ -10,6 +10,9 @@ import org.json.simple.JSONObject;
 import com.learner.game.innerdata.GameInfo;
 import com.learner.game.innerdata.TextObject;
 
+/**
+ * The game will pull questions from GameManger
+ */
 public class Game {
 
     private final UUID languageUUID;

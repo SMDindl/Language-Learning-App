@@ -6,11 +6,13 @@ public abstract class Question {
     
     protected UUID uuid;
     protected UUID gameUUID;
+    protected UUID languageUUID;
     protected String text;
     protected QuestionType questionType;
 
-    public Question(UUID uuid, UUID gameUUID, String text) {
+    public Question(UUID uuid, UUID gameUUID, UUID languageUUID, String text) {
         this.uuid = (uuid != null) ? uuid : UUID.randomUUID();
+        this.languageUUID = languageUUID;
         this.gameUUID = gameUUID;
         this.text = text;
     }
@@ -18,7 +20,8 @@ public abstract class Question {
     public abstract boolean validateAnswer(Object userAnswer);
 
     public UUID getUuid() { return uuid; }
-    public UUID getGameUuid() { return gameUUID; }
+    public UUID getGameUUID() { return gameUUID; }
+    public UUID getLanguageUUID() { return languageUUID; }
     public String getText() { return text; }
 
     public void askQuestion() {

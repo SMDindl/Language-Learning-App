@@ -61,9 +61,9 @@ public class User {
         progressTrackers.add(new ProgressTracker(language.getUUID(), language.getLanguageName()));
     }
 
-    public ProgressTracker getProgressTracker(Language language) {
+    public ProgressTracker getProgressTracker(UUID languageUUID) {
         for(ProgressTracker tracker : progressTrackers) {
-            if(tracker.getUUID() == language.getUUID()) {
+            if(tracker.getUUID() == languageUUID) {
                 return tracker;
             }
         }
@@ -71,11 +71,20 @@ public class User {
     }
 
     public void addMissedQuestion(Question question) {
-        // question.getLanguage
+        UUID questionLangUUID = question.getLanguageUUID();
+        ProgressTracker currentProgressTracker = getProgressTracker(questionLangUUID);
+        currentProgressTracker.addMissedQuestion(question);
+    }
+
+    public void removeMissedQuestion(Question question) {
+        UUID questionLangUUID = question.getLanguageUUID();
+        ProgressTracker currentProgressTracker = getProgressTracker(questionLangUUID);
+        currentProgressTracker.removeMissedQuestion(question);
     }
 
     /**
      * Inner nestest class used for traking user progress
+     * UUID of ProgressTrack is equal to languageUUID
      */
     public class ProgressTracker {
 

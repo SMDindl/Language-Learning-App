@@ -9,8 +9,8 @@ public class MultipleChoiceQuestion extends Question {
     private final ArrayList<String> options;
     private int correctAnswerIndex;
 
-    public MultipleChoiceQuestion(UUID uuid, UUID gameUUID, String text, ArrayList<String> options) {
-        super(uuid, gameUUID, text);
+    public MultipleChoiceQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String text, ArrayList<String> options) {
+        super(uuid, gameUUID, languageUUID, text);
         this.options = options;
         this.correctAnswerIndex = 0;  // Since the correct answer is initially at position 0
         this.questionType = QuestionType.MULTIPLE_CHOICE;

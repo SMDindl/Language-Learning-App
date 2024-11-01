@@ -10,8 +10,8 @@ public class MatchingQuestion extends Question {
 
     private final ArrayList<String> options;
 
-    public MatchingQuestion(UUID uuid, UUID gameUUID, String text, ArrayList<String> options) {
-        super(uuid, gameUUID, text);
+    public MatchingQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String text, ArrayList<String> options) {
+        super(uuid, gameUUID, languageUUID, text);
         this.options = options;
         this.questionType = QuestionType.MATCHING;
         shuffleOptions();

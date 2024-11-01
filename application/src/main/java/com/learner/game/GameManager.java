@@ -2,7 +2,6 @@ package com.learner.game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 import com.learner.game.questions.Question;
@@ -45,7 +44,7 @@ public class GameManager {
     }
 
     // Getter for languages, returning a list of Language instances
-    public List<Language> getLanguages() {
+    public ArrayList<Language> getLanguages() {
         return new ArrayList<>(languages.keySet());
     }
 

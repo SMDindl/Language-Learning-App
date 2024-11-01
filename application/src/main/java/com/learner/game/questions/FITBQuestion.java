@@ -6,8 +6,8 @@ public class FITBQuestion extends Question {
     
     private final String correctAnswer;
 
-    public FITBQuestion(UUID uuid, UUID gameUUID, String text, String correctAnswer) {
-        super(uuid, gameUUID, text);
+    public FITBQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String text, String correctAnswer) {
+        super(uuid, gameUUID, languageUUID, text);
         this.correctAnswer = correctAnswer;
         this.questionType = QuestionType.FITB;
     }

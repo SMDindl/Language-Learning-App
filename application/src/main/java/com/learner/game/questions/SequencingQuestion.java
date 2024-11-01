@@ -7,8 +7,8 @@ public class SequencingQuestion extends Question {
 
     private final ArrayList<String> correctSequence;
 
-    public SequencingQuestion(UUID uuid, UUID gameUUID, String text, ArrayList<String> correctSequence) {
-        super(uuid, gameUUID, text);
+    public SequencingQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String text, ArrayList<String> correctSequence) {
+        super(uuid, gameUUID, languageUUID, text);
         this.correctSequence = new ArrayList<>(correctSequence); // Correct sequence stored in order
         this.questionType = QuestionType.SEQUENCING;
     }
