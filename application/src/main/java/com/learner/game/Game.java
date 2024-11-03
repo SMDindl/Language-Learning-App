@@ -1,6 +1,8 @@
 package com.learner.game;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -31,32 +33,131 @@ public class Game {
         this.textObjects = textObjects;
     }
 
+    public void game() {
+        intro();
+        play();
+        quiz();
+    }
+
+    // Introduce user to game info and give instructions
+    private void intro() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(info);
+        System.out.println("Press Enter to continue...");
+        scanner.nextLine();  // Waits for Enter key press
+    }
+
+    // Play Game
+    private void play() {
+
+    }
+
+    // Pull Questions & ask them
+    private void quiz() {
+
+    }
+
     // Getters
-    public UUID getLanguageUUID() {
-        return languageUUID;
-    }
+    /**
+     * 
+     * @return
+     */
+    public UUID getLanguageUUID() { return languageUUID; }
 
-    public String getGameTitle() {
-        return gameTitle;
-    }
+    /**
+     * 
+     * @return
+     */
+    public String getGameTitle() { return gameTitle; }
 
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
+    /**
+     * 
+     * @return
+     */
+    public Difficulty getDifficulty() { return difficulty; }
 
-    public UUID getUUID() {
-        return uuid;
-    }
+    /**
+     * 
+     * @return
+     */
+    public UUID getUUID() { return uuid; }
 
-    public GameInfo getInfo() {
-        return info;
-    }
+    /**
+     * 
+     * @return
+     */
+    public GameInfo getInfo() { return info; }
 
+    // Handling textObjects
+    /**
+     * 
+     * @return
+     */
     public ArrayList<TextObject> getTextObjects() {
+        if (textObjects.isEmpty()) {
+            return null;  
+        }
         return textObjects;
     }
 
-    // Load the Game data from JSON (could also be done using a static method or factory method)
+    public ArrayList<UUID> getTextObjectUUIDs() {
+        if (textObjects.isEmpty()) {
+            return null;
+        }
+        return textObjects.stream().map(TextObject::getUUID).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * 
+     * @param textObjectUUID
+     * @return
+     */
+    public TextObject getTextObject(UUID textObjectUUID) {
+        if (textObjects.isEmpty()) {
+            return null;  
+        }
+        for(TextObject textObject : textObjects) {
+            if(textObject.getUUID() == textObjectUUID) {
+                return textObject;
+            }
+        }
+        return null; 
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public TextObject getRandomTextObject() {
+        if (textObjects.isEmpty()) {
+            return null;  
+        }
+        Random random = new Random();
+        return textObjects.get(random.nextInt(textObjects.size()));  
+    }
+
+    /**
+     * 
+     * @param textObjectUUID
+     * @return
+     */
+    public TextObject getNextTextObject(UUID textObjectUUID) {
+        if (textObjects.isEmpty()) {
+            return null;  
+        }
+
+        for (int i = 0; i < textObjects.size(); i++) {
+            if (textObjects.get(i).getUUID().equals(textObjectUUID)) {
+                int nextIndex = (i + 1) % textObjects.size();
+                return textObjects.get(nextIndex);
+            }
+        }
+        return null; // UUID not found
+    }
+
+    /**
+     * Used to load the Game data from JSON
+     */
     @SuppressWarnings("unchecked")
     public static Game fromJson(JSONObject gameJson, String language, UUID languageUUID) {
         String gameTitle = (String) gameJson.get("GAME");
@@ -74,7 +175,9 @@ public class Game {
         return new Game(languageUUID, gameTitle, difficulty, uuid, info, textObjects);
     }
 
-    // toString method for debugging
+    /**
+     * toString method for debugging
+     */
     @Override
     public String toString() {
         return "\n\n=== Game class data for " + difficulty + " " + gameTitle + " ===\n\n" 

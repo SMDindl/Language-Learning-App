@@ -49,9 +49,10 @@ public class DataLoader {
 
                     GameInfo gameInfo = GameInfo.fromJson((JSONObject) gameJson.get("INFO"), gameUUID);
                     ArrayList<TextObject> textObjects = parseTextObjects((JSONArray) gameJson.get("TEXT"), gameUUID);
-                    parseQuestions((JSONArray) gameJson.get("QUESTIONS"), gameUUID);
+                    parseQuestions((JSONArray) gameJson.get("QUESTIONS"), gameUUID, languageUUID);
 
                     Game game = new Game(languageUUID, gameTitle, difficulty, gameUUID, gameInfo, textObjects);
+                    gameManager.addGameUUIDToLanguage(languageUUID, gameUUID);
                     
                     // Assign game based on difficulty
                     switch (difficulty) {
@@ -62,6 +63,7 @@ public class DataLoader {
                 }
             }
         } catch (IOException | ParseException e) {
+            System.out.println("failed loading gamedata");
             e.printStackTrace();
         }
     }
@@ -72,12 +74,14 @@ public class DataLoader {
             JSONObject textJson = (JSONObject) textObj;
             TextObject textObject = TextObject.fromJson(textJson, gameUUID);
             textObjects.add(textObject);
+            gameManager.addTextObjectUUID(gameUUID, textObject.getUUID());
         }
         return textObjects;
     }
 
-    private static ArrayList<MultipleChoiceQuestion> parseQuestions(JSONArray questionsArray, UUID gameUUID) {
-        ArrayList<MultipleChoiceQuestion> questions = new ArrayList<>();
+    // private static ArrayList<MultipleChoiceQuestion> parseQuestions(JSONArray questionsArray, UUID gameUUID, UUID languageUUID) {
+    private static void parseQuestions(JSONArray questionsArray, UUID gameUUID, UUID languageUUID) {
+        // ArrayList<MultipleChoiceQuestion> questions = new ArrayList<>();
         for (Object questionObj : questionsArray) {
             JSONObject questionJson = (JSONObject) questionObj;
             UUID questionUUID = UUID.fromString((String) questionJson.get("UUID"));
@@ -89,17 +93,18 @@ public class DataLoader {
                 options.add((String) choice);
             }
 
-            MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionUUID, gameUUID, questionText, options);
-            questions.add(question);
+            MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionUUID, gameUUID, languageUUID, questionText, options);
+            // questions.add(question);
+            gameManager.addQuestion(gameUUID, question);
         }
-        return questions;
+        // return questions;
     }
 
     @Override
     public String toString() { 
         String s = "\u001B[33m" + "DATA LOADER TO STRING:\n\n" + "\u001B[0m";
         
-        System.out.println(gameManager.toString());
+        s += gameManager.toString();
 
         s += "\u001B[33m" + "END OF DATA LOADER TO STRING\n\n" + "\u001B[0m";
         return s;
@@ -110,11 +115,18 @@ public class DataLoader {
      * @param args
      */
     public static void main(String[] args) {
-        DataLoader loader = new DataLoader();
-        // LanguageManager gameData = LanguageManager.getInstance();
         loadGameData(); 
 
-       System.out.println(loader.toString());
+        UUID id = UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72");
+
+        // System.out.println(loader.toString());
+
+        // // This works.
+        // System.out.println(gameManager.getEasyGames(id));
+
+        System.out.println(gameManager.toString());
+
+        // System.out.println(gameManager.getLanguageMap());
 
     }
 }

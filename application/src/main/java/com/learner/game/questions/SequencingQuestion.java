@@ -3,24 +3,46 @@ package com.learner.game.questions;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.learner.game.innerdata.TextObject;
+
 public class SequencingQuestion extends Question {
+    
+    private ArrayList<String> sequence;
 
-    private final ArrayList<String> correctSequence;
+    public SequencingQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String questionText) {
+        super(uuid, gameUUID, languageUUID, questionText, QuestionType.SEQUENCING);
+        this.sequence = new ArrayList<>();
+    }
 
-    public SequencingQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String text, ArrayList<String> correctSequence) {
-        super(uuid, gameUUID, languageUUID, text);
-        this.correctSequence = new ArrayList<>(correctSequence); // Correct sequence stored in order
-        this.questionType = QuestionType.SEQUENCING;
+    public SequencingQuestion(UUID uuid) {
+
+        super(uuid, gameUUID, languageUUID, questionText, QuestionType.SEQUENCING);
+        this.sequence = new ArrayList<>();
     }
 
     @Override
-    public boolean validateAnswer(Object userAnswer) {
-        if (userAnswer instanceof ArrayList<?>) {
-            ArrayList<?> userSequence = (ArrayList<?>) userAnswer;
-            return userSequence.equals(correctSequence);
+    public void generateQuestion(ArrayList<TextObject> textObjects) {
+        for (TextObject textObject : textObjects) {
+            sequence.add(textObject.getText());
         }
-        return false;
+        this.questionText = "Arrange the following in the correct order.";
     }
 
-    public ArrayList<String> getCorrectSequence() { return correctSequence; }
+    @Override
+    public boolean validateAnswer(String userAnswer) {
+        String[] userSequence = userAnswer.split(", ");
+        if (userSequence.length != sequence.size()) {
+            return false;
+        }
+        for (int i = 0; i < sequence.size(); i++) {
+            if (!sequence.get(i).equalsIgnoreCase(userSequence[i].trim())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public ArrayList<String> getSequence() {
+        return sequence;
+    }
 }

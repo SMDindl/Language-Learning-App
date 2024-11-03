@@ -1,32 +1,40 @@
 package com.learner.game.questions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.UUID;
 
+import com.learner.game.innerdata.TextObject;
+
 public class MatchingQuestion extends Question {
+    
+    private ArrayList<String> matches;
 
-    private final ArrayList<String> options;
-
-    public MatchingQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String text, ArrayList<String> options) {
-        super(uuid, gameUUID, languageUUID, text);
-        this.options = options;
-        this.questionType = QuestionType.MATCHING;
-        shuffleOptions();
-    }
-
-    private void shuffleOptions() {
-        Collections.shuffle(options);
+    public MatchingQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String questionText) {
+        super(uuid, gameUUID, languageUUID, questionText, QuestionType.MATCHING);
+        this.matches = new ArrayList<>();
     }
 
     @Override
-    public boolean validateAnswer(Object userAnswer) {
-        HashSet<String> correctPairSet = new HashSet<>(options);
-        HashSet<String> userPairSet = new HashSet<>(Arrays.asList(userAnswer.toString().split(",")));
-        return userPairSet.equals(correctPairSet);
+    public void generateQuestion(ArrayList<TextObject> textObjects) {
+        for (TextObject textObject : textObjects) {
+            matches.add(textObject.getText());
+        }
+        this.questionText = "Match the words with their meanings.";
     }
 
-    public ArrayList<String> getOptions() { return options; }
+    @Override
+    public boolean validateAnswer(String userAnswer) {
+        String[] pairs = userAnswer.split(", ");
+        for (String pair : pairs) {
+            String[] match = pair.split(":");
+            if (match.length != 2 || !matches.contains(match[0].trim())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public ArrayList<String> getMatches() {
+        return matches;
+    }
 }

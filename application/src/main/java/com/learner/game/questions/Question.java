@@ -1,34 +1,46 @@
 package com.learner.game.questions;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
+import com.learner.game.innerdata.TextObject;
+
 public abstract class Question {
-    
     protected UUID uuid;
     protected UUID gameUUID;
     protected UUID languageUUID;
-    protected String text;
+    protected String questionText;
     protected QuestionType questionType;
 
-    public Question(UUID uuid, UUID gameUUID, UUID languageUUID, String text) {
-        this.uuid = (uuid != null) ? uuid : UUID.randomUUID();
-        this.languageUUID = languageUUID;
+    public Question(UUID uuid, UUID gameUUID, UUID languageUUID, String questionText, QuestionType questionType) {
+        this.uuid = uuid;
         this.gameUUID = gameUUID;
-        this.text = text;
+        this.languageUUID = languageUUID;
+        this.questionText = questionText;
+        this.questionType = questionType;
     }
 
-    public abstract boolean validateAnswer(Object userAnswer);
+    public abstract void generateQuestion(ArrayList<TextObject> textObjects);
 
-    public UUID getUuid() { return uuid; }
-    public UUID getGameUUID() { return gameUUID; }
-    public UUID getLanguageUUID() { return languageUUID; }
-    public String getText() { return text; }
+    public abstract boolean validateAnswer(String userAnswer);
 
-    public void askQuestion() {
-        System.out.println(text);
+    public UUID getUUID() {
+        return uuid;
     }
 
-    public void provideFeedback(boolean isCorrect) {
-        System.out.println(isCorrect ? "Correct!" : "Incorrect.");
+    public UUID getGameUUID() {
+        return gameUUID;
+    }
+
+    public UUID getLanguageUUID() {
+        return languageUUID;
+    }
+
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public QuestionType getQuestionType() {
+        return questionType;
     }
 }

@@ -4,6 +4,9 @@ import com.learner.game.Game;
 import com.learner.game.GameManager;
 import com.learner.game.Language;
 
+/**
+ * Test w/o data loading
+ */
 public class TestGameManagerFlow {
 
     public static void main(String[] args) {
@@ -21,12 +24,12 @@ public class TestGameManagerFlow {
         gameManager.initializeLanguage(spanish);
 
         // When we have a game to add
-        Game game1;
-        Game game2;
-        Game game3;
-
-
-
+        Game filipinoEasyGame;
+        Game filipinoMediumGame;
+        Game filipinoHardGame;
+        Game spanishEasyGame;
+        Game spanishMediumGame;
+        Game spanishHardGame;
 
         System.out.println();
 

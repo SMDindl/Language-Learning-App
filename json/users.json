@@ -1,0 +1,35 @@
+{
+    "users": [
+        {
+            "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
+            "username": "sdindl",
+            "email": "sdindl@email.sc.edu",
+            "progressTrackers": [
+                {
+                    "languageName": "filipino",
+                    "languageUUID": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
+                    "completedGames": [
+                        {
+                            "gameUUID": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7"
+                        },
+                        {
+                            "gameUUID": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7"
+                        }
+                    ],
+                    "missedQuestions": [
+                        {
+                            "gameUUID": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
+                            "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
+                            "questionType": "mutipleChoice"
+                        },
+                        {
+                            "gameUUID": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
+                            "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
+                            "questionType": "mutipleChoice"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

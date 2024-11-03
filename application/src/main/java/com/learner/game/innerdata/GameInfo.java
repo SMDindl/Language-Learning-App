@@ -55,7 +55,6 @@ public class GameInfo {
         return s;
     }
 
-
     // Used to load from json, will be accessed in dataloader
     @SuppressWarnings("unchecked")
     public static GameInfo fromJson(JSONObject infoJson, UUID gameUUID) {
@@ -74,22 +73,41 @@ public class GameInfo {
 
     @Override
     public String toString() {
-        return "\n---- ALL GAME INFO ----\n\n" 
-            + "Description:\n"
-            + description + "\n\n"
-            + "Objective:\n" 
-            +  objective + "\n\n"
-            + "Intructions List:\n" 
-            + instructionsToString() + "\n"  
-            + "Intro Concept:\n" 
-            + introConcept + "\n\n" 
-            + "Example:\n" 
-            + exampleUsage + "\n\n" 
-            + "Tip:\n" 
-            + gameTip + "\n\n"
-            + "GameUUID:\n" 
-            + gameUUID + "\n\n"
-            + "--- END OF ALL GAME INFO --- \n";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(description).append("\n\n")
+          .append(objective).append("\n\n")
+          .append("Instructions:\n")
+          .append(instructionsToString()).append("\n")
+          .append("Getting Started:\n");
+        sb.append("  Intro Concept:\n").append(introConcept).append("\n\n")
+          .append("  Example Usage:\n").append(exampleUsage).append("\n\n")
+          .append("Pro Tip:\n")
+          .append(gameTip).append("\n\n");
+        
+        return sb.toString();
     }
+    
+
+    // // Debugger toString
+    // @Override
+    // public String toString() {
+    //     return "\n---- ALL GAME INFO ----\n\n" 
+    //         + "Description:\n"
+    //         + description + "\n\n"
+    //         + "Objective:\n" 
+    //         +  objective + "\n\n"
+    //         + "Intructions List:\n" 
+    //         + instructionsToString() + "\n"  
+    //         + "Intro Concept:\n" 
+    //         + introConcept + "\n\n" 
+    //         + "Example:\n" 
+    //         + exampleUsage + "\n\n" 
+    //         + "Tip:\n" 
+    //         + gameTip + "\n\n"
+    //         + "GameUUID:\n" 
+    //         + gameUUID + "\n\n"
+    //         + "--- END OF ALL GAME INFO --- \n";
+    // }
     
 }

@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import org.json.simple.JSONObject;
 
+import com.learner.game.GameManager;
+
 /**
  * TextObject <-- Game <--- Difficulty & Language
  */
