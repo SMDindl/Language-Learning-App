@@ -1,9 +1,6 @@
 package com.learner.game.questions;
 
-import java.util.ArrayList;
 import java.util.UUID;
-
-import com.learner.game.innerdata.TextObject;
 
 /**
  * Generates the info needed for question types:

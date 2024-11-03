@@ -14,6 +14,8 @@ import com.learner.game.Difficulty;
 import com.learner.game.Game;
 import com.learner.game.GameManager;
 import com.learner.game.Language;
+import com.learner.game.User;
+import com.learner.game.UserList;
 import com.learner.game.innerdata.GameInfo;
 import com.learner.game.innerdata.TextObject;
 import com.learner.game.questions.MultipleChoiceQuestion;
@@ -22,14 +24,13 @@ import com.learner.game.questions.Question;
 public class DataLoader {
 
     private static final GameManager gameManager = GameManager.getInstance();
-
-    private final static String GAME_DATA_FILE = "json\\gamesData.json";
+    private static final UserList userList = UserList.getInstance();
 
     @SuppressWarnings("CallToPrintStackTrace")
-    public static void loadGameData() {
+    public static void loadGameData(String gameDataFilePath) {
         JSONParser parser = new JSONParser();
 
-        try (FileReader reader = new FileReader(GAME_DATA_FILE)) {
+        try (FileReader reader = new FileReader(gameDataFilePath)) {
             JSONObject jsonData = (JSONObject) parser.parse(reader);
             JSONArray languagesArray = (JSONArray) jsonData.get("LANGUAGES");
 
@@ -54,11 +55,10 @@ public class DataLoader {
 
                     Game game = new Game(languageUUID, gameTitle, difficulty, gameUUID, gameInfo, textObjects, questions);
                     gameManager.addGame(game);
-
                 }
             }
         } catch (IOException | ParseException e) {
-            System.out.println("failed loading gamedata");
+            System.out.println("Failed to load game data");
             e.printStackTrace();
         }
     }
@@ -74,7 +74,6 @@ public class DataLoader {
         return textObjects;
     }
 
-    // private static ArrayList<MultipleChoiceQuestion> parseQuestions(JSONArray questionsArray, UUID gameUUID, UUID languageUUID) {
     private static ArrayList<Question> parseQuestions(JSONArray questionsArray, UUID gameUUID, UUID languageUUID) {
         ArrayList<Question> questions = new ArrayList<>();
         for (Object questionObj : questionsArray) {
@@ -88,12 +87,88 @@ public class DataLoader {
                 options.add((String) choice);
             }
 
-            // Create the MultipleChoiceQuestion and add it to the list
             MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionUUID, gameUUID, languageUUID, questionText, options);
-            // MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionUUID, questionText, options);
             questions.add(question);
         }
         return questions;  
+    }
+
+    /**
+     * Loads user data from a specified JSON file path
+     * @param userFilePath the file path of the JSON file to load users from
+     */
+    @SuppressWarnings("CallToPrintStackTrace")
+    public static void loadUserData(String userFilePath) {
+        JSONParser parser = new JSONParser();
+        try (FileReader reader = new FileReader(userFilePath)) {
+            // Parse JSON data
+            JSONObject jsonData = (JSONObject) parser.parse(reader);
+            JSONArray usersArray = (JSONArray) jsonData.get("users");
+
+            // Check if "users" key is present in JSON
+            if (usersArray == null) {
+                System.out.println("No users found in the JSON file.");
+                return;
+            }
+
+            for (Object userObj : usersArray) {
+                JSONObject userJson = (JSONObject) userObj;
+                UUID uuid = UUID.fromString((String) userJson.get("uuid"));
+                String email = (String) userJson.get("email");
+                String username = (String) userJson.get("username");
+                String displayName = (String) userJson.get("displayname");
+                String password = (String) userJson.get("password");
+
+                // Create a new User instance
+                User user = new User(email, username, displayName, password, uuid);
+
+                // Load progress trackers for each user
+                JSONArray progressTrackersArray = (JSONArray) userJson.get("progressTrackers");
+                if (progressTrackersArray != null) {
+                    for (Object trackerObj : progressTrackersArray) {
+                        JSONObject trackerJson = (JSONObject) trackerObj;
+                        UUID languageUUID = UUID.fromString((String) trackerJson.get("languageUUID"));
+                        String languageName = (String) trackerJson.get("languageName");
+
+                        // Initialize a new ProgressTracker
+                        User.ProgressTracker tracker = user.new ProgressTracker(languageUUID, languageName);
+
+                        // Load completed games as UUIDs
+                        JSONArray completedGamesArray = (JSONArray) trackerJson.get("completedGames");
+                        if (completedGamesArray != null) {
+                            for (Object gameObj : completedGamesArray) {
+                                JSONObject gameJson = (JSONObject) gameObj;
+                                UUID gameUUID = UUID.fromString((String) gameJson.get("gameUUID"));
+                                tracker.addCompletedGame(gameUUID);
+                            }
+                        }
+
+                        // Load missed questions
+                        JSONArray missedQuestionsArray = (JSONArray) trackerJson.get("missedQuestions");
+                        if (missedQuestionsArray != null) {
+                            for (Object questionObj : missedQuestionsArray) {
+                                JSONObject questionJson = (JSONObject) questionObj;
+                                UUID questionUUID = UUID.fromString((String) questionJson.get("uuid"));
+                                String questionType = (String) questionJson.get("questionType");
+
+                                // Find the question in the GameManager
+                                Question question = gameManager.findQuestionInGame(tracker.getUUID(), questionUUID);
+
+                                // Ensure question exists and matches the type before adding to tracker
+                                if (question != null && question.getQuestionType().name().equalsIgnoreCase(questionType)) {
+                                    tracker.addMissedQuestion(question);
+                                }
+                            }
+                        }
+
+                        user.addProgressTracker(tracker);
+                    }
+                }
+                userList.addUser(user); // Add the user to the UserList
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -102,29 +177,18 @@ public class DataLoader {
         
         sb.append("\u001B[33m").append("DATA LOADER TO STRING:\n\n").append("\u001B[0m"); // prints in yellow
         sb.append(gameManager.toString());
+        sb.append(userList.toString());
         sb.append("\u001B[33m").append("END OF DATA LOADER TO STRING\n\n").append("\u001B[0m"); // prints in yellow
         
         return sb.toString();
     }
-    
 
-    /**
-     * DataLoader class tester
-     * @param args
-     */
     public static void main(String[] args) {
-        
-        loadGameData(); 
-
-        // UUID id = UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72");
-
-        // System.out.println(loader.toString());
-
-        // System.out.println(gameManager.getEasyGames(id));
+        loadGameData(DataConstants.GAME_DATA_FILE); 
+        loadUserData(DataConstants.USER_FILE);
 
         System.out.println(gameManager.toString());
-
-        // System.out.println(gameManager.getLanguageMap());
+        System.out.println(userList.toString());
 
     }
 }

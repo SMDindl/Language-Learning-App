@@ -1,6 +1,6 @@
 import java.util.UUID;
 
-import com.learner.game.Game;
+// import com.learner.game.Game;
 import com.learner.game.GameManager;
 import com.learner.game.Language;
 
@@ -24,12 +24,12 @@ public class TestGameManagerFlow {
         gameManager.initializeLanguage(spanish);
 
         // When we have a game to add
-        Game filipinoEasyGame;
-        Game filipinoMediumGame;
-        Game filipinoHardGame;
-        Game spanishEasyGame;
-        Game spanishMediumGame;
-        Game spanishHardGame;
+        // Game filipinoEasyGame;
+        // Game filipinoMediumGame;
+        // Game filipinoHardGame;
+        // Game spanishEasyGame;
+        // Game spanishMediumGame;
+        // Game spanishHardGame;
 
         System.out.println();
 

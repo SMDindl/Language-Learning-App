@@ -1,0 +1,153 @@
+{
+    "LANGUAGES": [
+        {
+            "LANG": "filipino",
+            "UUID": "1bafb0ae-3462-4ec3-9cc2-a98ff2898e72",
+            "GAMES": [
+                {
+                    "GAME": "colorsGame",
+                    "DIFF": "easy",
+                    "UUID": "8ce4fefc-a539-4546-9d7e-0ac8778f8de5",
+                    "INFO": {
+                        "description": "Welcome to the easy colors game. First, you will learn each color (red, green, and blue), then you will conquer the brain blaster!",
+                        "objective": "Be able to identify the Filipino words for each color taught and know the Filipino words for common objects of those colors.",
+                        "instructions": [
+                            "Navigate through each of the given colors and review the examples given.",
+                            "When up for the task, you will face the brain blaster."
+                        ],
+                        "prep": {
+                            "introConcept": "In Filipino, the word for 'color' is 'kulay.'",
+                            "exampleUsage": "To say that something is a color, use 'ay kulay' followed by the color. For example, 'Ang mansanas ay kulay pula.' (The apple is red.)",
+                            "gameTip": "Remember, colors often appear in everyday objects! Think of common items like fruits (mga prutas) or plants (mga halaman) to help remember."
+                        }
+                    },
+                    "TEXT": [
+                        {
+                            "text": "pula",
+                            "englishText": "red",
+                            "linkedText": "Ang mansanas ay kulay pula.",
+                            "englishLinkedText": "The apple is red.",
+                            "helperText": "Pula means 'red' in Filipino. It's used the same way as 'red' in English, like describing a red apple (mansanas na pula) or a red car (kotse na pula).",
+                            "UUID": "285bad41-5c1c-45b4-bc51-59f480bb1895"
+                        },
+                        {
+                            "text": "berde",
+                            "englishText": "green",
+                            "linkedText": "Ang damo ay kulay berde.",
+                            "englishLinkedText": "The grass is green.",
+                            "helperText": "Berde sounds a bit like 'verdant,' which means green and lush in English. Think of green grass (damo) or trees (mga puno).",
+                            "UUID": "a4c6be84-4a97-4c9d-9b28-69c6e72fd6b4"
+                        },
+                        {
+                            "text": "asul",
+                            "englishText": "blue",
+                            "linkedText": "Ang langit ay kulay asul.",
+                            "englishLinkedText": "The sky is blue.",
+                            "helperText": "Asul means 'blue' in Filipino, similar to the color of the sky (langit) or the ocean (karagatan).",
+                            "UUID": "52105f37-5798-4814-a066-d44fb5f7a4a6"
+                        }
+                    ],
+                    "QUESTIONS": [
+                        {
+                            "question": "What is the Filipino word for red?",
+                            "choices": ["pula", "berde", "asul"],
+                            "UUID": "e4e1d515-7baf-4569-8c14-7c663b6e49f5"
+                        },
+                        {
+                            "question": "Which color does 'berde' represent?",
+                            "choices": ["green", "red", "blue"],
+                            "UUID": "fa4b7e34-ec8f-42b6-81a7-93834276f7ec"
+                        },
+                        {
+                            "question": "What is the Filipino word for blue?",
+                            "choices": ["asul", "pula", "berde"],
+                            "UUID": "9d8c2bfe-1bbf-4b3b-88b7-fb28dc42c13e"
+                        }, 
+                        {
+                            "question": "Ang langit ay kulay asul.",
+                            "choices": ["True", "False"],
+                            "UUID": "70b9d347-5254-462d-adb5-64f846b04975"
+                        },
+                        {
+                            "question": "Ang mansanas ay kulay asul.",
+                            "choices": ["False", "True"],
+                            "UUID": "de7fbc40-8205-4a48-bd74-4e29f4deb09e"
+                        },
+                        {
+                            "question": "The word for 'sky' in Filipino is 'langit'.",
+                            "choices": ["True", "False"],
+                            "UUID": "90948dde-c705-434d-a566-d5ca8e670780"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "LANG": "spanish",
+            "UUID": "d9d2caae-e27d-4de7-9b2a-8a784f5fbb12",
+            "GAMES": [
+                {
+                    "GAME": "colorsGame",
+                    "DIFF": "easy",
+                    "UUID": "b8d6fae7-2ecb-4427-bc9a-31e8fa5bc2e3",
+                    "INFO": {
+                        "description": "Welcome to the easy colors game! First, you will learn each color (red, green, and blue), then complete a quiz!",
+                        "objective": "Be able to identify the Spanish words for each color taught and know the Spanish words for common objects of those colors.",
+                        "instructions": [
+                            "Navigate through each of the given colors and review the examples given.",
+                            "When up for the task, you will face the brain blaster."
+                        ],
+                        "prep": {
+                            "introConcept": "In Spanish, the word for 'color' is 'color.'",
+                            "exampleUsage": "To say that something is a color, use 'es color' followed by the color. For example, 'La manzana es color roja.' (The apple is red.)",
+                            "gameTip": "Remember, colors often appear in everyday objects! Think of common items like fruits or plants to help you remember."
+                        }
+                    },
+                    "TEXT": [
+                        {
+                            "text": "rojo",
+                            "englishText": "red",
+                            "linkedText": "La manzana es color roja.",
+                            "englishLinkedText": "The apple is red.",
+                            "helperText": "Rojo means 'red' in Spanish. It's used the same way as 'red' in English, like describing a red apple (manzana roja) or a red car (coche rojo).",
+                            "UUID": "b35ef1a4-2a3f-47c3-8412-8c4c5e6c6a31"
+                        },
+                        {
+                            "text": "verde",
+                            "englishText": "green",
+                            "linkedText": "La hierba es color verde.",
+                            "englishLinkedText": "The grass is green.",
+                            "helperText": "Verde is similar to 'verdant,' which means green and lush in English. Think of green grass or trees.",
+                            "UUID": "0c5a90ef-42c7-45e8-9bb2-43d2edaf6a53"
+                        },
+                        {
+                            "text": "azul",
+                            "englishText": "blue",
+                            "linkedText": "El cielo es color azul.",
+                            "englishLinkedText": "The sky is blue.",
+                            "helperText": "Azul means 'blue' in Spanish, similar to the color of the sky or the ocean.",
+                            "UUID": "ba4f07d2-0e35-4bfa-a9ff-f0b6d60e3a1a"
+                        }
+                    ],
+                    "QUESTIONS": [
+                        {
+                            "question": "What is the Spanish word for red?",
+                            "choices": ["rojo", "verde", "azul"],
+                            "UUID": "e25af2d5-6d3c-42d8-915f-d3d3f9c4e6a7"
+                        },
+                        {
+                            "question": "Which color does 'verde' represent?",
+                            "choices": ["green", "red", "blue"],
+                            "UUID": "d2c4b7af-f918-4e4b-85b8-35d1f8c2dbf4"
+                        },
+                        {
+                            "question": "If 'azul' means blue, what color is the sky in Spanish?",
+                            "choices": ["azul", "rojo", "verde"],
+                            "UUID": "5b3e5efb-36de-498f-a0bc-82c4b9c9f6c3"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

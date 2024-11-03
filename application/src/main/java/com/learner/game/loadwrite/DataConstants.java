@@ -6,6 +6,11 @@ package com.learner.game.loadwrite;
 public class DataConstants {
 
     // Constants for GameData.json
+    public final static String GAME_DATA_FILE = "application\\src\\main\\data\\gamesData.json";
+    public final static String GAME_DATA_FILE_JUNIT = "application\\src\\test\\resources\\g\\gamesData.json";
+
+    public final static String USER_FILE = "application\\src\\main\\data\\users.json";
+    public final static String USER_FILE_JUNIT = "application\\src\\test\\resources\\users.json";
 
     // MAIN JSON ARRAY HOLDING EVERYTHING
     public static final String LANGUAGES = "LANGUAGES";
@@ -43,6 +48,6 @@ public class DataConstants {
     public static final String CHOICES = "choices";            // JSON ARRAY (postion 0 should always be the correct answer)
 
     // Constants for User.json
-    
+
     
 }

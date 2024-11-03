@@ -13,9 +13,11 @@ public class User {
     private String displayName;
     private String password;
     private UUID uuid;
-    private HashSet<ProgressTracker> progressTrackers; // HashSet ensures no dupulicates
+    private HashSet<ProgressTracker> progressTrackers; // Set of progress trackers for different languages
 
-    // Constructor
+    /**
+     * Constructor to initialize User with specified UUID
+     */
     public User(String email, String username, String displayName, String password, UUID uuid) {
         this.email = email;
         this.username = username;
@@ -25,12 +27,17 @@ public class User {
         this.progressTrackers = new HashSet<>(); 
     }
 
-    // Constructor for creating a user without a specified UUID (generates one)
+    /**
+     * Constructor to initialize User without specified UUID (UUID will be generated)
+     */
     public User(String email, String username, String displayName, String password) {
         this(email, username, displayName, password, generateUUID());
     }
 
-    // Generates a uuid
+    /**
+     * Generates a new UUID
+     * @return a randomly generated UUID
+     */
     public static UUID generateUUID() {
         return UUID.randomUUID();
     }
@@ -56,55 +63,75 @@ public class User {
         return password;
     }
 
-    // ProgressTracker management
-    public void addProgressTracker(Language language) {
-        progressTrackers.add(new ProgressTracker(language.getUUID(), language.getLanguageName()));
+    public HashSet<ProgressTracker> getProgressTrackers() {
+        return progressTrackers;
     }
 
+    /**
+     * Adds a progress tracker for a specified language
+     */
+    public void addProgressTracker(ProgressTracker tracker) {
+        progressTrackers.add(tracker);
+    }
+
+    /**
+     * Retrieves the ProgressTracker for a specific language by UUID
+     * @param languageUUID the UUID of the language
+     * @return the ProgressTracker for the specified language, or null if not found
+     */
     public ProgressTracker getProgressTracker(UUID languageUUID) {
-        for(ProgressTracker tracker : progressTrackers) {
-            if(tracker.getUUID() == languageUUID) {
+        for (ProgressTracker tracker : progressTrackers) {
+            if (tracker.getUUID().equals(languageUUID)) {
                 return tracker;
             }
         }
         return null;
     }
 
+    /**
+     * Adds a missed question to the progress tracker of the question's language
+     */
     public void addMissedQuestion(Question question) {
         UUID questionLangUUID = question.getLanguageUUID();
         ProgressTracker currentProgressTracker = getProgressTracker(questionLangUUID);
-        currentProgressTracker.addMissedQuestion(question);
-    }
-
-    public void removeMissedQuestion(Question question) {
-        UUID questionLangUUID = question.getLanguageUUID();
-        ProgressTracker currentProgressTracker = getProgressTracker(questionLangUUID);
-        currentProgressTracker.removeMissedQuestion(question);
+        if (currentProgressTracker != null) {
+            currentProgressTracker.addMissedQuestion(question);
+        }
     }
 
     /**
-     * Inner nestest class used for traking user progress
-     * UUID of ProgressTrack is equal to languageUUID
+     * Removes a missed question from the progress tracker of the question's language
+     */
+    public void removeMissedQuestion(Question question) {
+        UUID questionLangUUID = question.getLanguageUUID();
+        ProgressTracker currentProgressTracker = getProgressTracker(questionLangUUID);
+        if (currentProgressTracker != null) {
+            currentProgressTracker.removeMissedQuestion(question);
+        }
+    }
+
+    /**
+     * Inner nested class used for tracking user progress.
+     * Each ProgressTracker is tied to a language using its UUID.
      */
     public class ProgressTracker {
-
-        // replace Game with game uuids
-        // questions can remain question instances as sometimes these are unquie 
-        private static ArrayList<Question> missedQuestions; // UUID of the game (that the question is apart of), the question itself (loaded by uuid)
-        private static ArrayList<Game> completedGames;      // UUID of the game, the Game
-        private final UUID uuid;            // = to languageUUID
+        
+        private final ArrayList<Question> missedQuestions; // Stores missed questions directly
+        private final ArrayList<UUID> completedGames;      // Stores UUIDs of completed games
+        private final UUID uuid;                           // Equal to languageUUID
         private final String languageName; 
 
+        /**
+         * Initializes ProgressTracker with the specified language UUID and name
+         */
         public ProgressTracker(UUID languageUUID, String languageName) {
             this.uuid = languageUUID;
             this.languageName = languageName;
+            this.missedQuestions = new ArrayList<>(); 
+            this.completedGames = new ArrayList<>();  
         }
 
-        // getters
-        public ProgressTracker getTracker() {
-            return this;
-        }
-
+        // Getters
         public String getLanguageName() {
             return languageName;
         }
@@ -112,41 +139,58 @@ public class User {
         public UUID getUUID() {
             return uuid;
         }
-    
-        public ArrayList<Game> getCompletedGames() {
+        
+        public ArrayList<UUID> getCompletedGames() {
             return completedGames;
-        }
-
-        public ArrayList<String> getCompletedGamesTitles() {
-            ArrayList<String> completed = new ArrayList<>();
-            for(Game game : completedGames) {
-                completed.add(game.getDifficulty() + " " + game.getGameTitle());
-            }
-            return completed;
         }
 
         public ArrayList<Question> getMissedQuestions() {
             return missedQuestions;
         }
-    
-        // Adder methods
-        public void addCompletedGame(Game game) {
-            if (!completedGames.contains(game)) {
-                completedGames.add(game);
+        
+        /**
+         * Adds a completed game by its UUID
+         */
+        public void addCompletedGame(UUID gameUUID) {
+            if (!completedGames.contains(gameUUID)) {
+                completedGames.add(gameUUID);
             }
         }
-    
+        
+        /**
+         * Adds a missed question to the tracker
+         */
         public void addMissedQuestion(Question question) {
             if (!missedQuestions.contains(question)) {
                 missedQuestions.add(question);
             }
         }
-    
-        // Remove
+        
+        /**
+         * Removes a missed question from the tracker
+         */
         public void removeMissedQuestion(Question question) {
             missedQuestions.remove(question);
         }
 
+        /**
+         * Retrieves a list of titles for completed games by looking up each UUID in GameManager
+         * @return list of titles and difficulty levels of completed games
+         */
+        public ArrayList<String> getCompletedGamesTitles() {
+            ArrayList<String> completedTitles = new ArrayList<>();
+            GameManager gameManager = GameManager.getInstance();
+
+            for (UUID gameUUID : completedGames) {
+                Game game = gameManager.findGameByUUID(gameUUID);
+                if (game != null) {
+                    completedTitles.add(game.getDifficulty() + " " + game.getGameTitle());
+                } else {
+                    completedTitles.add("Unknown Game (UUID: " + gameUUID + ")");
+                }
+            }
+
+            return completedTitles;
+        }
     }
-    
 }
