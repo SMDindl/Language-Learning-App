@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
 
+import com.learner.game.innerdata.TextObject;
+
 public class MultipleChoiceQuestion extends Question {
 
     private final ArrayList<String> options;
@@ -11,8 +13,8 @@ public class MultipleChoiceQuestion extends Question {
 
     public MultipleChoiceQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String text, ArrayList<String> options) {
         super(uuid, gameUUID, languageUUID, text, QuestionType.MULTIPLE_CHOICE);
-        this.options = new ArrayList<>(options); // Copy options to avoid modifying the original list
-        this.correctAnswerIndex = 0;  // Initially assume correct answer is at position 0
+        this.options = new ArrayList<>(options); 
+        this.correctAnswerIndex = 0;  
         shuffleOptions();
     }
 

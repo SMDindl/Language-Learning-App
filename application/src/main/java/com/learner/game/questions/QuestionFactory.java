@@ -14,20 +14,12 @@ public class QuestionFactory {
         Question question;
 
         switch (type) {
-            case FITB:
-                question = new FillInTheBlankQuestion(uuid, gameUUID, languageUUID, questionText);
-                break;
-            case MATCHING:
-                question = new MatchingQuestion(uuid, gameUUID, languageUUID, questionText);
-                break;
-            case SEQUENCING:
-                question = new SequencingQuestion(uuid, gameUUID, languageUUID, questionText);
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported question type: " + type);
+            case FITB -> question = new FITBQuestion(uuid, gameUUID, languageUUID, questionText);
+            case MATCHING -> question = new MatchingQuestion(uuid, gameUUID, languageUUID, questionText);
+            case SEQUENCING -> question = new SequencingQuestion(textObjects.get(0).getUUID(), gameUUID, languageUUID, questionText);
+            default -> throw new IllegalArgumentException("Unsupported question type: " + type);
         }
 
-        // Generate the question based on textObjects passed
         question.generateQuestion(textObjects);
         return question;
     }

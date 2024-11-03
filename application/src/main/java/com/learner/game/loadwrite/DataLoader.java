@@ -17,6 +17,7 @@ import com.learner.game.Language;
 import com.learner.game.innerdata.GameInfo;
 import com.learner.game.innerdata.TextObject;
 import com.learner.game.questions.MultipleChoiceQuestion;
+import com.learner.game.questions.Question;
 
 public class DataLoader {
 
@@ -49,17 +50,11 @@ public class DataLoader {
 
                     GameInfo gameInfo = GameInfo.fromJson((JSONObject) gameJson.get("INFO"), gameUUID);
                     ArrayList<TextObject> textObjects = parseTextObjects((JSONArray) gameJson.get("TEXT"), gameUUID);
-                    parseQuestions((JSONArray) gameJson.get("QUESTIONS"), gameUUID, languageUUID);
+                    ArrayList<Question> questions =  parseQuestions((JSONArray) gameJson.get("QUESTIONS"), gameUUID, languageUUID);
 
-                    Game game = new Game(languageUUID, gameTitle, difficulty, gameUUID, gameInfo, textObjects);
-                    gameManager.addGameUUIDToLanguage(languageUUID, gameUUID);
-                    
-                    // Assign game based on difficulty
-                    switch (difficulty) {
-                        case EASY -> gameManager.addEasyGame(languageUUID, game);
-                        case MEDIUM -> gameManager.addMediumGame(languageUUID, game);
-                        case HARD -> gameManager.addHardGame(languageUUID, game);
-                    }
+                    Game game = new Game(languageUUID, gameTitle, difficulty, gameUUID, gameInfo, textObjects, questions);
+                    gameManager.addGame(game);
+
                 }
             }
         } catch (IOException | ParseException e) {
@@ -80,8 +75,8 @@ public class DataLoader {
     }
 
     // private static ArrayList<MultipleChoiceQuestion> parseQuestions(JSONArray questionsArray, UUID gameUUID, UUID languageUUID) {
-    private static void parseQuestions(JSONArray questionsArray, UUID gameUUID, UUID languageUUID) {
-        // ArrayList<MultipleChoiceQuestion> questions = new ArrayList<>();
+    private static ArrayList<Question> parseQuestions(JSONArray questionsArray, UUID gameUUID, UUID languageUUID) {
+        ArrayList<Question> questions = new ArrayList<>();
         for (Object questionObj : questionsArray) {
             JSONObject questionJson = (JSONObject) questionObj;
             UUID questionUUID = UUID.fromString((String) questionJson.get("UUID"));
@@ -93,35 +88,37 @@ public class DataLoader {
                 options.add((String) choice);
             }
 
+            // Create the MultipleChoiceQuestion and add it to the list
             MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionUUID, gameUUID, languageUUID, questionText, options);
-            // questions.add(question);
-            gameManager.addQuestion(gameUUID, question);
+            questions.add(question);
         }
-        // return questions;
+        return questions;  
     }
 
     @Override
-    public String toString() { 
-        String s = "\u001B[33m" + "DATA LOADER TO STRING:\n\n" + "\u001B[0m";
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         
-        s += gameManager.toString();
-
-        s += "\u001B[33m" + "END OF DATA LOADER TO STRING\n\n" + "\u001B[0m";
-        return s;
+        sb.append("\u001B[33m").append("DATA LOADER TO STRING:\n\n").append("\u001B[0m"); // prints in yellow
+        sb.append(gameManager.toString());
+        sb.append("\u001B[33m").append("END OF DATA LOADER TO STRING\n\n").append("\u001B[0m"); // prints in yellow
+        
+        return sb.toString();
     }
+    
 
     /**
      * DataLoader class tester
      * @param args
      */
     public static void main(String[] args) {
+        
         loadGameData(); 
 
-        UUID id = UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72");
+        // UUID id = UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72");
 
         // System.out.println(loader.toString());
 
-        // // This works.
         // System.out.println(gameManager.getEasyGames(id));
 
         System.out.println(gameManager.toString());

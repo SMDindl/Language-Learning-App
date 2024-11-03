@@ -5,11 +5,11 @@ import java.util.UUID;
 
 import com.learner.game.innerdata.TextObject;
 
-public class FillInTheBlankQuestion extends Question {
+public class FITBQuestion extends Question {
     
     private String answer;
 
-    public FillInTheBlankQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String questionText) {
+    public FITBQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String questionText) {
         super(uuid, gameUUID, languageUUID, questionText, QuestionType.FITB);
     }
 

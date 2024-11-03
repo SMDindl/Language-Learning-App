@@ -62,6 +62,21 @@
                             "question": "What is the Filipino word for blue?",
                             "choices": ["asul", "pula", "berde"],
                             "UUID": "9d8c2bfe-1bbf-4b3b-88b7-fb28dc42c13e"
+                        }, 
+                        {
+                            "question": "Ang langit ay kulay asul.",
+                            "choices": ["True", "False"],
+                            "UUID": "70b9d347-5254-462d-adb5-64f846b04975"
+                        },
+                        {
+                            "question": "Ang mansanas ay kulay asul.",
+                            "choices": ["False", "True"],
+                            "UUID": "de7fbc40-8205-4a48-bd74-4e29f4deb09e"
+                        },
+                        {
+                            "question": "The word for 'sky' in Filipino is 'langit'.",
+                            "choices": ["True", "False"],
+                            "UUID": "90948dde-c705-434d-a566-d5ca8e670780"
                         }
                     ]
                 }

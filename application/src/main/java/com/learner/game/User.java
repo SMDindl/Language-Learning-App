@@ -88,10 +88,12 @@ public class User {
      */
     public class ProgressTracker {
 
+        // replace Game with game uuids
+        // questions can remain question instances as sometimes these are unquie 
         private static ArrayList<Question> missedQuestions; // UUID of the game (that the question is apart of), the question itself (loaded by uuid)
         private static ArrayList<Game> completedGames;      // UUID of the game, the Game
-        private final UUID uuid;
-        private final String languageName;
+        private final UUID uuid;            // = to languageUUID
+        private final String languageName; 
 
         public ProgressTracker(UUID languageUUID, String languageName) {
             this.uuid = languageUUID;

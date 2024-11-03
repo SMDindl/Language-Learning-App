@@ -2,8 +2,10 @@
     "users": [
         {
             "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
+            "email": "sdindl@email.com",
             "username": "sdindl",
-            "email": "sdindl@email.sc.edu",
+            "displayname": "Steven",
+            "password": "Password2024!",
             "progressTrackers": [
                 {
                     "languageName": "filipino",
@@ -18,16 +20,20 @@
                     ],
                     "missedQuestions": [
                         {
-                            "gameUUID": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
                             "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
                             "questionType": "mutipleChoice"
                         },
                         {
-                            "gameUUID": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
                             "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
                             "questionType": "mutipleChoice"
                         }
                     ]
+                },
+                {
+                    "languageName": "spanish",
+                    "languageUUID": "d9d2caae-e27d-4de7-9b2a-8a784f5fbb12",
+                    "completedGames": [],
+                    "missedQuestions": []
                 }
             ]
         }

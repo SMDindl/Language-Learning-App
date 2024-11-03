@@ -29,9 +29,17 @@ public class Facade {
         return instance;
     }
 
+    public void showLanguages() {
+
+    }
+
 
     public void pickLanguage(UUID languageUUID) {
         
+    }
+
+    public void showDifficulties() {
+
     }
 
     public void pickDifficulty(int choice) {
@@ -46,6 +54,10 @@ public class Facade {
                 
                 break;
         }
+    }
+
+    public void showGames() {
+
     }
 
     public void pickGame(UUID languageUUID) {

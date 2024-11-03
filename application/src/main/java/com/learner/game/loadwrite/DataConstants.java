@@ -5,6 +5,8 @@ package com.learner.game.loadwrite;
  */
 public class DataConstants {
 
+    // Constants for GameData.json
+
     // MAIN JSON ARRAY HOLDING EVERYTHING
     public static final String LANGUAGES = "LANGUAGES";
 
@@ -39,5 +41,8 @@ public class DataConstants {
     // JSON OBJS WITHIN QUESTION
     public static final String QUESTION_TEXT = "questionText"; // JSON OBJ
     public static final String CHOICES = "choices";            // JSON ARRAY (postion 0 should always be the correct answer)
+
+    // Constants for User.json
+    
     
 }

@@ -4,20 +4,18 @@ import java.util.UUID;
 
 import org.json.simple.JSONObject;
 
-import com.learner.game.GameManager;
-
 /**
  * TextObject <-- Game <--- Difficulty & Language
  */
 public class TextObject {
     
-    private String text;
-    private String englishText;
-    private String linkedText;
-    private String englishLinkedText;
-    private String helperText;
-    private UUID uuid;
-    private UUID gameUUID;
+    private final String text;
+    private final String englishText;
+    private final String linkedText;
+    private final String englishLinkedText;
+    private final String helperText;
+    private final UUID uuid;
+    private final UUID gameUUID;
 
     /**
      * 
@@ -83,16 +81,19 @@ public class TextObject {
 
     @Override
     public String toString() {
-        return "TEXT OBJ:\n" 
-            + "Text: " + text + "\n"
-            + "English Text: " + englishText + "\n"
-            + "Linked Text: " + linkedText + "\n"
-            + "English Linked Text: " + englishLinkedText + "\n"
-            + "Helper Text: " + helperText + "\n"
-            + "UUID: " + uuid + "\n"
-            + "Game UUID: " + gameUUID + "\n"
-            + "-End of text obj-\n";
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("TEXT OBJ:\n")
+        .append("Text: ").append(text).append("\n")
+        .append("English Text: ").append(englishText).append("\n")
+        .append("Linked Text: ").append(linkedText).append("\n")
+        .append("English Linked Text: ").append(englishLinkedText).append("\n")
+        .append("Helper Text: ").append(helperText).append("\n")
+        .append("UUID: ").append(uuid).append("\n")
+        .append("Game UUID: ").append(gameUUID).append("\n")
+        .append("-End of text obj-\n");
+        
+        return sb.toString();
     }
 
-    
 }

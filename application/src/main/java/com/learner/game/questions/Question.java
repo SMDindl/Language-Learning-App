@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.learner.game.innerdata.TextObject;
 
 public abstract class Question {
+    
     protected UUID uuid;
     protected UUID gameUUID;
     protected UUID languageUUID;
