@@ -202,7 +202,12 @@ public class Game {
 
         while (added < count) {
             UUID questionUUID = textObjects.get(currentIndex).getUUID();
-            Question question = QuestionFactory.createQuestion(type, questionUUID);
+            Question question;
+            if(type != QuestionType.MULTIPLE_CHOICE) {
+                question = QuestionFactory.createQuestion(type, questionUUID);
+            } else {
+                question = getQuestion(questionUUID);
+            }
             pulledQuestions.add(question);
             added++;
 

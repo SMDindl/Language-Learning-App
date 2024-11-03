@@ -2,6 +2,7 @@ package com.learner.game;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.learner.game.loadwrite.DataLoader;
 
 public class Facade {
@@ -115,6 +116,8 @@ public class Facade {
     }
 
     // Navigation and quiz methods
+    // Uses gameFacade
+    
     public String showCurrentTextObject() {
         return gameFacade.showCurrentTextObject();
     }
