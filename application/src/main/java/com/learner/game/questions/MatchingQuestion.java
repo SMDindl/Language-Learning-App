@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.UUID;
+
+import com.learner.game.Game;
 import com.learner.game.innerdata.TextObject;
 
 /**
@@ -26,8 +28,8 @@ public class MatchingQuestion extends Question {
      * @param languageUUID Unique identifier for the language
      * @param questionText Initial question text
      */
-    public MatchingQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String questionText) {
-        super(uuid, gameUUID, languageUUID, questionText, QuestionType.MATCHING);
+    public MatchingQuestion(UUID uuid) {
+        super(uuid, QuestionType.MATCHING);
         this.leftSide = new ArrayList<>();
         this.rightSide = new ArrayList<>();
         this.correctPairs = new HashMap<>();
@@ -40,7 +42,18 @@ public class MatchingQuestion extends Question {
      * @param textObjects List of TextObject items representing the matching pairs.
      */
     @Override
-    public void generateQuestion(ArrayList<TextObject> textObjects) {
+    public void generateQuestion() {
+        ArrayList<TextObject> textObjects = new ArrayList<>();                        // Create ArrayList of textObjects
+        TextObject theTextObject = gameManager.findTextObjectByUUID(this.getUUID()); // Retrieve the TextObject using the uuid
+        textObjects.add(theTextObject);                                             // add textObject to arrayList
+        Game game = gameManager.findGameByUUID(gameUUID);                          // Retrive the game
+
+        // Establish an ArrayList of textObjects
+        for(int i = 0; i < 3; i++) {
+            theTextObject = game.getNextTextObject(theTextObject.getUUID());
+            textObjects.add(theTextObject);
+        }
+
         // Populate leftSide, rightSide, and correctPairs
         for (TextObject textObject : textObjects) {
             String word = textObject.getText();

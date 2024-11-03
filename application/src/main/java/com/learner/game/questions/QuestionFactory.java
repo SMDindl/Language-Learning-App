@@ -5,22 +5,28 @@ import java.util.UUID;
 
 import com.learner.game.innerdata.TextObject;
 
+/**
+ * Generates the info needed for question types:
+ * - Fill the blank (FITB),
+ * - Matching,
+ * - Sequencing
+ * Based upon info provided by textObject uuid
+ */
 public class QuestionFactory {
 
-    public static Question createQuestion(QuestionType type, ArrayList<TextObject> textObjects, UUID gameUUID, UUID languageUUID) {
+    public static Question createQuestion(QuestionType type, UUID textObjectUUID) {
         
-        UUID uuid = textObjects.get(0).getUUID();
-        String questionText = ""; // Default text, will be generated in each specific type
         Question question;
 
         switch (type) {
-            case FITB -> question = new FITBQuestion(uuid, gameUUID, languageUUID, questionText);
-            case MATCHING -> question = new MatchingQuestion(uuid, gameUUID, languageUUID, questionText);
-            case SEQUENCING -> question = new SequencingQuestion(textObjects.get(0).getUUID(), gameUUID, languageUUID, questionText);
-            default -> throw new IllegalArgumentException("Unsupported question type: " + type);
+            case FITB -> question = new FITBQuestion(textObjectUUID);
+            case MATCHING -> question = new MatchingQuestion(textObjectUUID);
+            case SEQUENCING -> question = new SequencingQuestion(textObjectUUID);
+            default -> throw new IllegalArgumentException("Unsupported question type for creation/generation: " + type);
         }
 
-        question.generateQuestion(textObjects);
+        question.generateQuestion();
+
         return question;
     }
 }

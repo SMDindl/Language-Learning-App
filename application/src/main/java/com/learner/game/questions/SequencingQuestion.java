@@ -3,6 +3,8 @@ package com.learner.game.questions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
+
+import com.learner.game.Game;
 import com.learner.game.innerdata.TextObject;
 
 /**
@@ -24,10 +26,11 @@ public class SequencingQuestion extends Question {
      * @param languageUUID Unique identifier for the language
      * @param questionText Initial question text
      */
-    public SequencingQuestion(UUID uuid, UUID gameUUID, UUID languageUUID, String questionText) {
-        super(uuid, gameUUID, languageUUID, questionText, QuestionType.SEQUENCING);
+    public SequencingQuestion(UUID uuid) {
+        super(uuid, QuestionType.SEQUENCING);
         this.sequence = new ArrayList<>();
         this.correctSequence = new ArrayList<>();
+        generateQuestion();
     }
 
     /**
@@ -38,7 +41,18 @@ public class SequencingQuestion extends Question {
      * @param textObjects List of TextObject items representing the sequence items.
      */
     @Override
-    public void generateQuestion(ArrayList<TextObject> textObjects) {
+    public final void generateQuestion() {
+        ArrayList<TextObject> textObjects = new ArrayList<>();                        // Create ArrayList of textObjects
+        TextObject theTextObject = gameManager.findTextObjectByUUID(this.getUUID()); // Retrieve the TextObject using the uuid
+        textObjects.add(theTextObject);                                             // add textObject to arrayList
+        Game game = gameManager.findGameByUUID(gameUUID);                          // Retrive the game
+
+        // Establish an ArrayList of textObjects
+        for(int i = 0; i < 3; i++) {
+            theTextObject = game.getNextTextObject(theTextObject.getUUID());
+            textObjects.add(theTextObject);
+        }
+
         // Populate sequence and correctSequence with the items in the correct order
         for (TextObject textObject : textObjects) {
             String item = textObject.getText();

@@ -19,7 +19,6 @@ public class Facade {
     private Language currentLanguage; // Stores languageUUID and languageName of current language
     private Game currentGame;         // Stores gameUUID and any info pertaining game
     private User currentUser;         // Stores list of ProgressTrackers and any info of current user
-    // No instance of question / questions needed, although a questions HashMap is stored in gameManager, the Game class will pull questions itself
 
     // Public method to get the singleton instance
     public static Facade getInstance() {
@@ -29,8 +28,12 @@ public class Facade {
         return instance;
     }
 
-    public void showLanguages() {
+    public void loadData() {
 
+    }
+
+    public String showLanguages() {
+        return null;
     }
 
 
@@ -44,15 +47,15 @@ public class Facade {
 
     public void pickDifficulty(int choice) {
         switch(choice) {
-            case 1:
-                
-                break;
-            case 2:
+            case 1 -> {
 
-                break;
-            case 3:
-                
-                break;
+            }
+            case 2 -> {
+
+            }
+            case 3 -> {
+
+            }
         }
     }
 
@@ -64,6 +67,6 @@ public class Facade {
         
     }
 
-
+    // Will we need game methods directly interconnected to facade?
     
 }

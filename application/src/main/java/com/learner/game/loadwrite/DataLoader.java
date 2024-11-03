@@ -90,6 +90,7 @@ public class DataLoader {
 
             // Create the MultipleChoiceQuestion and add it to the list
             MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionUUID, gameUUID, languageUUID, questionText, options);
+            // MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionUUID, questionText, options);
             questions.add(question);
         }
         return questions;  

@@ -1,6 +1,7 @@
 package com.learner.game;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -50,6 +51,22 @@ public class GameManager {
         languages.computeIfAbsent(language, k -> new ArrayList<>());
     }
 
+    // Game Retrieval
+    // Can be used to get game, then game can be used to get languageUUID, and other info
+    public Game findGameByUUID(UUID gameUUID) {
+        return games.get(gameUUID);
+    }
+
+    // Language Retrieval
+    private Language getLanguageByUUID(UUID languageUUID) {
+        for (Language language : languages.keySet()) {
+            if (language.getUUID().equals(languageUUID)) {
+                return language;
+            }
+        }
+        return null;
+    }
+
     /**
      * Add a game to all HashMaps where the game / game uuid needs to be accounted for
      */
@@ -70,7 +87,11 @@ public class GameManager {
         languages.computeIfAbsent(getLanguageByUUID(game.getLanguageUUID()), k -> new ArrayList<>()).add(gameUUID);
     }
 
-    // TextObject Management
+    public Collection<Game> getAllGames() {
+        return games.values();
+    }
+
+// TextObject Management
 
     /**
      * Add textObject to the textObjects HashMap
@@ -87,7 +108,32 @@ public class GameManager {
         return (game != null) ? game.getTextObject(textObjectUUID) : null;
     }
 
-    // Question Management
+    /**
+     * Search for a TextObject based on its UUID across all games.
+     * 
+     * @return TextObject
+     */
+    public TextObject findTextObjectByUUID(UUID textObjectUUID) {
+        for (Game game : getAllGames()) { 
+            TextObject textObject = game.getTextObject(textObjectUUID);
+            if (textObject != null) {
+                return textObject; // Return the found TextObject
+            }
+        }
+        return null; // Return null if not found in any game
+    }
+
+    /**
+     * Get the list of TextObject UUIDs for a given gameUUID.
+     *
+     * @param gameUUID the UUID of the game
+     * @return an ArrayList of TextObject UUIDs associated with the game, or an empty list if none are found
+     */
+    public ArrayList<UUID> getTextObjectUUIDs(UUID gameUUID) {
+        return textObjects.getOrDefault(gameUUID, new ArrayList<>());
+    }
+
+// Question Management
 
     /**
      * 
@@ -125,21 +171,7 @@ public class GameManager {
         return (game != null) ? game.getQuestions() : new ArrayList<>();
     }
 
-    // Game Retrieval
-    // Can be used to get game, then game can be used to get languageUUID, and other info
-    public Game findGameByUUID(UUID gameUUID) {
-        return games.get(gameUUID);
-    }
-
-    // Language Retrieval
-    private Language getLanguageByUUID(UUID languageUUID) {
-        for (Language language : languages.keySet()) {
-            if (language.getUUID().equals(languageUUID)) {
-                return language;
-            }
-        }
-        return null;
-    }
+// Other methods
 
     /**
      * 
