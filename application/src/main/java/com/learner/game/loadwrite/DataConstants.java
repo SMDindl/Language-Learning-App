@@ -1,5 +1,9 @@
 package com.learner.game.loadwrite;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.UUID;
+
 /**
  * 
  */
@@ -48,6 +52,11 @@ public class DataConstants {
     public static final String CHOICES = "choices";            // JSON ARRAY (postion 0 should always be the correct answer)
 
     // Constants for User.json
+
+    // UUID of games that can use sequencing questions
+    public static final ArrayList<UUID> SEQUENCING_GAMES = new ArrayList<>(Arrays.asList(
+           
+    ));
 
     
 }

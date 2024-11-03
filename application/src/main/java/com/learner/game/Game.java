@@ -6,7 +6,10 @@ import java.util.UUID;
 
 import com.learner.game.innerdata.GameInfo;
 import com.learner.game.innerdata.TextObject;
+import com.learner.game.loadwrite.DataConstants;
 import com.learner.game.questions.Question;
+import com.learner.game.questions.QuestionFactory;
+import com.learner.game.questions.QuestionType;
 
 public class Game {
 
@@ -17,6 +20,8 @@ public class Game {
     private final ArrayList<TextObject> textObjects; // Stores TextObject instances
     private final ArrayList<Question> questions;     // Stores Question instances
     private final GameInfo info;
+    private final ArrayList<Question> pulledQuestions;
+    private int currentTextIndex = 0; // Tracks current TextObject index
 
     public Game(UUID languageUUID, String gameTitle, Difficulty difficulty, UUID uuid, GameInfo info, ArrayList<TextObject> textObjects, ArrayList<Question> questions) {
         this.languageUUID = languageUUID;
@@ -26,6 +31,57 @@ public class Game {
         this.info = info;
         this.textObjects = textObjects;
         this.questions = questions;
+        pulledQuestions = new ArrayList<>();
+    }
+
+    /**
+     * Introduces the game by providing the game info (description, objective, instructions, etc.)
+     * @return A string containing the game introduction.
+     */
+    public String getIntroduction() {
+        return info.toString();
+    }
+
+     /**
+     * Retrieves the current TextObject to present to the user.
+     * @return The current TextObject.
+     */
+    public TextObject getCurrentTextObject() {
+        if (textObjects.isEmpty()) return null;
+        return textObjects.get(currentTextIndex);
+    }
+
+    /**
+     * Advances to the next TextObject
+     * @return The next TextObject.
+     */
+    // Retrieve the next TextObject based on the current index without looping back to the beginning
+    public TextObject getNextTextObject() {
+        if (textObjects.isEmpty()) return null;
+
+        // Check if we are at the last TextObject
+        if (currentTextIndex < textObjects.size() - 1) {
+            currentTextIndex++;
+        }
+        
+        // Return the current TextObject, which will either be the next one or the last one if we've reached the end
+        return textObjects.get(currentTextIndex);
+    }
+
+    /**
+     * Goes back to the previous TextObject
+     * @return The previous TextObject.
+     */
+    public TextObject getPreviousTextObject() {
+        if (textObjects.isEmpty()) return null;
+
+        // Check if we are at the first TextObject
+        if (currentTextIndex > 0) {
+            currentTextIndex--;
+        }
+
+        // Return the current TextObject, which will either be the previous one or the first one if we've reached the start
+        return textObjects.get(currentTextIndex);
     }
 
     // Method to add a Question to the Game
@@ -36,6 +92,10 @@ public class Game {
     // Method to retrieve all Questions in the Game
     public ArrayList<Question> getQuestions() {
         return questions;
+    }
+
+    public Question getQuestion(int index) {
+        return (index >= 0 && index < questions.size()) ? questions.get(index) : null;
     }
 
     // Retrieve a specific Question by UUID
@@ -107,4 +167,59 @@ public class Game {
           .append("Questions: ").append(questions.isEmpty() ? "No Questions" : questions.size()).append("\n");
         return sb.toString();
     }
+
+    // we can pull 3 multiple choice and create 2 fill in the blank, 
+    // create 1 matching, and then only give a sequncing if the gameUUID, if within a
+    // list of gameUUIDs that will be stored in gameConstants (bc we only want to give sequence problems when 
+    // the sequence matters, like for a story)
+
+    // Pulls a predetermined set of questions based on specified requirements
+    public void pullQuestions() {
+        pulledQuestions.clear();
+
+        // Generate a random starting index for textObjects
+        int startIndex = new Random().nextInt(textObjects.size());
+
+        // Pull 3 Multiple Choice Questions
+        addQuestionsByType(QuestionType.MULTIPLE_CHOICE, 3, startIndex);
+
+        // Pull 2 Fill in the Blank Questions
+        addQuestionsByType(QuestionType.FITB, 2, startIndex);
+
+        // Pull 1 Matching Question
+        addQuestionsByType(QuestionType.MATCHING, 1, startIndex);
+
+        // Pull 1 Sequencing Question if the game is eligible for sequencing (story games for example)
+        if (DataConstants.SEQUENCING_GAMES.contains(uuid)) {
+            addQuestionsByType(QuestionType.SEQUENCING, 1, startIndex);
+        }
+    }
+
+    // Helper method to add a specific number of questions of a given type, starting from a given index
+    private void addQuestionsByType(QuestionType type, int count, int startIndex) {
+        int added = 0;
+        int currentIndex = startIndex;
+
+        while (added < count) {
+            UUID questionUUID = textObjects.get(currentIndex).getUUID();
+            Question question = QuestionFactory.createQuestion(type, questionUUID);
+            pulledQuestions.add(question);
+            added++;
+
+            // Move to the next index, wrapping around to 0 if we reach the end of textObjects
+            currentIndex = (currentIndex + 1) % textObjects.size();
+        }
+    }
+
+    public ArrayList<Question> getPulledQuestions() {
+        return pulledQuestions;
+    }
+
+    public Question getNextQuestion(int index) {
+        if (index >= 0 && index < pulledQuestions.size()) {
+            return pulledQuestions.get(index);
+        }
+        return null;
+    }
+
 }

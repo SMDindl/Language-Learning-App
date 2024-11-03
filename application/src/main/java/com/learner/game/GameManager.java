@@ -58,7 +58,7 @@ public class GameManager {
     }
 
     // Language Retrieval
-    private Language getLanguageByUUID(UUID languageUUID) {
+    public Language getLanguageByUUID(UUID languageUUID) {
         for (Language language : languages.keySet()) {
             if (language.getUUID().equals(languageUUID)) {
                 return language;
@@ -66,6 +66,10 @@ public class GameManager {
         }
         return null;
     }
+
+    public ArrayList<Language> getAllLanguages() {
+        return new ArrayList<>(languages.keySet());
+    }    
 
     /**
      * Add a game to all HashMaps where the game / game uuid needs to be accounted for
@@ -203,6 +207,24 @@ public class GameManager {
         // Return null if not found in either HashMap
         return null;
     }
+
+    public ArrayList<Game> getGamesByDifficulty(UUID languageUUID, Difficulty difficulty) {
+        ArrayList<Game> gamesByDifficulty = new ArrayList<>();
+        ArrayList<UUID> gameUUIDs = switch (difficulty) {
+            case EASY -> easyGameUUIDs.getOrDefault(languageUUID, new ArrayList<>());
+            case MEDIUM -> mediumGameUUIDs.getOrDefault(languageUUID, new ArrayList<>());
+            case HARD -> hardGameUUIDs.getOrDefault(languageUUID, new ArrayList<>());
+        };
+    
+        for (UUID gameUUID : gameUUIDs) {
+            Game game = games.get(gameUUID);
+            if (game != null) {
+                gamesByDifficulty.add(game);
+            }
+        }
+        return gamesByDifficulty;
+    }
+    
 
     // toString Method for Debugging
     @Override
