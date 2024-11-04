@@ -246,4 +246,14 @@ public class GameManager {
         s.append("\u001B[33m").append("END OF GAME MANAGER TO STRING\n\n").append("\u001B[0m");
         return s.toString();
     }
+
+    public void clearData() {
+        games.clear();
+        easyGameUUIDs.clear();
+        mediumGameUUIDs.clear();
+        hardGameUUIDs.clear();
+        languages.clear();
+        textObjects.clear();
+        questions.clear();
+    }
 }
