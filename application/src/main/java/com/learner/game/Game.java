@@ -196,7 +196,7 @@ public class Game {
     }
 
     // Helper method to add a specific number of questions of a given type, starting from a given index
-    private void addQuestionsByType(QuestionType type, int count, int startIndex) {
+    public void addQuestionsByType(QuestionType type, int count, int startIndex) {
         int added = 0;
         int currentIndex = startIndex;
 
