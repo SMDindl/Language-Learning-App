@@ -1,8 +1,4 @@
 {
-    "java.project.sourcePaths": [
-        "LearningApplication"
-    ],
-    "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib\\json-simple-1.1.1.jar"
     ],

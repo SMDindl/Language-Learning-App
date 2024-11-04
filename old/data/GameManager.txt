@@ -1,0 +1,272 @@
+package com.learner.game;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
+
+import com.learner.game.innerdata.TextObject;
+import com.learner.game.questions.Question;
+import com.learner.game.questions.QuestionFactory;
+import com.learner.game.questions.QuestionType;
+
+public class GameManager {
+
+    private static GameManager instance; // Singleton instance
+
+
+    private final HashMap<Language, ArrayList<UUID>> languages; // Key = Language instance, value = list of Game UUIDs for that language
+    private final HashMap<UUID, ArrayList<Game>> easyGames;     // Key = UUID of each language, value = list of Game instances for that language's easy games
+    private final HashMap<UUID, ArrayList<Game>> mediumGames;   // Key = UUID of each language, value = list of Game instances for that language's medium games
+    private final HashMap<UUID, ArrayList<Game>> hardGames;     // Key = UUID of each language, value = list of Game instances for that language's hard games
+    private final HashMap<UUID, ArrayList<Question>> questions; // Key = UUID of the game, value = list of Question instances for that Game
+    private final HashMap<UUID, ArrayList<UUID>> textObjects;   // Key = UUID of the game, value = list of textObject UUIDs
+
+    // Private constructor to prevent instantiation from outside
+    private GameManager() {
+        languages = new HashMap<>();
+        easyGames = new HashMap<>();
+        mediumGames = new HashMap<>();
+        hardGames = new HashMap<>();
+        questions = new HashMap<>();
+        textObjects = new HashMap<>();
+    }
+
+    // Public method to get the singleton instance
+    public static GameManager getInstance() {
+        if (instance == null) {
+            instance = new GameManager();
+        }
+        return instance;
+    }
+
+    // Method to initialize a language in the languages map if needed
+    public void initializeLanguage(Language language) {
+        languages.computeIfAbsent(language, k -> new ArrayList<>());
+    }
+
+    // Method to add a single game UUID to an existing language by language UUID
+    public void addGameUUIDToLanguage(UUID languageUUID, UUID gameUUID) {
+        Language language = getLanguageByUUID(languageUUID);
+        
+        if (language != null) {
+            languages.get(language).add(gameUUID);
+        } else {
+            System.out.println("Language with UUID " + languageUUID + " not found.");
+        }
+    }
+
+    // Helper method to find a Language by its UUID
+    private Language getLanguageByUUID(UUID languageUUID) {
+        for (Language language : languages.keySet()) {
+            if (language.getUUID().equals(languageUUID)) {
+                return language;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * @param gameUUID
+     * @return language that is attached to the passed in UUID
+     */
+    public Language getLanguageByGameUUID(UUID gameUUID) {
+        // Loop through each language and its associated game UUIDs
+        for (Language language : languages.keySet()) {
+            ArrayList<UUID> gameUUIDs = languages.get(language);
+            
+            // Check if the list of game UUIDs contains the specified gameUUID
+            if (gameUUIDs != null && gameUUIDs.contains(gameUUID)) {
+                return language; // Return the matching language
+            }
+        }
+        
+        // If no match was found, return null
+        return null;
+    }
+
+    // Getter for languages, returning a list of Language instances
+    public ArrayList<Language> getLanguages() {
+        return new ArrayList<>(languages.keySet());
+    }
+
+    public HashMap<Language, ArrayList<UUID>> getLanguageMap() {
+        return languages;
+    }
+
+    public void addTextObjectUUID(UUID gameUUID, UUID textObjectUUID) {
+        textObjects.computeIfAbsent(gameUUID, k -> new ArrayList<>()).add(textObjectUUID);
+    }
+
+    // Methods to add games by difficulty
+    public void addEasyGame(UUID languageUUID, Game game) {
+        easyGames.computeIfAbsent(languageUUID, k -> new ArrayList<>()).add(game);
+    }
+
+    public void addMediumGame(UUID languageUUID, Game game) {
+        mediumGames.computeIfAbsent(languageUUID, k -> new ArrayList<>()).add(game);
+    }
+
+    public void addHardGame(UUID languageUUID, Game game) {
+        hardGames.computeIfAbsent(languageUUID, k -> new ArrayList<>()).add(game);
+    }
+
+    // Getters for games by difficulty
+    public ArrayList<Game> getEasyGames(UUID languageUUID) {
+        return easyGames.getOrDefault(languageUUID, new ArrayList<>());
+    }
+
+    public ArrayList<Game> getMediumGames(UUID languageUUID) {
+        return mediumGames.getOrDefault(languageUUID, new ArrayList<>());
+    }
+
+    public ArrayList<Game> getHardGames(UUID languageUUID) {
+        return hardGames.getOrDefault(languageUUID, new ArrayList<>());
+    }
+
+    // TextObject Management
+
+    /**
+     * Finds a Game by its UUID.
+     *
+     * @param gameUUID The UUID of the Game.
+     * @return The Game instance if found, or null if not found.
+     */
+    public Game findGameByUUID(UUID gameUUID) {
+        return games.get(gameUUID);
+    }
+
+    /**
+     * Finds a TextObject within a specific Game by its UUID.
+     *
+     * @param gameUUID       The UUID of the Game containing the TextObject.
+     * @param textObjectUUID The UUID of the TextObject to find.
+     * @return The TextObject if found, or null if not found.
+     */
+    public TextObject findTextObjectInGame(UUID gameUUID, UUID textObjectUUID) {
+        Game game = findGameByUUID(gameUUID);
+        return (game != null) ? game.getTextObject(textObjectUUID) : null;
+    }
+
+    /**
+     * Retrieves the next `count` TextObjects within a Game, starting from a specific TextObject UUID.
+     *
+     * @param gameUUID       The UUID of the Game containing the TextObjects.
+     * @param textObjectUUID The UUID of the starting TextObject.
+     * @param count          The number of TextObjects to retrieve.
+     * @return An ArrayList of the next `count` TextObjects in the game, or an empty list if not found.
+     */
+    public ArrayList<TextObject> getNextTextObjectsInGame(UUID gameUUID, UUID textObjectUUID, int count) {
+        Game game = findGameByUUID(gameUUID);
+        if (game == null) {
+            return new ArrayList<>(); // Return an empty list if the game is not found
+        }
+
+        ArrayList<TextObject> textObjectsList = game.getTextObjects();
+        ArrayList<TextObject> result = new ArrayList<>();
+        int startIndex = -1;
+
+        // Find the starting index of the specified TextObject
+        for (int i = 0; i < textObjectsList.size(); i++) {
+            if (textObjectsList.get(i).getUUID().equals(textObjectUUID)) {
+                startIndex = i;
+                break;
+            }
+        }
+
+        if (startIndex == -1) {
+            return new ArrayList<>(); // Return an empty list if the TextObject is not found
+        }
+
+        // Add the next `count` TextObjects to the result, wrapping around if necessary
+        for (int i = 0; i < count; i++) {
+            int index = (startIndex + i) % textObjectsList.size();
+            result.add(textObjectsList.get(index));
+        }
+
+        return result;
+    }
+
+    // Question Mangament
+
+    // Method to add a question to the question list for a specific game
+    public void addQuestion(UUID gameUUID, Question question) {
+        questions.computeIfAbsent(gameUUID, k -> new ArrayList<>()).add(question);
+    }
+
+    // Method to find a gameUUID 
+    public UUID findGameUUIDByQuestionUUID(UUID questionUUID) {
+        // Iterate over each entry in the questions map
+        for (HashMap.Entry<UUID, ArrayList<Question>> entry : questions.entrySet()) {
+            UUID gameUUID = entry.getKey();
+            ArrayList<Question> questionList = entry.getValue();
+    
+            // Check if any question in the list has the matching UUID
+            for (Question question : questionList) {
+                if (question.getUUID().equals(questionUUID)) {
+                    return gameUUID;  // Return the gameUUID where the questionUUID is found
+                }
+            }
+        }
+        return null;  // Return null if no matching gameUUID is found for the questionUUID
+    }
+
+    // Method to generate a question type
+    public Question generateNewQuestion(UUID gameUUID, QuestionType questionType) {
+        Question question;
+
+        QuestionFactory.createQuestion(questionType, textObjects, gameUUID, getLanguageByGameUUID(gameUUID).getUUID());
+        
+        return null;
+    }
+
+    public Question regenerateQuestion(UUID textObjectUUID, QuestionType questionType) {
+        TextObject textObj = findTextObject(textObjectUUID);
+        UUID gameUUID = textObj.getGameUUID();
+
+
+        
+        Question question = QuestionFactory.createQuestion(questionType, textObjects, gameUUID, getLanguageByGameUUID(gameUUID).getUUID());
+        
+        return question;
+    }
+
+    public Question rebuildQuestion(UUID uuid, ArrayList<UUID> uuidArray, ArrayList<UUID> uuidArray2) {
+        if(uuidArray.isEmpty()) {           // FITB Question
+
+        } else {
+
+        }
+        return null;
+    }
+
+    // Getter for questions associated with a specific game
+    public ArrayList<Question> getQuestions(UUID gameUUID) {
+        return questions.getOrDefault(gameUUID, new ArrayList<>());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+
+        s.append("\u001B[33m").append("GAME MANAGER TO STRING:").append("\u001B[0m\n");
+    
+        // Itterate through each language
+        for (Language language : getLanguages()) {
+            s.append(language.toString()).append("\n");
+    
+            s.append("Easy ").append(language.getLanguageName()).append(" games:\n");
+            s.append(getEasyGames(language.getUUID())).append("\n");
+
+            s.append("Medium ").append(language.getLanguageName()).append(" games:\n");
+            s.append(getMediumGames(language.getUUID())).append("\n");
+
+            s.append("Hard ").append(language.getLanguageName()).append(" games:\n");
+            s.append(getHardGames(language.getUUID())).append("\n");
+        }
+    
+        s.append("\u001B[33m").append("END OF GAME MANAGER TO STRING\n\n").append("\u001B[0m");
+        return s.toString();
+    }
+    
+}
