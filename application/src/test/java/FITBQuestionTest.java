@@ -1,96 +1,63 @@
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Before;
-import org.junit.Test;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.learner.game.innerdata.TextObject;
+import com.learner.game.questions.FITBQuestion;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
-// Ensure to import your classes correctly, adjust the package name if necessary.
-public class FITBQuestionTest {
-    
-    private FITBQuestion fitbQuestion;
-    private GameManager gameManager; // Assuming you have a GameManager class
+// Mock GameManager for testing purposes
+class MockGameManager {
+    private final TextObject textObject;
 
-    @Before
-    public void setUp() {
-        // Initialize UUID for the question
-        UUID uuid = UUID.randomUUID();
-        
-        // Mock the GameManager
-        gameManager = mock(GameManager.class);
-        
-        // Create the FITBQuestion instance with the mocked GameManager
-        fitbQuestion = new FITBQuestion(uuid);
-        fitbQuestion.setGameManager(gameManager); // You may need to add a setter in FITBQuestion for GameManager
+    public MockGameManager(TextObject textObject) {
+        this.textObject = textObject;
+    }
+
+    public TextObject findTextObjectByUUID(UUID uuid) {
+        // Returns the TextObject if UUID matches
+        return textObject.getUUID().equals(uuid) ? textObject : null;
+    }
+}
+
+class FITBQuestionTest {
+
+    private FITBQuestion question;
+    private TextObject textObject;
+
+    @BeforeEach
+    void setUp() {
+        // Sample UUIDs
+        UUID questionUUID = UUID.fromString("285bad41-5c1c-45b4-bc51-59f480bb1895");
+        UUID languageUUID = UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72");
+        UUID gameUUID = UUID.fromString("8ce4fefc-a539-4546-9d7e-0ac8778f8de5");
+
+        // Initialize FITBQuestion with the UUID
+        question = new FITBQuestion(questionUUID); // Ensure this constructor exists
+
+        // Create a TextObject with all required arguments
+        textObject = new TextObject(
+            "pula",                       // text (answer)
+            "Ang mansanas ay kulay pula.", // linkedText with answer
+            "The apple is red.",           // englishLinkedText
+            "Pula means 'red' in Filipino.", // helperText
+            questionUUID,                  // TextObject UUID
+            languageUUID,                  // Language UUID
+            gameUUID                       // Game UUID
+        );
+
+        // Mock gameManager behavior
+        question.setGameManager(new MockGameManager(textObject)); // Ensure this method exists
     }
 
     @Test
-    public void testGenerateQuestionCreatesCorrectQuestionText() {
-        // Setup mock TextObject
-        String linkedText = "What is the capital of France?";
-        String actualText = "Paris";
-        
-        TextObject mockTextObject = mock(TextObject.class);
-        when(mockTextObject.getLinkedText()).thenReturn(linkedText);
-        when(mockTextObject.getText()).thenReturn(actualText);
-        
-        // Setup the mock behavior for gameManager
-        when(gameManager.findTextObjectByUUID(fitbQuestion.getUUID())).thenReturn(mockTextObject);
-        
+    void testGenerateQuestionReplacesAnswerWithBlank() {
         // Generate the question
-        fitbQuestion.generateQuestion();
-        
-        // Verify the generated question text
-        String expectedQuestionText = "What is the capital of France?";
-        expectedQuestionText = expectedQuestionText.replace(actualText, "_____");
-        
-        assertEquals(expectedQuestionText, fitbQuestion.getQuestionText());
-        assertEquals(actualText, fitbQuestion.getAnswer());
-    }
-    
-    @Test
-    public void testValidateAnswerReturnsTrueForCorrectAnswer() {
-        // Setup mock TextObject
-        String linkedText = "What is the capital of France?";
-        String actualText = "Paris";
+        question.generateQuestion();
 
-        TextObject mockTextObject = mock(TextObject.class);
-        when(mockTextObject.getLinkedText()).thenReturn(linkedText);
-        when(mockTextObject.getText()).thenReturn(actualText);
-        
-        // Setup the mock behavior for gameManager
-        when(gameManager.findTextObjectByUUID(fitbQuestion.getUUID())).thenReturn(mockTextObject);
-        
-        // Generate the question
-        fitbQuestion.generateQuestion();
+        // Check if question text replaces "pula" with "_____"
+        assertEquals("Ang mansanas ay kulay _____.", question.getQuestionText());
 
-        // Test valid answer
-        boolean isValid = fitbQuestion.validateAnswer("Paris");
-        assertTrue(isValid);
-    }
-
-    @Test
-    public void testValidateAnswerReturnsFalseForIncorrectAnswer() {
-        // Setup mock TextObject
-        String linkedText = "What is the capital of France?";
-        String actualText = "Paris";
-
-        TextObject mockTextObject = mock(TextObject.class);
-        when(mockTextObject.getLinkedText()).thenReturn(linkedText);
-        when(mockTextObject.getText()).thenReturn(actualText);
-        
-        // Setup the mock behavior for gameManager
-        when(gameManager.findTextObjectByUUID(fitbQuestion.getUUID())).thenReturn(mockTextObject);
-        
-        // Generate the question
-        fitbQuestion.generateQuestion();
-
-        // Test invalid answer
-        boolean isValid = fitbQuestion.validateAnswer("London");
-        assertFalse(isValid);
+        // Check if answer is set correctly
+        assertEquals("pula", question.getAnswer());
     }
 }

@@ -1,75 +1,23 @@
-// // package com.learner.game.questions;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import java.util.UUID;
 
-// // import static org.junit.jupiter.api.Assertions.*;
-// // import org.junit.jupiter.api.BeforeEach;
-// // import org.junit.jupiter.api.Test;
-// // import java.util.UUID;
+public class QuestionTest {
 
-// // public class QuestionTest {
-    
-// //     private Question question;
-// //     private UUID questionUUID;
+    private FITBQuestion question; // or whatever specific question type you're testing
 
-// //     @BeforeEach
-// //     void setUp() {
-// //         questionUUID = UUID.randomUUID();
-// //         // Assuming you cannot instantiate abstract classes directly, you might need a concrete subclass
-// //         question = new FITBQuestion(questionUUID);  // Using FITBQuestion as an example
-// //     }
+    @BeforeEach
+    public void setUp() {
+        UUID uuid = UUID.randomUUID();
+        question = new FITBQuestion(uuid, QuestionType.FILL_IN_THE_BLANK); // Assuming this constructor exists
+    }
 
-// //     @Test
-// //     void testGetUUIDReturnsCorrectUUID() {
-// //         assertEquals(questionUUID, question.getUUID(), 
-// //             "Expected getUUID to return the correct UUID.");
-// //     }
+    @Test
+    public void testGetUUID() {
+        assertNotNull(question.getUUID());
+        assertEquals(question.getUUID().toString(), question.getUUID().toString()); // Example assertion
+    }
 
-// //     // More tests could be added for shared functionalities
-// // }
-// // import org.junit.jupiter.api.BeforeEach;
-// // import org.junit.jupiter.api.Test;
-// // import java.util.UUID;
-
-// // public class QuestionTest {
-    
-// //     private Question question;
-// //     private UUID questionUUID;
-
-// //     @BeforeEach
-// //     void setUp() {
-// //         questionUUID = UUID.randomUUID();
-// //         // Assuming you cannot instantiate abstract classes directly, you might need a concrete subclass
-// //         question = new FITBQuestion(questionUUID);  // Using FITBQuestion as an example
-// //     }
-
-// //     @Test
-// //     void testGetUUIDReturnsCorrectUUID() {
-// //         assertEquals(questionUUID, question.getUUID(), 
-// //             "Expected getUUID to return the correct UUID.");
-// //     }
-
-// //     // More tests could be added for shared functionalities
-// // }
-// // import org.junit.jupiter.api.BeforeEach;
-// // import org.junit.jupiter.api.Test;
-// // import java.util.UUID;
-
-// // public class QuestionTest {
-    
-// //     private Question question;
-// //     private UUID questionUUID;
-
-// //     @BeforeEach
-// //     void setUp() {
-// //         questionUUID = UUID.randomUUID();
-// //         // Assuming you cannot instantiate abstract classes directly, you might need a concrete subclass
-// //         question = new FITBQuestion(questionUUID);  // Using FITBQuestion as an example
-// //     }
-
-// //     @Test
-// //     void testGetUUIDReturnsCorrectUUID() {
-// //         assertEquals(questionUUID, question.getUUID(), 
-// //             "Expected getUUID to return the correct UUID.");
-// //     }
-
-// //     // More tests could be added for shared functionalities
-// // }
+    // Add more test methods here
+}

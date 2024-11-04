@@ -1,111 +1,76 @@
-// package com.learner.game.questions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-// import static org.junit.jupiter.api.Assertions.*;
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
-// import java.util.UUID;
+import java.util.UUID;
 
-// public class SequencingQuestionTest {
-    
-//     private SequencingQuestion seqQuestion;
-//     private UUID questionUUID;
+import static org.junit.jupiter.api.Assertions.*;
 
-//     @BeforeEach
-//     void setUp() {
-//         questionUUID = UUID.randomUUID();
-//         String[] correctOrder = {"Step 1", "Step 2", "Step 3"};
-//         seqQuestion = new SequencingQuestion(questionUUID, correctOrder);
-//     }
+public class SequencingQuestionTest {
 
-//     @Test
-//     void testValidateAnswerReturnsTrueForCorrectSequence() {
-//         String[] userAnswer = {"Step 1", "Step 2", "Step 3"};
-//         assertTrue(seqQuestion.validateAnswer(userAnswer), 
-//             "Expected validateAnswer to return true for the correct sequence.");
-//     }
+    private SequencingQuestion question;
 
-//     @Test
-//     void testValidateAnswerReturnsFalseForIncorrectSequence() {
-//         String[] userAnswer = {"Step 3", "Step 2", "Step 1"};
-//         assertFalse(seqQuestion.validateAnswer(userAnswer), 
-//             "Expected validateAnswer to return false for an incorrect sequence.");
-//     }
+    @BeforeEach
+    void setUp() {
+        // Sample UUIDs
+        UUID questionUUID = UUID.fromString("e4e1d515-7baf-4569-8c14-7c663b6e49f5");
+        UUID languageUUID = UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72");
+        UUID gameUUID = UUID.fromString("8ce4fefc-a539-4546-9d7e-0ac8778f8de5");
 
-//     @Test
-//     void testGetCorrectOrderReturnsCorrectSequence() {
-//         assertArrayEquals(new String[]{"Step 1", "Step 2", "Step 3"}, seqQuestion.getCorrectOrder(), 
-//             "Expected getCorrectOrder to return the correct sequence.");
-//     }
-// }
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
-// import java.util.UUID;
+        // Initialize SequencingQuestion with the UUID and the expected question type
+        question = new SequencingQuestion(questionUUID, QuestionType.SEQUENCING);
+        question.setGameUUID(gameUUID);
+        question.setLanguageUUID(languageUUID);
+        
+        // Sample question data
+        question.setQuestionText("Arrange the colors in the correct order: red, green, blue.");
+        question.setChoices(new String[] {"red", "green", "blue"});
 
-// public class SequencingQuestionTest {
-    
-//     private SequencingQuestion seqQuestion;
-//     private UUID questionUUID;
+        // Add expected answers for validation
+        question.setCorrectSequence(new String[] {"red", "green", "blue"});
+    }
 
-//     @BeforeEach
-//     void setUp() {
-//         questionUUID = UUID.randomUUID();
-//         String[] correctOrder = {"Step 1", "Step 2", "Step 3"};
-//         seqQuestion = new SequencingQuestion(questionUUID, correctOrder);
-//     }
+    @Test
+    void testGenerateQuestion() {
+        question.generateQuestion();
+        assertNotNull(question.getQuestionText(), "Question text should be generated.");
+        assertEquals("Arrange the colors in the correct order: red, green, blue.", question.getQuestionText());
+    }
 
-//     @Test
-//     void testValidateAnswerReturnsTrueForCorrectSequence() {
-//         String[] userAnswer = {"Step 1", "Step 2", "Step 3"};
-//         assertTrue(seqQuestion.validateAnswer(userAnswer), 
-//             "Expected validateAnswer to return true for the correct sequence.");
-//     }
+    @Test
+    void testValidateCorrectAnswer() {
+        String userAnswer = "red, green, blue";
+        assertTrue(question.validateAnswer(userAnswer), "Answer should be valid.");
+    }
 
-//     @Test
-//     void testValidateAnswerReturnsFalseForIncorrectSequence() {
-//         String[] userAnswer = {"Step 3", "Step 2", "Step 1"};
-//         assertFalse(seqQuestion.validateAnswer(userAnswer), 
-//             "Expected validateAnswer to return false for an incorrect sequence.");
-//     }
+    @Test
+    void testValidateIncorrectAnswer() {
+        String userAnswer = "green, blue, red";
+        assertFalse(question.validateAnswer(userAnswer), "Answer should be invalid.");
+    }
 
-//     @Test
-//     void testGetCorrectOrderReturnsCorrectSequence() {
-//         assertArrayEquals(new String[]{"Step 1", "Step 2", "Step 3"}, seqQuestion.getCorrectOrder(), 
-//             "Expected getCorrectOrder to return the correct sequence.");
-//     }
-// }
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
-// import java.util.UUID;
+    @Test
+    void testGetUUID() {
+        assertEquals(UUID.fromString("e4e1d515-7baf-4569-8c14-7c663b6e49f5"), question.getUUID());
+    }
 
-// public class SequencingQuestionTest {
-    
-//     private SequencingQuestion seqQuestion;
-//     private UUID questionUUID;
+    @Test
+    void testGetGameUUID() {
+        assertEquals(UUID.fromString("8ce4fefc-a539-4546-9d7e-0ac8778f8de5"), question.getGameUUID());
+    }
 
-//     @BeforeEach
-//     void setUp() {
-//         questionUUID = UUID.randomUUID();
-//         String[] correctOrder = {"Step 1", "Step 2", "Step 3"};
-//         seqQuestion = new SequencingQuestion(questionUUID, correctOrder);
-//     }
+    @Test
+    void testGetLanguageUUID() {
+        assertEquals(UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72"), question.getLanguageUUID());
+    }
 
-//     @Test
-//     void testValidateAnswerReturnsTrueForCorrectSequence() {
-//         String[] userAnswer = {"Step 1", "Step 2", "Step 3"};
-//         assertTrue(seqQuestion.validateAnswer(userAnswer), 
-//             "Expected validateAnswer to return true for the correct sequence.");
-//     }
+    @Test
+    void testGetQuestionText() {
+        assertEquals("Arrange the colors in the correct order: red, green, blue.", question.getQuestionText());
+    }
 
-//     @Test
-//     void testValidateAnswerReturnsFalseForIncorrectSequence() {
-//         String[] userAnswer = {"Step 3", "Step 2", "Step 1"};
-//         assertFalse(seqQuestion.validateAnswer(userAnswer), 
-//             "Expected validateAnswer to return false for an incorrect sequence.");
-//     }
-
-//     @Test
-//     void testGetCorrectOrderReturnsCorrectSequence() {
-//         assertArrayEquals(new String[]{"Step 1", "Step 2", "Step 3"}, seqQuestion.getCorrectOrder(), 
-//             "Expected getCorrectOrder to return the correct sequence.");
-//     }
-// }
+    @Test
+    void testGetQuestionType() {
+        assertEquals(QuestionType.SEQUENCING, question.getQuestionType());
+    }
+}
