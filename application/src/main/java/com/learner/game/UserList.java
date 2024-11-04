@@ -93,4 +93,8 @@ public class UserList {
         return sb.toString();
     }
 
+    public void clearUsers() {
+        users.clear();
+    }
+
 }

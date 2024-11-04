@@ -189,6 +189,5 @@ public class DataLoader {
 
         System.out.println(gameManager.toString());
         System.out.println(userList.toString());
-
     }
 }

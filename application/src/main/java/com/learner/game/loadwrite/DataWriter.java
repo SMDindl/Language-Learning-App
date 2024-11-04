@@ -1,16 +1,16 @@
 package com.learner.game.loadwrite;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.UUID;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.learner.game.User;
 import com.learner.game.UserList;
 import com.learner.game.questions.Question;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.UUID;
 
 public class DataWriter {
 

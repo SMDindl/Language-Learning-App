@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\test\java\com\languageLearner\learner\game\GameDataTest.java
 C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\test\java\com\languageLearner\learner\game\GameTest.java
 C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\test\java\GameManagerTest.java
@@ -17,3 +18,11 @@ C:\Users\mauho\Language-Learning-App\application\src\test\java\QuestionTypeTest.
 C:\Users\mauho\Language-Learning-App\application\src\test\java\SequencingQuestionTest.java
 C:\Users\mauho\Language-Learning-App\application\src\test\java\UUIDGenerator.java
 >>>>>>> branch-maurice
+=======
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\DataConstantsTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\DataLoaderTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\DataWriterTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\FacadeForGameTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\FacadeTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\FacadeWithDataLoadingTest.java
+>>>>>>> branch-steven
