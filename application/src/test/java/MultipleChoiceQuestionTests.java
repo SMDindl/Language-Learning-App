@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import static org.junit.Assert.*;
 //got to work
-public class MultipleChoiceQuestionTest {
+public class MultipleChoiceQuestionTests {
     
     private MultipleChoiceQuestion question;
 
@@ -29,7 +29,7 @@ public class MultipleChoiceQuestionTest {
     @Test
     public void testAskQuestion() {
         // Here you might want to check if the method works correctly
-        // In a real scenario, you'd capture the output or verify it
+        // In a real scenario, you'd capture the output or verify that the method works as expected
         question.askQuestion();
     }
 
@@ -49,7 +49,7 @@ public class MultipleChoiceQuestionTest {
     public void testGetQuestionText() {
         assertEquals("The question text should match.", "What is the Filipino word for red?", question.getQuestionText());
     }
-
+    
     @Test
     public void testGetChoices() {
         assertEquals("There should be three choices.", 3, question.getOptions().size());
