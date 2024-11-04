@@ -1,10 +1,12 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class SequencingQuestionTest {
 
@@ -12,21 +14,12 @@ public class SequencingQuestionTest {
 
     @BeforeEach
     void setUp() {
-        // Sample UUIDs
         UUID questionUUID = UUID.fromString("e4e1d515-7baf-4569-8c14-7c663b6e49f5");
-        UUID languageUUID = UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72");
-        UUID gameUUID = UUID.fromString("8ce4fefc-a539-4546-9d7e-0ac8778f8de5");
-
-        // Initialize SequencingQuestion with the UUID and the expected question type
         question = new SequencingQuestion(questionUUID, QuestionType.SEQUENCING);
-        question.setGameUUID(gameUUID);
-        question.setLanguageUUID(languageUUID);
         
         // Sample question data
         question.setQuestionText("Arrange the colors in the correct order: red, green, blue.");
         question.setChoices(new String[] {"red", "green", "blue"});
-
-        // Add expected answers for validation
         question.setCorrectSequence(new String[] {"red", "green", "blue"});
     }
 
@@ -50,27 +43,18 @@ public class SequencingQuestionTest {
     }
 
     @Test
-    void testGetUUID() {
-        assertEquals(UUID.fromString("e4e1d515-7baf-4569-8c14-7c663b6e49f5"), question.getUUID());
+    void testCorrectSequence() {
+        // Check the correct sequence validation
+        String[] userSequence = {"red", "green", "blue"};
+        assertTrue(question.validateSequence(userSequence), "User sequence should match the correct sequence.");
     }
 
     @Test
-    void testGetGameUUID() {
-        assertEquals(UUID.fromString("8ce4fefc-a539-4546-9d7e-0ac8778f8de5"), question.getGameUUID());
+    void testIncorrectSequence() {
+        // Check incorrect sequence validation
+        String[] userSequence = {"blue", "red", "green"};
+        assertFalse(question.validateSequence(userSequence), "User sequence should not match the correct sequence.");
     }
 
-    @Test
-    void testGetLanguageUUID() {
-        assertEquals(UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72"), question.getLanguageUUID());
-    }
 
-    @Test
-    void testGetQuestionText() {
-        assertEquals("Arrange the colors in the correct order: red, green, blue.", question.getQuestionText());
-    }
-
-    @Test
-    void testGetQuestionType() {
-        assertEquals(QuestionType.SEQUENCING, question.getQuestionType());
-    }
 }

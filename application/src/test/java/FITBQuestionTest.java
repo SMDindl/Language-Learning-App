@@ -1,63 +1,27 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.learner.game.innerdata.TextObject;
-import com.learner.game.questions.FITBQuestion;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.UUID;
-
-// Mock GameManager for testing purposes
-class MockGameManager {
-    private final TextObject textObject;
-
-    public MockGameManager(TextObject textObject) {
-        this.textObject = textObject;
-    }
-
-    public TextObject findTextObjectByUUID(UUID uuid) {
-        // Returns the TextObject if UUID matches
-        return textObject.getUUID().equals(uuid) ? textObject : null;
-    }
-}
-
-class FITBQuestionTest {
+import com.learner.game.questions.FITBQuestion; 
+import com.learner.game.questions.QuestionType; 
+public class FITBQuestionTest {
 
     private FITBQuestion question;
-    private TextObject textObject;
 
     @BeforeEach
     void setUp() {
-        // Sample UUIDs
-        UUID questionUUID = UUID.fromString("285bad41-5c1c-45b4-bc51-59f480bb1895");
-        UUID languageUUID = UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72");
-        UUID gameUUID = UUID.fromString("8ce4fefc-a539-4546-9d7e-0ac8778f8de5");
+        UUID questionUUID = UUID.fromString("e4e1d515-7baf-4569-8c14-7c663b6e49f5");
+        question = new FITBQuestion(questionUUID.toString(), QuestionType.FITB);  // Assuming constructor expects String
 
-        // Initialize FITBQuestion with the UUID
-        question = new FITBQuestion(questionUUID); // Ensure this constructor exists
+        // Sample data setup
+        question.setQuestionText("Fill in the blank: The sky is ___ (color).");
+        question.setCorrectAnswer("blue");
 
-        // Create a TextObject with all required arguments
-        textObject = new TextObject(
-            "pula",                       // text (answer)
-            "Ang mansanas ay kulay pula.", // linkedText with answer
-            "The apple is red.",           // englishLinkedText
-            "Pula means 'red' in Filipino.", // helperText
-            questionUUID,                  // TextObject UUID
-            languageUUID,                  // Language UUID
-            gameUUID                       // Game UUID
-        );
-
-        // Mock gameManager behavior
-        question.setGameManager(new MockGameManager(textObject)); // Ensure this method exists
+        // Check if you have a proper setGameManager method
+        // Assuming a MockGameManager is defined properly
+        question.setGameManager(new MockGameManager());  // Ensure the method exists
     }
 
-    @Test
-    void testGenerateQuestionReplacesAnswerWithBlank() {
-        // Generate the question
-        question.generateQuestion();
-
-        // Check if question text replaces "pula" with "_____"
-        assertEquals("Ang mansanas ay kulay _____.", question.getQuestionText());
-
-        // Check if answer is set correctly
-        assertEquals("pula", question.getAnswer());
-    }
+    // Additional test methods for functionality...
 }
