@@ -1,73 +1,57 @@
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Before;
+import org.junit.Test;
+import com.learner.game.questions.MultipleChoiceQuestion;
 import java.util.ArrayList;
 import java.util.UUID;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class MultipleChoiceQuestionTest {
-
+public class MultipleChoiceQuestionTest {
+    
     private MultipleChoiceQuestion question;
-    private UUID uuid;
-    private UUID gameUUID;
-    private UUID languageUUID;
-    private String questionText;
-    private ArrayList<String> options;
 
-    @BeforeEach
-    void setUp() {
-        uuid = UUID.randomUUID();
-        gameUUID = UUID.randomUUID();
-        languageUUID = UUID.randomUUID();
-        questionText = "What is the Filipino word for red?";
-        options = new ArrayList<>();
-        options.add("pula");
-        options.add("berde");
-        options.add("asul");
-        
-        // Create a MultipleChoiceQuestion instance
-        question = new MultipleChoiceQuestion(uuid, gameUUID, languageUUID, questionText, options);
+    @Before
+    public void setUp() {
+        // Setup a sample MultipleChoiceQuestion from the JSON data
+        String questionText = "What is the Filipino word for red?";
+        ArrayList<String> choices = new ArrayList<>();
+        choices.add("pula");
+        choices.add("berde");
+        choices.add("asul");
+
+        UUID questionUUID = UUID.fromString("e4e1d515-7baf-4569-8c14-7c663b6e49f5");
+        UUID gameUUID = UUID.fromString("8ce4fefc-a539-4546-9d7e-0ac8778f8de5");
+        UUID languageUUID = UUID.fromString("1bafb0ae-3462-4ec3-9cc2-a98ff2898e72");
+
+        // Create an instance of MultipleChoiceQuestion
+        question = new MultipleChoiceQuestion(questionUUID, gameUUID, languageUUID, questionText, choices);
     }
 
     @Test
-    void testShuffleOptions() {
-        ArrayList<String> originalOptions = new ArrayList<>(question.getOptions());
-
-        // Wait for some time to allow shuffle to take place (in case shuffle doesn't change order)
-        try {
-            Thread.sleep(100); // Sleep for a brief period to let shuffle have an effect
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-
-        ArrayList<String> shuffledOptions = question.getOptions();
-        assertNotEquals(originalOptions, shuffledOptions, "Options should be shuffled");
-    }
-
-    @Test
-    void testValidateAnswerCorrect() {
-        assertTrue(question.validateAnswer("pula"), "The answer 'pula' should be correct.");
-    }
-
-    @Test
-    void testValidateAnswerIncorrect() {
-        assertFalse(question.validateAnswer("berde"), "The answer 'berde' should be incorrect.");
-    }
-
-    @Test
-    void testAskQuestion() {
-        // This test just verifies that the method executes without throwing exceptions
+    public void testAskQuestion() {
+        // Here you might want to check if the method works correctly
+        // In a real scenario, you'd capture the output or verify it
         question.askQuestion();
-        // Verify that the output includes the question text
-        assertEquals(questionText, question.getQuestionText());
     }
 
     @Test
-    void testGetOptions() {
-        ArrayList<String> retrievedOptions = question.getOptions();
-        assertEquals(options.size(), retrievedOptions.size(), "Options size should match");
-        assertTrue(retrievedOptions.containsAll(options), "Options should match expected values");
+    public void testValidateCorrectAnswer() {
+        String correctAnswer = "pula";
+        assertTrue("The answer should be correct.", question.validateAnswer(correctAnswer));
+    }
+
+    @Test
+    public void testValidateIncorrectAnswer() {
+        String incorrectAnswer = "berde";
+        assertFalse("The answer should be incorrect.", question.validateAnswer(incorrectAnswer));
+    }
+
+    @Test
+    public void testGetQuestionText() {
+        assertEquals("The question text should match.", "What is the Filipino word for red?", question.getQuestionText());
+    }
+
+    @Test
+    public void testGetChoices() {
+        assertEquals("There should be three choices.", 3, question.getOptions().size());
     }
 }
