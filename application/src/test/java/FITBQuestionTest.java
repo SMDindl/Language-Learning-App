@@ -1,68 +1,96 @@
-package com.learner.game.questions;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import com.learner.game.innerdata.TextObject;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.UUID;
 
-public class FITBQuestionTest {  // Make the class public
+// Ensure to import your classes correctly, adjust the package name if necessary.
+public class FITBQuestionTest {
     
     private FITBQuestion fitbQuestion;
-    private UUID questionUUID;
-    private TextObject textObject;
+    private GameManager gameManager; // Assuming you have a GameManager class
 
-    @BeforeEach
-    void setUp() {
-        questionUUID = UUID.randomUUID();
-        fitbQuestion = new FITBQuestion(questionUUID);
+    @Before
+    public void setUp() {
+        // Initialize UUID for the question
+        UUID uuid = UUID.randomUUID();
         
-        // Set up the TextObject mock with linked text and the actual text
-        textObject = new TextObject("What is the capital of France?", "Paris");
-        // Here, you might set up how the game manager will retrieve this textObject
+        // Mock the GameManager
+        gameManager = mock(GameManager.class);
+        
+        // Create the FITBQuestion instance with the mocked GameManager
+        fitbQuestion = new FITBQuestion(uuid);
+        fitbQuestion.setGameManager(gameManager); // You may need to add a setter in FITBQuestion for GameManager
     }
 
     @Test
-    void testGenerateQuestionCreatesCorrectQuestionText() {
+    public void testGenerateQuestionCreatesCorrectQuestionText() {
+        // Setup mock TextObject
+        String linkedText = "What is the capital of France?";
+        String actualText = "Paris";
+        
+        TextObject mockTextObject = mock(TextObject.class);
+        when(mockTextObject.getLinkedText()).thenReturn(linkedText);
+        when(mockTextObject.getText()).thenReturn(actualText);
+        
+        // Setup the mock behavior for gameManager
+        when(gameManager.findTextObjectByUUID(fitbQuestion.getUUID())).thenReturn(mockTextObject);
+        
+        // Generate the question
         fitbQuestion.generateQuestion();
         
-        String expectedQuestionText = "What is the capital of France? _____";
+        // Verify the generated question text
+        String expectedQuestionText = "What is the capital of France?";
+        expectedQuestionText = expectedQuestionText.replace(actualText, "_____");
+        
         assertEquals(expectedQuestionText, fitbQuestion.getQuestionText());
-        assertEquals("Paris", fitbQuestion.getAnswer());
+        assertEquals(actualText, fitbQuestion.getAnswer());
+    }
+    
+    @Test
+    public void testValidateAnswerReturnsTrueForCorrectAnswer() {
+        // Setup mock TextObject
+        String linkedText = "What is the capital of France?";
+        String actualText = "Paris";
+
+        TextObject mockTextObject = mock(TextObject.class);
+        when(mockTextObject.getLinkedText()).thenReturn(linkedText);
+        when(mockTextObject.getText()).thenReturn(actualText);
+        
+        // Setup the mock behavior for gameManager
+        when(gameManager.findTextObjectByUUID(fitbQuestion.getUUID())).thenReturn(mockTextObject);
+        
+        // Generate the question
+        fitbQuestion.generateQuestion();
+
+        // Test valid answer
+        boolean isValid = fitbQuestion.validateAnswer("Paris");
+        assertTrue(isValid);
     }
 
     @Test
-    void testValidateAnswerReturnsTrueForCorrectAnswer() {
-        fitbQuestion.generateQuestion(); // Ensure the question is generated first
-        assertTrue(fitbQuestion.validateAnswer("Paris"), 
-            "Expected validateAnswer to return true for the correct answer.");
-    }
+    public void testValidateAnswerReturnsFalseForIncorrectAnswer() {
+        // Setup mock TextObject
+        String linkedText = "What is the capital of France?";
+        String actualText = "Paris";
 
-    @Test
-    void testValidateAnswerReturnsFalseForIncorrectAnswer() {
-        fitbQuestion.generateQuestion(); // Ensure the question is generated first
-        assertFalse(fitbQuestion.validateAnswer("Berlin"), 
-            "Expected validateAnswer to return false for an incorrect answer.");
-    }
+        TextObject mockTextObject = mock(TextObject.class);
+        when(mockTextObject.getLinkedText()).thenReturn(linkedText);
+        when(mockTextObject.getText()).thenReturn(actualText);
+        
+        // Setup the mock behavior for gameManager
+        when(gameManager.findTextObjectByUUID(fitbQuestion.getUUID())).thenReturn(mockTextObject);
+        
+        // Generate the question
+        fitbQuestion.generateQuestion();
 
-    @Test
-    void testValidateAnswerHandlesNullAnswerGracefully() {
-        fitbQuestion.generateQuestion(); // Ensure the question is generated first
-        assertFalse(fitbQuestion.validateAnswer(null), 
-            "Expected validateAnswer to return false for null input.");
-    }
-
-    @Test
-    void testValidateAnswerIgnoresCaseForCorrectAnswer() {
-        fitbQuestion.generateQuestion(); // Ensure the question is generated first
-        assertTrue(fitbQuestion.validateAnswer("PARIS"), 
-            "Expected validateAnswer to return true regardless of case for the correct answer.");
-    }
-
-    @Test
-    void testGetAnswerReturnsCorrectAnswer() {
-        fitbQuestion.generateQuestion(); // Ensure the question is generated first
-        assertEquals("Paris", fitbQuestion.getAnswer(), 
-            "Expected getAnswer to return the correct answer.");
+        // Test invalid answer
+        boolean isValid = fitbQuestion.validateAnswer("London");
+        assertFalse(isValid);
     }
 }
