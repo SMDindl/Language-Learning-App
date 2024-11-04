@@ -1,28 +1,18 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\test\java\com\languageLearner\learner\game\GameDataTest.java
-C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\test\java\com\languageLearner\learner\game\GameTest.java
-C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\test\java\GameManagerTest.java
-C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\test\java\NarrateTest.java
-C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\test\java\UUIDGenerator.java
-=======
-C:\Users\mauho\Language-Learning-App\application\src\test\java\FITBQuestionTest.java
-C:\Users\mauho\Language-Learning-App\application\src\test\java\GameDataTest.java
-C:\Users\mauho\Language-Learning-App\application\src\test\java\GameManagerTest.java
-C:\Users\mauho\Language-Learning-App\application\src\test\java\MatchingQuestionTest.java
-C:\Users\mauho\Language-Learning-App\application\src\test\java\MultipleChoiceQuestionTest.java
-C:\Users\mauho\Language-Learning-App\application\src\test\java\NarrateTest.java
-C:\Users\mauho\Language-Learning-App\application\src\test\java\QuestionFactoryTest.java
-C:\Users\mauho\Language-Learning-App\application\src\test\java\QuestionTest.java
-C:\Users\mauho\Language-Learning-App\application\src\test\java\QuestionTypeTest.java
-C:\Users\mauho\Language-Learning-App\application\src\test\java\SequencingQuestionTest.java
-C:\Users\mauho\Language-Learning-App\application\src\test\java\UUIDGenerator.java
->>>>>>> branch-maurice
-=======
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\com\languageLearner\learner\game\GameTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\com\languageLearner\learner\game\UserTest.java
 C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\DataConstantsTest.java
 C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\DataLoaderTest.java
 C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\DataWriterTest.java
 C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\FacadeForGameTest.java
 C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\FacadeTest.java
 C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\FacadeWithDataLoadingTest.java
->>>>>>> branch-steven
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\FITBQuestionTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\GameDataTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\GameTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\MatchingQuestionTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\MultipleChoiceQuestionTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\QuestionFactoryTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\QuestionTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\QuestionTypeTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\SequencingQuestionTest.java
+C:\Users\zagsk\Documents\Language-Learning-App\application\src\test\java\UserTest.java

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: FacadeForGameTest
 -------------------------------------------------------------------------------
-Tests run: 10, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.217 s <<< FAILURE! -- in FacadeForGameTest
-FacadeForGameTest.testValidateQuizAnswer -- Time elapsed: 0.005 s <<< FAILURE!
+Tests run: 10, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.251 s <<< FAILURE! -- in FacadeForGameTest
+FacadeForGameTest.testValidateQuizAnswer -- Time elapsed: 0.011 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
@@ -78,7 +78,7 @@ org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-FacadeForGameTest.testEndGameSession -- Time elapsed: 0.003 s <<< ERROR!
+FacadeForGameTest.testEndGameSession -- Time elapsed: 0.002 s <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "java.util.UUID.equals(Object)" because the return value of "com.learner.game.User$ProgressTracker.getUUID()" is null
 	at com.learner.game.User.getProgressTracker(User.java:84)
 	at com.learner.game.FacadeForGame.endGameSession(FacadeForGame.java:82)
