@@ -1,0 +1,44 @@
+{
+    "LANGUAGES": [
+        {
+            "LANG": "filipino",
+            "UUID": "1bafb0ae-3462-4ec3-9cc2-a98ff2898e72",
+            "QUESTIONS": [
+                {
+                    "GAME": "colorsGame",
+                    "DIFFICULTY": "easy",
+                    "UUID": "8ce4fefc-a539-4546-9d7e-0ac8778f8de5",
+                    "TEXT": "What color is this?",
+                    "OPTIONS": ["Red", "Green", "Blue", "Yellow"]
+                },
+                {
+                    "GAME": "colorsGame",
+                    "DIFFICULTY": "easy",
+                    "UUID": "b1f2d4a6-c639-42b8-a5e5-3d86e0343edc",
+                    "TEXT": "Choose the color that represents nature.",
+                    "OPTIONS": ["Green", "Purple", "Black", "Pink"]
+                },
+                {
+                    "GAME": "colorsGame",
+                    "DIFFICULTY": "medium",
+                    "UUID": "72efc3fc-9a42-4ebf-8e0a-b7d9f80eaa5e",
+                    "TEXT": "Which color is associated with calmness?",
+                    "OPTIONS": ["Blue", "Red", "Orange", "Brown"]
+                }
+            ]
+        },
+        {
+            "LANG": "spanish",
+            "UUID": "d9d2caae-e27d-4de7-9b2a-8a784f5fbb12",
+            "QUESTIONS": [
+                {
+                    "GAME": "colorsGame",
+                    "DIFFICULTY": "easy",
+                    "UUID": "3c9b33e0-98a9-413f-b7f3-12af7a3efc5d",
+                    "TEXT": "¿Qué color es este?",
+                    "OPTIONS": ["Rojo", "Verde", "Azul", "Amarillo"]
+                }
+            ]
+        }
+    ]
+}
