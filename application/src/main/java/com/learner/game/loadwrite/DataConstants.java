@@ -11,7 +11,7 @@ public class DataConstants {
 
     // Constants for GameData.json
     public final static String GAME_DATA_FILE = "application\\src\\main\\data\\gamesData.json";
-    public final static String GAME_DATA_FILE_JUNIT = "application\\src\\test\\resources\\g\\gamesData.json";
+    public final static String GAME_DATA_FILE_JUNIT = "application\\src\\test\\resources\\gamesData.json";
 
     public final static String USER_FILE = "application\\src\\main\\data\\users.json";
     public final static String USER_FILE_JUNIT = "application\\src\\test\\resources\\users.json";
