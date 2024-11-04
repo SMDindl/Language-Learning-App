@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\main\java\com\languageLearner\app\ProgressViewer.java
 C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\main\java\com\languageLearner\app\UIHardcodedScenario.java
 C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\main\java\com\learner\game\Difficulty.java
@@ -24,3 +25,31 @@ C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\app
 C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\main\java\com\learner\game\UI.java
 C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\main\java\com\learner\game\User.java
 C:\Users\dunca\Documents\Software Engineering Projects\Language-Learning-App\application\src\main\java\com\learner\game\UserList.java
+=======
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\languageLearner\app\ProgressViewer.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\languageLearner\app\UIHardcodedScenario.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\Difficulty.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\Facade.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\FacadeForGame.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\Game.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\GameManager.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\innerdata\GameInfo.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\innerdata\TextObject.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\Language.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\loadwrite\DataConstants.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\loadwrite\DataLoader.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\loadwrite\DataWriter.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\narration\NarrateTest.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\narration\Narrator.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\narration\VoiceList.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\questions\FITBQuestion.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\questions\MatchingQuestion.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\questions\MultipleChoiceQuestion.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\questions\Question.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\questions\QuestionFactory.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\questions\QuestionType.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\questions\SequencingQuestion.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\UI.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\User.java
+C:\Users\mauho\Language-Learning-App\application\src\main\java\com\learner\game\UserList.java
+>>>>>>> branch-maurice
