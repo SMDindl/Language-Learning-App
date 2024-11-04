@@ -12,20 +12,17 @@
                     "languageUUID": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
                     "completedGames": [
                         {
-                            "gameUUID": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7"
-                        },
-                        {
-                            "gameUUID": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7"
+                            "gameUUID": "8ce4fefc-a539-4546-9d7e-0ac8778f8de5"
                         }
                     ],
                     "missedQuestions": [
                         {
-                            "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
-                            "questionType": "mutipleChoice"
+                            "uuid": "e4e1d515-7baf-4569-8c14-7c663b6e49f5",
+                            "questionType": "multipleChoice"
                         },
                         {
-                            "uuid": "c9d7dff4-d613-4dad-bb41-e1fb1913ccb7",
-                            "questionType": "mutipleChoice"
+                            "uuid": "285bad41-5c1c-45b4-bc51-59f480bb1895",
+                            "questionType": "matching"
                         }
                     ]
                 },
