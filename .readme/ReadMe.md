@@ -9,7 +9,7 @@ Our application is designed to help English speakers learn Filipino (Latin-based
 # Project Prototype
 Link to the live site of the prototype: (https://smdindl.github.io/Language-Learning-App/)
 
-# Project Walk-through
+# Project Prototype Walk-through
 Watch my video walk-through on YouTube here: [Video Walk-through](https://www.youtube.com/watch?v=xKGJS_9CxZs)
 
 
