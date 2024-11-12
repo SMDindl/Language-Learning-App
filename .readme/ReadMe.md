@@ -6,6 +6,12 @@ Our application is designed to help English speakers learn Filipino (Latin-based
 ## Video Walkthrough
 [Watch the video here](https://youtu.be/ekEufFtlyRE)
 
+# My Semester Project
+You can view my working prototype here: [Live Prototype](https://github.com/SMDindl/Language-Learning-App.git)
+
+# Project Walk-through
+Watch my video walk-through on YouTube here: [Video Walk-through](https://www.youtube.com/watch?v=xKGJS_9CxZs)
+
 
 ## Features
 - **Interactive Games**: Engaging games such as Alphahabet,Colors,Numbers that make learning fun.
